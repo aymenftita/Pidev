@@ -7,7 +7,7 @@
 ## etape 3
  ### ekteb fel terminal "git clone https://github.com/Aymen-Ftita/Pidev.git " , taw tal9ah yhabet fel projet.
 ## etape 4
- ### ekteb git branch -> tji lista , kol we7ed 3andou branch b esmou. (elli mejetouch el lista y7ot el command he4i git "remote add origin https://github.com/Aymen-Ftita/Pidev.git").
+ ### ekteb git branch -> tji lista , kol we7ed 3andou branch b esmou. (elli mejetouch el lista y7ot el command he4i git "remote add origin https://github.com/Aymen-Ftita/Pidev.git"). sinon ken ma5tafch he4a lkol a3mel "git checkout -b {esmek}".
 ## etape 5
  ### ekteb "git checkout [first name mte3ek kima maktoub fel lista ] " wabda e5dem 3ala rou7ek.
 ## etape 6
