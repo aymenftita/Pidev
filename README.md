@@ -17,4 +17,4 @@
 
 
 ## Remarque :
- # elli ma3andouch el git installé processus o5ra lezem tsir abda e5dem taw nrak7ouh ba3d.
+ # elli ma3andouch el git installé processus o5ra lezem tsir abda e5dem taw nrak7ouh ba3d...
