@@ -50,4 +50,5 @@ public class entity {
                 ", attribut3='" + attribut3 + '\'' +
                 '}';
     }
+
 }
