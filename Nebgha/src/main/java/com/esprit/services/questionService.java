@@ -1,7 +1,7 @@
 package com.esprit.services;
 
 import main.java.com.esprit.utils.DataSource;
-import main.java.com.esprit.models.question;
+import com.esprit.models.question;
 
 import com.esprit.services.IService;
 
@@ -16,10 +16,10 @@ public class questionService implements IService<question> {
     }
     @Override
     public void ajouter(question question) {
-        String req = "INSERT into questions(id, titre, auteur_id, date, sujet_id, contenu) values ('" + question.getId() +
-                "', '" + question.getTitre() + "', '" + question.getAuteur_id() +
-                "', STR_TO_DATE(" + question.getDate() + ",'%m/%d/%Y')'" + "', '" +
-                question.getSujet_id() + "', '" + question.getContenu() + "');";
+        String req = "INSERT into questions_forum(id, titre, auteur_id, date_creation, sujet_id, contenu) values (" + question.getId() +
+                ", '" + question.getTitre() + "', " + question.getAuteur_id() +
+                ", STR_TO_DATE('" + question.getDate() + "','%d/%m/%Y')" + ", " +
+                question.getSujet_id() + ", '" + question.getContenu() + "');";
         try {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
@@ -31,11 +31,11 @@ public class questionService implements IService<question> {
 
     @Override
     public void modifier(question question) {
-        String req = "UPDATE questions set titre = '" + question.getTitre() +
-                "', auteur_id = '" + question.getAuteur_id() +
-                "', date = , STR_TO_DATE('" + question.getDate() +
-                "', sujet_id = '" + question.getSujet_id() +
-                "', contenu = '" + question.getContenu() +
+        String req = "UPDATE questions_forum set titre = '" + question.getTitre() +
+                "', auteur_id = " + question.getAuteur_id() +
+                ", date_creation = STR_TO_DATE('" + question.getDate() +
+                "','%d/%m/%Y'), sujet_id = " + question.getSujet_id() +
+                ", contenu = '" + question.getContenu() +
                 "' where id = " + question.getId() + ";";
         try {
             Statement st = connection.createStatement();
@@ -48,7 +48,7 @@ public class questionService implements IService<question> {
 
     @Override
     public void supprimer(question question) {
-        String req = "DELETE from questions where id = " + question.getId() + ";";
+        String req = "DELETE from questions_forum where id = " + question.getId() + ";";
         try {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
@@ -62,13 +62,13 @@ public class questionService implements IService<question> {
     public List<question> afficher() {
         List<question> questions = new ArrayList<>();
 
-        String req = "SELECT * from questions";
+        String req = "SELECT * from questions_forum";
         try {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
                 questions.add(new question(rs.getInt("id"), rs.getString("titre"),
-                        rs.getInt("auteur_id"), rs.getString("date"),
+                        rs.getInt("auteur_id"), rs.getString("date_creation"),
                         rs.getInt("sujet_id"), rs.getString("contenu")));
             }
         } catch (SQLException e) {
