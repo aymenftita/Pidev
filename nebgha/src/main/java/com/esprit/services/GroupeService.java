@@ -1,5 +1,6 @@
-package com.esprit.models;
+package com.esprit.services;
 
+import com.esprit.models.Groupe;
 import com.esprit.utils.DataSource;
 
 import java.sql.Connection;
