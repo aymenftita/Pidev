@@ -1,7 +1,7 @@
-package main.java.com.esprit.services;
+package com.esprit.services;
 
-import main.java.com.esprit.utils.DataSource;
-import main.java.com.esprit.models.sujet;
+import com.esprit.utils.DataSource;
+import com.esprit.models.sujet;
 
 import com.esprit.services.IService;
 

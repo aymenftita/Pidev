@@ -1,12 +1,14 @@
-package main.java.com.esprit.models;
+package com.esprit.models;
 
+
+import java.sql.Date;
 
 public class reponse{
     private int id;
     private int auteur_id;
     private int question_id;
     private String contenu;
-    private String date;
+    private Date date;
     private int sujet_id;
 
     public reponse() {
@@ -26,7 +28,7 @@ public class reponse{
                 '}';
     }
 
-    public reponse(int id, int auteur_id, int question_id, String contenu, String date, int sujet_id) {
+    public reponse(int id, int auteur_id, int question_id, String contenu, Date date, int sujet_id) {
         this.id = id;
         this.auteur_id = auteur_id;
         this.question_id = question_id;
@@ -67,11 +69,11 @@ public class reponse{
         this.contenu = contenu;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

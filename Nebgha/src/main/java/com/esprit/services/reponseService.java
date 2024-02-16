@@ -1,7 +1,7 @@
 package com.esprit.services;
 
-import main.java.com.esprit.utils.DataSource;
-import main.java.com.esprit.models.reponse;
+import com.esprit.utils.DataSource;
+import com.esprit.models.reponse;
 
 import com.esprit.services.IService;
 
@@ -20,8 +20,8 @@ public class reponseService implements IService<reponse> {
     @Override
     public void ajouter(reponse reponse) {
         String req = "INSERT into reponse_forum(auteur_id, question_id, contenu, date_creation, sujet_id) values ('" + reponse.getAuteur_id() + "', '"
-                + reponse.getQuestion_id() + "', '" + reponse.getContenu() + "', STR_TO_DATE('" + reponse.getDate() +
-                "','%d/%m/%Y'), '"+ reponse.getSujet_id() + "');";
+                + reponse.getQuestion_id() + "', '" + reponse.getContenu() + "', '" + reponse.getDate() +
+                "', "+ reponse.getSujet_id() + ");";
         try {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
@@ -35,7 +35,7 @@ public class reponseService implements IService<reponse> {
     public void modifier(reponse reponse) {
         String req = "UPDATE reponse_forum set auteur_id = '" + reponse.getAuteur_id() + "', question_id = '"
                 + reponse.getQuestion_id() + "', contenu = '" + reponse.getContenu()
-                + "', date_creation = STR_TO_DATE('" + reponse.getDate() + "','%d/%m/%Y'), sujet_id = " + reponse.getSujet_id() +
+                + "', date_creation = '" + reponse.getDate() + "', sujet_id = " + reponse.getSujet_id() +
                 " where id = " + reponse.getId() + ";";
         try {
             Statement st = connection.createStatement();
@@ -69,7 +69,7 @@ public class reponseService implements IService<reponse> {
             while (rs.next()) {
                 reponses.add(new reponse(rs.getInt("id"), rs.getInt("auteur_id"),
                         rs.getInt("question_id"), rs.getString("contenu"),
-                        rs.getString("date_creation"), rs.getInt("sujet_id")));
+                        rs.getDate("date_creation"), rs.getInt("sujet_id")));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
