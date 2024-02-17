@@ -1,22 +1,10 @@
 package com.esprit.tests;
 
-//import main.java.com.esprit.services.EntityService;
-//import com.esprit.services.EntityService2;
 import com.esprit.services.questionService;
-import com.esprit.models.question;
-import com.esprit.services.reponseService;
-import com.esprit.models.sujet;
-import com.esprit.models.reponse;
-import com.esprit.services.sujetService;
-import com.esprit.utils.DataSource;
+import com.esprit.models.Question;
 
-import java.sql.Connection;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.sql.Date;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 public class MainProg {
 
@@ -42,7 +30,7 @@ public class MainProg {
         /*********************       QUESTION            ********************/
         //question testQuestion1 = new question(5, "Test titre",1, date, 1, "test contenu");
         questionService q = new questionService();
-        question testQuestion = new question(10, "Test modifTitre",1, Date.valueOf("2022-12-03"), 1, "test modifContenu");
+        Question testQuestion = new Question(10, "Test modifTitre",1, Date.valueOf("2022-12-03"), 1, "test modifContenu");
 
         q.ajouter(testQuestion);
         //q.modifier(testQuestion2);

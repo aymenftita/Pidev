@@ -1,14 +1,12 @@
 package com.esprit.services;
 
 import com.esprit.utils.DataSource;
-import com.esprit.models.reponse;
-
-import com.esprit.services.IService;
+import com.esprit.models.Reponse;
 
 import java.sql.*;
 import java.util.*;
 
-public class reponseService implements IService<reponse> {
+public class reponseService implements IService<Reponse> {
 
 
     private Connection connection;
@@ -18,7 +16,7 @@ public class reponseService implements IService<reponse> {
     }
 
     @Override
-    public void ajouter(reponse reponse) {
+    public void ajouter(Reponse reponse) {
         String req = "INSERT into reponse_forum(auteur_id, question_id, contenu, date_creation, sujet_id) values ('" + reponse.getAuteur_id() + "', '"
                 + reponse.getQuestion_id() + "', '" + reponse.getContenu() + "', '" + reponse.getDate() +
                 "', "+ reponse.getSujet_id() + ");";
@@ -32,7 +30,7 @@ public class reponseService implements IService<reponse> {
     }
 
     @Override
-    public void modifier(reponse reponse) {
+    public void modifier(Reponse reponse) {
         String req = "UPDATE reponse_forum set auteur_id = '" + reponse.getAuteur_id() + "', question_id = '"
                 + reponse.getQuestion_id() + "', contenu = '" + reponse.getContenu()
                 + "', date_creation = '" + reponse.getDate() + "', sujet_id = " + reponse.getSujet_id() +
@@ -47,7 +45,7 @@ public class reponseService implements IService<reponse> {
     }
 
     @Override
-    public void supprimer(reponse reponse) {
+    public void supprimer(Reponse reponse) {
         String req = "DELETE from reponse_forum where id = " + reponse.getId() + ";";
         try {
             Statement st = connection.createStatement();
@@ -59,15 +57,15 @@ public class reponseService implements IService<reponse> {
     }
 
     @Override
-    public List<reponse> afficher() {
-        List<reponse> reponses = new ArrayList<>();
+    public List<Reponse> afficher() {
+        List<Reponse> reponses = new ArrayList<>();
 
         String req = "SELECT * from reponse_forum";
         try {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
-                reponses.add(new reponse(rs.getInt("id"), rs.getInt("auteur_id"),
+                reponses.add(new Reponse(rs.getInt("id"), rs.getInt("auteur_id"),
                         rs.getInt("question_id"), rs.getString("contenu"),
                         rs.getDate("date_creation"), rs.getInt("sujet_id")));
             }

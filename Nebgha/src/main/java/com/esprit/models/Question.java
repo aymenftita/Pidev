@@ -2,7 +2,7 @@ package com.esprit.models;
 
 import java.sql.Date;
 
-public class question{
+public class Question {
     private int id;
     private String titre;
     private int auteur_id;
@@ -10,10 +10,10 @@ public class question{
     private int sujet_id;
     private String contenu;
 
-    public question() {
+    public Question() {
     }
 
-    public question(int id,String titre, int auteur_id, Date date, int sujet_id, String contenu) {
+    public Question(int id, String titre, int auteur_id, Date date, int sujet_id, String contenu) {
         this.id = id;
         this.titre = titre;
         this.auteur_id = auteur_id;

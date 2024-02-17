@@ -1,22 +1,20 @@
 package com.esprit.services;
 
 import com.esprit.utils.DataSource;
-import com.esprit.models.question;
-
-import com.esprit.services.IService;
+import com.esprit.models.Question;
 
 import java.sql.*;
 import java.util.*;
 
 
-public class questionService implements IService<question> {
+public class questionService implements IService<Question> {
     private Connection connection;
 
     public questionService() {
         connection = DataSource.getInstance().getConnection();
     }
     @Override
-    public void ajouter(question question) {
+    public void ajouter(Question question) {
         String req = "INSERT into questions_forum(id, titre, auteur_id, date_creation, sujet_id, contenu) values (" + question.getId() +
                 ", '" + question.getTitre() + "', " + question.getAuteur_id() +
                 ", '" + question.getDate()  + "', " +
@@ -31,7 +29,7 @@ public class questionService implements IService<question> {
     }
     //TODO: fix date input;
     @Override
-    public void modifier(question question) {
+    public void modifier(Question question) {
         String req = "UPDATE questions_forum set titre = '" + question.getTitre() +
                 "', auteur_id = " + question.getAuteur_id() +
                 ", date_creation = '" + question.getDate() +
@@ -48,7 +46,7 @@ public class questionService implements IService<question> {
     }
 
     @Override
-    public void supprimer(question question) {
+    public void supprimer(Question question) {
         String req = "DELETE from questions_forum where id = " + question.getId() + ";";
         try {
             Statement st = connection.createStatement();
@@ -60,15 +58,15 @@ public class questionService implements IService<question> {
     }
 
     @Override
-    public List<question> afficher() {
-        List<question> questions = new ArrayList<>();
+    public List<Question> afficher() {
+        List<Question> questions = new ArrayList<>();
 
         String req = "SELECT * from questions_forum";
         try {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
-                questions.add(new question(rs.getInt("id"), rs.getString("titre"),
+                questions.add(new Question(rs.getInt("id"), rs.getString("titre"),
                         rs.getInt("auteur_id"), rs.getDate("date_creation"),
                         rs.getInt("sujet_id"), rs.getString("contenu")));
             }

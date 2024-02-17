@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.esprit.controllers.AjoutPersonneController">
+   <children>
+      <Label layoutX="85.0" layoutY="42.0" text="nom" />
+      <Label layoutX="85.0" layoutY="93.0" text="prenom" />
+      <TextField fx:id="tfNom" layoutX="151.0" layoutY="38.0" />
+      <TextField fx:id="tfPrenom" layoutX="151.0" layoutY="89.0" />
+      <Button layoutX="200.0" layoutY="152.0" mnemonicParsing="false" onAction="#addPersonne" text="envoyer" />
+   </children>
+</AnchorPane>

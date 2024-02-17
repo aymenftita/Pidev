@@ -1,17 +1,17 @@
 package com.esprit.models;
 
-public class sujet {
+public class Sujet {
 
     private int id;
     private String titre;
     private String desc;
     private String regles;
 
-    public sujet() {
+    public Sujet() {
 
     }
 
-    public sujet(int id, String titre, String desc, String regles) {
+    public Sujet(int id, String titre, String desc, String regles) {
         this.id = id;
         this.titre = titre;
         this.desc = desc;

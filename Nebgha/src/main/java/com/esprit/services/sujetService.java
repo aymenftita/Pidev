@@ -1,21 +1,19 @@
 package com.esprit.services;
 
 import com.esprit.utils.DataSource;
-import com.esprit.models.sujet;
-
-import com.esprit.services.IService;
+import com.esprit.models.Sujet;
 
 import java.sql.*;
 import java.util.*;
 
-public class sujetService implements IService<sujet> {
+public class sujetService implements IService<Sujet> {
     private Connection connection;
 
     public sujetService() {
         connection = DataSource.getInstance().getConnection();
     }
     @Override
-    public void ajouter(sujet sujet) {
+    public void ajouter(Sujet sujet) {
         String req = "INSERT into sujets(titre, description, regles) values ('" + sujet.getTitre() +
                 "', '" + sujet.getDesc() + "', '" + sujet.getRegles() +  "');";
         try {
@@ -28,7 +26,7 @@ public class sujetService implements IService<sujet> {
     }
 
     @Override
-    public void modifier(sujet sujet) {
+    public void modifier(Sujet sujet) {
         String req = "UPDATE sujets set titre = '" + sujet.getTitre() + "', description = '" + sujet.getDesc() +
                 "', regles = '" + sujet.getRegles() + "' where id = '" + sujet.getId() + "';";
         try {
@@ -41,7 +39,7 @@ public class sujetService implements IService<sujet> {
     }
 
     @Override
-    public void supprimer(sujet sujet) {
+    public void supprimer(Sujet sujet) {
         String req = "DELETE from sujets where id = " + sujet.getId() + ";";
         try {
             Statement st = connection.createStatement();
@@ -53,15 +51,15 @@ public class sujetService implements IService<sujet> {
     }
 
     @Override
-    public List<sujet> afficher() {
-        List<sujet> sujets = new ArrayList<>();
+    public List<Sujet> afficher() {
+        List<Sujet> sujets = new ArrayList<>();
 
         String req = "SELECT * from sujets";
         try {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
-                sujets.add(new sujet(rs.getInt("id"), rs.getString("titre"),
+                sujets.add(new Sujet(rs.getInt("id"), rs.getString("titre"),
                         rs.getString("description"), rs.getString("regles")));
             }
         } catch (SQLException e) {
