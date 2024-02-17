@@ -2,7 +2,11 @@ package com.esprit.tests;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class MainProgGUI extends Application {
 
@@ -11,10 +15,12 @@ public class MainProgGUI extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
-        Parent root = FXMLLoader.load(getClass().getResource("Ajouter.fxml"));
-        primaryStage.setTitle("hello");
-        primaryStage.setScene(new Scene(root,300,275));
+    public void start(Stage primaryStage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ajouter.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Ajout Personne");
         primaryStage.show();
     }
 }
