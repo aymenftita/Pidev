@@ -10,12 +10,12 @@
     <children>
         <Label layoutX="103.0" layoutY="112.0" text="Date" />
         <Label layoutX="95.0" layoutY="221.0" text="Description" />
-        <TextField id="tfDescription" fx:id="tfPrenom" layoutX="338.0" layoutY="217.0" />
+        <TextField fx:id="tfDescription"  layoutX="338.0" layoutY="217.0" />
         <Button layoutX="258.0" layoutY="291.0" mnemonicParsing="false" onAction="#addPersonne" text="Envoyer" />
-      <TextField id="tfid" layoutX="338.0" layoutY="53.0" />
-      <TextField id="tfSujet" layoutX="338.0" layoutY="161.0" />
+      <TextField fx:id="tfid" layoutX="338.0" layoutY="53.0" />
+      <TextField fx:id="tfSujet" layoutX="338.0" layoutY="161.0" />
       <Label layoutX="103.0" layoutY="57.0" text="User Id" />
       <Label layoutX="103.0" layoutY="165.0" text="Sujet" />
-      <DatePicker id="tfDate" layoutX="325.0" layoutY="108.0" />
+      <DatePicker fx:id="tfDate" layoutX="325.0" layoutY="108.0" />
     </children>
 </AnchorPane>

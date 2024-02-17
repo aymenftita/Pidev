@@ -25,14 +25,10 @@ public class Ajoutercontrollers {
     private DatePicker tfDate;
 
 
-
-
-
-
     @FXML
     void addPersonne(ActionEvent event) throws IOException {
         ReclamationService ps = new ReclamationService();
-        ps.ajouter(new Reclamation(1,1 , "21/02/2024", "tfSujet.getText()", "tfDescription.getText()","envoye", 1,"Admin" ));
+        ps.ajouter(new Reclamation(1,Integer.parseInt(tfid.getText()) , tfDate.getValue().toString(), tfSujet.getText(), tfDescription.getText(),"envoye", 1,"Admin" ));
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Personne ajoutée");
         alert.setContentText("Personne ajoutée !");
