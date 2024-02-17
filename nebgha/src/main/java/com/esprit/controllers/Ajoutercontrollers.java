@@ -26,12 +26,7 @@ public class Ajoutercontrollers {
         alert.setTitle("Personne ajoutée");
         alert.setContentText("Personne ajoutée !");
         alert.show();
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AffichagePersonne.fxml"));
-        Parent root = loader.load();
-        tfNom.getScene().setRoot(root);
-
-
+        
     }
 
 
