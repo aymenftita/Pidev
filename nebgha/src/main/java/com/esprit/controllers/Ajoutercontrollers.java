@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
@@ -13,20 +14,30 @@ import java.io.IOException;
 public class Ajoutercontrollers {
 
     @FXML
-    private TextField tfNom;
+    private TextField tfid;
 
     @FXML
-    private TextField tfPrenom;
+    private TextField tfSujet;
+
+    @FXML
+    private TextField tfDescription;
+    @FXML
+    private DatePicker tfDate;
+
+
+
+
+
 
     @FXML
     void addPersonne(ActionEvent event) throws IOException {
         ReclamationService ps = new ReclamationService();
-        ps.ajouter(new Reclamation(1, 1, tfNom.getText(), tfNom.getText(), tfNom.getText(), tfNom.getText(), 1, tfPrenom.getText()));
+        ps.ajouter(new Reclamation(1,1 , "21/02/2024", "tfSujet.getText()", "tfDescription.getText()","envoye", 1,"Admin" ));
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Personne ajoutée");
         alert.setContentText("Personne ajoutée !");
         alert.show();
-        
+
     }
 
 

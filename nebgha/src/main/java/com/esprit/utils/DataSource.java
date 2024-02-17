@@ -7,7 +7,7 @@ public class DataSource {
     private Connection connection;
     private static DataSource instance;
 
-    private final String URL = "jdbc:mysql://localhost:3306/Pidev";
+    private final String URL = "jdbc:mysql://localhost:3306/pidev";
     private final String USER = "root";
     private  final String PASSWORD = "";
 
