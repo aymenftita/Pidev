@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.ShowQuizController">
+   <children>
+      <TableView fx:id="quizTableView" layoutY="86.0" prefHeight="200.0" prefWidth="661.0">
+        <columns>
+          <TableColumn fx:id="id" prefWidth="75.0" text="id" />
+          <TableColumn fx:id="creatorId" prefWidth="75.0" text="creatorId" />
+            <TableColumn fx:id="title" prefWidth="75.0" text="Titre" />
+            <TableColumn fx:id="description" prefWidth="75.0" text="Description" />
+            <TableColumn fx:id="date" prefWidth="75.0" text="Date" />
+            <TableColumn fx:id="duree" prefWidth="75.0" text="Durée" />
+            <TableColumn fx:id="nbr_questions" prefWidth="130.40005493164062" text="Nombre de questions" />
+            <TableColumn fx:id="difficulte" prefWidth="77.5999755859375" text="Difficulte" />
+        </columns>
+      </TableView>
+      <Label layoutX="140.0" layoutY="14.0" text="Liste des Quizs" textFill="#000066">
+         <font>
+            <Font name="Montserrat Thin" size="53.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnEdit" layoutX="290.0" layoutY="315.0" mnemonicParsing="false" onAction="#openEdit" style="-fx-background-color: #FDFD96;" text="Modifier" />
+      <Button fx:id="btnQuiz" layoutX="111.0" layoutY="315.0" mnemonicParsing="false" onAction="#openAjout" style="-fx-background-color: #00ab41;" text="Ajouter " textFill="WHITE" />
+      <Button fx:id="btnDelete" layoutX="480.0" layoutY="315.0" mnemonicParsing="false" onAction="#deleteQuiz" style="-fx-background-color: #FF0000;" text="Supprimer" textFill="WHITE" />
+   </children>
+</AnchorPane>

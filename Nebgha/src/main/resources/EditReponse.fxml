@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.esprit.controllers.EditReponseController"
+            prefHeight="400.0" prefWidth="600.0">
+    <children>
+        <Label layoutX="218.0" layoutY="34.0" text="Modifier Réponse" textFill="#000066">
+        </Label>
+        <Label layoutX="49.0" layoutY="95.0" text="Question" />
+        <Label layoutX="47.0" layoutY="131.0" text="Texte" />
+        <Label layoutX="47.0" layoutY="165.0" text="Est_correcte" />
+        <Label layoutX="46.0" layoutY="200.0" text="Ordre" />
+        <Label layoutX="46.0" layoutY="235.0" text="Explication" />
+        <TextField fx:id="texttf" layoutX="109.0" layoutY="127.0" prefHeight="26.0" prefWidth="366.0" />
+        <ComboBox fx:id="questionList" layoutX="109.0" layoutY="91.0" prefWidth="150.0" />
+        <TextField fx:id="ordretf" layoutX="111.0" layoutY="195.0" prefHeight="26.0" prefWidth="74.0" />
+        <TextField fx:id="explicationtf" layoutX="113.0" layoutY="230.0" prefHeight="26.0" prefWidth="366.0" />
+        <Button fx:id="reponsebtn" layoutX="491.0" layoutY="338.0" mnemonicParsing="false" onAction="#EditReponse" text="Enregistrer" />
+        <CheckBox fx:id="est_correcte" layoutX="113.0" layoutY="165.0" mnemonicParsing="false" />
+    </children>
+</AnchorPane>

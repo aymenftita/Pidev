@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.esprit.controllers.ShowReponsesController"
+            prefHeight="400.0" prefWidth="600.0">
+    <children>
+        <TableView fx:id="reponseTableView" layoutX="8.0" layoutY="124.0" prefHeight="200.0" prefWidth="584.0">
+            <columns>
+                <TableColumn fx:id="reponseId" prefWidth="75.0" text="ReponseId" />
+                <TableColumn fx:id="questionId" prefWidth="75.0" text="QuestionId" />
+                <TableColumn fx:id="texte" prefWidth="75.0" text="Texte" />
+                <TableColumn fx:id="estCorrecte" prefWidth="75.0" text="est_correcte" />
+                <TableColumn fx:id="ordre" prefWidth="75.0" text="Ordre" />
+                <TableColumn fx:id="explication" prefWidth="130.40005493164062" text="Explication" />
+            </columns>
+        </TableView>
+        <Label layoutX="159.0" layoutY="14.0" text="Liste des Réponses" textFill="#000066">
+            </Label>
+        <Button fx:id="btnEdit" layoutX="269.0" layoutY="341.0" mnemonicParsing="false" onAction="#openEdit" style="-fx-background-color: #FDFD96;" text="Modifier" />
+        <Button fx:id="btnQuiz" layoutX="118.0" layoutY="341.0" mnemonicParsing="false" onAction="#openAjout" style="-fx-background-color: #00ab41;" text="Ajouter " textFill="WHITE" />
+        <Button fx:id="btnDelete" layoutX="423.0" layoutY="341.0" mnemonicParsing="false" onAction="#deleteReponse" style="-fx-background-color: #FF0000;" text="Supprimer" textFill="WHITE" />
+        <Label layoutX="28.0" layoutY="91.0" text="Select Question">
+
+        </Label>
+        <ComboBox fx:id="questionList" layoutX="131.0" layoutY="89.0" prefWidth="150.0" />
+    </children>
+</AnchorPane>
