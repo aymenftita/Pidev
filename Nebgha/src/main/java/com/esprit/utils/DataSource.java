@@ -1,13 +1,15 @@
 package com.esprit.utils;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class DataSource {
 
     private Connection connection;
     private static DataSource instance;
 
-    private final String URL = "jdbc:mysql://localhost:3306/DbName";
+    private final String URL = "jdbc:mysql://localhost:3306/nebgha";
     private final String USER = "root";
     private  final String PASSWORD = "";
 
