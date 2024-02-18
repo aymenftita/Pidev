@@ -22,7 +22,7 @@ public class ModifierReclamationController {
     public TextField tfUserId;
     public TextField tfpriorite;
     public TextField tfIdREclamation;
-    public ComboBox cbstatus;
+    public ComboBox<String> cbstatus;
 
 
         public void initialize() {
@@ -32,7 +32,14 @@ public class ModifierReclamationController {
     public void UpdateReclamation(ActionEvent actionEvent) {
 
         ReclamationService ps = new ReclamationService();
-        ps.modifier(new Reclamation(Integer.parseInt(tfIdREclamation.getText()),Integer.parseInt(tfUserId.getText()) , tfDate.getValue().toString(), tfSujet.getText(), tfDescription.getText(), cbstatus.getValue().toString(), Integer.parseInt(tfpriorite.getText()),"admin" ));
+        ps.modifier(new Reclamation(Integer.parseInt(
+                tfIdREclamation.getText()),
+                Integer.parseInt(tfUserId.getText()) ,
+                tfDate.getValue().toString(),
+                tfSujet.getText(),
+                tfDescription.getText(),
+                cbstatus.getValue().toString(),
+                Integer.parseInt(tfpriorite.getText()),"admin" ));
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Personne ajoutée");
         alert.setContentText("Personne ajoutée !");

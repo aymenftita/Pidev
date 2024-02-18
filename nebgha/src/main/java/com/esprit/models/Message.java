@@ -54,11 +54,11 @@ public class Message {
 
     @Override
     public String toString() {
-        return "Message{" +
-                "idMessage=" + idMessage +
-                ", idGroupe=" + idGroupe +
-                ", dateCreation='" + dateCreation + '\'' +
-                ", text='" + text + '\'' +
-                '}';
+        return
+                  idMessage +
+                "                   " + idGroupe +
+                "                   " + dateCreation + "                    " +
+                "                   " + text ;
+
     }
 }

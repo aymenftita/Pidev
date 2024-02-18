@@ -1,7 +1,9 @@
 E:\Pidev\nebgha\src\main\java\com\esprit\controllers\AjouterGroupeController.java
 E:\Pidev\nebgha\src\main\java\com\esprit\models\Utilisateur.java
 E:\Pidev\nebgha\src\main\java\com\esprit\utils\DataSource.java
+E:\Pidev\nebgha\src\main\java\com\esprit\controllers\SupprimerGroupeController.java
 E:\Pidev\nebgha\src\main\java\com\esprit\tests\MainProg.java
+E:\Pidev\nebgha\src\main\java\com\esprit\controllers\SupprimerMessageController.java
 E:\Pidev\nebgha\src\main\java\com\esprit\services\IService.java
 E:\Pidev\nebgha\src\main\java\com\esprit\services\ReclamationService.java
 E:\Pidev\nebgha\src\main\java\com\esprit\tests\MainProgGUI.java
@@ -11,6 +13,8 @@ E:\Pidev\nebgha\src\main\java\com\esprit\services\MessageService.java
 E:\Pidev\nebgha\src\main\java\com\esprit\models\Groupe.java
 E:\Pidev\nebgha\src\main\java\com\esprit\models\Reclamation.java
 E:\Pidev\nebgha\src\main\java\com\esprit\models\Message.java
+E:\Pidev\nebgha\src\main\java\com\esprit\controllers\AfficherMessageController.java
+E:\Pidev\nebgha\src\main\java\com\esprit\controllers\ModifierMessageController.java
 E:\Pidev\nebgha\src\main\java\com\esprit\services\GroupeService.java
 E:\Pidev\nebgha\src\main\java\com\esprit\models\UtilisateurGroupes.java
 E:\Pidev\nebgha\src\main\java\com\esprit\controllers\Ajoutercontrollers.java

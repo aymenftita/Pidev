@@ -56,8 +56,8 @@ public class GroupeService {
     }
 
 
-    public void supprimer(Groupe groupe) {
-        String req = "DELETE from groupe where id_g = " + groupe.getId_groupe() + ";";
+    public void supprimer(int id) {
+        String req = "DELETE from groupe where id_g = " + id + ";";
         try {
             Statement st = connection.createStatement();
             st.executeUpdate(req);

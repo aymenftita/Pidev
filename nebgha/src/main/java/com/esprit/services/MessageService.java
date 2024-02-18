@@ -1,8 +1,6 @@
 package com.esprit.services;
 
-import com.esprit.models.Groupe;
 import com.esprit.models.Message;
-import com.esprit.models.Reclamation;
 import com.esprit.utils.DataSource;
 
 import java.sql.Connection;
@@ -54,7 +52,7 @@ public class MessageService {
         }
     }
 
-    public void afficher() {
+    public Message afficher() {
         List<Message> entities = new ArrayList<>();
 
         String req = "SELECT * from message";
@@ -70,5 +68,24 @@ public class MessageService {
             System.out.println(e.getMessage());
         }
 
+        return (Message) entities;
+    }
+
+    public List<Message> read() {
+
+        List<Message> categories = new ArrayList<>();
+
+        String req = "SELECT * from message";
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while (rs.next()) {
+                categories.add(new Message(rs.getInt("id_message"), rs.getString("date_creation"), rs.getString("text")));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return categories;
     }
 }
