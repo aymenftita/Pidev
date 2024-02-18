@@ -33,6 +33,10 @@ public class Quiz {
         this.difficulte = difficulte;
     }
 
+    public Quiz() {
+
+    }
+
     public int getQuizId() {
         return quizId;
     }

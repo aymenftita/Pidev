@@ -1,4 +1,6 @@
 package com.esprit.services;
+import com.esprit.models.Difficulte;
+import com.esprit.models.Questions;
 import com.esprit.models.Quiz;
 import com.esprit.models.Reponses;
 import com.esprit.utils.DataSource;
@@ -75,5 +77,48 @@ public class ReponsesService implements IService<Reponses>{
             System.out.println(e.getMessage());
         }
         return reponsesList;
+    }
+
+    public List<Reponses> afficherReponsesQuestion(int questionId) {
+        List<Reponses> reponsesList = new ArrayList<>();
+        String req = "SELECT * FROM reponses_quiz WHERE questionId = " + questionId;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(req);
+            while (rs.next()) {
+                reponsesList.add(new Reponses(rs.getInt("reponseId"),
+                        rs.getInt("questionId"),
+                        rs.getString("texte"),
+                        rs.getBoolean("est_correcte"),
+                        rs.getInt("ordre"),
+                        rs.getString("explication")
+                        ));
+
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return reponsesList;
+    }
+
+    public Reponses getReponse(int reponseId) {
+        Reponses reponse = null;
+        String req = "SELECT * FROM reponses_quiz WHERE reponseId = " + reponseId;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(req);
+            if (rs.next()) {
+                reponse = new Reponses(rs.getInt("reponseId"),
+                        rs.getInt("questionId"),
+                        rs.getString("texte"),
+                        rs.getBoolean("est_correcte"),
+                        rs.getInt("ordre"),
+                        rs.getString("explication")
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return reponse;
     }
 }

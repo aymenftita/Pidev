@@ -1,4 +1,5 @@
 package com.esprit.services;
+import com.esprit.models.Difficulte;
 import com.esprit.models.Questions;
 import com.esprit.models.Quiz;
 import com.esprit.utils.DataSource;
@@ -79,5 +80,48 @@ public class QuestionsService implements IService<Questions> {
         }
         return questionsList;
 
+    }
+
+    public List<Questions> afficherQuestionsQuiz(int quizId) {
+        List<Questions> questionsList = new ArrayList<>();
+        String req = "SELECT * FROM questions_quiz WHERE quizId = " + quizId;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(req);
+            while (rs.next()) {
+                questionsList.add(new Questions(rs.getInt("questionId"),
+                        rs.getInt("quizId"),
+                        rs.getString("texte"),
+                        rs.getString("type"),
+                        rs.getInt("points"),
+                        rs.getInt("ordre"),
+                        rs.getString("categorie")));
+
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return questionsList;
+
+    }
+    public Questions getQuestion(int questionId) {
+        Questions question = null;
+        String req = "SELECT * FROM questions_quiz WHERE questionId = " + questionId;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(req);
+            if (rs.next()) {
+                question = new Questions(rs.getInt("questionId"),
+                        rs.getInt("quizId"),
+                        rs.getString("texte"),
+                        rs.getString("type"),
+                        rs.getInt("points"),
+                        rs.getInt("ordre"),
+                        rs.getString("categorie"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return question;
     }
 }
