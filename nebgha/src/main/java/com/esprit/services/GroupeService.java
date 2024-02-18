@@ -45,7 +45,7 @@ public class GroupeService {
 
 
     public void modifier(Groupe groupe) {
-        String req = "UPDATE groupe set uid = '" + groupe.getUid() + "', nom_g = '" + groupe.getTitre() + "', description = '" + groupe.getDescription() + "' where id_g = " + groupe.getId_groupe() + ";";
+        String req = "UPDATE groupe set creator_id = '" + groupe.getUid() + "', titre = '" + groupe.getTitre() + "', description = '" + groupe.getDescription() + "' where id_groupe = " + groupe.getId_groupe() + ";";
         try {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
@@ -61,7 +61,7 @@ public class GroupeService {
         try {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
-            System.out.println("entité supprmiée !");
+            System.out.println("Groupe supprmiée !");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

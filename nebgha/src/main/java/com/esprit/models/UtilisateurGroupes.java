@@ -9,4 +9,6 @@ public class UtilisateurGroupes {
         this.idUtilisateur = idUtilisateur;
         this.idGroupe = idGroupe;
     }
+
+
 }

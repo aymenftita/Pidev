@@ -41,7 +41,7 @@ public class ReclamationService {
 
 
     public void modifier(Reclamation reclamation) {
-        String req = "UPDATE reclamations set sujet = '" + reclamation.getSujet() + "', priorite = '" + reclamation.getPriorite() + "' where id_reclamation = " + reclamation.getIdReclamation() + ";";
+        String req = "UPDATE reclamations set uid = '" + reclamation.getUserId() + "', date_creation = '" + reclamation.getDateCreation() + "', sujet = '" + reclamation.getSujet() + "', description = '" + reclamation.getDescription() + "', status = '" + reclamation.getStatus() + "', priorite = '" + reclamation.getPriorite() + "' where id_reclamation = " + reclamation.getIdReclamation() + ";";
         try {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
@@ -64,8 +64,8 @@ public class ReclamationService {
     }
 
 
-    public void afficher() {
-        List<Reclamation> entities = new ArrayList<>();
+    public ArrayList<Reclamation> afficher() {
+        ArrayList<Reclamation> entities = new ArrayList<>();
 
         String req = "SELECT * from reclamations";
         try {
@@ -76,10 +76,14 @@ public class ReclamationService {
                 "status"), rs.getInt("priorite") , rs.getString("role") ));
 
             }
+
             System.out.println(entities.toString());
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
+        return entities;
+
 
     }
 

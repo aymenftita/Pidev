@@ -15,14 +15,13 @@
       <ButtonBar layoutX="123.0" prefHeight="52.0" prefWidth="610.0">
         <buttons>
           <Button mnemonicParsing="false" prefHeight="52.0" prefWidth="134.0" text="Afficher" />
-            <Button layoutX="135.0" layoutY="17.0" mnemonicParsing="false" prefHeight="60.0" text="Ajouter" />
-            <Button layoutX="48.0" layoutY="17.0" mnemonicParsing="false" prefHeight="75.0" text="Modifier" />
-            <Button layoutX="202.0" layoutY="17.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="238.0" text="Supprimer" />
+            <Button fx:id="bt_M_U" layoutX="48.0" layoutY="17.0" mnemonicParsing="false" prefHeight="75.0" text="Modifier Message" />
+            <Button fx:id="bt_M_D" layoutX="202.0" layoutY="17.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="238.0" text="Supprimer Message" />
         </buttons>
       </ButtonBar>
       <Separator layoutX="125.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="0.0" />
-      <Button fx:id="bt_R" layoutX="-1.0" mnemonicParsing="false" prefHeight="285.0" prefWidth="126.0" onAction="#SwitchToReclamation" text="Reclamations" />
-      <Button fx:id="bt_G" layoutX="-1.0" layoutY="283.0" mnemonicParsing="false" prefHeight="277.0" prefWidth="126.0" onAction="#SwitchToGroupe" text="Groupes" />
+      <Button fx:id="bt_R" layoutX="-1.0" mnemonicParsing="false" prefHeight="285.0" prefWidth="126.0" onAction="#SwitchToAjouterReclamation" text="Reclamations" />
+      <Button fx:id="bt_G" layoutX="-1.0" layoutY="283.0" mnemonicParsing="false" prefHeight="277.0" prefWidth="126.0" onAction="#SwitchToAjouterGroupe" text="Groupes" />
       <Label layoutX="227.0" layoutY="384.0" text="Text de message" />
       <TextArea fx:id="taAjouterMessage" layoutX="430.0" layoutY="351.0" prefHeight="84.0" prefWidth="207.0" />
       <Label layoutX="244.0" layoutY="271.0" text="Date" />

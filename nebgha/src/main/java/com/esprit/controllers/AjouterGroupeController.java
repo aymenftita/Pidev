@@ -26,7 +26,6 @@ public class AjouterGroupeController {
 
 
 
-
     @FXML
     void addGroupe(ActionEvent event) throws IOException {
         GroupeService ps = new GroupeService();
@@ -39,23 +38,15 @@ public class AjouterGroupeController {
     }
 
 
-    public void SwitchToMessage(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterMessage.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        Stage primaryStage = new Stage();
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Ajout Personne");
-        primaryStage.show();
+    public void SwitchToAjouterMessage(ActionEvent actionEvent) throws IOException {
+        SwitchScenesController ss = new SwitchScenesController();
+        ActionEvent event = null;
+        ss.SwitchToAjouterMessage(event);
     }
 
-    public void SwitchToReclamation(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterReclamation.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        Stage primaryStage = new Stage();
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Ajout Reclamation");
-        primaryStage.show();
+    public void SwitchToAjouterReclamation(ActionEvent actionEvent) throws IOException {
+        SwitchScenesController ss = new SwitchScenesController();
+        ActionEvent event = null;
+        ss.SwitchToAjouterReclamation(event);
     }
 }

@@ -6,6 +6,7 @@ E:\Pidev\nebgha\src\main\java\com\esprit\services\IService.java
 E:\Pidev\nebgha\src\main\java\com\esprit\services\ReclamationService.java
 E:\Pidev\nebgha\src\main\java\com\esprit\tests\MainProgGUI.java
 E:\Pidev\nebgha\src\main\java\com\esprit\models\Status.java
+E:\Pidev\nebgha\src\main\java\com\esprit\controllers\ModifierReclamationController.java
 E:\Pidev\nebgha\src\main\java\com\esprit\services\MessageService.java
 E:\Pidev\nebgha\src\main\java\com\esprit\models\Groupe.java
 E:\Pidev\nebgha\src\main\java\com\esprit\models\Reclamation.java
@@ -13,4 +14,6 @@ E:\Pidev\nebgha\src\main\java\com\esprit\models\Message.java
 E:\Pidev\nebgha\src\main\java\com\esprit\services\GroupeService.java
 E:\Pidev\nebgha\src\main\java\com\esprit\models\UtilisateurGroupes.java
 E:\Pidev\nebgha\src\main\java\com\esprit\controllers\Ajoutercontrollers.java
+E:\Pidev\nebgha\src\main\java\com\esprit\controllers\SwitchScenesController.java
+E:\Pidev\nebgha\src\main\java\com\esprit\controllers\ModifierGroupeController.java
 E:\Pidev\nebgha\src\main\java\com\esprit\controllers\AjouterMessageController.java

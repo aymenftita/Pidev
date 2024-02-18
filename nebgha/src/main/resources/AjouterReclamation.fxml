@@ -14,9 +14,8 @@
         <ButtonBar layoutX="123.0" prefHeight="52.0" prefWidth="610.0">
             <buttons>
                 <Button mnemonicParsing="false" prefHeight="52.0" prefWidth="134.0" text="Afficher" />
-                <Button layoutX="135.0" layoutY="17.0" mnemonicParsing="false" prefHeight="60.0" text="Ajouter" />
-                <Button layoutX="48.0" layoutY="17.0" mnemonicParsing="false" prefHeight="75.0" text="Modifier" />
-                <Button layoutX="202.0" layoutY="17.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="238.0" text="Supprimer" />
+                <Button layoutX="48.0" layoutY="17.0" mnemonicParsing="false" prefHeight="75.0" text="Modifier Reclamation" />
+                <Button layoutX="202.0" layoutY="17.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="238.0" text="Supprimer Reclamation" />
             </buttons>
         </ButtonBar>
         <Separator layoutX="125.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="0.0" />

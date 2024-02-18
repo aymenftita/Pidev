@@ -1,4 +1,8 @@
-com\esprit\controllers\AjouterMessageController.class
 com\esprit\tests\MainProgGUI.class
+com\esprit\controllers\SwitchScenesController.class
+com\esprit\controllers\ModifierGroupeController.class
+com\esprit\controllers\AjouterMessageController.class
+com\esprit\controllers\ModifierMessageController.class
 com\esprit\models\UtilisateurGroupes.class
 com\esprit\controllers\AjouterGroupeController.class
+com\esprit\controllers\ModifierReclamationController.class

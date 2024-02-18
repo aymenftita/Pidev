@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="493.0" prefWidth="702.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.AfficherReclamationController">
+   <TableView fx:id="tvReclamation" layoutX="141.0" layoutY="66.0" prefHeight="427.0" prefWidth="609.0">
+      <columns>
+         <TableColumn fx:id="tvReclamation_id" prefWidth="21.60003662109375" text="id" />
+         <TableColumn fx:id="tvReclamation_uid" prefWidth="24.79998779296875" text="Uid" />
+         <TableColumn fx:id="tvReclamation_date" prefWidth="98.39996337890625" text="Date" />
+         <TableColumn fx:id="tvReclamation_sujet" prefWidth="103.20001220703125" text="sujet" />
+         <TableColumn fx:id="tvReclamation_description" prefWidth="169.59994506835938" text="description" />
+         <TableColumn fx:id="tvReclamation_status" prefWidth="65.5999755859375" text="status" />
+         <TableColumn fx:id="tvReclamation_priorite" minWidth="0.0" prefWidth="50.40008544921875" text="priorité" />
+         <TableColumn fx:id="tvReclamation_responsable" prefWidth="73.5999755859375" text="responsable" />
+      </columns>
+   </TableView>
+</AnchorPane>

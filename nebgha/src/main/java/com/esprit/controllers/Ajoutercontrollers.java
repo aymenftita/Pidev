@@ -62,4 +62,6 @@ public class Ajoutercontrollers {
         primaryStage.setTitle("Ajout Personne");
         primaryStage.show();
     }
+
+
 }
