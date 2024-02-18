@@ -21,17 +21,8 @@ public class MessageService {
     }
 
     public void ajouter(Message message) {
-        String req = "INSERT into message(" +
-                "id_g, " +
-                "uid, " +
-                "uid," +
-                "date_creation)" +
-                "values ('" +
-                message.getId_g() + ", " +
-                message.getUid() + ", " +
-                message.getDate_creation() + ", " +
-                message.getText() +
-                "');";
+
+       String req = "INSERT INTO message(id_g,text,date_creation) VALUES ('"+message.getIdGroupe()+"','"+message.getText()+"','"+message.getDateCreation()+"')";
         try {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
@@ -42,7 +33,7 @@ public class MessageService {
     }
 
     public void modifier(Message message) {
-        String req = "UPDATE message set text = '" + message.getText() + "', date_creation = '" + message.getDate_creation() + "' where id_message = " + message.getId_message() + ";";
+        String req = "UPDATE message set text = '" + message.getText() + "', date_creation = '" + message.getDateCreation() + "' where id_g = " + message.getIdGroupe() + ";";
         try {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
@@ -53,7 +44,7 @@ public class MessageService {
     }
 
     public void supprimer(Message message) {
-        String req = "DELETE from message where id_message = " + message.getId_message() + ";";
+        String req = "DELETE from message where id_message = " + message.getIdMessage() + ";";
         try {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
@@ -71,7 +62,7 @@ public class MessageService {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
-                entities.add(new Message(rs.getInt("id_messsage"), rs.getInt("uid"), rs.getString("id_g") , rs.getString("Text")));
+                entities.add(new Message(rs.getInt("id_message"),rs.getInt("id_g") , rs.getString("date_creation"),  rs.getString("text")));
 
             }
             System.out.println(entities.toString());

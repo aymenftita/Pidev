@@ -2,58 +2,58 @@ package com.esprit.models;
 
 public class Reclamation {
 
-    private int id_reclamation;
-    private int uid;
-    private String date_creation;
+    private int idReclamation;
+    private int userId;
+    private String dateCreation;
     private String sujet;
     private String description;
     private String status;
-    private int priorité;
-    private String responsablle;
+    private int priorite;
+    private String responsable;
 
-    public Reclamation(int id_reclamation, int uid, String date_creation, String sujet, String description, String status, int priorité, String responsablle) {
-        this.id_reclamation = id_reclamation;
-        this.uid = uid;
-        this.date_creation = date_creation;
+    public Reclamation(int idReclamation, int userId, String dateCreation, String sujet, String description, String status, int priorite, String responsable) {
+        this.idReclamation = idReclamation;
+        this.userId = userId;
+        this.dateCreation = dateCreation;
         this.sujet = sujet;
         this.description = description;
         this.status = status;
-        this.priorité = priorité;
-        this.responsablle = responsablle;
+        this.priorite = priorite;
+        this.responsable = responsable;
     }
 
-    public Reclamation(int uid, String date_creation, String sujet, String description, String status, int priorité, String responsablle) {
-        this.uid = uid;
-        this.date_creation = "01/01/2024";
+    public Reclamation(int userId, String dateCreation, String sujet, String description, String status, int priorite, String responsablle) {
+        this.userId = userId;
+        this.dateCreation = dateCreation;
         this.sujet = sujet;
         this.description = description;
         this.status = status;
-        this.priorité = priorité;
-        this.responsablle = responsablle;
+        this.priorite = priorite;
+        this.responsable = responsablle;
     }
 
-    public int getId_reclamation() {
-        return id_reclamation;
+    public int getIdReclamation() {
+        return idReclamation;
     }
 
-    public void setId_reclamation(int id_reclamation) {
-        this.id_reclamation = id_reclamation;
+    public void setIdReclamation(int idReclamation) {
+        this.idReclamation = idReclamation;
     }
 
-    public int getUid() {
-        return uid;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUid(int uid) {
-        this.uid = uid;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public String getDate_creation() {
-        return date_creation;
+    public String getDateCreation() {
+        return dateCreation;
     }
 
-    public void setDate_creation(String date_creation) {
-        this.date_creation = date_creation;
+    public void setDateCreation(String dateCreation) {
+        this.dateCreation = dateCreation;
     }
 
     public String getSujet() {
@@ -80,33 +80,33 @@ public class Reclamation {
         this.status = status;
     }
 
-    public int getPriorité() {
-        return priorité;
+    public int getPriorite() {
+        return priorite;
     }
 
-    public void setPriorité(int priorité) {
-        this.priorité = priorité;
+    public void setPriorite(int priorite) {
+        this.priorite = priorite;
     }
 
-    public String getResponsablle() {
-        return responsablle;
+    public String getResponsable() {
+        return responsable;
     }
 
-    public void setResponsablle(String responsablle) {
-        this.responsablle = responsablle;
+    public void setResponsablle(String responsable) {
+        this.responsable = responsable;
     }
 
     @Override
     public String toString() {
         return "Reclamation{" +
-                "id_reclamation=" + id_reclamation +
-                ", utilisateur_id=" + uid +
-                ", date_creation='" + date_creation + '\'' +
+                "idReclamation=" + idReclamation +
+                ", userId=" + userId +
+                ", dateCreation='" + dateCreation + '\'' +
                 ", sujet='" + sujet + '\'' +
                 ", description='" + description + '\'' +
-                ", status=" + status +
-                ", priorité=" + priorité +
-                ", responsablle=" + responsablle +
+                ", status='" + status + '\'' +
+                ", priorité=" + priorite +
+                ", responsablle='" + responsable + '\'' +
                 '}';
     }
 }

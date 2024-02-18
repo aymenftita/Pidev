@@ -1,8 +1,10 @@
 package com.esprit.tests;
 
 import com.esprit.models.Groupe;
+import com.esprit.models.Message;
 import com.esprit.services.GroupeService;
 //import com.esprit.services.EntityService;
+import com.esprit.services.MessageService;
 import com.esprit.services.ReclamationService;
 
 import java.sql.SQLException;
@@ -23,9 +25,15 @@ public class MainProg {
 
         Groupe g2 = new Groupe(0,1,"test Title","test Description");
 
+        MessageService ms = new MessageService();
+
+        Message m = new Message(1,1,"dzdzd","hfhff");
+
+        gs.ajouter(g3);
 
 
-        gs.afficher();
+
+
 
 
 

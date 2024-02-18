@@ -21,9 +21,9 @@ public class GroupeService {
 
     public void ajouter(Groupe groupe) {
         String req = "INSERT into groupe(" +
-                "id_g, " +
-                "uid, " +
-                "nom_g," +
+                "id_groupe , " +
+                "creator_id, " +
+                "titre," +
                 "description)" +
                 "values ('" +
                 groupe.getId_groupe() + ", " +
@@ -31,9 +31,12 @@ public class GroupeService {
                 groupe.getTitre() + ", " +
                 groupe.getDescription() +
                 "');";
+
+        String req2 = "INSERT INTO groupe(id_groupe,creator_id,titre,description) VALUES ('"+groupe.getId_groupe()+"','"+groupe.getUid()+"','"+groupe.getTitre()+"','"+groupe.getDescription()+"')";
+
         try {
             Statement st = connection.createStatement();
-            st.executeUpdate(req);
+            st.executeUpdate(req2);
             System.out.println("Groupe ajoutée !");
         } catch (SQLException e) {
             System.out.println(e.getMessage());

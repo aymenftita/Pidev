@@ -14,22 +14,22 @@ public class ReclamationService {
     }
 
     public void ajouter(Reclamation reclamation) {
-        String req = "INSERT into reclamation(" +
+        String req = "INSERT into reclamations(" +
                         "uid, " +
                         "date_creation, " +
                         "sujet," +
                         "description," +
                         "status," +
                         "priorite," +
-                        "role) " +
+                        "responsable) " +
                         "values ('" +
-                            reclamation.getUid() + "', '" +
-                            reclamation.getDate_creation() + "', '" +
+                            reclamation.getUserId() + "', '" +
+                            reclamation.getDateCreation() + "', '" +
                             reclamation.getSujet()+ "', '" +
                             reclamation.getDescription()+ "', '" +
-                            reclamation.getUid() + "', '" +
-                            reclamation.getPriorité()+ "', '" +
-                            reclamation.getResponsablle() + "');";
+                            reclamation.getStatus() + "', '" +
+                            reclamation.getPriorite()+ "', '" +
+                            reclamation.getResponsable() + "');";
         try {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
@@ -41,7 +41,7 @@ public class ReclamationService {
 
 
     public void modifier(Reclamation reclamation) {
-        String req = "UPDATE reclamation set sujet = '" + reclamation.getSujet() + "', priorite = '" + reclamation.getPriorité() + "' where id_reclamation = " + reclamation.getId_reclamation() + ";";
+        String req = "UPDATE reclamations set sujet = '" + reclamation.getSujet() + "', priorite = '" + reclamation.getPriorite() + "' where id_reclamation = " + reclamation.getIdReclamation() + ";";
         try {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
@@ -53,7 +53,7 @@ public class ReclamationService {
 
 
     public void supprimer(Reclamation reclamation) {
-        String req = "DELETE from reclamation where id_reclamation = " + reclamation.getId_reclamation() + ";";
+        String req = "DELETE from reclamations where id_reclamation = " + reclamation.getIdReclamation() + ";";
         try {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
@@ -67,7 +67,7 @@ public class ReclamationService {
     public void afficher() {
         List<Reclamation> entities = new ArrayList<>();
 
-        String req = "SELECT * from reclamation";
+        String req = "SELECT * from reclamations";
         try {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(req);

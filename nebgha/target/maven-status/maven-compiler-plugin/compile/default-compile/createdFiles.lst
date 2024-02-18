@@ -1,1 +1,4 @@
+com\esprit\controllers\AjouterMessageController.class
 com\esprit\tests\MainProgGUI.class
+com\esprit\models\UtilisateurGroupes.class
+com\esprit\controllers\AjouterGroupeController.class

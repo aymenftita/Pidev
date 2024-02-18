@@ -1,57 +1,47 @@
 package com.esprit.models;
 
 public class Message {
-    private int id_message;
-    private int uid ;
-    private int id_g;
-    private String date_creation;
+    private int idMessage;
+    private int idGroupe;
+    private String dateCreation;
     private String text;
 
-    public Message(int id_message, int uid, int id_g, String date_creation, String text) {
-        this.id_message = id_message;
-        this.uid = uid;
-        this.id_g = id_g;
-        this.date_creation = date_creation;
+
+    public Message(int idMessage, int idGroupe, String dateCreation, String text) {
+        this.idMessage = idMessage;
+        this.idGroupe = idGroupe;
+        this.dateCreation = dateCreation;
         this.text = text;
     }
 
-    public Message(int uid, int id_g, String date_creation, String text) {
-        this.uid = uid;
-        this.id_g = id_g;
-        this.date_creation = date_creation;
+    public Message(int idGroupe, String dateCreation, String text) {
+        this.idGroupe = idGroupe;
+        this.dateCreation = dateCreation;
         this.text = text;
     }
 
-    public int getId_message() {
-        return id_message;
+    public int getIdMessage() {
+        return idMessage;
     }
 
-    public void setId_message(int id_message) {
-        this.id_message = id_message;
+    public void setIdMessage(int idMessage) {
+        this.idMessage = idMessage;
     }
 
-    public int getUid() {
-        return uid;
+    public int getIdGroupe() {
+        return idGroupe;
     }
 
-    public void setUid(int uid) {
-        this.uid = uid;
+    public void setIdGroupe(int idGroupe) {
+        this.idGroupe = idGroupe;
     }
 
-    public int getId_g() {
-        return id_g;
+    public String getDateCreation() {
+        return dateCreation;
     }
 
-    public void setId_g(int id_g) {
-        this.id_g = id_g;
-    }
-
-    public String getDate_creation() {
-        return date_creation;
-    }
-
-    public void setDate_creation(String date_creation) {
-        this.date_creation = date_creation;
+    public void setDateCreation(String dateCreation) {
+        this.dateCreation = dateCreation;
     }
 
     public String getText() {
@@ -65,10 +55,9 @@ public class Message {
     @Override
     public String toString() {
         return "Message{" +
-                "id_message=" + id_message +
-                ", uid=" + uid +
-                ", id_g=" + id_g +
-                ", date_creation='" + date_creation + '\'' +
+                "idMessage=" + idMessage +
+                ", idGroupe=" + idGroupe +
+                ", dateCreation='" + dateCreation + '\'' +
                 ", text='" + text + '\'' +
                 '}';
     }
