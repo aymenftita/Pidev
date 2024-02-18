@@ -38,7 +38,10 @@ public class AjoutSujetController {
 
     @FXML
     void menuAfficherSujet(ActionEvent event) throws IOException {
-
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherSujet.fxml"));
+        Parent root = loader.load();
+        tfSujetTitre.getScene().setRoot(root);
+        AfficherSujetController asc = loader.getController();
 
     }
 
@@ -60,7 +63,10 @@ public class AjoutSujetController {
     }
 
     @FXML
-    void menuSupprimerSujet(ActionEvent event) {
+    void menuSupprimerSujet(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/SupprimerSujet.fxml"));
+        Parent root = loader.load();
+        tfSujetTitre.getScene().setRoot(root);
 
     }
 

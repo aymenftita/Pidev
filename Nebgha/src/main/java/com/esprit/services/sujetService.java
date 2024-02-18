@@ -69,4 +69,25 @@ public class sujetService implements IService<Sujet> {
         return sujets;
     }
 
+    public Sujet getSujet(int id) {
+
+        Sujet sujet = null;  //
+
+        String req = "SELECT * FROM sujets WHERE id = " + id;
+
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(req);
+
+            if (rs.next()) {  // Check if a row exists
+                sujet = new Sujet(rs.getInt("id"), rs.getString("titre"),
+                        rs.getString("description"), rs.getString("regles"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return sujet;
+    }
+
 }

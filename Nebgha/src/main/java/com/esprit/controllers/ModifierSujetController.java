@@ -29,6 +29,10 @@ public class ModifierSujetController {
 
     @FXML
     void menuAfficherSujet(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherSujet.fxml"));
+        Parent root = loader.load();
+        tfModifIdSujet.getScene().setRoot(root);
+        AfficherSujetController asc = loader.getController();
 
     }
 
@@ -50,7 +54,10 @@ public class ModifierSujetController {
     }
 
     @FXML
-    void menuSupprimerSujet(ActionEvent event) {
+    void menuSupprimerSujet(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/SupprimerSujet.fxml"));
+        Parent root = loader.load();
+        tfModifSujetTitre.getScene().setRoot(root);
 
     }
 
