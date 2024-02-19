@@ -1,4 +1,4 @@
-package main.java.com.esprit.utils;
+package com.esprit.utils;
 
 import java.sql.*;
 

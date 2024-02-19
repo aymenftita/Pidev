@@ -1,7 +1,7 @@
-package main.java.com.esprit.services;
+package com.esprit.services;
 
-import main.java.com.esprit.models.cours;
-import main.java.com.esprit.utils.DataSource;
+import com.esprit.models.cours;
+import com.esprit.utils.DataSource;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,7 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CoursService implements IService<cours> {
+public class CoursService implements com.esprit.services.IService<cours> {
 
     private Connection connection;
 

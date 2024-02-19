@@ -1,4 +1,4 @@
-package main.java.com.esprit.models;
+package com.esprit.models;
 
 public class lecon {
     private int id_leçon;

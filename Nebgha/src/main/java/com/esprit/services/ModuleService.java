@@ -1,7 +1,7 @@
-package main.java.com.esprit.services;
+package com.esprit.services;
 
-import main.java.com.esprit.models.module;
-import main.java.com.esprit.utils.DataSource;
+import com.esprit.models.module;
+import com.esprit.utils.DataSource;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,7 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModuleService implements IService<module>{
+public class ModuleService implements com.esprit.services.IService<module> {
 
     private  Connection connection;
 
@@ -20,7 +20,7 @@ public class ModuleService implements IService<module>{
 
     @Override
     public void ajouter(module module) {
-        String req = "INSERT INTO module (titre, niveau, domaine, createur_id) VALUES ('" + module.getTitre() + "', '" + module.getNiveau() + "', '" + module.getDomaine() + "', '" + module.getCreateur_id() + "')";
+        String req = "INSERT INTO module (titre, niveau, domaine, createur_id) VALUES ('" + com.esprit.models.module.getTitre() + "', '" + module.getNiveau() + "', '" + module.getDomaine() + "', '" + module.getCreateur_id() + "')";
 
         try {
             Statement st = connection.createStatement();
@@ -35,7 +35,7 @@ public class ModuleService implements IService<module>{
 
     @Override
     public void modifier(module module) {
-        String req = "UPDATE module set titre = '" + module.getTitre() + "', niveau = '" + module.getNiveau() + "', domaine = '" + module.getDomaine() + "',  createur_id = '" + module.getCreateur_id() + "' where id_module = " + module.getId_module() + ";";
+        String req = "UPDATE module set titre = '" + com.esprit.models.module.getTitre() + "', niveau = '" + module.getNiveau() + "', domaine = '" + module.getDomaine() + "',  createur_id = '" + module.getCreateur_id() + "' where id_module = " + module.getId_module() + ";";
         try {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
@@ -84,5 +84,28 @@ public class ModuleService implements IService<module>{
         }
 
         return modules;
+    }
+
+    public module rechercherParTitre(String titreModule) {
+        String req = "SELECT * FROM module WHERE titre = '" + titreModule + "';";
+
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(req);
+
+            if (rs.next()) {
+                int id_module = rs.getInt("id_module");
+                String moduleTitre = rs.getString("titre");
+                String niveau = rs.getString("niveau");
+                String domaine = rs.getString("domaine");
+                String createur_id = rs.getString("createur_id");
+
+                return new module(id_module, moduleTitre, niveau, domaine, createur_id);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return null;
     }
 }

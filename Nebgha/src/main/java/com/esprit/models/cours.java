@@ -1,4 +1,4 @@
-package main.java.com.esprit.models;
+package com.esprit.models;
 
 public class cours {
     private int id_cours;
