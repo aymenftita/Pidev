@@ -1,4 +1,4 @@
-package com.esprit.controllers;
+package com.esprit.controllers.question;
 
 import com.esprit.services.sujetService;
 import javafx.event.ActionEvent;
@@ -10,32 +10,32 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
-public class SupprimerSujetController {
+public class SupprimerQuestionController {
 
     @FXML
     private TextField tfSuppSujetID;
 
     @FXML
     void menuAfficherSujet(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherSujet.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesSujet/AfficherSujet.fxml"));
         Parent root = loader.load();
         tfSuppSujetID.getScene().setRoot(root);
-        AfficherSujetController asc = loader.getController();
+        AfficherQuestionController asc = loader.getController();
 
     }
 
     @FXML
     void menuAjoutSujet(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjoutSujet.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesSujet/AjoutSujet.fxml"));
         Parent root = loader.load();
         tfSuppSujetID.getScene().setRoot(root);
-        AjoutSujetController asc = loader.getController();
+        AjoutQuestionController asc = loader.getController();
 
     }
 
     @FXML
     void menuModifierSujet(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifierSujet.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesSujet/ModifierSujet.fxml"));
         Parent root = loader.load();
         tfSuppSujetID.getScene().setRoot(root);
 
@@ -43,7 +43,7 @@ public class SupprimerSujetController {
 
     @FXML
     void menuSupprimerSujet(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/SupprimerSujet.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesSujet/SupprimerSujet.fxml"));
         Parent root = loader.load();
         tfSuppSujetID.getScene().setRoot(root);
 

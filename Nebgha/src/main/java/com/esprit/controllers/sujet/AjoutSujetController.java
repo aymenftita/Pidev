@@ -1,4 +1,4 @@
-package com.esprit.controllers;
+package com.esprit.controllers.sujet;
 
 import com.esprit.models.Sujet;
 import com.esprit.services.sujetService;
@@ -38,7 +38,7 @@ public class AjoutSujetController {
 
     @FXML
     void menuAfficherSujet(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherSujet.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesSujet/AfficherSujet.fxml"));
         Parent root = loader.load();
         tfSujetTitre.getScene().setRoot(root);
         AfficherSujetController asc = loader.getController();
@@ -47,7 +47,7 @@ public class AjoutSujetController {
 
     @FXML
     void menuAjoutSujet(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjoutSujet.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesSujet/AjoutSujet.fxml"));
         Parent root = loader.load();
         tfSujetTitre.getScene().setRoot(root);
 
@@ -55,7 +55,7 @@ public class AjoutSujetController {
 
     @FXML
     void menuModifierSujet(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifierSujet.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesSujet/ModifierSujet.fxml"));
         Parent root = loader.load();
         tfSujetTitre.getScene().setRoot(root);
         ModifierSujetController asc = loader.getController();
@@ -64,7 +64,7 @@ public class AjoutSujetController {
 
     @FXML
     void menuSupprimerSujet(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/SupprimerSujet.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesSujet/SupprimerSujet.fxml"));
         Parent root = loader.load();
         tfSujetTitre.getScene().setRoot(root);
 

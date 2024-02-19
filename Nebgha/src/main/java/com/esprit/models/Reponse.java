@@ -4,6 +4,7 @@ package com.esprit.models;
 import java.sql.Date;
 
 public class Reponse {
+    //TODO: change auteur_id, sujet_id, and question_id to classes
     private int id;
     private int auteur_id;
     private int question_id;
