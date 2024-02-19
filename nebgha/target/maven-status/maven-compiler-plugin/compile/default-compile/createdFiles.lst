@@ -3,7 +3,9 @@ com\esprit\tests\MainProgGUI.class
 com\esprit\controllers\SwitchScenesController.class
 com\esprit\controllers\AfficherMessageController$1.class
 com\esprit\controllers\SupprimerMessageController.class
+com\esprit\controllers\testTableController.class
 com\esprit\controllers\ModifierGroupeController.class
+com\esprit\controllers\AfficherReclamationController.class
 com\esprit\controllers\AjouterMessageController.class
 com\esprit\controllers\ModifierMessageController.class
 com\esprit\controllers\AfficherMessageController.class

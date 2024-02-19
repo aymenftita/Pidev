@@ -15,7 +15,7 @@ public class AfficherMessageController {
     @FXML
     private ListView<Message> listView;
 
-    private ObservableList<Message> personnes = FXCollections.observableArrayList();
+    private ObservableList<Message> messages = FXCollections.observableArrayList();
 
     @FXML
     private void initialize() {
@@ -23,7 +23,7 @@ public class AfficherMessageController {
         chargerDonnees();
 
         // Initialiser la ListView avec l'ObservableList
-        listView.setItems(personnes);
+        listView.setItems(messages);
 
         // Définir comment les éléments de la ListView doivent être affichés
         listView.setCellFactory(param -> new ListCell<Message>() {
@@ -62,7 +62,7 @@ public class AfficherMessageController {
                     String text = resultSet.getString("text");
 
                     Message personne = new Message(id, idg,date,text);
-                    personnes.add(personne);
+                    messages.add(personne);
                 }
             }
         } catch (SQLException e) {

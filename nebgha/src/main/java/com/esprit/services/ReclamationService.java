@@ -89,7 +89,7 @@ public class ReclamationService {
 
     public ResultSet afficher2() throws SQLException  {
         Statement st = connection.createStatement();
-        ResultSet rs = st.executeQuery("SELECT * from reclamation");
+        ResultSet rs = st.executeQuery("SELECT * from reclamations");
 
         return rs;
     }

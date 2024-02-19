@@ -67,7 +67,7 @@ public class GroupeService {
         }
     }
 
-    public void afficher() {
+    public List<Groupe> afficher() {
         List<Groupe> entities = new ArrayList<>();
 
         String req = "SELECT * from groupe";
@@ -82,6 +82,8 @@ public class GroupeService {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
+        return entities;
 
     }
 
