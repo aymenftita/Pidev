@@ -28,6 +28,7 @@ public class AfficherModuleController implements Initializable {
     private TableColumn<module, String> createurIdColumn;
 
     private ObservableList<module> dataModule;
+    
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
