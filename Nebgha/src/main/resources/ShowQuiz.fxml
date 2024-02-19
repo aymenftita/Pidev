@@ -21,12 +21,12 @@
             <TableColumn fx:id="difficulte" prefWidth="77.5999755859375" text="Difficulte" />
         </columns>
       </TableView>
-      <Label layoutX="140.0" layoutY="14.0" text="Liste des Quizs" textFill="#000066">
+      <Label layoutX="239.0" layoutY="22.0" text="Liste des Quizs" textFill="#000066">
          <font>
-            <Font name="Montserrat Thin" size="53.0" />
+            <Font size="28.0" />
          </font>
       </Label>
-      <Button fx:id="btnEdit" layoutX="290.0" layoutY="315.0" mnemonicParsing="false" onAction="#openEdit" style="-fx-background-color: #FDFD96;" text="Modifier" />
+      <Button fx:id="btnEdit" layoutX="300.0" layoutY="315.0" mnemonicParsing="false" onAction="#openEdit" style="-fx-background-color: #FDFD96;" text="Modifier" />
       <Button fx:id="btnQuiz" layoutX="111.0" layoutY="315.0" mnemonicParsing="false" onAction="#openAjout" style="-fx-background-color: #00ab41;" text="Ajouter " textFill="WHITE" />
       <Button fx:id="btnDelete" layoutX="480.0" layoutY="315.0" mnemonicParsing="false" onAction="#deleteQuiz" style="-fx-background-color: #FF0000;" text="Supprimer" textFill="WHITE" />
    </children>

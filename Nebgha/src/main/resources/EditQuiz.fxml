@@ -18,10 +18,10 @@
         <TextField fx:id="desctf" layoutX="214.0" layoutY="117.0" />
         <TextField fx:id="dureetf" layoutX="214.0" layoutY="161.0" />
         <TextField fx:id="nbr_questionstf" layoutX="214.0" layoutY="209.0" />
-        <Button layoutX="480.0" layoutY="296.0" mnemonicParsing="false" onAction="#EditQuiz" text="Enregistrer" textFill="#000066" />
-        <Label layoutX="170.0" layoutY="14.0" text="Modifier Quiz" textFill="#000066">
+        <Button layoutX="480.0" layoutY="296.0" mnemonicParsing="false" onAction="#EditQuiz" style="-fx-background-color: #FDFD96;" text="Enregistrer" textFill="#000066" />
+        <Label layoutX="215.0" layoutY="14.0" text="Modifier Quiz" textFill="#000066">
          <font>
-            <Font size="39.0" />
+            <Font size="28.0" />
          </font></Label>
         <ComboBox fx:id="difficulteComboBox" layoutX="213.0" layoutY="253.0" prefWidth="150.0" />
 

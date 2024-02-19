@@ -1,4 +1,6 @@
 package com.esprit.services;
+import com.esprit.models.Difficulte;
+import com.esprit.models.Quiz;
 import com.esprit.models.Recompenses;
 import com.esprit.models.Reponses;
 import com.esprit.utils.DataSource;
@@ -72,6 +74,24 @@ public class RecompensesService implements IService<Recompenses> {
             System.out.println(e.getMessage());
         }
         return recompensesList;
+    }
+
+    public Recompenses getRecompense(int recompenseId) {
+        Recompenses recompense = null;
+        String req = "SELECT * FROM recompenses WHERE rewardID = " + recompenseId;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(req);
+            if (rs.next()) {
+                recompense = new Recompenses(rs.getInt("rewardID"),
+                        rs.getString("nom"),
+                        rs.getString("description"),
+                        rs.getInt("score_requis"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return recompense;
     }
 
 }

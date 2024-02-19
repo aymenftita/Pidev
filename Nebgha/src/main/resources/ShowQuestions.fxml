@@ -21,14 +21,14 @@
                 <TableColumn fx:id="categorie" prefWidth="130.40005493164062" text="Catégorie" />
             </columns>
         </TableView>
-        <Label layoutX="159.0" layoutY="14.0" text="Liste des Questions" textFill="#000066">
+        <Label layoutX="181.0" layoutY="14.0" text="Liste des Questions" textFill="#000066">
          <font>
-            <Font size="38.0" />
+            <Font size="28.0" />
          </font></Label>
         <Button fx:id="btnEdit" layoutX="269.0" layoutY="341.0" mnemonicParsing="false" onAction="#openEdit" style="-fx-background-color: #FDFD96;" text="Modifier" />
         <Button fx:id="btnQuiz" layoutX="118.0" layoutY="341.0" mnemonicParsing="false" onAction="#openAjout" style="-fx-background-color: #00ab41;" text="Ajouter " textFill="WHITE" />
         <Button fx:id="btnDelete" layoutX="423.0" layoutY="341.0" mnemonicParsing="false" onAction="#deleteQuestion" style="-fx-background-color: #FF0000;" text="Supprimer" textFill="WHITE" />
-      <Label layoutX="28.0" layoutY="91.0" text="Select quiz">
+      <Label layoutX="28.0" layoutY="91.0" text="Select quiz" textFill="#000066">
          <font>
             <Font size="15.0" />
          </font>

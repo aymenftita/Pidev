@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.ShowRecompensesController">
+    <children>
+        <TableView fx:id="recompenseTableView" layoutX="36.0" layoutY="90.0" prefHeight="200.0" prefWidth="527.0">
+            <columns>
+                <TableColumn fx:id="id" prefWidth="58.4000244140625" text="id" />
+                <TableColumn fx:id="nom" prefWidth="161.5999755859375" text="Titre" />
+                <TableColumn fx:id="description" prefWidth="208.0" text="Description" />
+                <TableColumn fx:id="scoreRequis" prefWidth="96.79998779296875" text="Score Requis" />
+            </columns>
+        </TableView>
+        <Label layoutX="178.0" layoutY="21.0" text="Liste des Récompenses" textFill="#000066">
+         <font>
+            <Font size="28.0" />
+         </font></Label>
+        <Button fx:id="btnEdit" layoutX="269.0" layoutY="315.0" mnemonicParsing="false" onAction="#openEdit" style="-fx-background-color: #FDFD96;" text="Modifier" />
+        <Button fx:id="btnRecompense" layoutX="99.0" layoutY="315.0" mnemonicParsing="false" onAction="#openAjout" style="-fx-background-color: #00ab41;" text="Ajouter " textFill="WHITE" />
+        <Button fx:id="btnDelete" layoutX="463.0" layoutY="315.0" mnemonicParsing="false" onAction="#deleteRecompense" style="-fx-background-color: #FF0000;" text="Supprimer" textFill="WHITE" />
+    </children>
+</AnchorPane>

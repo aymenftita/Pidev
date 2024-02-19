@@ -12,7 +12,7 @@
     <children>
         <Label layoutX="188.0" layoutY="20.0" text="Modifier Question" textFill="#000066">
          <font>
-            <Font size="26.0" />
+            <Font size="28.0" />
          </font></Label>
         <Label layoutX="49.0" layoutY="95.0" text="Quiz" />
         <Label layoutX="47.0" layoutY="131.0" text="Texte" />
@@ -27,6 +27,6 @@
         <TextField fx:id="pointstf" layoutX="109.0" layoutY="195.0" prefHeight="26.0" prefWidth="74.0" />
         <TextField fx:id="ordretf" layoutX="109.0" layoutY="230.0" prefHeight="26.0" prefWidth="74.0" />
         <TextField fx:id="categorietf" layoutX="109.0" layoutY="266.0" prefHeight="26.0" prefWidth="135.0" />
-        <Button fx:id="questionbtn" layoutX="491.0" layoutY="338.0" mnemonicParsing="false" onAction="#EditQuestion" text="Enregistrer" />
+        <Button fx:id="questionbtn" layoutX="491.0" layoutY="338.0" mnemonicParsing="false" onAction="#EditQuestion" style="-fx-background-color: #FDFD96;" text="Enregistrer" textFill="#000066" />
     </children>
 </AnchorPane>

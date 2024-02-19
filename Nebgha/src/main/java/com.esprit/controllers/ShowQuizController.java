@@ -16,7 +16,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
@@ -77,7 +76,6 @@ public class ShowQuizController implements Initializable {
         quizTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 selectedQuizId = newSelection.getQuizId();
-                System.out.println("Selected quiz ID: " + selectedQuizId);
             } else {
                 selectedQuizId = -1;
             }
@@ -86,7 +84,6 @@ public class ShowQuizController implements Initializable {
 
     @FXML
     void openAjout(ActionEvent event) throws IOException {
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjoutQuiz.fxml"));
         Parent root = loader.load();
         Stage currentStage = (Stage) quizTableView.getScene().getWindow();
@@ -97,7 +94,6 @@ public class ShowQuizController implements Initializable {
     @FXML
     void openEdit(ActionEvent event) throws IOException {
         if (selectedQuizId != -1) {
-            System.out.println("Edit button clicked for quiz with ID: " + selectedQuizId);
             QuizService quizService = new QuizService();
             Quiz selectedQuiz = quizService.getQuiz(selectedQuizId);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/EditQuiz.fxml"));
@@ -114,7 +110,6 @@ public class ShowQuizController implements Initializable {
     @FXML
     void deleteQuiz(ActionEvent event) {
         if (selectedQuizId != -1) {
-            System.out.println("Delete button clicked for quiz with ID: " + selectedQuizId);
             QuizService quizService = new QuizService();
             Quiz selectedQuiz = quizService.getQuiz(selectedQuizId);
             quizService.supprimer(selectedQuiz);
