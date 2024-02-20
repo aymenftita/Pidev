@@ -26,39 +26,7 @@ public class ModifierQuestionController {
     @FXML
     private TextField tfModifSujetTitre;
 
-    @FXML
-    void menuAfficherSujet(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesSujet/AfficherSujet.fxml"));
-        Parent root = loader.load();
-        tfModifIdSujet.getScene().setRoot(root);
-        AfficherQuestionController asc = loader.getController();
 
-    }
-
-    @FXML
-    void menuAjoutSujet(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesSujet/AjoutSujet.fxml"));
-        Parent root = loader.load();
-        tfModifIdSujet.getScene().setRoot(root);
-        AjoutQuestionController asc = loader.getController();
-
-    }
-
-    @FXML
-    void menuModifierSujet(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesSujet/ModifierSujet.fxml"));
-        Parent root = loader.load();
-        tfModifIdSujet.getScene().setRoot(root);
-
-    }
-
-    @FXML
-    void menuSupprimerSujet(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesSujet/SupprimerSujet.fxml"));
-        Parent root = loader.load();
-        tfModifSujetTitre.getScene().setRoot(root);
-
-    }
 
     @FXML
     void modifierSujet(ActionEvent event) {

@@ -1,7 +1,6 @@
 package com.esprit.controllers.sujet;
 
-import com.esprit.controllers.sujet.AfficherSujetController;
-import com.esprit.controllers.sujet.AjoutSujetController;
+import com.esprit.controllers.InterfacesAdminController;
 import com.esprit.models.Sujet;
 import com.esprit.services.sujetService;
 import javafx.event.ActionEvent;
@@ -28,38 +27,34 @@ public class ModifierSujetController {
     @FXML
     private TextField tfModifSujetTitre;
 
-    @FXML
-    void menuAfficherSujet(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesSujet/AfficherSujet.fxml"));
-        Parent root = loader.load();
-        tfModifIdSujet.getScene().setRoot(root);
-        AfficherSujetController asc = loader.getController();
+    private Sujet sujetToModify; // Store the sujet to be modified
 
+    public void setSujetToModify(Sujet sujet) {
+        this.sujetToModify = sujet;
+        populateTextFields(); // Populate the text fields with the sujet's data
+    }
+
+    private void populateTextFields() {
+        if (sujetToModify != null) {
+            tfModifIdSujet.setText(String.valueOf(sujetToModify.getId()));
+            tfModifSujetTitre.setText(sujetToModify.getTitre());
+            tfModifDescriptionSujet.setText(sujetToModify.getDesc());
+            tfModifReglesSujet.setText(sujetToModify.getRegles());
+        } else {
+            // Clear the text fields if no sujet is set
+            tfModifIdSujet.clear();
+            tfModifSujetTitre.clear();
+            tfModifDescriptionSujet.clear();
+            tfModifReglesSujet.clear();
+        }
     }
 
     @FXML
-    void menuAjoutSujet(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesSujet/AjoutSujet.fxml"));
-        Parent root = loader.load();
-        tfModifIdSujet.getScene().setRoot(root);
-        AjoutSujetController asc = loader.getController();
-
-    }
-
-    @FXML
-    void menuModifierSujet(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesSujet/ModifierSujet.fxml"));
-        Parent root = loader.load();
-        tfModifIdSujet.getScene().setRoot(root);
-
-    }
-
-    @FXML
-    void menuSupprimerSujet(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesSujet/SupprimerSujet.fxml"));
+    void menuAdmin(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/InterfacesAdmin.fxml"));
         Parent root = loader.load();
         tfModifSujetTitre.getScene().setRoot(root);
-
+        InterfacesAdminController iac = loader.getController();
     }
 
     @FXML

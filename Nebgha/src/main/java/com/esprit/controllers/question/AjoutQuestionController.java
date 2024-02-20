@@ -36,38 +36,4 @@ public class AjoutQuestionController {
 
     }
 
-    @FXML
-    void menuAfficherSujet(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesSujet/AfficherSujet.fxml"));
-        Parent root = loader.load();
-        tfSujetTitre.getScene().setRoot(root);
-        AfficherQuestionController asc = loader.getController();
-
-    }
-
-    @FXML
-    void menuAjoutSujet(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesSujet/AjoutSujet.fxml"));
-        Parent root = loader.load();
-        tfSujetTitre.getScene().setRoot(root);
-
-    }
-
-    @FXML
-    void menuModifierSujet(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesSujet/ModifierSujet.fxml"));
-        Parent root = loader.load();
-        tfSujetTitre.getScene().setRoot(root);
-        ModifierQuestionController asc = loader.getController();
-
-    }
-
-    @FXML
-    void menuSupprimerSujet(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesSujet/SupprimerSujet.fxml"));
-        Parent root = loader.load();
-        tfSujetTitre.getScene().setRoot(root);
-
-    }
-
 }

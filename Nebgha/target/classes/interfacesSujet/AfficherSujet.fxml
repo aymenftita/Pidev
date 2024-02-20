@@ -83,7 +83,7 @@
                                     </AnchorPane>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="399.0" prefWidth="422.0">
                                        <children>
-                                          <TableView fx:id="tvAffichageSujet" layoutX="2.0" layoutY="7.0" prefHeight="384.0" prefWidth="410.0">
+                                          <TableView fx:id="tvAffichageSujet" layoutX="2.0" layoutY="9.0" prefHeight="382.0" prefWidth="410.0">
                                             <columns>
                                                <TableColumn prefWidth="23.0" text="ID">
                                                   <cellValueFactory>

@@ -1,5 +1,6 @@
 package com.esprit.controllers.reponse;
 
+import com.esprit.controllers.InterfacesAdminController;
 import com.esprit.models.Reponse;
 import com.esprit.models.Sujet;
 import com.esprit.services.reponseService;
@@ -48,37 +49,11 @@ public class AjoutReponseController {
     }
 
     @FXML
-    void menuAfficherReponse(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesReponse/AfficherReponse.fxml"));
+    void menuAdmin(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/InterfacesAdmin.fxml"));
         Parent root = loader.load();
-        tfAuteurID.getScene().setRoot(root);
-        AfficherReponseController asc = loader.getController();
-
-    }
-
-    @FXML
-    void menuAjoutReponse(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesReponse/AjoutReponse.fxml"));
-        Parent root = loader.load();
-        tfAuteurID.getScene().setRoot(root);
-
-    }
-
-    @FXML
-    void menuModifierReponse(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesReponse/ModifierReponse.fxml"));
-        Parent root = loader.load();
-        tfAuteurID.getScene().setRoot(root);
-        ModifierReponseController asc = loader.getController();
-
-    }
-
-    @FXML
-    void menuSupprimerReponse(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesReponse/SupprimerReponse.fxml"));
-        Parent root = loader.load();
-        tfAuteurID.getScene().setRoot(root);
-
+        tfSujetID.getScene().setRoot(root);
+        InterfacesAdminController iac = loader.getController();
     }
 
 }
