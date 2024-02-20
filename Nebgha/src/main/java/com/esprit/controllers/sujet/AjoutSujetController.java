@@ -26,9 +26,12 @@ public class AjoutSujetController {
 
     @FXML
     void ajouterSujet(ActionEvent event) {
-
+        //Création du service et ajout d'entité
         sujetService SS = new sujetService();
-        SS.ajouter(new Sujet(11, tfSujetTitre.getText(), tfDescriptionSujet.getText(), tfReglesSujet.getText()));
+        SS.ajouter(new Sujet(11, tfSujetTitre.getText(), tfDescriptionSujet.getText(),
+                tfReglesSujet.getText()));
+
+        //Message de confirmation
         Alert alertAjout = new Alert(Alert.AlertType.INFORMATION);
         alertAjout.setTitle("Ajout Sujet");
         alertAjout.setHeaderText("Succées!");
@@ -39,10 +42,10 @@ public class AjoutSujetController {
 
     @FXML
     void menuAdmin(ActionEvent event) throws IOException {
+        //redirection à l'autre interface
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/InterfacesAdmin.fxml"));
         Parent root = loader.load();
         tfSujetTitre.getScene().setRoot(root);
-        InterfacesAdminController iac = loader.getController();
 
     }
 }

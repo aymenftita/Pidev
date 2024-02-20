@@ -27,7 +27,6 @@ public class questionService implements IService<Question> {
             System.out.println(e.getMessage());
         }
     }
-    //TODO: fix date input;
     @Override
     public void modifier(Question question) {
         String req = "UPDATE questions_forum set titre = '" + question.getTitre() +

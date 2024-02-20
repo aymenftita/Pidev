@@ -36,24 +36,27 @@ public class AjoutReponseController {
 
     @FXML
     void ajouterReponse(ActionEvent event) {
+        //Création du service et ajout d'entité
         reponseService rs = new reponseService();
         rs.ajouter(new Reponse(0, Integer.parseInt(tfAuteurID.getText()),
                 Integer.parseInt(tfQuestionID.getText()), tfContenuReponse.getText(),
                 Date.valueOf(dpDateReponse.getValue()), Integer.parseInt(tfSujetID.getText())));
+
+        //Message de confirmation
         Alert alertAjout = new Alert(Alert.AlertType.INFORMATION);
-        alertAjout.setTitle("Ajout Question");
+        alertAjout.setTitle("Ajout Réponse");
         alertAjout.setHeaderText("Succées!");
-        alertAjout.setContentText("Question ajouté!");
+        alertAjout.setContentText("Réponse ajouté!");
         alertAjout.show();
 
     }
 
     @FXML
     void menuAdmin(ActionEvent event) throws IOException {
+        //redirection à l'autre interface
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/InterfacesAdmin.fxml"));
         Parent root = loader.load();
         tfSujetID.getScene().setRoot(root);
-        InterfacesAdminController iac = loader.getController();
     }
 
 }

@@ -27,21 +27,23 @@ public class ModifierSujetController {
     @FXML
     private TextField tfModifSujetTitre;
 
-    private Sujet sujetToModify; // Store the sujet to be modified
+    private Sujet sujetToModify;
 
     public void setSujetToModify(Sujet sujet) {
+        //chargement d'instance à modifier
         this.sujetToModify = sujet;
-        populateTextFields(); // Populate the text fields with the sujet's data
+        populateTextFields();
     }
 
     private void populateTextFields() {
+        //chargement des champs de textes
         if (sujetToModify != null) {
             tfModifIdSujet.setText(String.valueOf(sujetToModify.getId()));
             tfModifSujetTitre.setText(sujetToModify.getTitre());
             tfModifDescriptionSujet.setText(sujetToModify.getDesc());
             tfModifReglesSujet.setText(sujetToModify.getRegles());
         } else {
-            // Clear the text fields if no sujet is set
+            // Si pas de sujet choisi, vider les champs
             tfModifIdSujet.clear();
             tfModifSujetTitre.clear();
             tfModifDescriptionSujet.clear();
@@ -51,16 +53,20 @@ public class ModifierSujetController {
 
     @FXML
     void menuAdmin(ActionEvent event) throws IOException {
+        //redirection à l'autre interface
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/InterfacesAdmin.fxml"));
         Parent root = loader.load();
         tfModifSujetTitre.getScene().setRoot(root);
-        InterfacesAdminController iac = loader.getController();
     }
 
     @FXML
     void modifierSujet(ActionEvent event) {
+        //Création du service et modification d'entité
         sujetService SS = new sujetService();
-        SS.modifier(new Sujet(Integer.parseInt(tfModifIdSujet.getText()), tfModifSujetTitre.getText(), tfModifDescriptionSujet.getText(), tfModifReglesSujet.getText()));
+        SS.modifier(new Sujet(Integer.parseInt(tfModifIdSujet.getText()), tfModifSujetTitre.getText(),
+                tfModifDescriptionSujet.getText(), tfModifReglesSujet.getText()));
+
+        //Message de confirmation
         Alert alertModif = new Alert(Alert.AlertType.INFORMATION);
         alertModif.setTitle("Modification Sujet");
         alertModif.setHeaderText("Succées!");
