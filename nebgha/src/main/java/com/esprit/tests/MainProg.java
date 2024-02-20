@@ -7,6 +7,7 @@ import com.esprit.services.GroupeService;
 import com.esprit.services.MessageService;
 import com.esprit.services.ReclamationService;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MainProg {
@@ -29,7 +30,7 @@ public class MainProg {
 
         Message m = new Message(1,1,"dzdzd","hfhff");
 
-        gs.ajouter(g3);
+
 
 
 

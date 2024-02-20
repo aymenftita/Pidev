@@ -1,31 +1,38 @@
 package com.esprit.controllers;
 
-import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
+import com.esprit.models.Message;
+import com.esprit.services.MessageService;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
-import java.net.URL;
 
 public class ModifierMessageController {
 
-    
+    MessageService ms = new MessageService();
+
+    @FXML
     public TextField tfidgroupe;
+    @FXML
     public TextField tftext;
+    @FXML
     public TextField tfidmessage;
+    @FXML
     public DatePicker tfdate;
 
     @FXML
     private void UpdateMessage(){
+
+        ms.modifier(new Message(
+                Integer.parseInt(tfidmessage.getText()),
+                Integer.parseInt(tfidgroupe.getText()),
+                tfdate.getValue().toString(),
+                tftext.getText()));
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Message Modifié");
+        alert.setContentText("Message Modifié !");
+        alert.show();
         
     }
 
-    public void SwitchToAjouterReclamation(ActionEvent actionEvent) {
-    }
 
-    public void SwitchToAjouterGroupe(ActionEvent actionEvent) {
-    }
 }

@@ -9,31 +9,28 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class SwitchScenesController {
-    public void SwitchToAjouterReclamation(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterReclamation.fxml"));
+    public void SwitchScene(ActionEvent event,String fxmlfile) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/"+fxmlfile+".fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         Stage primaryStage = new Stage();
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Ajout Reclamation");
         primaryStage.show();
     }
-    public void SwitchToAjouterMessage(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterMessage.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        Stage primaryStage = new Stage();
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Ajout Personne");
-        primaryStage.show();
-    }
-    public void SwitchToAjouterGroupe(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterGroupe.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        Stage primaryStage = new Stage();
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Ajout Groupe");
-        primaryStage.show();
+
+
+    public static void switchScene(Stage stage, String fxmlfile) {
+        try {
+            FXMLLoader loader = new FXMLLoader(SwitchScenesController.class.getResource("/"+fxmlfile+".fxml"));
+            Parent root = loader.load();
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
+
+

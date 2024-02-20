@@ -4,6 +4,7 @@ import com.esprit.models.Reclamation;
 import com.esprit.services.ReclamationService;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -24,6 +25,9 @@ public class ModifierReclamationController {
     public TextField tfIdREclamation;
     public ComboBox<String> cbstatus;
 
+    AfficherReclamationController ar = new AfficherReclamationController();
+
+
 
         public void initialize() {
             cbstatus.setItems(FXCollections.observableArrayList("envoyé","En cours de traitement", "Traité"));
@@ -41,38 +45,9 @@ public class ModifierReclamationController {
                 cbstatus.getValue().toString(),
                 Integer.parseInt(tfpriorite.getText()),"admin" ));
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Personne ajoutée");
-        alert.setContentText("Personne ajoutée !");
+        alert.setTitle("Reclamation Modifié");
+        alert.setContentText("Reclamation Modifié !");
         alert.show();
     }
 
-    public void SwitchToAjouterReclamation(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterReclamation.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        Stage primaryStage = new Stage();
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Ajout Reclamation");
-        primaryStage.show();
-    }
-
-    public void SwitchToAjouterMessage(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterMessage.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        Stage primaryStage = new Stage();
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Ajout Personne");
-        primaryStage.show();
-    }
-
-    public void SwitchToAjouterGroupe(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterGroupe.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        Stage primaryStage = new Stage();
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Ajout Groupe");
-        primaryStage.show();
-    }
 }

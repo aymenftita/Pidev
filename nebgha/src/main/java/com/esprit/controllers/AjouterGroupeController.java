@@ -38,15 +38,5 @@ public class AjouterGroupeController {
     }
 
 
-    public void SwitchToAjouterMessage(ActionEvent actionEvent) throws IOException {
-        SwitchScenesController ss = new SwitchScenesController();
-        ActionEvent event = null;
-        ss.SwitchToAjouterMessage(event);
-    }
 
-    public void SwitchToAjouterReclamation(ActionEvent actionEvent) throws IOException {
-        SwitchScenesController ss = new SwitchScenesController();
-        ActionEvent event = null;
-        ss.SwitchToAjouterReclamation(event);
-    }
 }

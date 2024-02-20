@@ -1,9 +1,7 @@
 package com.esprit.controllers;
 
 import com.esprit.models.Groupe;
-import com.esprit.models.Reclamation;
 import com.esprit.services.GroupeService;
-import com.esprit.services.ReclamationService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -25,15 +23,19 @@ public class ModifierGroupeController {
         GroupeService ps = new GroupeService();
         ps.modifier(new Groupe(Integer.parseInt(tfIdGroupe.getText()),Integer.parseInt(tfCreateur.getText()) , tfTitre.getText(), tfDescription.getText() ));
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Personne ajoutée");
-        alert.setContentText("Personne ajoutée !");
+        alert.setTitle("Groupe Modifié");
+        alert.setContentText("Gorupe "+tfIdGroupe.getText()+" "+tfTitre.getText()+" Modifié");
         alert.show();
     }
 
-    public void SwitchToAjouterReclamation(ActionEvent actionEvent) {
+    public void initialize(){
+        AfficherGroupeController gc = new AfficherGroupeController();
+        /*tfTitre.setText(gc.getSelectedGroupe().getTitre());
+        tfCreateur.setText("dgdg");
+        tfIdGroupe.setText("id");
+        tfDescription.setText(gc.getSelectedGroupe().getDescription());*/
 
     }
 
-    public void SwitchToAjouterMessage(ActionEvent actionEvent) {
-    }
+
 }

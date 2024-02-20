@@ -57,7 +57,7 @@ public class GroupeService {
 
 
     public void supprimer(int id) {
-        String req = "DELETE from groupe where id_g = " + id + ";";
+        String req = "DELETE from groupe where id_groupe = " + id + ";";
         try {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
@@ -75,10 +75,10 @@ public class GroupeService {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
-                entities.add(new Groupe(rs.getInt("id_g"), rs.getInt("uid"), rs.getString("nom_g") , rs.getString("description")));
+                entities.add(new Groupe(rs.getInt(1), rs.getInt(2), rs.getString(3) , rs.getString(4)));
 
             }
-            System.out.println(entities.toString());
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

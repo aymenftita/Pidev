@@ -52,8 +52,8 @@ public class ReclamationService {
     }
 
 
-    public void supprimer(Reclamation reclamation) {
-        String req = "DELETE from reclamations where id_reclamation = " + reclamation.getIdReclamation() + ";";
+    public void supprimer(int id) {
+        String req = "DELETE from reclamations where id_reclamation = " + id + ";";
         try {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
@@ -72,18 +72,20 @@ public class ReclamationService {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
-                entities.add(new Reclamation(rs.getInt("id_reclamation"), rs.getInt("uid"), rs.getString("date_creation") , rs.getString("sujet") , rs.getString ("description"), rs.getString(
-                "status"), rs.getInt("priorite") , rs.getString("role") ));
+                entities.add(new Reclamation(rs.getInt(1), rs.getInt(2), rs.getString(3) , rs.getString(4) , rs.getString (5), rs.getString(
+                6), rs.getInt(7) , rs.getString(8) ));
 
             }
 
-            System.out.println(entities.toString());
+
+
+            System.out.println(entities);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
-        return entities;
 
+        return entities;
 
     }
 

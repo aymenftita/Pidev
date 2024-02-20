@@ -1,38 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="491.0" prefWidth="678.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.ModifierGroupeController">
+<AnchorPane prefHeight="489.0" prefWidth="429.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.ModifierGroupeController">
     <children>
-        <ButtonBar layoutX="91.0" layoutY="14.0" prefHeight="52.0" prefWidth="557.0">
-            <buttons>
-                <Button fx:id="bt_G_D" layoutX="202.0" layoutY="17.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="238.0" text="Supprimer Groupe" />
-                <Button fx:id="bt_G_A" layoutX="48.0" layoutY="17.0" mnemonicParsing="false" prefHeight="75.0" text="Ajouter Groupe" />
-            </buttons>
-        </ButtonBar>
-        <Separator layoutX="126.0" layoutY="4.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="0.0" />
-        <Button fx:id="bt_R" mnemonicParsing="false" onAction="#SwitchToAjouterReclamation" prefHeight="290.0" prefWidth="126.0" text="Reclamations" />
-        <Button fx:id="bt_M" layoutY="291.0" mnemonicParsing="false" onAction="#SwitchToAjouterMessage" prefHeight="274.0" prefWidth="126.0" text="Messages" />
-        <Button id="bt_ajouter_groupe" layoutX="324.0" layoutY="460.0" mnemonicParsing="false" onAction="#UpdateGroupe" prefHeight="39.0" prefWidth="90.0" text="Button" />
-        <Label layoutX="329.0" layoutY="119.0" prefHeight="39.0" prefWidth="189.0" text="Modifier Groupe">
+        <Button id="bt_ajouter_groupe" layoutX="155.0" layoutY="395.0" mnemonicParsing="false" onAction="#UpdateGroupe" prefHeight="46.0" prefWidth="119.0" text="Modifier Groupe" />
+        <Label layoutX="100.0" layoutY="32.0" prefHeight="46.0" prefWidth="253.0" text="Modifier Groupe">
             <font>
-                <Font size="23.0" />
+                <Font name="System Bold" size="30.0" />
             </font>
         </Label>
-        <Label layoutX="218.0" layoutY="338.0" text="Titre" />
-        <Label layoutX="218.0" layoutY="387.0" text="Description" />
-        <Label layoutX="218.0" layoutY="287.0" text="Createur( ID )" />
-        <TextField fx:id="tfCreateur"  layoutX="410.0" layoutY="283.0" />
-        <TextField fx:id="tfTitre"  layoutX="410.0" layoutY="334.0" />
-        <TextField fx:id="tfDescription"  layoutX="411.0" layoutY="383.0" />
-        <TextField fx:id="tfIdGroupe"  layoutX="416.0" layoutY="213.0" prefHeight="26.0" prefWidth="34.0" />
-        <Label layoutX="307.0" layoutY="217.0" text="Groupe( ID )" />
+        <Label layoutX="94.0" layoutY="274.0" text="Titre :">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+        <Label layoutX="70.0" layoutY="321.0" text="Description :">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+        <Label layoutX="70.0" layoutY="221.0" text="Createur( ID ) :">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+        <TextField fx:id="tfCreateur" layoutX="243.0" layoutY="220.0" />
+        <TextField fx:id="tfTitre" layoutX="243.0" layoutY="271.0" />
+        <TextField fx:id="tfDescription" layoutX="244.0" layoutY="320.0" />
+        <TextField fx:id="tfIdGroupe" layoutX="249.0" layoutY="150.0" prefHeight="26.0" prefWidth="34.0" />
+        <Label layoutX="140.0" layoutY="154.0" text="Groupe( ID )">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+      <Separator layoutX="-1.0" layoutY="88.0" prefHeight="4.0" prefWidth="430.0" />
     </children>
 </AnchorPane>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -9,34 +8,35 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="461.0" prefWidth="686.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.ModifierMessageController">
+<AnchorPane prefHeight="461.0" prefWidth="428.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.ModifierMessageController">
    <children>
-      <ButtonBar layoutX="91.0" layoutY="16.0" prefHeight="52.0" prefWidth="557.0">
-         <buttons>
-            <Button fx:id="bt_G_D" layoutX="202.0" layoutY="17.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="238.0" text="Supprimer Message" />
-            <Button fx:id="bt_G_A" layoutX="48.0" layoutY="17.0" mnemonicParsing="false" prefHeight="75.0" text="Ajouter Message" />
-         </buttons>
-      </ButtonBar>
-      <Separator layoutX="126.0" layoutY="6.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="0.0" />
-      <Button fx:id="bt_R" layoutY="2.0" mnemonicParsing="false" onAction="#SwitchToAjouterReclamation" prefHeight="290.0" prefWidth="126.0" text="Reclamations" />
-      <Button fx:id="bt_M" layoutY="293.0" mnemonicParsing="false" onAction="#SwitchToAjouterMessage" prefHeight="274.0" prefWidth="126.0" text="Groupes" />
-      <Button id="bt_ajouter_groupe" layoutX="324.0" layoutY="462.0" mnemonicParsing="false" onAction="#UpdateGroupe" prefHeight="39.0" prefWidth="90.0" text="Button" />
-      <Label layoutX="329.0" layoutY="121.0" prefHeight="39.0" prefWidth="189.0" text="Modifier Message">
+      <Button layoutX="162.0" layoutY="373.0" mnemonicParsing="false" onAction="#UpdateMessage" prefHeight="39.0" prefWidth="112.0" text="Modifier Message" />
+      <Label layoutX="96.0" layoutY="23.0" prefHeight="39.0" prefWidth="264.0" text="Modifier Message">
          <font>
-            <Font size="23.0" />
+            <Font name="Arial Bold" size="29.0" />
          </font>
       </Label>
-      <Label layoutX="218.0" layoutY="340.0" text="dateCreation" />
-      <Label layoutX="238.0" layoutY="387.0" text="text">
+      <Label layoutX="53.0" layoutY="248.0" text="dateCreation :">
          <font>
-            <Font size="15.0" />
+            <Font size="18.0" />
+         </font></Label>
+      <Label layoutX="89.0" layoutY="297.0" text="text :">
+         <font>
+            <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="218.0" layoutY="289.0" text="Groupe( ID )" />
-      <TextField fx:id="tfidgroupe" layoutX="410.0" layoutY="285.0" />
-      <TextField fx:id="tftext" layoutX="411.0" layoutY="385.0" />
-      <TextField fx:id="tfidmessage" layoutX="416.0" layoutY="215.0" prefHeight="26.0" prefWidth="34.0" />
-      <Label layoutX="307.0" layoutY="219.0" text="Message( ID )" />
-      <DatePicker fx:id="tfdate" layoutX="399.0" layoutY="336.0" />
+      <Label layoutX="56.0" layoutY="197.0" text="Groupe( ID ) :">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <TextField fx:id="tfidgroupe" layoutX="228.0" layoutY="198.0" />
+      <TextField fx:id="tftext" layoutX="229.0" layoutY="298.0" />
+      <TextField fx:id="tfidmessage" layoutX="256.0" layoutY="127.0" prefHeight="26.0" prefWidth="34.0" />
+      <Label layoutX="128.0" layoutY="126.0" text="Message( ID )">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <DatePicker fx:id="tfdate" layoutX="217.0" layoutY="249.0" />
+      <Separator layoutY="84.0" prefHeight="2.0" prefWidth="428.0" />
    </children>
 </AnchorPane>
