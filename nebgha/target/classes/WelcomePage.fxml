@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="341.0" prefWidth="554.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.WelcomePageController">
+<AnchorPane prefHeight="341.0" prefWidth="554.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.otherControllers.WelcomePageController">
    <children>
       <ImageView fitHeight="442.0" fitWidth="712.0" layoutX="-1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -20,15 +20,15 @@
             <Font name="Arial Bold" size="42.0" />
          </font>
       </Label>
-      <Button defaultButton="true" layoutX="159.0" layoutY="124.0" mnemonicParsing="false" onAction="#SwitchToAfficherReclamation" opacity="0.0" prefHeight="76.0" prefWidth="302.0" text="Reclamations">
+      <Button defaultButton="true" layoutX="159.0" layoutY="124.0" mnemonicParsing="false"  opacity="0.0" prefHeight="76.0" prefWidth="302.0" text="Reclamations">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Button>
-      <Button defaultButton="true" layoutX="157.0" layoutY="305.0" mnemonicParsing="false" onAction="#SwitchToAfficherMessage" opacity="0.0" prefHeight="76.0" prefWidth="302.0" text="Messages">
+      <Button defaultButton="true" layoutX="157.0" layoutY="305.0" mnemonicParsing="false"  opacity="0.0" prefHeight="76.0" prefWidth="302.0" text="Messages">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Button>
-      <Button defaultButton="true" layoutX="159.0" layoutY="213.0" mnemonicParsing="false" onAction="#SwitchToAfficherGroupe" opacity="0.0" prefHeight="76.0" prefWidth="302.0" text="Groupes">
+      <Button defaultButton="true" layoutX="159.0" layoutY="213.0" mnemonicParsing="false" onAction="#switcher" opacity="0.0" prefHeight="76.0" prefWidth="302.0" text="Groupes">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Button>

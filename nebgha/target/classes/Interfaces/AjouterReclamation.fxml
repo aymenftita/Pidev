@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="443.0" prefWidth="497.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.reclamationControllers.AjouterReclamationController">
+    <Label layoutX="104.0" layoutY="128.0" text="Date :">
+        <font>
+        <Font size="21.0" />
+        </font>
+    </Label>
+    <Label layoutX="74.0" layoutY="237.0" text="Description :">
+        <font>
+        <Font size="21.0" />
+        </font>
+    </Label>
+    <TextField fx:id="tfDescription" layoutX="301.0" layoutY="240.0" />
+    <Button layoutX="165.0" layoutY="397.0" mnemonicParsing="false" onAction="#addReclamation" prefHeight="31.0" prefWidth="162.0" text="Ajouter Reclamation">
+        <font>
+        <Font size="15.0" />
+        </font>
+    </Button>
+    <TextField fx:id="tfSujet" layoutX="301.0" layoutY="184.0" />
+    <Label layoutX="94.0" layoutY="73.0" text="User Id :">
+        <font>
+        <Font size="21.0" />
+        </font>
+    </Label>
+    <Label layoutX="103.0" layoutY="181.0" text="Sujet :">
+        <font>
+        <Font size="21.0" />
+        </font>
+    </Label>
+    <DatePicker fx:id="tfDate" layoutX="288.0" layoutY="131.0" />
+    <Label layoutX="114.0" layoutY="9.0" prefHeight="31.0" prefWidth="322.0" text="Ajouter Reclamation">
+        <font>
+          <Font name="System Bold" size="30.0" />
+        </font>
+    </Label>
+    <Label layoutX="97.0" layoutY="296.0" text="Status :">
+        <font>
+          <Font size="21.0" />
+        </font>
+    </Label>
+    <TextField fx:id="tfP" layoutX="301.0" layoutY="347.0" />
+    <Label layoutX="92.0" layoutY="344.0" text="Priorité :">
+        <font>
+          <Font size="21.0" />
+        </font>
+    </Label>
+    <Separator layoutY="117.0" prefHeight="3.0" prefWidth="518.0" />
+    <Separator layoutY="169.0" prefHeight="3.0" prefWidth="518.0" />
+    <Separator layoutY="220.0" prefHeight="3.0" prefWidth="518.0" />
+    <Separator layoutX="5.0" layoutY="281.0" prefHeight="3.0" prefWidth="518.0" />
+    <Separator layoutX="5.0" layoutY="333.0" prefHeight="3.0" prefWidth="518.0" />
+    <Separator layoutX="246.0" layoutY="62.0" orientation="VERTICAL" prefHeight="321.0" prefWidth="6.0" />
+    <Separator layoutX="7.0" layoutY="380.0" prefHeight="3.0" prefWidth="518.0" />
+    <Separator layoutX="7.0" layoutY="63.0" prefHeight="3.0" prefWidth="518.0" />
+   <ChoiceBox fx:id="cb" layoutX="300.0" layoutY="299.0" prefWidth="150.0" />
+   <ComboBox fx:id="cbUsers" layoutX="300.0" layoutY="76.0" prefWidth="150.0" />
+</AnchorPane>

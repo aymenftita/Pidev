@@ -1,6 +1,7 @@
 package com.esprit.services;
 
 import com.esprit.models.Groupe;
+import com.esprit.models.Utilisateur;
 import com.esprit.utils.DataSource;
 
 import java.sql.Connection;
@@ -74,8 +75,9 @@ public class GroupeService {
         try {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(req);
+            UtilisateurService us =new UtilisateurService();
             while (rs.next()) {
-                entities.add(new Groupe(rs.getInt(1), rs.getInt(2), rs.getString(3) , rs.getString(4)));
+                entities.add(new Groupe(rs.getInt(1), us.rechercheUtilisateur(rs.getInt(2)), rs.getString(3) , rs.getString(4)));
 
             }
 
@@ -86,6 +88,8 @@ public class GroupeService {
         return entities;
 
     }
+
+
 
 
 }

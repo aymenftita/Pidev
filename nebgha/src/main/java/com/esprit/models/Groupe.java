@@ -3,18 +3,18 @@ package com.esprit.models;
 public class Groupe {
 
     private int id_groupe;
-    private int uid;
+    private Utilisateur uid;
     private String titre;
     private String description;
 
-    public Groupe(int id_groupe, int uid, String titre, String description) {
+    public Groupe(int id_groupe, Utilisateur uid, String titre, String description) {
         this.id_groupe = id_groupe;
         this.uid = uid;
         this.titre = titre;
         this.description = description;
     }
 
-    public Groupe(int uid, String titre, String description) {
+    public Groupe(Utilisateur uid, String titre, String description) {
         this.uid = uid;
         this.titre = titre;
         this.description = description;
@@ -28,11 +28,11 @@ public class Groupe {
         this.id_groupe = id_groupe;
     }
 
-    public int getUid() {
+    public Utilisateur getUid() {
         return uid;
     }
 
-    public void setUid(int uid) {
+    public void setUid(Utilisateur uid) {
         this.uid = uid;
     }
 

@@ -1,6 +1,7 @@
 package com.esprit.services;
 
 import com.esprit.models.Reclamation;
+import com.esprit.models.Utilisateur;
 import com.esprit.utils.DataSource;
 
 import java.sql.*;
@@ -23,7 +24,7 @@ public class ReclamationService {
                         "priorite," +
                         "responsable) " +
                         "values ('" +
-                            reclamation.getUserId() + "', '" +
+                            reclamation.getUserId().getId() + "', '" +
                             reclamation.getDateCreation() + "', '" +
                             reclamation.getSujet()+ "', '" +
                             reclamation.getDescription()+ "', '" +
@@ -41,7 +42,7 @@ public class ReclamationService {
 
 
     public void modifier(Reclamation reclamation) {
-        String req = "UPDATE reclamations set uid = '" + reclamation.getUserId() + "', date_creation = '" + reclamation.getDateCreation() + "', sujet = '" + reclamation.getSujet() + "', description = '" + reclamation.getDescription() + "', status = '" + reclamation.getStatus() + "', priorite = '" + reclamation.getPriorite() + "' where id_reclamation = " + reclamation.getIdReclamation() + ";";
+        String req = "UPDATE reclamations set uid = '" + reclamation.getUserId().getId() + "', date_creation = '" + reclamation.getDateCreation() + "', sujet = '" + reclamation.getSujet() + "', description = '" + reclamation.getDescription() + "', status = '" + reclamation.getStatus() + "', priorite = '" + reclamation.getPriorite() + "' where id_reclamation = " + reclamation.getIdReclamation() + ";";
         try {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
@@ -64,6 +65,8 @@ public class ReclamationService {
     }
 
 
+
+
     public ArrayList<Reclamation> afficher() {
         ArrayList<Reclamation> entities = new ArrayList<>();
 
@@ -71,8 +74,10 @@ public class ReclamationService {
         try {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(req);
+            UtilisateurService us = new UtilisateurService();
             while (rs.next()) {
-                entities.add(new Reclamation(rs.getInt(1), rs.getInt(2), rs.getString(3) , rs.getString(4) , rs.getString (5), rs.getString(
+               Utilisateur user = us.rechercheUtilisateur( rs.getInt(2));
+                entities.add(new Reclamation(rs.getInt(1), user, rs.getString(3) , rs.getString(4) , rs.getString (5), rs.getString(
                 6), rs.getInt(7) , rs.getString(8) ));
 
             }

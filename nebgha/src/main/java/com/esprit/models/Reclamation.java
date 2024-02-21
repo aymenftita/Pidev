@@ -3,7 +3,7 @@ package com.esprit.models;
 public class Reclamation {
 
     private int idReclamation;
-    private int userId;
+    private Utilisateur userId;
     private String dateCreation;
     private String sujet;
     private String description;
@@ -11,7 +11,7 @@ public class Reclamation {
     private int priorite;
     private String responsable;
 
-    public Reclamation(int idReclamation, int userId, String dateCreation, String sujet, String description, String status, int priorite, String responsable) {
+    public Reclamation(int idReclamation, Utilisateur userId, String dateCreation, String sujet, String description, String status, int priorite, String responsable) {
         this.idReclamation = idReclamation;
         this.userId = userId;
         this.dateCreation = dateCreation;
@@ -22,7 +22,7 @@ public class Reclamation {
         this.responsable = responsable;
     }
 
-    public Reclamation(int userId, String dateCreation, String sujet, String description, String status, int priorite, String responsablle) {
+    public Reclamation(Utilisateur userId, String dateCreation, String sujet, String description, String status, int priorite, String responsablle) {
         this.userId = userId;
         this.dateCreation = dateCreation;
         this.sujet = sujet;
@@ -40,11 +40,11 @@ public class Reclamation {
         this.idReclamation = idReclamation;
     }
 
-    public int getUserId() {
+    public Utilisateur getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Utilisateur userId) {
         this.userId = userId;
     }
 
