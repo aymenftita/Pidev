@@ -2,7 +2,7 @@ package com.esprit.tests;
 
 import com.esprit.models.Evenement;
 import com.esprit.services.EvenementService;
-
+import java.sql.Date;
 
 public class MainProg {
 
@@ -10,9 +10,9 @@ public class MainProg {
         EvenementService ps = new EvenementService();
 
 
-        ps.ajouter(new Evenement(1, "Med" ,28:03:2001,1 ,2,1,"oui"));
-//        ps.supprimer(new Personne(3, "Ahmed", "Med"));
-//        ps.modifier(new Personne(1, "Emma", "Zouaoui"));
+      //  ps.ajouter(new Evenement(2, "amine" ,Date.valueOf("2001-03-28"),1 ,2,1,"oui"));
+    ps.supprimer(new Evenement(9 ,2,  "GHADA" ,Date.valueOf("2001-03-28") ,2,1,1 , "non"));
+      ps.modifier(new Evenement( 6 ,1,  "GHADA" ,Date.valueOf("2001-03-28") ,2,1,1 , "non") );
 //        System.out.println(ps.afficher());
        // PersonneService2 ps2 = new PersonneService2();
         //ps2.ajouter(new Personne("Fedi2", "Naoufel"));

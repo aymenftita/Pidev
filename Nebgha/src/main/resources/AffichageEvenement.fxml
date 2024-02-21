@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.AffichageEvenementController">
+   <children>
+      <Label layoutX="75.0" layoutY="46.0" text="creatorId" />
+      <Label layoutX="75.0" layoutY="91.0" prefHeight="17.0" prefWidth="28.0" text="nom" />
+      <Label layoutX="75.0" layoutY="136.0" text="date" />
+      <Label layoutX="75.0" layoutY="192.0" text="heure" />
+      <Label layoutX="75.0" layoutY="251.0" text="duree" />
+      <Label layoutX="75.0" layoutY="295.0" text="lieuId" />
+      <Label layoutX="75.0" layoutY="343.0" text="description" />
+      <Label fx:id="ttCreatorId" layoutX="338.0" layoutY="46.0" text="Label" />
+      <Label fx:id="ttNom" layoutX="338.0" layoutY="91.0" text="Label" />
+      <Label fx:id="ttDate" layoutX="338.0" layoutY="136.0" text="Label" />
+      <Label fx:id="ttHeure" layoutX="338.0" layoutY="192.0" text="Label" />
+      <Label fx:id="ttDuree" layoutX="338.0" layoutY="251.0" text="Label" />
+      <Label fx:id="ttLieuId" layoutX="338.0" layoutY="295.0" text="Label" />
+      <Label fx:id="ttDescription" layoutX="338.0" layoutY="343.0" text="Label" />
+   </children>
+</AnchorPane>
