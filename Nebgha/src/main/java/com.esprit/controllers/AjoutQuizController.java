@@ -1,8 +1,7 @@
 package com.esprit.controllers;
 
-import com.esprit.models.Difficulte;
-import com.esprit.models.Quiz;
-import com.esprit.services.QuizService;
+import com.esprit.models.*;
+import com.esprit.services.*;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,11 +13,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
-import java.util.Calendar;
 import java.util.ResourceBundle;
 
 public class AjoutQuizController implements Initializable {
@@ -50,7 +48,7 @@ public class AjoutQuizController implements Initializable {
         Difficulte difficulte = difficulteComboBox.getValue();
         int duration = Integer.parseInt(dureetf.getText());
         int numberOfQuestions = Integer.parseInt(nbr_questionstf.getText());
-        qs.ajouter(new Quiz(1, titletf.getText(), desctf.getText(), Calendar.getInstance().getTime(), duration, numberOfQuestions, difficulte));
+        qs.ajouter(new Quiz(1, titletf.getText(), desctf.getText(),  duration, numberOfQuestions, difficulte));
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Quiz ajouté");
         alert.setContentText("Quiz ajouté!");
@@ -63,8 +61,21 @@ public class AjoutQuizController implements Initializable {
         Parent root = loader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
+        stage.setTitle("Quizs");
         stage.show();
 
+    }
+
+    @FXML
+    void previous(MouseEvent event) throws IOException {
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuiz.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Quizs");
+        stage.show();
     }
 
 }

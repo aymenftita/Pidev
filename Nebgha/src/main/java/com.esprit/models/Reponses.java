@@ -2,23 +2,23 @@ package com.esprit.models;
 
 public class Reponses {
     private int reponseId;
-    private int questionId;
+    private Questions question;
     private String texte;
     private boolean estCorrecte;
     private int ordre;
     private String explication;
 
-    public Reponses(int questionId, String texte, boolean estCorrecte, int ordre, String explication) {
-        this.questionId = questionId;
+    public Reponses(Questions question, String texte, boolean estCorrecte, int ordre, String explication) {
+        this.question = question;
         this.texte = texte;
         this.estCorrecte = estCorrecte;
         this.ordre = ordre;
         this.explication = explication;
     }
 
-    public Reponses(int reponseId, int questionId, String texte, boolean estCorrecte, int ordre, String explication) {
+    public Reponses(int reponseId, Questions question, String texte, boolean estCorrecte, int ordre, String explication) {
         this.reponseId = reponseId;
-        this.questionId = questionId;
+        this.question = question;
         this.texte = texte;
         this.estCorrecte = estCorrecte;
         this.ordre = ordre;
@@ -33,12 +33,12 @@ public class Reponses {
         this.reponseId = reponseId;
     }
 
-    public int getQuestionId() {
-        return questionId;
+    public Questions getQuestion() {
+        return question;
     }
 
-    public void setQuestionId(int questionId) {
-        this.questionId = questionId;
+    public void setQuestion(Questions question) {
+        this.question = question;
     }
 
     public String getTexte() {
@@ -77,7 +77,7 @@ public class Reponses {
     public String toString() {
         return "Reponses{" +
                 "reponseId=" + reponseId +
-                ", questionId=" + questionId +
+                ", question=" + question +
                 ", texte='" + texte + '\'' +
                 ", estCorrecte=" + estCorrecte +
                 ", ordre=" + ordre +

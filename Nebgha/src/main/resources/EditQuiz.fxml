@@ -4,26 +4,55 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.EditQuizController">
+<AnchorPane prefHeight="400.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.EditQuizController">
     <children>
-        <Label layoutX="41.0" layoutY="121.0" text="Description" />
-        <Label layoutX="41.0" layoutY="165.0" text="Durée" />
-        <Label layoutX="41.0" layoutY="75.0" text="Titre" />
-        <Label layoutX="41.0" layoutY="213.0" text="Nombre de questions" />
-        <Label layoutX="41.0" layoutY="257.0" text="Difficulté" />
+      <ImageView fitHeight="400.0" fitWidth="582.0">
+         <image>
+            <Image url="@images/Rb.png" />
+         </image>
+      </ImageView>
+        <Label layoutX="41.0" layoutY="121.0" text="Description" textFill="#000066">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+        <Label layoutX="41.0" layoutY="165.0" text="Durée" textFill="#000066">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+        <Label layoutX="41.0" layoutY="75.0" text="Titre" textFill="#000066">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+        <Label layoutX="41.0" layoutY="213.0" text="Nombre de questions" textFill="#000066">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+        <Label layoutX="41.0" layoutY="257.0" text="Difficulté" textFill="#000066">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
         <TextField fx:id="titletf" layoutX="214.0" layoutY="81.0" />
         <TextField fx:id="desctf" layoutX="214.0" layoutY="117.0" />
         <TextField fx:id="dureetf" layoutX="214.0" layoutY="161.0" />
         <TextField fx:id="nbr_questionstf" layoutX="214.0" layoutY="209.0" />
-        <Button layoutX="480.0" layoutY="296.0" mnemonicParsing="false" onAction="#EditQuiz" style="-fx-background-color: #FDFD96;" text="Enregistrer" textFill="#000066" />
-        <Label layoutX="215.0" layoutY="14.0" text="Modifier Quiz" textFill="#000066">
+        <Button layoutX="385.0" layoutY="302.0" mnemonicParsing="false" onAction="#EditQuiz" prefHeight="40.0" prefWidth="103.0" style="-fx-background-color: #FDFD96;" text="Enregistrer" textFill="#000066">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
+        <Label layoutX="206.0" layoutY="15.0" text="Modifier Quiz" textFill="#000066">
          <font>
             <Font size="28.0" />
          </font></Label>
         <ComboBox fx:id="difficulteComboBox" layoutX="213.0" layoutY="253.0" prefWidth="150.0" />
-
+        <ImageView fitHeight="51.0" fitWidth="56.0" layoutY="9.0" onMouseClicked="#previous">
+            <image>
+                <Image url="@images/previous.gif" />
+            </image>
+        </ImageView>
     </children>
 </AnchorPane>

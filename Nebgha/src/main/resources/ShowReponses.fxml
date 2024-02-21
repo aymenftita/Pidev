@@ -5,11 +5,18 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.ShowReponsesController">
     <children>
+      <ImageView fitHeight="400.0" fitWidth="600.0">
+         <image>
+            <Image url="@images/Rb.png" />
+         </image>
+      </ImageView>
         <TableView fx:id="reponseTableView" layoutX="8.0" layoutY="124.0" prefHeight="200.0" prefWidth="584.0">
             <columns>
                 <TableColumn fx:id="reponseId" prefWidth="75.0" text="ReponseId" />
@@ -24,12 +31,33 @@
          <font>
             <Font size="28.0" />
          </font></Label>
-        <Button fx:id="btnEdit" layoutX="269.0" layoutY="341.0" mnemonicParsing="false" onAction="#openEdit" style="-fx-background-color: #FDFD96;" text="Modifier" />
-        <Button fx:id="btnQuiz" layoutX="118.0" layoutY="341.0" mnemonicParsing="false" onAction="#openAjout" style="-fx-background-color: #00ab41;" text="Ajouter " textFill="WHITE" />
-        <Button fx:id="btnDelete" layoutX="423.0" layoutY="341.0" mnemonicParsing="false" onAction="#deleteReponse" style="-fx-background-color: #FF0000;" text="Supprimer" textFill="WHITE" />
+        <Button fx:id="btnEdit" layoutX="269.0" layoutY="341.0" mnemonicParsing="false" onAction="#openEdit" style="-fx-background-color: white;" text="Modifier" />
+        <Button fx:id="btnReponse" layoutX="118.0" layoutY="341.0" mnemonicParsing="false" onAction="#openAjout" style="-fx-background-color: white;" text="Ajouter " />
+        <Button fx:id="btnDelete" layoutX="423.0" layoutY="341.0" mnemonicParsing="false" onAction="#deleteReponse" style="-fx-background-color: white;" text="Supprimer" />
         <Label layoutX="28.0" layoutY="91.0" text="Select Question" textFill="#000066">
-
-        </Label>
-        <ComboBox fx:id="questionList" layoutX="131.0" layoutY="89.0" prefWidth="150.0" />
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+        <ComboBox fx:id="questionList" layoutX="136.0" layoutY="89.0" prefWidth="150.0" style="-fx-background-color: white;" />
+        <ImageView fitHeight="51.0" fitWidth="56.0" layoutY="9.0" onMouseClicked="#previous">
+            <image>
+                <Image url="@images/previous.gif" />
+            </image>
+        </ImageView>
+      <ImageView fitHeight="32.0" fitWidth="35.0" layoutX="80.0" layoutY="338.0">
+         <image>
+            <Image url="@images/add.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="28.0" layoutX="237.0" layoutY="341.0">
+         <image>
+            <Image url="@images/update.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="28.0" layoutX="395.0" layoutY="341.0">
+         <image>
+            <Image url="@images/delete.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>

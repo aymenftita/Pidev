@@ -5,22 +5,47 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.AjoutQuestionController">
+<AnchorPane prefHeight="327.0" prefWidth="569.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.AjoutQuestionController">
    <children>
-      <Label layoutX="199.0" layoutY="14.0" text="Ajout Question" textFill="#000066">
+      <ImageView fitHeight="358.0" fitWidth="581.0" layoutX="-6.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Rb.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="198.0" layoutY="22.0" text="Ajout Question" textFill="#000066">
          <font>
             <Font size="28.0" />
          </font>
       </Label>
-      <Label layoutX="49.0" layoutY="95.0" text="Quiz" />
-      <Label layoutX="47.0" layoutY="131.0" text="Texte" />
-      <Label layoutX="47.0" layoutY="165.0" text="Type" />
-      <Label layoutX="46.0" layoutY="200.0" text="Points" />
-      <Label layoutX="46.0" layoutY="235.0" text="Ordre" />
-      <Label layoutX="48.0" layoutY="271.0" text="Catégorie" />
+      <Label layoutX="34.0" layoutY="88.0" text="Quiz" textFill="#000066">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+      <Label layoutX="32.0" layoutY="124.0" text="Texte" textFill="#000066">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+      <Label layoutX="32.0" layoutY="158.0" text="Type" textFill="#000066">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+      <Label layoutX="31.0" layoutY="193.0" text="Points" textFill="#000066">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+      <Label layoutX="31.0" layoutY="228.0" text="Ordre" textFill="#000066">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+      <Label layoutX="33.0" layoutY="264.0" text="Catégorie" textFill="#000066">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
       <RadioButton fx:id="rbunique" layoutX="129.0" layoutY="165.0" mnemonicParsing="false" text="choix unique" />
       <RadioButton fx:id="rbmultiple" layoutX="264.0" layoutY="165.0" mnemonicParsing="false" text="choix multiple" />
       <TextField fx:id="texttf" layoutX="109.0" layoutY="127.0" prefHeight="26.0" prefWidth="366.0" />
@@ -28,6 +53,14 @@
       <TextField fx:id="pointstf" layoutX="109.0" layoutY="195.0" prefHeight="26.0" prefWidth="74.0" />
       <TextField fx:id="ordretf" layoutX="109.0" layoutY="230.0" prefHeight="26.0" prefWidth="74.0" />
       <TextField fx:id="categorietf" layoutX="109.0" layoutY="266.0" prefHeight="26.0" prefWidth="135.0" />
-      <Button fx:id="questionbtn" layoutX="491.0" layoutY="338.0" mnemonicParsing="false" onAction="#addQuestion" style="-fx-background-color: #FDFD96;" text="Enregistrer" textFill="#000066" />
+      <Button fx:id="questionbtn" layoutX="453.0" layoutY="272.0" mnemonicParsing="false" onAction="#addQuestion" prefHeight="33.0" prefWidth="96.0" style="-fx-background-color: #FDFD96;" text="Enregistrer" textFill="#000066">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
+      <ImageView fitHeight="51.0" fitWidth="56.0" layoutY="9.0" onMouseClicked="#previous">
+         <image>
+            <Image url="@images/previous.gif" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

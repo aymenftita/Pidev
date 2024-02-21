@@ -1,8 +1,7 @@
 package com.esprit.controllers;
 
-import com.esprit.models.Quiz;
-import com.esprit.services.QuestionsService;
-import com.esprit.services.QuizService;
+import com.esprit.models.*;
+import com.esprit.services.*;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,8 +12,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import com.esprit.models.Questions;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -34,7 +33,6 @@ public class EditQuestionController implements Initializable {
     @FXML
     private TextField pointstf;
 
-
     @FXML
     private ComboBox<String> quizList;
 
@@ -47,37 +45,23 @@ public class EditQuestionController implements Initializable {
     @FXML
     private TextField texttf;
 
-    public void initData(Questions question) {
-        this.question = question;
-        categorietf.setText(question.getCategorie());
-        ordretf.setText(String.valueOf(question.getOrdre()));
-        pointstf.setText(String.valueOf(question.getPoints()));
-        texttf.setText(question.getTexte());
-        quizList.getSelectionModel().select(question.getQuizId());
-        if (question.getType().equals("multiple")) {
-            rbmultiple.setSelected(true);
-        } else if (question.getType().equals("unique")) {
-            rbunique.setSelected(true);
-        }
-    }
-
     @FXML
     void EditQuestion(ActionEvent event) throws IOException {
         QuestionsService qs = new QuestionsService();
-        String selectedQuizName = quizList.getValue();
         QuizService quizService = new QuizService();
+        Quiz selectedQuiz = null;
+        String selectedQuizName = quizList.getValue();
         List<Quiz> quizzes = quizService.afficher();
 
-        int selectedQuizId = -1;
-        for (Quiz quiz : quizzes) {
-            if (quiz.getNom().equals(selectedQuizName)) {
-                selectedQuizId = quiz.getQuizId();
-                break;
-            }
+        if (selectedQuizName != null) {
+            selectedQuiz = quizzes.stream()
+                    .filter(quiz -> quiz.getNom().equals(selectedQuizName))
+                    .findFirst()
+                    .orElse(null);
         }
 
-        if (selectedQuizId != -1) {
-            question.setQuizId(selectedQuizId);
+        if (selectedQuiz != null) {
+            question.setQuiz(selectedQuiz);
             question.setTexte(texttf.getText());
             question.setType(rbmultiple.isSelected() ? "multiple" : "unique");
             question.setPoints(Integer.parseInt(pointstf.getText()));
@@ -98,6 +82,7 @@ public class EditQuestionController implements Initializable {
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
+            stage.setTitle("Questions");
             stage.show();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -111,9 +96,34 @@ public class EditQuestionController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         QuizService quizService = new QuizService();
         List<Quiz> quizzes = quizService.afficher();
-
         List<String> quizNames = quizzes.stream().map(Quiz::getNom).collect(Collectors.toList());
         quizList.setItems(FXCollections.observableArrayList(quizNames));
+    }
+
+    public void initData(Questions question) {
+        this.question = question;
+        categorietf.setText(question.getCategorie());
+        ordretf.setText(String.valueOf(question.getOrdre()));
+        pointstf.setText(String.valueOf(question.getPoints()));
+        texttf.setText(question.getTexte());
+        quizList.setValue(question.getQuiz().getNom());
+        if (question.getType().equals("multiple")) {
+            rbmultiple.setSelected(true);
+        } else if (question.getType().equals("unique")) {
+            rbunique.setSelected(true);
+        }
+    }
+
+    @FXML
+    void previous(MouseEvent event) throws IOException {
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuestions.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Questions");
+        stage.show();
     }
 
 }

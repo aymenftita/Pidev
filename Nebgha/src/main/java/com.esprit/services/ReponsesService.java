@@ -10,14 +10,18 @@ import java.util.*;
 
 public class ReponsesService implements IService<Reponses>{
     private Connection connection;
+    private QuestionsService questionsService;
+
 
     public ReponsesService() {
         connection = DataSource.getInstance().getConnection();
+        questionsService = new QuestionsService();
+
     }
     @Override
     public void ajouter(Reponses reponses) {
         String req = "INSERT INTO reponses_quiz (questionId, texte, est_correcte, ordre, explication) VALUES (" +
-                reponses.getQuestionId() + ", '" + reponses.getTexte() + "', " + reponses.isEstCorrecte() + ", " +
+                reponses.getQuestion().getQuestionId() + ", '" + reponses.getTexte() + "', " + reponses.isEstCorrecte() + ", " +
                 reponses.getOrdre() + ", '" + reponses.getExplication() + "')";
         try {
             Statement statement = connection.createStatement();
@@ -30,7 +34,7 @@ public class ReponsesService implements IService<Reponses>{
 
     @Override
     public void modifier(Reponses reponses) {
-        String req = "UPDATE reponses_quiz SET questionId = " + reponses.getQuestionId() +
+        String req = "UPDATE reponses_quiz SET questionId = " + reponses.getQuestion().getQuestionId()+
                 ", texte = '" + reponses.getTexte() +
                 "', est_correcte = " + reponses.isEstCorrecte() +
                 ", ordre = " + reponses.getOrdre() +
@@ -65,8 +69,10 @@ public class ReponsesService implements IService<Reponses>{
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(req);
             while (rs.next()) {
-                reponsesList.add(new Reponses(rs.getInt("reponseId"),
-                        rs.getInt("questionId"),
+                Questions question = questionsService.getQuestion(rs.getInt("questionId"));
+                reponsesList.add(new Reponses(
+                        rs.getInt("reponseId"),
+                        question,
                         rs.getString("texte"),
                         rs.getBoolean("est_correcte"),
                         rs.getInt("ordre"),
@@ -86,8 +92,9 @@ public class ReponsesService implements IService<Reponses>{
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(req);
             while (rs.next()) {
+                Questions question = questionsService.getQuestion(rs.getInt("questionId"));
                 reponsesList.add(new Reponses(rs.getInt("reponseId"),
-                        rs.getInt("questionId"),
+                        question,
                         rs.getString("texte"),
                         rs.getBoolean("est_correcte"),
                         rs.getInt("ordre"),
@@ -108,8 +115,9 @@ public class ReponsesService implements IService<Reponses>{
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(req);
             if (rs.next()) {
+                Questions question = questionsService.getQuestion(rs.getInt("questionId"));
                 reponse = new Reponses(rs.getInt("reponseId"),
-                        rs.getInt("questionId"),
+                        question,
                         rs.getString("texte"),
                         rs.getBoolean("est_correcte"),
                         rs.getInt("ordre"),
@@ -120,5 +128,28 @@ public class ReponsesService implements IService<Reponses>{
             System.out.println(e.getMessage());
         }
         return reponse;
+    }
+
+    public List<Reponses> afficherParQuestion(int questionId) {
+        List<Reponses> reponsesList = new ArrayList<>();
+        String req = "SELECT * FROM reponses_quiz WHERE questionId = " + questionId;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(req);
+            while (rs.next()) {
+                Questions question = questionsService.getQuestion(rs.getInt("questionId"));
+                reponsesList.add(new Reponses(
+                        rs.getInt("reponseId"),
+                        question,
+                        rs.getString("texte"),
+                        rs.getBoolean("est_correcte"),
+                        rs.getInt("ordre"),
+                        rs.getString("explication")));
+
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return reponsesList;
     }
 }

@@ -2,16 +2,16 @@ package com.esprit.models;
 
 public class Questions {
     private int questionId;
-    private int quizId;
+    private Quiz quiz;
     private String texte;
     private String type;
     private int points;
     private int ordre;
     private String categorie;
 
-    public Questions(int questionId, int quizId, String texte, String type, int points, int ordre, String categorie) {
+    public Questions(int questionId, Quiz quiz, String texte, String type, int points, int ordre, String categorie) {
         this.questionId = questionId;
-        this.quizId = quizId;
+        this.quiz = quiz;
         this.texte = texte;
         this.type = type;
         this.points = points;
@@ -19,8 +19,8 @@ public class Questions {
         this.categorie = categorie;
     }
 
-    public Questions(int quizId, String texte, String type, int points, int ordre, String categorie) {
-        this.quizId = quizId;
+    public Questions(Quiz quiz, String texte, String type, int points, int ordre, String categorie) {
+        this.quiz = quiz;
         this.texte = texte;
         this.type = type;
         this.points = points;
@@ -36,12 +36,12 @@ public class Questions {
         this.questionId = questionId;
     }
 
-    public int getQuizId() {
-        return quizId;
+    public Quiz getQuiz() {
+        return quiz;
     }
 
-    public void setQuizId(int quizId) {
-        this.quizId = quizId;
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
     }
 
     public String getTexte() {
@@ -88,7 +88,7 @@ public class Questions {
     public String toString() {
         return "Questions{" +
                 "questionId=" + questionId +
-                ", quizId=" + quizId +
+                ", quiz=" + quiz +
                 ", texte='" + texte + '\'' +
                 ", type='" + type + '\'' +
                 ", points=" + points +

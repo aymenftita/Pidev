@@ -17,7 +17,7 @@ public class QuizService implements IService<Quiz> {
     public void ajouter(Quiz quiz) {
         String req = "INSERT INTO quiz (creatorId, nom, description, date_creation, duree, nbr_questions, difficulte) VALUES (" +
                 quiz.getCreatorId() + ", '" + quiz.getNom() + "', '" + quiz.getDescription() + "', '" +
-                new java.sql.Date(quiz.getDateCreation().getTime()) + "', " + quiz.getDuree() + ", " +
+                new java.sql.Date(System.currentTimeMillis()) + "', " + quiz.getDuree() + ", " +
                 quiz.getNombreQuestions() + ", '" + quiz.getDifficulte().toString() + "')";
         try {
             Statement statement = connection.createStatement();

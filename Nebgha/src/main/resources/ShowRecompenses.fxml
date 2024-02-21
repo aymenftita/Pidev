@@ -4,11 +4,18 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.ShowRecompensesController">
     <children>
+      <ImageView fitHeight="400.0" fitWidth="600.0">
+         <image>
+            <Image url="@images/Rb.png" />
+         </image>
+      </ImageView>
         <TableView fx:id="recompenseTableView" layoutX="36.0" layoutY="90.0" prefHeight="200.0" prefWidth="527.0">
             <columns>
                 <TableColumn fx:id="id" prefWidth="58.4000244140625" text="id" />
@@ -21,8 +28,28 @@
          <font>
             <Font size="28.0" />
          </font></Label>
-        <Button fx:id="btnEdit" layoutX="269.0" layoutY="315.0" mnemonicParsing="false" onAction="#openEdit" style="-fx-background-color: #FDFD96;" text="Modifier" />
-        <Button fx:id="btnRecompense" layoutX="99.0" layoutY="315.0" mnemonicParsing="false" onAction="#openAjout" style="-fx-background-color: #00ab41;" text="Ajouter " textFill="WHITE" />
-        <Button fx:id="btnDelete" layoutX="463.0" layoutY="315.0" mnemonicParsing="false" onAction="#deleteRecompense" style="-fx-background-color: #FF0000;" text="Supprimer" textFill="WHITE" />
+        <Button fx:id="btnEdit" layoutX="289.0" layoutY="315.0" mnemonicParsing="false" onAction="#openEdit" style="-fx-background-color: white;" text="Modifier" />
+        <Button fx:id="btnRecompense" layoutX="108.0" layoutY="315.0" mnemonicParsing="false" onAction="#openAjout" style="-fx-background-color: white;" text="Ajouter " />
+        <Button fx:id="btnDelete" layoutX="456.0" layoutY="315.0" mnemonicParsing="false" onAction="#deleteRecompense" style="-fx-background-color: white;" text="Supprimer" textFill="#101010" />
+        <ImageView fitHeight="51.0" fitWidth="56.0" layoutY="9.0" onMouseClicked="#previous">
+            <image>
+                <Image url="@images/previous.gif" />
+            </image>
+        </ImageView>
+      <ImageView fitHeight="32.0" fitWidth="33.0" layoutX="67.0" layoutY="312.0">
+         <image>
+            <Image url="@images/add.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="32.0" fitWidth="33.0" layoutX="253.0" layoutY="312.0">
+         <image>
+            <Image url="@images/update.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="32.0" fitWidth="33.0" layoutX="423.0" layoutY="311.0">
+         <image>
+            <Image url="@images/delete.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>

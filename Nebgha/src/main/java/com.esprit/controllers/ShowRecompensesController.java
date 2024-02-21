@@ -1,22 +1,21 @@
 package com.esprit.controllers;
 
-import com.esprit.models.Quiz;
-import com.esprit.models.Recompenses;
-import com.esprit.services.QuizService;
-import com.esprit.services.RecompensesService;
+import com.esprit.models.*;
+import com.esprit.services.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -62,6 +61,7 @@ public class ShowRecompensesController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjoutRecompense.fxml"));
         Parent root = loader.load();
         Stage currentStage = (Stage) recompenseTableView.getScene().getWindow();
+        currentStage.setTitle("Ajouter Récompense");
         currentStage.setScene(new Scene(root));
     }
 
@@ -75,6 +75,7 @@ public class ShowRecompensesController implements Initializable {
             EditRecompenseController editRecompenseController = loader.getController();
             editRecompenseController.initData(selectedRecompense);
             Stage currentStage = (Stage) recompenseTableView.getScene().getWindow();
+            currentStage.setTitle("Modifier Récompense");
             currentStage.setScene(new Scene(root));
         }
     }
@@ -104,5 +105,15 @@ public class ShowRecompensesController implements Initializable {
         });
     }
 
-
+    @FXML
+    void previous(MouseEvent event) throws IOException {
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AdminInterface.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Nebgha");
+        stage.show();
+    }
 }

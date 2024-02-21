@@ -1,31 +1,30 @@
 package com.esprit.models;
 
-import java.util.*;
-
+import java.sql.Date;
 public class ReponsesUtilisateur {
     private int userResponseId;
     private int userId;
-    private int reponseId;
-    private int quizId;
+    private Reponses reponse;
+    private Quiz quiz;
     private Date date;
     private int tempsPris;
     private boolean isCorrect;
 
 
-    public ReponsesUtilisateur(int userResponseId, int userId, int reponseId, int quizId, Date date, int tempsPris, boolean isCorrect) {
+    public ReponsesUtilisateur(int userResponseId, int userId, Reponses reponse, Quiz quiz, Date date, int tempsPris, boolean isCorrect) {
         this.userResponseId = userResponseId;
         this.userId = userId;
-        this.reponseId = reponseId;
-        this.quizId = quizId;
+        this.reponse = reponse;
+        this.quiz = quiz;
         this.date = date;
         this.tempsPris = tempsPris;
         this.isCorrect = isCorrect;
     }
 
-    public ReponsesUtilisateur(int userId, int reponseId, int quizId, Date date, int tempsPris, boolean isCorrect) {
+    public ReponsesUtilisateur(int userId, Reponses reponse, Quiz quiz, Date date, int tempsPris, boolean isCorrect) {
         this.userId = userId;
-        this.reponseId = reponseId;
-        this.quizId = quizId;
+        this.reponse = reponse;
+        this.quiz = quiz;
         this.date = date;
         this.tempsPris = tempsPris;
         this.isCorrect = isCorrect;
@@ -55,20 +54,20 @@ public class ReponsesUtilisateur {
         this.userId = userId;
     }
 
-    public int getReponseId() {
-        return reponseId;
+    public Reponses getReponse() {
+        return reponse;
     }
 
-    public void setReponseId(int reponseId) {
-        this.reponseId = reponseId;
+    public void setReponse(Reponses reponse) {
+        this.reponse = reponse;
     }
 
-    public int getQuizId() {
-        return quizId;
+    public Quiz getQuiz() {
+        return quiz;
     }
 
-    public void setQuizId(int quizId) {
-        this.quizId = quizId;
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
     }
 
     public Date getDate() {
@@ -92,8 +91,8 @@ public class ReponsesUtilisateur {
         return "ReponsesUtilisateur{" +
                 "userResponseId=" + userResponseId +
                 ", userId=" + userId +
-                ", reponseId=" + reponseId +
-                ", quizId=" + quizId +
+                ", reponse=" + reponse+
+                ", quiz=" + quiz +
                 ", date=" + date +
                 ", tempsPris=" + tempsPris +
                 ", isCorrect=" + isCorrect +
