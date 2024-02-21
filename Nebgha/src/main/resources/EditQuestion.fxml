@@ -5,28 +5,61 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.EditQuestionController">
     <children>
+      <ImageView fitHeight="400.0" fitWidth="600.0">
+         <image>
+            <Image url="@images/Rb.png" />
+         </image>
+      </ImageView>
         <Label layoutX="188.0" layoutY="20.0" text="Modifier Question" textFill="#000066">
          <font>
             <Font size="28.0" />
          </font></Label>
-        <Label layoutX="49.0" layoutY="95.0" text="Quiz" />
-        <Label layoutX="47.0" layoutY="131.0" text="Texte" />
-        <Label layoutX="47.0" layoutY="165.0" text="Type" />
-        <Label layoutX="46.0" layoutY="200.0" text="Points" />
-        <Label layoutX="46.0" layoutY="235.0" text="Ordre" />
-        <Label layoutX="48.0" layoutY="271.0" text="Catégorie" />
-        <RadioButton fx:id="rbunique" layoutX="129.0" layoutY="165.0" mnemonicParsing="false" text="choix unique" />
+        <Label layoutX="49.0" layoutY="95.0" text="Quiz" textFill="#000066">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+        <Label layoutX="47.0" layoutY="131.0" text="Texte" textFill="#000066">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+        <Label layoutX="47.0" layoutY="165.0" text="Type" textFill="#000066">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+        <Label layoutX="46.0" layoutY="200.0" text="Points" textFill="#000066">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+        <Label layoutX="46.0" layoutY="235.0" text="Ordre" textFill="#000066">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+        <Label layoutX="48.0" layoutY="271.0" text="Catégorie" textFill="#000066">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+        <RadioButton fx:id="rbunique" layoutX="163.0" layoutY="164.0" mnemonicParsing="false" text="choix unique" />
         <RadioButton fx:id="rbmultiple" layoutX="264.0" layoutY="165.0" mnemonicParsing="false" text="choix multiple" />
-        <TextField fx:id="texttf" layoutX="109.0" layoutY="127.0" prefHeight="26.0" prefWidth="366.0" />
-        <ComboBox fx:id="quizList" layoutX="109.0" layoutY="91.0" prefWidth="150.0" />
-        <TextField fx:id="pointstf" layoutX="109.0" layoutY="195.0" prefHeight="26.0" prefWidth="74.0" />
-        <TextField fx:id="ordretf" layoutX="109.0" layoutY="230.0" prefHeight="26.0" prefWidth="74.0" />
-        <TextField fx:id="categorietf" layoutX="109.0" layoutY="266.0" prefHeight="26.0" prefWidth="135.0" />
-        <Button fx:id="questionbtn" layoutX="491.0" layoutY="338.0" mnemonicParsing="false" onAction="#EditQuestion" style="-fx-background-color: #FDFD96;" text="Enregistrer" textFill="#000066" />
+        <TextField fx:id="texttf" layoutX="143.0" layoutY="126.0" prefHeight="26.0" prefWidth="366.0" />
+        <ComboBox fx:id="quizList" layoutX="143.0" layoutY="90.0" prefWidth="150.0" />
+        <TextField fx:id="pointstf" layoutX="143.0" layoutY="194.0" prefHeight="26.0" prefWidth="74.0" />
+        <TextField fx:id="ordretf" layoutX="143.0" layoutY="229.0" prefHeight="26.0" prefWidth="74.0" />
+        <TextField fx:id="categorietf" layoutX="143.0" layoutY="265.0" prefHeight="26.0" prefWidth="135.0" />
+        <Button fx:id="questionbtn" layoutX="413.0" layoutY="297.0" mnemonicParsing="false" onAction="#EditQuestion" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #FDFD96;" text="Enregistrer" textFill="#000066">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
+        <ImageView fitHeight="51.0" fitWidth="56.0" layoutY="9.0" onMouseClicked="#previous">
+            <image>
+                <Image url="@images/previous.gif" />
+            </image>
+        </ImageView>
     </children>
 </AnchorPane>

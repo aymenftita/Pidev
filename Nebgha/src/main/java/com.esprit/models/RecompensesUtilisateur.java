@@ -1,27 +1,27 @@
 package com.esprit.models;
 
-import java.util.*;
+import java.sql.Date;
 
 public class RecompensesUtilisateur {
     private int userRewardId;
     private int userId;
-    private int rewardId;
+    private Recompenses reward;
     private Date date;
     private boolean statut;
     private Date dateUtilisation;
 
-    public RecompensesUtilisateur(int userRewardId, int userId, int rewardId, Date date, boolean statut, Date dateUtilisation) {
+    public RecompensesUtilisateur(int userRewardId, int userId, Recompenses reward, Date date, boolean statut, Date dateUtilisation) {
         this.userRewardId = userRewardId;
         this.userId = userId;
-        this.rewardId = rewardId;
+        this.reward = reward;
         this.date = date;
         this.statut = statut;
         this.dateUtilisation = dateUtilisation;
     }
 
-    public RecompensesUtilisateur(int userId, int rewardId, Date date, boolean statut, Date dateUtilisation) {
+    public RecompensesUtilisateur(int userId, Recompenses reward, Date date, boolean statut, Date dateUtilisation) {
         this.userId = userId;
-        this.rewardId = rewardId;
+        this.reward = reward;
         this.date = date;
         this.statut = statut;
         this.dateUtilisation = dateUtilisation;
@@ -43,12 +43,12 @@ public class RecompensesUtilisateur {
         this.userId = userId;
     }
 
-    public int getRewardId() {
-        return rewardId;
+    public Recompenses getReward() {
+        return reward;
     }
 
-    public void setRewardId(int rewardId) {
-        this.rewardId = rewardId;
+    public void setReward(Recompenses reward) {
+        this.reward = reward;
     }
 
     public Date getDate() {
@@ -80,7 +80,7 @@ public class RecompensesUtilisateur {
         return "RecompensesUtilisateur{" +
                 "userRewardId=" + userRewardId +
                 ", userId=" + userId +
-                ", rewardId=" + rewardId +
+                ", reward=" + reward +
                 ", date=" + date +
                 ", statut=" + statut +
                 ", dateUtilisation=" + dateUtilisation +

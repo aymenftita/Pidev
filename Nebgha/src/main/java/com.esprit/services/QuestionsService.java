@@ -10,14 +10,17 @@ import java.util.*;
 
 public class QuestionsService implements IService<Questions> {
     private Connection connection;
+    private QuizService quizService;
+
 
     public QuestionsService() {
         connection = DataSource.getInstance().getConnection();
+        quizService = new QuizService();
     }
     @Override
     public void ajouter(Questions questions) {
         String req = "INSERT INTO questions_quiz (quizId, texte, type, points, ordre, categorie) VALUES (" +
-                questions.getQuizId() + ", '" + questions.getTexte() + "', '" + questions.getType() + "', " +
+                questions.getQuiz().getQuizId() + ", '" + questions.getTexte() + "', '" + questions.getType() + "', " +
                 questions.getPoints() + ", " + questions.getOrdre() + ", '" + questions.getCategorie() + "')";
         try {
             Statement statement = connection.createStatement();
@@ -30,7 +33,7 @@ public class QuestionsService implements IService<Questions> {
 
     @Override
     public void modifier(Questions questions) {
-        String req = "UPDATE questions_quiz SET quizId = " + questions.getQuizId() +
+        String req = "UPDATE questions_quiz SET quizId = " + questions.getQuiz().getQuizId() +
                 ", texte = '" + questions.getTexte() +
                 "', type = '" + questions.getType() +
                 "', points = " + questions.getPoints() +
@@ -65,9 +68,11 @@ public class QuestionsService implements IService<Questions> {
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(req);
+
             while (rs.next()) {
+                Quiz quiz = quizService.getQuiz(rs.getInt("quizId"));
                 questionsList.add(new Questions(rs.getInt("questionId"),
-                        rs.getInt("quizId"),
+                        quiz,
                         rs.getString("texte"),
                         rs.getString("type"),
                         rs.getInt("points"),
@@ -89,8 +94,9 @@ public class QuestionsService implements IService<Questions> {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(req);
             while (rs.next()) {
+                Quiz quiz = quizService.getQuiz(rs.getInt("quizId"));
                 questionsList.add(new Questions(rs.getInt("questionId"),
-                        rs.getInt("quizId"),
+                        quiz,
                         rs.getString("texte"),
                         rs.getString("type"),
                         rs.getInt("points"),
@@ -111,8 +117,9 @@ public class QuestionsService implements IService<Questions> {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(req);
             if (rs.next()) {
+                Quiz quiz = quizService.getQuiz(rs.getInt("quizId"));
                 question = new Questions(rs.getInt("questionId"),
-                        rs.getInt("quizId"),
+                        quiz,
                         rs.getString("texte"),
                         rs.getString("type"),
                         rs.getInt("points"),

@@ -1,6 +1,6 @@
 package com.esprit.models;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Quiz {
     private int quizId;
@@ -23,11 +23,10 @@ public class Quiz {
         this.difficulte = difficulte;
     }
 
-    public Quiz(int creatorId, String nom, String description, Date dateCreation, int duree, int nombreQuestions, Difficulte difficulte) {
+    public Quiz(int creatorId, String nom, String description,  int duree, int nombreQuestions, Difficulte difficulte) {
         this.nom = nom;
         this.description = description;
         this.creatorId = creatorId;
-        this.dateCreation = dateCreation;
         this.duree = duree;
         this.nombreQuestions = nombreQuestions;
         this.difficulte = difficulte;

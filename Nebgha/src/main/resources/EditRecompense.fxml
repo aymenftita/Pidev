@@ -4,23 +4,46 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.EditRecompenseController">
     <children>
-        <Label layoutX="87.0" layoutY="122.0" text="Titre" textFill="#000066" />
-        <Label layoutX="85.0" layoutY="175.0" text="Descriprion" textFill="#000066" />
-        <Label layoutX="87.0" layoutY="231.0" text="Score requis" textFill="#000066" />
+      <ImageView fitHeight="400.0" fitWidth="600.0">
+         <image>
+            <Image url="@images/Rb.png" />
+         </image>
+      </ImageView>
+        <Label layoutX="87.0" layoutY="122.0" text="Titre" textFill="#000066">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+        <Label layoutX="85.0" layoutY="175.0" text="Descriprion" textFill="#000066">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+        <Label layoutX="87.0" layoutY="231.0" text="Score requis" textFill="#000066">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
         <TextField fx:id="titretf" layoutX="203.0" layoutY="118.0" />
         <TextField fx:id="desctf" layoutX="203.0" layoutY="171.0" prefHeight="26.0" prefWidth="274.0" />
         <TextField fx:id="scoretf" layoutX="203.0" layoutY="226.0" prefHeight="26.0" prefWidth="108.0" />
         <ButtonBar layoutY="360.0" prefHeight="40.0" prefWidth="600.0" />
-        <Button layoutX="513.0" layoutY="348.0" mnemonicParsing="false" onAction="#editRecompense" style="-fx-background-color: #FDFD96;" text="Enregistrer" textFill="#000066" />
+        <Button layoutX="435.0" layoutY="291.0" mnemonicParsing="false" onAction="#editRecompense" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #FDFD96;" text="Enregistrer" textFill="#000066">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
         <Label layoutX="164.0" layoutY="21.0" text="Modifier Récompense" textFill="#000066">
          <font>
             <Font size="28.0" />
          </font></Label>
-
+        <ImageView fitHeight="51.0" fitWidth="56.0" layoutY="9.0" onMouseClicked="#previous">
+            <image>
+                <Image url="@images/previous.gif" />
+            </image>
+        </ImageView>
     </children>
 </AnchorPane>

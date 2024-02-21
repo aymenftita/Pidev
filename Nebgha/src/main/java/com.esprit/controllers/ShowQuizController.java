@@ -10,11 +10,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
@@ -66,7 +68,7 @@ public class ShowQuizController implements Initializable {
         creatorId.setCellValueFactory(new PropertyValueFactory<>("creatorId"));
         title.setCellValueFactory(new PropertyValueFactory<>("nom"));
         description.setCellValueFactory(new PropertyValueFactory<>("description"));
-        date.setCellValueFactory(new PropertyValueFactory<>("date_creation"));
+        date.setCellValueFactory(new PropertyValueFactory<>("dateCreation"));
         duree.setCellValueFactory(new PropertyValueFactory<>("duree"));
         nbr_questions.setCellValueFactory(new PropertyValueFactory<>("nombreQuestions"));
         difficulte.setCellValueFactory(new PropertyValueFactory<>("difficulte"));
@@ -87,6 +89,7 @@ public class ShowQuizController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjoutQuiz.fxml"));
         Parent root = loader.load();
         Stage currentStage = (Stage) quizTableView.getScene().getWindow();
+        currentStage.setTitle("Ajouter Quiz");
         currentStage.setScene(new Scene(root));
 
     }
@@ -101,6 +104,7 @@ public class ShowQuizController implements Initializable {
             EditQuizController editQuizController = loader.getController();
             editQuizController.initData(selectedQuiz);
             Stage currentStage = (Stage) quizTableView.getScene().getWindow();
+            currentStage.setTitle("Modifier Quiz");
             currentStage.setScene(new Scene(root));
         }
     }
@@ -122,6 +126,16 @@ public class ShowQuizController implements Initializable {
                 e.printStackTrace();
             }        }
     }
-
+    @FXML
+    void previous(MouseEvent event) throws IOException {
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstPage.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Nebgha");
+        stage.show();
+    }
 
 }

@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -40,6 +41,7 @@ public class EditQuizController implements Initializable {
     private Quiz quizToEdit;
 
     public void initData(Quiz quiz) {
+
         quizToEdit = quiz;
         titletf.setText(quiz.getNom());
         desctf.setText(quiz.getDescription());
@@ -77,6 +79,19 @@ public class EditQuizController implements Initializable {
         Parent root = loader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
+        stage.setTitle("Quizs");
+        stage.show();
+    }
+
+    @FXML
+    void previous(MouseEvent event) throws IOException {
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuiz.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Quizs");
         stage.show();
     }
 

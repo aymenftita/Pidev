@@ -1,4 +1,5 @@
 package com.esprit.services;
+import com.esprit.models.Quiz;
 import com.esprit.models.Recompenses;
 import com.esprit.models.RecompensesUtilisateur;
 import com.esprit.utils.DataSource;
@@ -8,16 +9,18 @@ import java.util.*;
 
 public class RecompensesUtilisateurService implements IService<RecompensesUtilisateur>{
     private Connection connection;
+    private RecompensesService recompensesService;
 
     public RecompensesUtilisateurService() {
         connection = DataSource.getInstance().getConnection();
+        recompensesService = new RecompensesService();
     }
     @Override
     public void ajouter(RecompensesUtilisateur recompensesUtilisateur) {
         String req = "INSERT INTO recompenses_utilisateur (userId, rewardId, date, statut, date_utilisation) VALUES (" +
                 recompensesUtilisateur.getUserId() + ", " +
-                recompensesUtilisateur.getRewardId() + ", '" +
-                new java.sql.Date(recompensesUtilisateur.getDate().getTime()) + "', '" +
+                recompensesUtilisateur.getReward().getRewardId()+ ", '" +
+                recompensesUtilisateur.getDate() + "', '" +
                 (recompensesUtilisateur.isStatut() ? 1 : 0)  + "', '" +
                 new java.sql.Date(recompensesUtilisateur.getDateUtilisation().getTime()) + "')";
         try {
@@ -34,8 +37,8 @@ public class RecompensesUtilisateurService implements IService<RecompensesUtilis
     @Override
     public void modifier(RecompensesUtilisateur recompensesUtilisateur) {
         String req = "UPDATE recompenses_utilisateur SET userId = " + recompensesUtilisateur.getUserId() +
-                ", rewardId = " + recompensesUtilisateur.getRewardId() +
-                ", date = '" + new java.sql.Date(recompensesUtilisateur.getDate().getTime()) +
+                ", rewardId = " + recompensesUtilisateur.getReward().getRewardId() +
+                ", date = '" + recompensesUtilisateur.getDate() +
                 "', statut = " + (recompensesUtilisateur.isStatut() ? 1 : 0) +
                 ", date_utilisation = '" + new java.sql.Date(recompensesUtilisateur.getDateUtilisation().getTime()) +
                 "' WHERE userRewardId = " + recompensesUtilisateur.getUserRewardId();
@@ -70,9 +73,10 @@ public class RecompensesUtilisateurService implements IService<RecompensesUtilis
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(req);
             while (rs.next()) {
+                Recompenses reward = recompensesService.getRecompense(rs.getInt("rewardId"));
                 recUserList.add(new RecompensesUtilisateur(rs.getInt("userRewardId"),
                         rs.getInt("userId"),
-                        rs.getInt("rewardId"),
+                        reward,
                         rs.getDate("date"),
                         rs.getBoolean("statut"),
                         rs.getDate("date_utilisation")));

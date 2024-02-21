@@ -1,5 +1,7 @@
 package com.esprit.services;
+import com.esprit.models.Quiz;
 import com.esprit.models.Recompenses;
+import com.esprit.models.Reponses;
 import com.esprit.models.ReponsesUtilisateur;
 import com.esprit.utils.DataSource;
 
@@ -8,16 +10,24 @@ import java.util.*;
 
 public class ReponsesUtilisateurService implements IService<ReponsesUtilisateur> {
     private Connection connection;
+    private ReponsesService reponsesService;
+    private QuizService quizService;
+
+
 
     public ReponsesUtilisateurService() {
         connection = DataSource.getInstance().getConnection();
+        reponsesService = new ReponsesService();
+        quizService = new QuizService();
+
+
     }
     @Override
     public void ajouter(ReponsesUtilisateur reponsesUtilisateur) {
         String req = "INSERT INTO reponses_utilisateurs (userId, reponseId, quizId, date, temps_pris, est_correcte) VALUES (" +
-                reponsesUtilisateur.getUserId() + ", " + reponsesUtilisateur.getReponseId() + ", " +
-                reponsesUtilisateur.getQuizId() + ", '" +
-                new java.sql.Date(reponsesUtilisateur.getDate().getTime()) + "', " +
+                reponsesUtilisateur.getUserId() + ", " + reponsesUtilisateur.getReponse().getReponseId() + ", " +
+                reponsesUtilisateur.getQuiz().getQuizId() + ", '" +
+                reponsesUtilisateur.getDate() + "', " +
                 reponsesUtilisateur.getTempsPris() + ", " +
                 reponsesUtilisateur.isCorrect() + ")";
         try {
@@ -32,9 +42,9 @@ public class ReponsesUtilisateurService implements IService<ReponsesUtilisateur>
     @Override
     public void modifier(ReponsesUtilisateur reponsesUtilisateur) {
         String req = "UPDATE reponses_utilisateurs SET userId = " + reponsesUtilisateur.getUserId() +
-                ", reponseId = " + reponsesUtilisateur.getReponseId() +
-                ", quizId = " + reponsesUtilisateur.getQuizId() +
-                ", date = '" + new java.sql.Date(reponsesUtilisateur.getDate().getTime()) +
+                ", reponseId = " + reponsesUtilisateur.getReponse().getReponseId() +
+                ", quizId = " + reponsesUtilisateur.getQuiz().getQuizId() +
+                ", date = '" + reponsesUtilisateur.getDate() +
                 "', temps_pris = " + reponsesUtilisateur.getTempsPris() +
                 ", est_correcte = " + reponsesUtilisateur.isCorrect() +
                 " WHERE userResponseId = " + reponsesUtilisateur.getUserResponseId();
@@ -67,10 +77,12 @@ public class ReponsesUtilisateurService implements IService<ReponsesUtilisateur>
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(req);
             while (rs.next()) {
+                Reponses reponse = reponsesService.getReponse(rs.getInt("reponseId"));
+                Quiz quiz = quizService.getQuiz(rs.getInt("quizId"));
                 repUserList.add(new ReponsesUtilisateur(rs.getInt("UserResponseId"),
                         rs.getInt("userId"),
-                        rs.getInt("reponseId"),
-                        rs.getInt("quizId"),
+                        reponse,
+                        quiz,
                         rs.getDate("date"),
                         rs.getInt("temps_pris"),
                         rs.getBoolean("est_correcte")
