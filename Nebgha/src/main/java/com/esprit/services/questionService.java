@@ -1,5 +1,6 @@
 package com.esprit.services;
 
+import com.esprit.models.Sujet;
 import com.esprit.utils.DataSource;
 import com.esprit.models.Question;
 
@@ -18,7 +19,7 @@ public class questionService implements IService<Question> {
         String req = "INSERT into questions_forum(id, titre, auteur_id, date_creation, sujet_id, contenu) values (" + question.getId() +
                 ", '" + question.getTitre() + "', " + question.getAuteur_id() +
                 ", '" + question.getDate()  + "', " +
-                question.getSujet_id() + ", '" + question.getContenu() + "');";
+                question.getSujet().getId() + ", '" + question.getContenu() + "');";
         try {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
@@ -32,7 +33,7 @@ public class questionService implements IService<Question> {
         String req = "UPDATE questions_forum set titre = '" + question.getTitre() +
                 "', auteur_id = " + question.getAuteur_id() +
                 ", date_creation = '" + question.getDate() +
-                "', sujet_id = " + question.getSujet_id() +
+                "', sujet_id = " + question.getSujet().getId() +
                 ", contenu = '" + question.getContenu() +
                 "' where id = " + question.getId() + ";";
         try {
@@ -64,16 +65,40 @@ public class questionService implements IService<Question> {
         try {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(req);
+            sujetService ss = new sujetService();//sujet service pour récupérer le sujet d'aprés l'ID
             while (rs.next()) {
                 questions.add(new Question(rs.getInt("id"), rs.getString("titre"),
                         rs.getInt("auteur_id"), rs.getDate("date_creation"),
-                        rs.getInt("sujet_id"), rs.getString("contenu")));
+                        ss.getSujet(rs.getInt("sujet_id")), rs.getString("contenu")));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
         return questions;
+    }
+
+    public Question getQuestion(int id) {
+
+        Question question = null;
+
+        String req = "SELECT * FROM questions_forum WHERE id = " + id;
+
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(req);
+
+            if (rs.next()) {  // Check if a row exists
+                sujetService ss = new sujetService();//sujet service pour récupérer le sujet d'aprés l'ID
+                question = new Question(rs.getInt("id"), rs.getString("titre"),
+                        rs.getInt("auteur_id"), rs.getDate("date_creation"),
+                        ss.getSujet(rs.getInt("sujet_id")), rs.getString("contenu"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return question;
     }
 
 }

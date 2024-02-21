@@ -2,18 +2,18 @@ package com.esprit.controllers.question;
 
 import com.esprit.controllers.InterfacesAdminController;
 import com.esprit.models.Question;
+import com.esprit.models.Sujet;
 import com.esprit.services.questionService;
+import com.esprit.services.sujetService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.List;
 
 public class ModifierQuestionController {
 
@@ -27,12 +27,31 @@ public class ModifierQuestionController {
     private TextField tfQuestionAuteurID;
 
     @FXML
-    private TextField tfQuestionSujetID;
+    private ComboBox<Sujet> cbChoixSujet;
 
     @FXML
     private TextField tfQuestionTitre;
 
     private Question questionToModify;
+
+    @FXML
+    void initialize() {
+        sujetService ss = new sujetService();
+        List<Sujet> sujets = ss.afficher();
+        cbChoixSujet.getItems().setAll(sujets);
+        // Configuration pour afficher seulement les titres dans le ComboBox
+        cbChoixSujet.setCellFactory(listView -> new ListCell<Sujet>() {
+            @Override
+            protected void updateItem(Sujet sujet, boolean empty) {
+                super.updateItem(sujet, empty);
+                if (sujet != null) {
+                    setText(sujet.getTitre());
+                } else {
+                    setText(null);
+                }
+            }
+        });
+    }
 
     @FXML
     void menuAdmin(ActionEvent event) throws IOException {
@@ -52,15 +71,24 @@ public class ModifierQuestionController {
         //chargement des champs de textes
         if (questionToModify != null) {
             tfQuestionTitre.setText(questionToModify.getTitre());
-            tfQuestionSujetID.setText(String.valueOf(questionToModify.getSujet_id()));
             tfQuestionAuteurID.setText(String.valueOf(questionToModify.getAuteur_id()));
             taContenuQuestion.setText(questionToModify.getContenu());
             DpDateQuestion.setValue(questionToModify.getDate().toLocalDate());
+            if (questionToModify.getSujet() != null) {
+                // Find the sujet in the combo box items and select it
+                for (Sujet sujet : cbChoixSujet.getItems()) {
+                    if (sujet.getId() == questionToModify.getSujet().getId()) {
+                        cbChoixSujet.getSelectionModel().select(sujet);
+                        break;
+                    }
+                }
+            }
+        }
 
-        } else {
+        else {
             // Si pas de questions choisi, vider les champs
             tfQuestionTitre.clear();
-            tfQuestionSujetID.clear();
+            cbChoixSujet.getSelectionModel().clearSelection();
             tfQuestionAuteurID.clear();
             taContenuQuestion.clear();
             DpDateQuestion.setValue(null);
@@ -69,11 +97,12 @@ public class ModifierQuestionController {
 
     @FXML
     void modifierQuestion(ActionEvent event) {
+        Sujet selectedSujet = cbChoixSujet.getValue();
         //Création du service et modification d'entité
         questionService qs = new questionService();
-        qs.modifier(new Question(0, tfQuestionTitre.getText(),
+        qs.modifier(new Question(questionToModify.getId(), tfQuestionTitre.getText(),
                 Integer.parseInt(tfQuestionAuteurID.getText()), Date.valueOf(DpDateQuestion.getValue()),
-                Integer.parseInt(tfQuestionSujetID.getText()), taContenuQuestion.getText()));
+                selectedSujet, taContenuQuestion.getText()));
 
         //Message de confirmation
         Alert alertModif = new Alert(Alert.AlertType.INFORMATION);

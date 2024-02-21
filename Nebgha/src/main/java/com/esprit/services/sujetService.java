@@ -71,7 +71,7 @@ public class sujetService implements IService<Sujet> {
 
     public Sujet getSujet(int id) {
 
-        Sujet sujet = null;  //
+        Sujet sujet = null;
 
         String req = "SELECT * FROM sujets WHERE id = " + id;
 

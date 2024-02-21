@@ -1,7 +1,10 @@
 package com.esprit.tests;
 
+import com.esprit.models.Reponse;
+import com.esprit.models.Sujet;
 import com.esprit.services.questionService;
 import com.esprit.models.Question;
+import com.esprit.services.reponseService;
 
 import java.text.ParseException;
 import java.sql.Date;
@@ -28,11 +31,11 @@ public class MainProg {
          */
 
         /*********************       QUESTION            ********************/
-        //question testQuestion1 = new question(5, "Test titre",1, date, 1, "test contenu");
-        questionService q = new questionService();
-        Question testQuestion = new Question(10, "Test modifTitre",1, Date.valueOf("2022-12-03"), 1, "test modifContenu");
+        //Question testQuestion2 = new Question(2, "Test titre",2, Date.valueOf("2022-12-03"), new Sujet(1, "TestModif1", "Test modif Desc", "Tests modifRegles"), "test contenu");
+        //questionService q = new questionService();
+        //Question testQuestion = new Question(10, "Test modifTitre",1, Date.valueOf("2022-12-03"), 1, "test modifContenu");
 
-        q.ajouter(testQuestion);
+        //q.ajouter(testQuestion);
         //q.modifier(testQuestion2);
         //q.ajouter(new question(3, "test titre3", 1, Date.valueOf("2024-05-25"), 1, "test contenu3"));
         //q.supprimer(testQuestion1);
@@ -44,16 +47,20 @@ public class MainProg {
 */
          /*/
 
-        /*************************        REPONSE      ************************
-        reponse testReponse1 = new reponse(1, 1,2, "test contenu", Date.valueOf("12/06/2021"), 1);
+        /*************************        REPONSE      *************************
+        Reponse testReponse1 = new Reponse(2, 1,
+                new Question(13, "test", 2,Date.valueOf("2024-02-13"),
+                        new Sujet(1, "TestModif1", "Test modif Desc", "Tests modifRegles"),
+                        "dadza"), "contenu", Date.valueOf("2024-02-13"),
+                new Sujet(1, "TestModif1", "Test modif Desc", "Tests modifRegles"));
         reponseService r = new reponseService();
-        reponse testReponse2 = new reponse(1, 1,3, "test modifContenu", Date.valueOf("12/07/2021"), 1);
+        //reponse testReponse2 = new reponse(1, 1,3, "test modifContenu", Date.valueOf("12/07/2021"), 1);
 
         //r.ajouter(testReponse1);
-        //r.modifier(testReponse2);
+        r.modifier(testReponse1);
         //r.ajouter(new reponse(3, 1, 2, "contenu", Date.valueOf("12/07/2021"), 1));
-        r.supprimer(testReponse1);
-
+        //r.supprimer(testReponse1);
+*
         List listAffichage = r.afficher();
         for(int i=0;i<listAffichage.size();i++){
             System.out.println(listAffichage.get(i));

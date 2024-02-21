@@ -18,8 +18,8 @@ public class reponseService implements IService<Reponse> {
     @Override
     public void ajouter(Reponse reponse) {
         String req = "INSERT into reponse_forum(auteur_id, question_id, contenu, date_creation, sujet_id) values ('" + reponse.getAuteur_id() + "', '"
-                + reponse.getQuestion_id() + "', '" + reponse.getContenu() + "', '" + reponse.getDate() +
-                "', "+ reponse.getSujet_id() + ");";
+                + reponse.getQuestion().getId() + "', '" + reponse.getContenu() + "', '" + reponse.getDate() +
+                "', "+ reponse.getSujet().getId() + ");";
         try {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
@@ -31,9 +31,9 @@ public class reponseService implements IService<Reponse> {
 
     @Override
     public void modifier(Reponse reponse) {
-        String req = "UPDATE reponse_forum set auteur_id = '" + reponse.getAuteur_id() + "', question_id = '"
-                + reponse.getQuestion_id() + "', contenu = '" + reponse.getContenu()
-                + "', date_creation = '" + reponse.getDate() + "', sujet_id = " + reponse.getSujet_id() +
+        String req = "UPDATE reponse_forum set auteur_id = " + reponse.getAuteur_id() + ", question_id = "
+                + reponse.getQuestion().getId() + ", contenu = '" + reponse.getContenu()
+                + "', date_creation = '" + reponse.getDate() + "', sujet_id = " + reponse.getSujet().getId() +
                 " where id = " + reponse.getId() + ";";
         try {
             Statement st = connection.createStatement();
@@ -64,10 +64,12 @@ public class reponseService implements IService<Reponse> {
         try {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(req);
+            sujetService ss = new sujetService();//sujet service pour récupérer le sujet d'aprés l'ID
+            questionService qs = new questionService();//question service pour récupérer le question d'aprés l'ID
             while (rs.next()) {
                 reponses.add(new Reponse(rs.getInt("id"), rs.getInt("auteur_id"),
-                        rs.getInt("question_id"), rs.getString("contenu"),
-                        rs.getDate("date_creation"), rs.getInt("sujet_id")));
+                        qs.getQuestion(rs.getInt("question_id")), rs.getString("contenu"),
+                        rs.getDate("date_creation"), ss.getSujet(rs.getInt("sujet_id"))));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

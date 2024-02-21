@@ -3,22 +3,23 @@ package com.esprit.models;
 import java.sql.Date;
 
 public class Question {
+    //TODO: change auteur_id to a class
     private int id;
     private String titre;
     private int auteur_id;
     private Date date;
-    private int sujet_id;
+    private Sujet sujet;
     private String contenu;
 
     public Question() {
     }
 
-    public Question(int id, String titre, int auteur_id, Date date, int sujet_id, String contenu) {
+    public Question(int id, String titre, int auteur_id, Date date, Sujet sujet, String contenu) {
         this.id = id;
         this.titre = titre;
         this.auteur_id = auteur_id;
         this.date = date;
-        this.sujet_id = sujet_id;
+        this.sujet = sujet;
         this.contenu = contenu;
     }
 
@@ -29,7 +30,7 @@ public class Question {
                 ", titre='" + titre + '\'' +
                 ", auteur_id=" + auteur_id +
                 ", date='" + date + '\'' +
-                ", sujet_id=" + sujet_id +
+                ", sujet_id=" + sujet.getId() +
                 ", contenu='" + contenu + '\'' +
                 '}';
     }
@@ -66,12 +67,12 @@ public class Question {
         this.date = date;
     }
 
-    public int getSujet_id() {
-        return sujet_id;
+    public Sujet getSujet() {
+        return sujet;
     }
 
-    public void setSujet_id(int sujet_id) {
-        this.sujet_id = sujet_id;
+    public void setSujet(Sujet sujet) {
+        this.sujet = sujet;
     }
 
     public String getContenu() {

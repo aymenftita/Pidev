@@ -13,15 +13,14 @@ import com.esprit.models.Sujet;
 import com.esprit.services.questionService;
 import com.esprit.services.reponseService;
 import com.esprit.services.sujetService;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 
@@ -55,6 +54,24 @@ public class InterfacesAdminController {
     private void loadQuestions() {
         //charger la table des questions
         questionService QS = new questionService();
+
+        //Collecter l'ID de chaque sujet pour l'affichage
+        TableColumn<Question, Sujet> sujetColumn = (TableColumn<Question, Sujet>) tvAffichageQuestion.getColumns()
+                .filtered(c -> c.getText().equals("Sujet id")).get(0);
+        sujetColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getSujet())); // Wrap in ObservableValue
+        sujetColumn.setCellFactory(col -> new TableCell<Question, Sujet>() {
+            @Override
+            protected void updateItem(Sujet sujet, boolean empty) {
+                super.updateItem(sujet, empty);
+                if (sujet != null) {
+                    setText(String.valueOf(sujet.getId())); // afficher sujet ID
+                } else {
+                    setText(null);
+                }
+            }
+        });
+
+
         ObservableList<Question> questionsData = FXCollections.observableArrayList(QS.afficher());
         tvAffichageQuestion.setItems(questionsData);
     }
@@ -62,8 +79,43 @@ public class InterfacesAdminController {
     private void loadReponses() {
         //charger la table des réponse
         reponseService RS = new reponseService();
+
+        //Collecter l'ID de chaque sujet pour l'affichage
+        TableColumn<Reponse, Sujet> sujetColumn = (TableColumn<Reponse, Sujet>) tvAffichageReponse.getColumns().
+                filtered(c -> c.getText().equals("Sujet id")).get(0);
+        sujetColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getSujet()));
+        sujetColumn.setCellFactory(col -> new TableCell<Reponse, Sujet>() {
+            @Override
+            protected void updateItem(Sujet sujet, boolean empty) {
+                super.updateItem(sujet, empty);
+                if (sujet != null) {
+                    setText(String.valueOf(sujet.getId())); // Afficher sujet ID
+                } else {
+                    setText(null);
+                }
+            }
+        });
+
+        //Collecter l'ID de chaque question pour l'affichage
+        TableColumn<Reponse, Question> questionColumn = (TableColumn<Reponse, Question>) tvAffichageReponse.getColumns().
+                filtered(c -> c.getText().equals("Question id")).get(0);
+        questionColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getQuestion()));
+        questionColumn.setCellFactory(col -> new TableCell<Reponse, Question>() {
+            @Override
+            protected void updateItem(Question question, boolean empty) {
+                super.updateItem(question, empty);
+                if (question != null) {
+                    setText(String.valueOf(question.getId())); // Afficher question ID
+                } else {
+                    setText(null);
+                }
+            }
+        });
+
         ObservableList<Reponse> reponsesData = FXCollections.observableArrayList(RS.afficher());
         tvAffichageReponse.setItems(reponsesData);
+
+
     }
 
     private void loadSujets() {
@@ -164,6 +216,8 @@ public class InterfacesAdminController {
 
     }
 
+    //TODO: foreign key constraints stop elements from deleting, add a pop up to indicate this
+
     @FXML
     void supprimerQuestion(ActionEvent event) {
         //Collecter l'élément choisi du table
@@ -172,7 +226,8 @@ public class InterfacesAdminController {
             //Supprimer l'élément choisi
             questionService qs = new questionService();
             qs.supprimer(selectedQuestion);
-            tvAffichageQuestion.getItems().remove(selectedQuestion); // Recharger la table
+            loadQuestions();// Recharger la table
+
         } else {
             // Si pas d'élément choisi
             Alert alertAjout = new Alert(Alert.AlertType.ERROR);
@@ -191,7 +246,7 @@ public class InterfacesAdminController {
             //Supprimer l'élément choisi
             reponseService rs = new reponseService();
             rs.supprimer(selectedReponse);
-            tvAffichageReponse.getItems().remove(selectedReponse); // Refresh TableView
+            loadReponses(); // Recharger la table
         } else {
             // Si pas d'élément choisi
             Alert alertAjout = new Alert(Alert.AlertType.ERROR);
@@ -211,7 +266,7 @@ public class InterfacesAdminController {
             //Supprimer l'élément choisi
             sujetService SS = new sujetService();
             SS.supprimer(selectedSujet);
-            tvAffichageSujet.getItems().remove(selectedSujet); // Refresh TableView
+            loadSujets(); // Recharger la table
         } else {
             // Si pas d'élément choisi
             Alert alertAjout = new Alert(Alert.AlertType.ERROR);
