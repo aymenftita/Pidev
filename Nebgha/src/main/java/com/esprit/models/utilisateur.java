@@ -1,28 +1,34 @@
 package com.esprit.models;
-
-import java.util.Date;
-
-public sealed class utilisateur permits admin,etudiant,tuteur {
-
+import com.esprit.models.Role;
+public  class utilisateur {
     public int id;
     public String nom;
     public String prenom;
-    public Date date_naissance;
     public String email;
     public String password;
     public Role role;
 
-    public utilisateur(int id, String nom, String prenom, Date date_naissance, String email, String password, Role role) {
+
+    public utilisateur(int id, String nom, String prenom,
+                         String email,
+                       String password, Role role) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
-        this.date_naissance = date_naissance;
+
         this.email = email;
         this.password = password;
         this.role = role;
     }
 
-    public utilisateur(int id, String nom, Date dateNaissance, String email, String password) {
+    public utilisateur( String nom, String prenom,
+                       String email,
+                       String password, Role role) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.password = password;
+        this.role = role;
     }
 
     public int getId() {
@@ -49,13 +55,7 @@ public sealed class utilisateur permits admin,etudiant,tuteur {
         this.prenom = prenom;
     }
 
-    public Date getDate_naissance() {
-        return date_naissance;
-    }
 
-    public void setDate_naissance(Date date_naissance) {
-        this.date_naissance = date_naissance;
-    }
 
     public String getEmail() {
         return email;
@@ -73,7 +73,7 @@ public sealed class utilisateur permits admin,etudiant,tuteur {
         this.password = password;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
@@ -87,7 +87,7 @@ public sealed class utilisateur permits admin,etudiant,tuteur {
                 "id=" + id +
                 ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
-                ", date_naissance=" + date_naissance +
+                ", date_naissance=" +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +

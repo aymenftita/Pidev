@@ -2,19 +2,29 @@ package com.esprit.models;
 
 import java.util.Date;
 
+
 public final class etudiant extends utilisateur {
+
 public int niveau;
 public String specialite;
-public float moyenne;
 
-    public etudiant(int id, String nom, Date date_naissance, String email, String password, int niveau, String specialite, float moyenne) {
-        super(id, nom, date_naissance, email, password);
+
+    public etudiant(int id, String nom, String prenom,
+                    String email, String password, Role role,
+                    int niveau, String specialite) {
+        super(id, nom, prenom, email, password, role);
         this.niveau = niveau;
         this.specialite = specialite;
-        this.moyenne = moyenne;
     }
 
-    public String getNiveau() {
+    public etudiant(String nom, String prenom, String email, String password,
+                    Role role, int niveau, String specialite) {
+        super(nom, prenom, email, password, role);
+        this.niveau = niveau;
+        this.specialite = specialite;
+    }
+
+    public int getNiveau() {
         return niveau;
     }
 
@@ -30,20 +40,13 @@ public float moyenne;
         this.specialite = specialite;
     }
 
-    public float getMoyenne() {
-        return moyenne;
-    }
 
-    public void setMoyenne(float moyenne) {
-        this.moyenne = moyenne;
-    }
 
     @Override
     public String toString() {
         return "etudiant{" +
                 "niveau=" + niveau +
                 ", specialite='" + specialite + '\'' +
-                ", moyenne=" + moyenne +
                 "} " + super.toString();
     }
 }

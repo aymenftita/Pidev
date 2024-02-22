@@ -4,20 +4,28 @@ import java.util.Date;
 
 public final class admin extends utilisateur{
 
-    public admin(int id, String nom, String prenom, Date date_naissance, String email, String password, Role role) {
-        super(id, nom, prenom, date_naissance, email, password, role);
+    public admin( int id,String nom,
+                 String prenom,
+                 String email, String password, Role role)
+    {
+        super( id,nom, prenom, email, password, role);
     }
-
-
+    public admin( String nom,
+                  String prenom,
+                  String email, String password, Role role)
+    {
+        super( nom, prenom, email, password, role);
+    }
 
     @Override
     public String toString() {
         return "admin{" +
                 "id=" + id +
                 ", nom='" + nom + '\'' +
-                ", date_naissance=" + date_naissance +
+                ", prenom='" + prenom + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                "} " + super.toString();
+                ", role='" + role + '\'' +
+                "} " ;
     }
 }

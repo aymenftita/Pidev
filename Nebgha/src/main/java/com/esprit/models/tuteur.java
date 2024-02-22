@@ -7,13 +7,24 @@ public final class tuteur extends utilisateur {
     public String domaine;
     public String experience;
 
-    public tuteur( String nom, String prenom, Date date_naissance, String email, String password, Role role, int id1, String domaine, String experience) {
-        super(id1,nom, prenom, date_naissance, email, password, role);
+    public tuteur( int id1,String nom, String prenom,
+                   String email,
+                   String password, Role role,
+                   String domaine, String experience) {
+        super(id1,nom, prenom, email, password, role);
         this.id = id1;
         this.domaine = domaine;
         this.experience = experience;
     }
+    public tuteur( String nom, String prenom,
+                   String email,
+                   String password, Role role,
+                   String domaine, String experience) {
+        super(nom, prenom, email, password, role);
 
+        this.domaine = domaine;
+        this.experience = experience;
+    }
     @Override
     public int getId() {
         return id;

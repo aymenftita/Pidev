@@ -1,75 +1,59 @@
 package com.esprit.services;
 
+import com.esprit.models.Role;
 import com.esprit.models.etudiant;
 import com.esprit.models.tuteur;
 import com.esprit.utils.DataSource;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceTuteur implements IService<tuteur> {
     private Connection connection;
-    public void ServiceAdmin(){
+    public  ServiceTuteur(){
+
         connection = DataSource.getInstance().getConnection();
     }
     @Override
-    public void ajouter(tuteur a) throws SQLException {
-        String req = "INSERT into utilisateur(nom,prenom,email,password,Role,domaine,experience) values (?,?,?,?,?,?,?);";
+    public void ajouter(tuteur a )  {
+        String req = "INSERT into utilisateur(nom, prenom,email," +
+                "password,Role,domaine,experience,id) values" +
+                " ('" + a.getNom() + "', '" + a.getPrenom() +
+                "','"+ a.getEmail()+ "','"+ a.getPassword() +
+                "','" +a.getRole() + "','"
+                + a.getDomaine() +"','"+a.getExperience() +
+                "','"+a.getId() + "');";
         try {
-            PreparedStatement pst = connection.prepareStatement(req);
-            pst.setString(1,a.getNom());
-            pst.setString(2,a.getPrenom());
-            pst.setString(3,a.getEmail());
-            pst.setString(4,a.getPassword());
-            pst.setString(5, a.getDomaine());
-            pst.setString(6,a.getExperience());
-            pst.setString(7,a.getRole());
-            pst.setString(8, a.getRole().toString());
-
-            pst.executeUpdate();
-            System.out.println("Tuteur ajouté");
-
-
+            Statement st = connection.createStatement();
+            st.executeUpdate(req);
+            System.out.println("Tuteur ajoutée !");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
+
     }
 
     @Override
     public void modifier(tuteur a) {
-        String req = "UPDATE utilisateur set nom = ?, prenom = ?, email = ?, password = ?, Role = ?, domaine = ?, experience = ?, where id = ?;";
+        String req = "UPDATE utilisateur SET nom = '" + a.getNom() + "', prenom = '" + a.getPrenom() + "', email = '" + a.getEmail() + "', password = '" + a.getPassword() + "', Role = '" + a.getRole().toString() + "', experience = '" + a.getExperience() + "', domaine = '" + a.getDomaine() + "' WHERE id = " + a.getId();
         try {
-            PreparedStatement pst = connection.prepareStatement(req);
-            pst.setString(1,a.getNom());
-            pst.setString(2,a.getPrenom());
-            pst.setString(3,a.getEmail());
-            pst.setString(4,a.getPassword());
-            pst.setString(5,a.getExperience());
-            pst.setString(6, a.getDomaine());
-            pst.setInt(5,a.getId());
-            pst.setString(6,a.getRole().toString());
-
-            pst.executeUpdate();
-            System.out.println("tuteur modifié");
-
+            Statement st = connection.createStatement();
+            st.executeUpdate(req);
+            System.out.println("Tuteur modifié !");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
     }
 
     @Override
     public void supprimer(tuteur a) {
-        String req = "DELETE from personne where id = ?;";
+        String req = "DELETE from utilisateur where id = " + a.getId() + ";";
         try {
-            PreparedStatement pst = connection.prepareStatement(req);
-            pst.setInt(1, a.getId());
-            pst.executeUpdate();
-            System.out.println("tuteur supprmié !");
+            Statement st = connection.createStatement();
+            st.executeUpdate(req);
+            System.out.println("Tuteur supprmiée !");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -79,12 +63,19 @@ public class ServiceTuteur implements IService<tuteur> {
     public List<tuteur> afficher() {
         List<tuteur> tuteurs= new ArrayList<>();
 
-        String req = "SELECT * from utilisateur where UserType='tuteur' ";
+        String req = "SELECT * from utilisateur where Role='tuteur' ";
         try {
             PreparedStatement pst = connection.prepareStatement(req);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                tuteurs.add(new etudiant(rs.getInt("id"),rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("password"),rs.getInt("experience"), rs.getString("specialite"), rs.getFloat("domaine")));
+                tuteurs.add(new tuteur( rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        Role.valueOf(rs.getString("role")),
+                        rs.getString("domaine"),
+                        rs.getString("experience")));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
