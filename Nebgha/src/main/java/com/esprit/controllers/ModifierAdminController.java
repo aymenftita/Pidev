@@ -6,7 +6,7 @@ import com.esprit.services.ServiceAdmin;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-public class SupprimerAdminController {
+public class ModifierAdminController {
     @FXML
     private TextField tfid;
     @FXML
@@ -20,17 +20,16 @@ public class SupprimerAdminController {
     @FXML
     private TextField tfrole;
 
-    public void SupprimerAdmin(){
+
+    public void modifierAdmin(){
         ServiceAdmin sa = new ServiceAdmin();
-        sa.supprimer(
-                new admin(
-                        Integer.parseInt(tfid.getText()),
-                        tfnom.getText(),
-                        tfprenom.getText(),
-                        tfemail.getText(),
-                        tfpass.getText(),
-                        Role.Administrateur
-                )
-        );
+        sa.modifier(new admin(
+                Integer.parseInt(tfid.getText()),
+                tfnom.getText(),
+                tfprenom.getText(),
+                tfemail.getText(),
+                tfpass.getText(),
+                Role.Administrateur
+        ));
     }
 }

@@ -1,21 +1,12 @@
 package com.esprit.controllers;
 
 import com.esprit.models.Role;
-import com.esprit.models.etudiant;
 import com.esprit.models.tuteur;
-import com.esprit.services.ServiceEtudiant;
 import com.esprit.services.ServiceTuteur;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
-import java.io.IOException;
-
-public class AjouterTuteurController {
+public class ModifierTuteurController {
     @FXML
     private TextField tfid;
     @FXML
@@ -36,9 +27,9 @@ public class AjouterTuteurController {
     private TextField tfexperience;
 
 
-    public void AjouterTuteur(){
+    public void modifierTuteur(){
         ServiceTuteur se = new ServiceTuteur();
-        se.ajouter(new tuteur(
+        se.modifier(new tuteur(
                 Integer.parseInt(tfid.getText()),
                 tfnom.getText(),
                 tfprenom.getText(),
@@ -48,14 +39,5 @@ public class AjouterTuteurController {
                 tfdomaine.getText(),
                 tfexperience.getText()
         ));
-    }
-
-    public void SwitchScene(ActionEvent event, String fxmlfile) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Interfaces/"+fxmlfile+".fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        Stage Stage = new Stage();
-        Stage.setScene(scene);
-        Stage.show();
     }
 }
