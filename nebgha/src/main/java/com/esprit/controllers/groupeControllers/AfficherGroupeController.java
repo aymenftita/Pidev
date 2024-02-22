@@ -1,6 +1,7 @@
 package com.esprit.controllers.groupeControllers;
 import com.esprit.controllers.otherControllers.SwitchScenesController;
 import com.esprit.models.Groupe;
+import com.esprit.models.Utilisateur;
 import com.esprit.services.GroupeService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,7 +28,7 @@ public class AfficherGroupeController {
     @FXML
     private TableColumn<Groupe, Integer> idColumn;
     @FXML
-    private TableColumn<Groupe, Integer> idColumng;
+    private TableColumn<Groupe, Utilisateur> idColumng;
 
     @FXML
     private TableColumn<Groupe, String> nomColumn;
