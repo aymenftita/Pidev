@@ -1,7 +1,7 @@
 package com.esprit.models;
 
 public enum Role {
-    etudiant,
+    Etudiant,
     Tuteur,
     Administrateur,
     utilisateur,

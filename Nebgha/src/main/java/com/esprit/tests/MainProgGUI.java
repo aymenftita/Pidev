@@ -58,13 +58,24 @@ public class MainProgGUI extends Application {
     */
      @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterEtudiant.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstPage.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Ajout Etudiant");
+        primaryStage.setTitle("Welcome");
         primaryStage.show();
     }
+    /*@Override
+    public void start(Stage primaryStage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterAdmin.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Etudiant ajoutée");
+        primaryStage.show();
+    }
+
+     */
 
 
 

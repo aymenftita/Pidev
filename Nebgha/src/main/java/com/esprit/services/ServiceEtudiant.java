@@ -19,7 +19,7 @@ public ServiceEtudiant(){connection = DataSource.getInstance().getConnection();}
                 "email,password,Role,niveau,specialite) values ('" +
                 a.getNom() + "', '" + a.getPrenom() + "','"+
                 a.getEmail()+ "','"+ a.getPassword() + "','" +
-                Role.etudiant + "','"+a.getNiveau() + "','"+
+                Role.Etudiant + "','"+a.getNiveau() + "','"+
                 a.getSpecialite()+"');";
         try {
             Statement st = connection.createStatement();
@@ -69,7 +69,7 @@ public ServiceEtudiant(){connection = DataSource.getInstance().getConnection();}
     public List<etudiant> afficher() {
         List<etudiant> etudiants= new ArrayList<>();
 
-        String req = "SELECT * from utilisateur where Role='etudiant' ";
+        String req = "SELECT * from utilisateur where Role='Etudiant' ";
         try {
             PreparedStatement pst = connection.prepareStatement(req);
             ResultSet rs = pst.executeQuery();
@@ -79,7 +79,7 @@ public ServiceEtudiant(){connection = DataSource.getInstance().getConnection();}
                         rs.getString("prenom"),
                         rs.getString("email"),
                         rs.getString("password"),
-                        Role.etudiant,
+                        Role.Etudiant,
                         rs.getInt("niveau"),
                         rs.getString("specialite")));
             }
@@ -89,4 +89,6 @@ public ServiceEtudiant(){connection = DataSource.getInstance().getConnection();}
 
         return etudiants;
     }
+
+
 }

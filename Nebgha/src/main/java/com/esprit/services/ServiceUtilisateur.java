@@ -89,6 +89,24 @@ public class ServiceUtilisateur implements IService<utilisateur> {
         }
         return utilisateurs;
     }
-
+    public utilisateur login(String email, String password) {
+        utilisateur user = null;
+        String query = "SELECT * FROM utilisateur WHERE email = '" + email + "' AND password = '" + password + "'";
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            if (resultSet.next()) {
+                user = new utilisateur(
+                        resultSet.getString("nom"),
+                        resultSet.getString("prenom"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"),
+                        Role.valueOf(resultSet.getString("role")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
 
 }

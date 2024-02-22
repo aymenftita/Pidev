@@ -21,9 +21,9 @@ public class ServiceAdmin implements IService<admin>{
 
     @Override
     public void ajouter(admin a )  {
-        String req = "INSERT into utilisateur (id,nom," +
+        String req = "INSERT into utilisateur (nom," +
                 "prenom,email,password,Role) " +
-                "values ('" + a.getId() + "', '"
+                "values ('"
                 + a.getNom() + "','"+ a.getPrenom()+
                "','" +a.getEmail() +
                 "','" + a.getPassword() +
@@ -88,6 +88,26 @@ public class ServiceAdmin implements IService<admin>{
             }
             return admins;
         }
+    public admin getAdmin(int adminId) {
+        admin admin = null;
+        String req = "SELECT * FROM utilisateur WHERE role = 'administrateur' AND id = " + adminId;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(req);
+            if (rs.next()) {
+                admin = new admin(
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        Role.valueOf(rs.getString("role"))
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return admin;
+    }
 
 
 }

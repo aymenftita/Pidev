@@ -5,12 +5,12 @@ import java.util.Date;
 public final class tuteur extends utilisateur {
     public int id;
     public String domaine;
-    public String experience;
+    public double experience;
 
     public tuteur( int id1,String nom, String prenom,
                    String email,
                    String password, Role role,
-                   String domaine, String experience) {
+                   String domaine, double experience) {
         super(id1,nom, prenom, email, password, role);
         this.id = id1;
         this.domaine = domaine;
@@ -19,7 +19,7 @@ public final class tuteur extends utilisateur {
     public tuteur( String nom, String prenom,
                    String email,
                    String password, Role role,
-                   String domaine, String experience) {
+                   String domaine, double experience) {
         super(nom, prenom, email, password, role);
 
         this.domaine = domaine;
@@ -43,11 +43,11 @@ public final class tuteur extends utilisateur {
         this.domaine = domaine;
     }
 
-    public String getExperience() {
+    public double getExperience() {
         return experience;
     }
 
-    public void setExperience(String experience) {
+    public void setExperience(double experience) {
         this.experience = experience;
     }
 

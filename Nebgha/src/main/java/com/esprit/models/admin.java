@@ -1,7 +1,5 @@
 package com.esprit.models;
 
-import java.util.Date;
-
 public final class admin extends utilisateur{
 
     public admin( int id,String nom,

@@ -75,7 +75,7 @@ public class ServiceTuteur implements IService<tuteur> {
                         rs.getString("password"),
                         Role.valueOf(rs.getString("role")),
                         rs.getString("domaine"),
-                        rs.getString("experience")));
+                        rs.getDouble("experience")));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
