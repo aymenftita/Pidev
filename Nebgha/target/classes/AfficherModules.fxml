@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import jdk.internal.joptsimple.internal.Columns?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.esprit.controller.AfficherModuleController"
+            prefHeight="400.0" prefWidth="600.0">
+    <TableView fx:id="tableModule" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" >
+        <columns>
+            <TableColumn fx:id="idModuleColumn" prefWidth="75.0" text="ID Module" >
+                <cellValueFactory>
+                    <PropertyValueFactory property="id_module" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="titreColumn" prefWidth="75.0" text="Titre" >
+                <cellValueFactory>
+                    <PropertyValueFactory property="titre" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="niveauColumn" prefWidth="75.0" text="Niveau" >
+                <cellValueFactory>
+                    <PropertyValueFactory property="niveau" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="domaineColumn" prefWidth="75.0" text="Domaine" >
+                <cellValueFactory>
+                    <PropertyValueFactory property="domaine" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="createurIdColumn" prefWidth="75.0" text="Créateur ID" >
+                <cellValueFactory>
+                    <PropertyValueFactory property="createur_id" />
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+
+</AnchorPane>
