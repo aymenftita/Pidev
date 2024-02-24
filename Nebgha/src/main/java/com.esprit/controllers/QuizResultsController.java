@@ -12,7 +12,6 @@ public class QuizResultsController {
     @FXML
     private Label titleLabel;
 
-
     @FXML
     private Label scoreLabel;
 
@@ -33,39 +32,36 @@ public class QuizResultsController {
         titleLabel.setText("Résultats du quiz - " + quiz.getNom());
 
         int correctAnswers = 0;
-        List<ReponsesUtilisateur> reponsesUtilisateurList = reponseUtilisateurService.afficherParQuiz(quizId, userId);
+        List<ReponsesUtilisateur> reponsesUtilisateurList = reponseUtilisateurService.afficherParQuizEtUser(quizId, userId);
 
         for (Questions question : questions) {
             Label questionLabel = new Label(question.getTexte());
+            questionLabel.setStyle("-fx-font-weight: bold; -fx-background-color: #f0f0f0; -fx-padding: 5px;");
             questionsContainer.getChildren().add(questionLabel);
 
             List<Reponses> reponses = reponseService.afficherParQuestion(question.getQuestionId());
             for (Reponses reponse : reponses) {
                 Label reponseLabel = new Label(reponse.getTexte());
-                if (reponse.isEstCorrecte()) {
-                    reponseLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: green;");
-                }
 
                 for (ReponsesUtilisateur reponsesUtilisateur : reponsesUtilisateurList) {
                     if (reponsesUtilisateur.getReponse().getReponseId() == reponse.getReponseId()) {
                         if (reponsesUtilisateur.isCorrect()) {
                             reponseLabel.setText(reponseLabel.getText() + " (Correcte)");
-                            reponseLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: green;");
+                            reponseLabel.setStyle("-fx-background-color: rgba(0, 255, 0, 0.3); -fx-padding: 5px;");
                             correctAnswers++;
                         } else {
                             reponseLabel.setText(reponseLabel.getText() + " (Fausse)");
-                            reponseLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: red;");
+                            reponseLabel.setStyle("-fx-background-color: rgba(255, 0, 0, 0.3); -fx-padding: 5px;");
                         }
                     }
                 }
                 questionsContainer.getChildren().add(reponseLabel);
             }
 
-
-
             String explanation = reponses.get(0).getExplication();
             if (!explanation.isEmpty()) {
                 Label explicationLabel = new Label("Explication: " + explanation);
+                explicationLabel.setStyle("-fx-background-color: rgba(0, 0, 255, 0.3); -fx-padding: 5px;");
                 questionsContainer.getChildren().add(explicationLabel);
             }
         }
@@ -76,5 +72,4 @@ public class QuizResultsController {
                 + "Votre score est: " + String.format("%.1f", score) + "%");
         timeMessageLabel.setText(completedInTime ? "Vous avez terminé le quiz à temps." : "Vous avez dépassé la durée du quiz.");
     }
-
 }

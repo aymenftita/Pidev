@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,19 +15,28 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.ShowQuizController">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="662.0">
+      <ImageView fitHeight="400.0" fitWidth="663.0">
          <image>
             <Image url="@images/Rb.png" />
          </image>
       </ImageView>
-      <TableView fx:id="quizTableView" layoutY="86.0" prefHeight="200.0" prefWidth="661.0">
+       <TextField fx:id="searchField" layoutX="20.0" layoutY="81.0" promptText="Rechercher quiz" />
+       <Button fx:id="sortButton" layoutX="560.0" layoutY="81.0" onAction="#toggleSortOrder" text="Tri par date" />
+       <ComboBox fx:id="difficultyComboBox" layoutX="181.0" layoutY="81.0" promptText="Difficulté">
+           <items>
+               <FXCollections fx:factory="observableArrayList">
+                   <String fx:value="débutant" />
+                   <String fx:value="intermediaire" />
+                   <String fx:value="avancé" />
+               </FXCollections>
+           </items>
+       </ComboBox>
+       <TableView fx:id="quizTableView" layoutY="118.0" prefHeight="200.0" prefWidth="661.0">
         <columns>
-          <TableColumn fx:id="id" prefWidth="75.0" text="id" />
-          <TableColumn fx:id="creatorId" prefWidth="75.0" text="creatorId" />
             <TableColumn fx:id="title" prefWidth="75.0" text="Titre" />
             <TableColumn fx:id="description" prefWidth="75.0" text="Description" />
             <TableColumn fx:id="date" prefWidth="75.0" text="Date" />
-            <TableColumn fx:id="duree" prefWidth="75.0" text="Durée" />
+            <TableColumn fx:id="duree" prefWidth="75.0" text="Durée (min)" />
             <TableColumn fx:id="nbr_questions" prefWidth="130.40005493164062" text="Nombre de questions" />
             <TableColumn fx:id="difficulte" prefWidth="77.5999755859375" text="Difficulte" />
         </columns>
@@ -33,25 +46,13 @@
             <Font size="28.0" />
          </font>
       </Label>
-      <Button fx:id="btnEdit" layoutX="300.0" layoutY="315.0" mnemonicParsing="false" onAction="#openEdit" style="-fx-background-color: white;" text="Modifier" />
-      <Button fx:id="btnQuiz" layoutX="111.0" layoutY="315.0" mnemonicParsing="false" onAction="#openAjout" style="-fx-background-color: white;" text="Ajouter " />
-      <Button fx:id="btnDelete" layoutX="480.0" layoutY="315.0" mnemonicParsing="false" onAction="#deleteQuiz" style="-fx-background-color: white;" text="Supprimer" />
+      <Button fx:id="btnQuiz" layoutX="111.0" layoutY="356.0" mnemonicParsing="false" onAction="#openAjout" style="-fx-background-color: white;" text="Ajouter " />
        <ImageView fitHeight="51.0" fitWidth="56.0" layoutY="9.0" onMouseClicked="#previous">
            <image>
                <Image url="@images/previous.gif" />
            </image>
        </ImageView>
-      <ImageView fitHeight="34.0" fitWidth="38.0" layoutX="442.0" layoutY="311.0">
-         <image>
-            <Image url="@images/delete.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="34.0" fitWidth="32.0" layoutX="264.0" layoutY="311.0">
-         <image>
-            <Image url="@images/update.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="75.0" layoutY="315.0">
+      <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="79.0" layoutY="356.0">
          <image>
             <Image url="@images/add.png" />
          </image>

@@ -20,7 +20,7 @@
          <font>
             <Font size="17.0" />
          </font></Label>
-        <Label layoutX="41.0" layoutY="165.0" text="Durée" textFill="#000066">
+        <Label layoutX="41.0" layoutY="165.0" text="Durée (min)" textFill="#000066">
          <font>
             <Font size="17.0" />
          </font></Label>

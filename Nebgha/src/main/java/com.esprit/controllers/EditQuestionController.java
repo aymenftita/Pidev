@@ -60,34 +60,42 @@ public class EditQuestionController implements Initializable {
                     .orElse(null);
         }
 
-        if (selectedQuiz != null) {
-            question.setQuiz(selectedQuiz);
-            question.setTexte(texttf.getText());
-            question.setType(rbmultiple.isSelected() ? "multiple" : "unique");
-            question.setPoints(Integer.parseInt(pointstf.getText()));
-            question.setOrdre(Integer.parseInt(ordretf.getText()));
-            question.setCategorie(categorietf.getText());
+        if (selectedQuiz != null && !texttf.getText().isEmpty() && !ordretf.getText().isEmpty()
+                && !pointstf.getText().isEmpty() && !categorietf.getText().isEmpty() && (rbmultiple.isSelected() || rbunique.isSelected())) {
+            try {
+                question.setQuiz(selectedQuiz);
+                question.setTexte(texttf.getText());
+                question.setType(rbmultiple.isSelected() ? "multiple" : "unique");
+                question.setPoints(Integer.parseInt(pointstf.getText()));
+                question.setOrdre(Integer.parseInt(ordretf.getText()));
+                question.setCategorie(categorietf.getText());
 
-            qs.modifier(question);
+                qs.modifier(question);
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Question modifiée");
-            alert.setContentText("Question modifiée!");
-            alert.showAndWait();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Question modifiée");
+                alert.setContentText("Question modifiée!");
+                alert.showAndWait();
 
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            currentStage.close();
+                Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                currentStage.close();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuestions.fxml"));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Questions");
-            stage.show();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuestions.fxml"));
+                Parent root = loader.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.setTitle("Questions");
+                stage.show();
+            } catch (NumberFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setContentText("Veuillez saisir des valeurs numériques valides pour les points et l'ordre.");
+                alert.showAndWait();
+            }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");
-            alert.setContentText("Veuillez sélectionner un quiz");
+            alert.setContentText("Veuillez remplir tous les champs, sélectionner un quiz et choisir un type de réponse.");
             alert.showAndWait();
         }
     }

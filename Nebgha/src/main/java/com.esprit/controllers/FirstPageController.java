@@ -14,12 +14,12 @@ public class FirstPageController {
 
     @FXML
     void TuteurInterface(ActionEvent event) throws IOException {
-        changeScene(event, "/TuteurFirstPage.fxml","Tuteur");
+        changeScene(event, "/TuteurInterface.fxml","Tuteur");
     }
 
     @FXML
     void AdminInterface(ActionEvent event) throws IOException {
-        changeScene(event, "/AdminFirstPage.fxml","Admin");
+        changeScene(event, "/AdminInterface.fxml","Admin");
     }
 
     @FXML

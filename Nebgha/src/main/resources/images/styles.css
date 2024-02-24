@@ -12,6 +12,41 @@
 .button:hover {
     -fx-background-color: #f0f0f0;
 }
+/* styles.css */
+.quiz-block {
+    -fx-border-color: #000066;
+    -fx-border-radius: 5;
+    -fx-padding: 10;
+    -fx-alignment: center; /* Align center */
+}
+/* styles.css */
+
+.question-box {
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #000066;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-alignment: center;
+    -fx-padding: 10;
+}
+
+.question-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 5px;
+}
+
+.response-radio-button {
+    -fx-padding: 5px;
+}
+
+
+
+
+
+
+
+
 
 
 

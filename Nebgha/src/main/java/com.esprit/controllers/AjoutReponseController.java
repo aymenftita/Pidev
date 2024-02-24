@@ -37,37 +37,56 @@ public class AjoutReponseController implements Initializable {
     @FXML
     private TextField texttf;
 
-    private ReponsesService reponseService = new ReponsesService();
 
     @FXML
     private Questions selectedQuestion;
 
+
     @FXML
     void addReponse(ActionEvent event) throws IOException {
-        ReponsesService qs = new ReponsesService();
+        ReponsesService reponseService = new ReponsesService();
         String selectedQuestionName = questionList.getValue();
 
-        if (selectedQuestion != null) {
-            Reponses reponse = new Reponses(selectedQuestion, texttf.getText(),
-                    est_correcte.isSelected(), Integer.parseInt(ordretf.getText()),
-                    explicationtf.getText()
-            );
+        if (selectedQuestionName != null) {
+            if (texttf.getText().isEmpty() || ordretf.getText().isEmpty() || explicationtf.getText().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setContentText("Veuillez remplir tous les champs.");
+                alert.showAndWait();
+                return;
+            }
 
-            reponseService.ajouter(reponse);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Réponse ajoutée");
-            alert.setContentText("Réponse ajoutée!");
-            alert.showAndWait();
+            try {
+                int ordre = Integer.parseInt(ordretf.getText());
+                if (ordre <= 0) {
+                    throw new NumberFormatException();
+                }
 
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            currentStage.close();
+                Reponses reponse = new Reponses(selectedQuestion, texttf.getText(),
+                        est_correcte.isSelected(), ordre, explicationtf.getText()
+                );
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowReponses.fxml"));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Réponses");
-            stage.show();
+                reponseService.ajouter(reponse);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Réponse ajoutée");
+                alert.setContentText("Réponse ajoutée!");
+                alert.showAndWait();
+
+                Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                currentStage.close();
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowReponses.fxml"));
+                Parent root = loader.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.setTitle("Réponses");
+                stage.show();
+            } catch (NumberFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setContentText("Veuillez saisir une valeur numérique valide pour l'ordre.");
+                alert.showAndWait();
+            }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");

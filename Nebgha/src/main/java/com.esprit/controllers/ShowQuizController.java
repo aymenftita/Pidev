@@ -12,21 +12,22 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class ShowQuizController implements Initializable {
 
-        @FXML
-        private TableColumn<Quiz, Integer> creatorId;
+
+
 
         @FXML
         private TableColumn<Quiz, Date> date;
@@ -41,7 +42,7 @@ public class ShowQuizController implements Initializable {
         private TableColumn<Quiz, Integer> duree;
 
         @FXML
-        private TableColumn<Quiz, Integer> id;
+        private TextField searchField;
 
         @FXML
         private TableColumn<Quiz, Integer> nbr_questions;
@@ -53,18 +54,21 @@ public class ShowQuizController implements Initializable {
         private TableColumn<Quiz, String> title;
 
         private int selectedQuizId;
+        @FXML
+        private Button sortButton;
+        private boolean ascendingOrder = true;
+        @FXML
+        private ComboBox<String> difficultyComboBox;
+        private String role = "administrateur";
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         QuizService quizService = new QuizService();
         List<Quiz> quizzes = quizService.afficher();
-        System.out.println(quizzes);
 
         ObservableList<Quiz> quizObservableList = FXCollections.observableArrayList(quizzes);
 
-        id.setCellValueFactory(new PropertyValueFactory<>("QuizId"));
-        creatorId.setCellValueFactory(new PropertyValueFactory<>("creatorId"));
         title.setCellValueFactory(new PropertyValueFactory<>("nom"));
         description.setCellValueFactory(new PropertyValueFactory<>("description"));
         date.setCellValueFactory(new PropertyValueFactory<>("dateCreation"));
@@ -74,6 +78,27 @@ public class ShowQuizController implements Initializable {
 
         quizTableView.setItems(quizObservableList);
 
+        quizTableView.setRowFactory(tv -> {
+            javafx.scene.control.TableRow<Quiz> row = new javafx.scene.control.TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && !row.isEmpty()) {
+                    Quiz rowData = row.getItem();
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/EditQuiz.fxml"));
+                        Parent root = loader.load();
+                        EditQuizController editQuizController = loader.getController();
+                        editQuizController.initData(rowData);
+                        Stage currentStage = (Stage) quizTableView.getScene().getWindow();
+                        currentStage.setTitle("Modifier Quiz");
+                        currentStage.setScene(new Scene(root));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            return row;
+        });
+
         quizTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 selectedQuizId = newSelection.getQuizId();
@@ -81,50 +106,108 @@ public class ShowQuizController implements Initializable {
                 selectedQuizId = -1;
             }
         });
+
+        TableColumn<Quiz, Void> deleteQuizColumn = new TableColumn<>("Delete");
+        deleteQuizColumn.setPrefWidth(75);
+        deleteQuizColumn.setCellFactory(param -> new TableCell<Quiz, Void>() {
+            private final Button deleteButton = new Button("Delete");
+
+            {
+                deleteButton.setOnAction(event -> {
+                    Quiz quiz = getTableView().getItems().get(getIndex());
+                    quizService.supprimer(quiz);
+                    getTableView().getItems().remove(quiz);
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(deleteButton);
+                }
+            }
+        });
+        sortButton.setText("Sort by Date \u2191");
+        sortButton.setOnAction(this::toggleSortOrder);
+
+
+        quizTableView.getColumns().add(deleteQuizColumn);
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterQuizs(newValue, difficultyComboBox.getValue(), quizzes);
+        });
+        difficultyComboBox.setOnAction(event -> {
+            filterQuizs(searchField.getText(), difficultyComboBox.getValue(), quizzes);
+        });
+
+        filterQuizs("", "", quizzes);
     }
+
+    private void filterQuizs(String searchText, String selectedDifficulty, List<Quiz> quizzes) {
+        ObservableList<Quiz> filteredQuizzes;
+
+        if ((searchText == null || searchText.isEmpty()) && (selectedDifficulty == null || selectedDifficulty.isEmpty())) {
+            filteredQuizzes = FXCollections.observableArrayList(quizzes);
+        } else {
+            filteredQuizzes = FXCollections.observableArrayList(
+                    quizzes.stream()
+                            .filter(quiz -> {
+                                boolean searchTextMatch = searchText == null || searchText.isEmpty() || quiz.getNom().toLowerCase().contains(searchText.toLowerCase());
+                                boolean difficultyMatch = selectedDifficulty == null || selectedDifficulty.isEmpty() || quiz.getDifficulte().toString().equalsIgnoreCase(selectedDifficulty);
+                                return searchTextMatch && difficultyMatch;
+                            })
+                            .collect(Collectors.toList())
+            );
+        }
+
+        quizTableView.setItems(filteredQuizzes);
+    }
+
+
+    public void toggleSortOrder(ActionEvent event) {
+        ascendingOrder = !ascendingOrder;
+        if (ascendingOrder) {
+            sortButton.setText("Sort by Date \u2191");
+        } else {
+            sortButton.setText("Sort by Date \u2193");
+        }
+        sortQuizzesByDate();
+    }
+
+    private void sortQuizzesByDate() {
+        Comparator<Quiz> comparator = Comparator.comparing(Quiz::getDateCreation);
+        if (!ascendingOrder) {
+            comparator = comparator.reversed();
+        }
+        ObservableList<Quiz> sortedQuizzes = quizTableView.getItems()
+                .stream()
+                .sorted(comparator)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), FXCollections::observableArrayList));
+        quizTableView.setItems(sortedQuizzes);
+    }
+
 
     @FXML
     void openAjout(ActionEvent event) throws IOException {
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjoutQuiz.fxml"));
         Parent root = loader.load();
-        Stage currentStage = (Stage) quizTableView.getScene().getWindow();
-        currentStage.setTitle("Ajouter Quiz");
+        AjoutQuizController ajoutQuizController = loader.getController();
+        ajoutQuizController.setRole(role);
+        ajoutQuizController.setUserId(2);
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(new Scene(root));
+        currentStage.setTitle("Ajouter Quiz");
+        currentStage.show();
 
-    }
 
-    @FXML
-    void openEdit(ActionEvent event) throws IOException {
-        if (selectedQuizId != -1) {
-            QuizService quizService = new QuizService();
-            Quiz selectedQuiz = quizService.getQuiz(selectedQuizId);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/EditQuiz.fxml"));
-            Parent root = loader.load();
-            EditQuizController editQuizController = loader.getController();
-            editQuizController.initData(selectedQuiz);
-            Stage currentStage = (Stage) quizTableView.getScene().getWindow();
-            currentStage.setTitle("Modifier Quiz");
-            currentStage.setScene(new Scene(root));
-        }
+
     }
 
 
 
-    @FXML
-    void deleteQuiz(ActionEvent event) {
-        if (selectedQuizId != -1) {
-            QuizService quizService = new QuizService();
-            Quiz selectedQuiz = quizService.getQuiz(selectedQuizId);
-            quizService.supprimer(selectedQuiz);
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuiz.fxml"));
-                Parent root = loader.load();
-                Stage currentStage = (Stage) quizTableView.getScene().getWindow();
-                currentStage.setScene(new Scene(root));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }        }
-    }
     @FXML
     void previous(MouseEvent event) throws IOException {
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();

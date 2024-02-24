@@ -13,8 +13,8 @@
             fx:controller="com.esprit.controllers.QuizsHistoryController"
             prefHeight="400.0" prefWidth="600.0">
 
-    <TextField fx:id="searchField" promptText="Search Quizzes" layoutX="10.0" layoutY="10.0"/>
-    <ComboBox fx:id="difficultyComboBox" promptText="Select Difficulty" layoutX="200.0" layoutY="10.0">
+    <TextField fx:id="searchField" promptText="Rechercher quiz" layoutX="10.0" layoutY="10.0"/>
+    <ComboBox fx:id="difficultyComboBox" promptText="Difficulté" layoutX="200.0" layoutY="10.0">
         <items>
             <FXCollections fx:factory="observableArrayList">
                 <String fx:value="débutant" />

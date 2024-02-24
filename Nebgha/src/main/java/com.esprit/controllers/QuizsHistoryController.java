@@ -4,6 +4,7 @@ import com.esprit.models.*;
 import com.esprit.services.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -61,29 +62,34 @@ public class QuizsHistoryController {
     private void updateQuizList(List<Quiz> quizzes) {
         quizPane.getChildren().clear();
         for (Quiz quiz : quizzes) {
-            VBox quizBlock = createQuizBlock(quiz);
-            quizPane.getChildren().add(quizBlock);
+            boolean hasAttempted = reponsesUtilisateurService.afficherParQuizEtUser(quiz.getQuizId(), userId)
+                    .stream()
+                    .anyMatch(response -> response.getQuiz().getQuizId() == quiz.getQuizId() && response.getUserId() == userId);
+
+            if (hasAttempted) {
+                VBox quizBlock = createQuizBlock(quiz);
+                quizPane.getChildren().add(quizBlock);
+            }
         }
     }
 
+
     private VBox createQuizBlock(Quiz quiz) {
-        boolean hasAttempted = reponsesUtilisateurService.afficherParQuiz(quiz.getQuizId(), userId)
+        boolean hasAttempted = reponsesUtilisateurService.afficherParQuizEtUser(quiz.getQuizId(), userId)
                 .stream()
                 .anyMatch(response -> response.getQuiz().getQuizId() == quiz.getQuizId() && response.getUserId() == userId);
 
         VBox quizBlock = new VBox();
         quizBlock.setSpacing(10);
+        quizBlock.setStyle("-fx-border-color: #000066; -fx-border-radius: 5;-fx-padding: 10;");
+        quizBlock.setAlignment(Pos.CENTER);
 
         Label nameLabel = new Label(quiz.getNom());
         Label difficultyLabel = new Label(quiz.getDifficulte().toString());
         Label durationLabel = new Label(String.valueOf(quiz.getDuree()));
+
         if (hasAttempted) {
-
-        Button resultButton = new Button();
-
-            Label passedLabel = new Label("Quiz passed");
-            quizBlock.getChildren().add(passedLabel);
-            resultButton.setText("Show results");
+            Button resultButton = new Button("Show results");
             resultButton.setOnAction(event -> {
                 try {
                     showQuizResult(quiz.getQuizId(), userId);
@@ -94,12 +100,11 @@ public class QuizsHistoryController {
             quizBlock.getChildren().addAll(nameLabel, difficultyLabel, durationLabel, resultButton);
         }
         return quizBlock;
-
     }
 
     private void showQuizResult(int quizId, int userId) throws IOException {
         Quiz quiz = quizService.getQuiz(quizId);
-        int totalTimeTaken = reponsesUtilisateurService.afficherParQuiz(quizId, userId)
+        int totalTimeTaken = reponsesUtilisateurService.afficherParQuizEtUser(quizId, userId)
                 .stream()
                 .mapToInt(ReponsesUtilisateur::getTempsPris)
                 .sum();

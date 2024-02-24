@@ -26,7 +26,7 @@ public class ReponsesUtilisateurService implements IService<ReponsesUtilisateur>
         String req = "INSERT INTO reponses_utilisateurs (userId, reponseId, quizId, date, temps_pris, est_correcte) VALUES (" +
                 reponsesUtilisateur.getUserId() + ", " + reponsesUtilisateur.getReponse().getReponseId() + ", " +
                 reponsesUtilisateur.getQuiz().getQuizId() + ", '" +
-                reponsesUtilisateur.getDate() + "', " +
+                new java.sql.Date(System.currentTimeMillis()) + "', " +
                 reponsesUtilisateur.getTempsPris() + ", " +
                 reponsesUtilisateur.isCorrect() + ")";
         try {
@@ -94,9 +94,34 @@ public class ReponsesUtilisateurService implements IService<ReponsesUtilisateur>
         return repUserList;
     }
 
-    public List<ReponsesUtilisateur> afficherParQuiz(int quizId , int userId) {
+    public List<ReponsesUtilisateur> afficherParQuizEtUser(int quizId , int userId) {
         List<ReponsesUtilisateur> repUserList = new ArrayList<>();
         String req = "SELECT * FROM reponses_utilisateurs WHERE quizId = " + quizId + " AND userId = " + userId;
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(req);
+            while (rs.next()) {
+                Reponses reponse = reponsesService.getReponse(rs.getInt("reponseId"));
+                Quiz quiz = quizService.getQuiz(rs.getInt("quizId"));
+                repUserList.add(new ReponsesUtilisateur(rs.getInt("UserResponseId"),
+                        rs.getInt("userId"),
+                        reponse,
+                        quiz,
+                        rs.getDate("date"),
+                        rs.getInt("temps_pris"),
+                        rs.getBoolean("est_correcte")
+                ));
+
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return repUserList;
+    }
+    public List<ReponsesUtilisateur> afficherParQuiz(int quizId) {
+        List<ReponsesUtilisateur> repUserList = new ArrayList<>();
+        String req = "SELECT * FROM reponses_utilisateurs WHERE quizId = " + quizId ;
 
         try {
             Statement statement = connection.createStatement();

@@ -81,6 +81,28 @@ public class QuizService implements IService<Quiz> {
         return quizzes;
     }
 
+    public List<Quiz> afficherParUser(int userId) {
+        List<Quiz> quizzes = new ArrayList<>();
+        String req = "SELECT * FROM quiz WHERE creatorId = " + userId;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(req);
+            while (rs.next()) {
+                quizzes.add(new Quiz(rs.getInt("quizId"),
+                        rs.getInt("creatorId"),
+                        rs.getString("nom"),
+                        rs.getString("description"),
+                        rs.getDate("date_creation"),
+                        rs.getInt("duree"),
+                        rs.getInt("nbr_questions"),
+                        Difficulte.valueOf(rs.getString("difficulte"))));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return quizzes;
+    }
+
     public Quiz getQuiz(int quizId) {
         Quiz quiz = null;
         String req = "SELECT * FROM quiz WHERE quizId = " + quizId;

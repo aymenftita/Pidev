@@ -9,8 +9,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
 public class AdminInterfaceController {
+
 
     @FXML
     void ShowQuestions(ActionEvent event) throws IOException {
@@ -20,7 +20,10 @@ public class AdminInterfaceController {
     @FXML
     void ShowQuizs(ActionEvent event) throws IOException {
         changeScene(event, "/ShowQuiz.fxml","Quizs");
+
     }
+
+
 
     @FXML
     void ShowRecompenses(ActionEvent event) throws IOException {

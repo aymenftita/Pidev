@@ -67,21 +67,32 @@ public class EditReponseController implements Initializable {
         QuestionsService questionsService = new QuestionsService();
         List<Questions> questions = questionsService.afficher();
 
-        if (selectedQuestionName != null) {
-            selectedQuestion = questions.stream()
-                    .filter(question -> question.getTexte().equals(selectedQuestionName))
-                    .findFirst()
-                    .orElse(null);
-        }
 
-        if (selectedQuestion != null) {
-            reponse.setQuestion(selectedQuestion);
-            reponse.setTexte(texttf.getText());
-            reponse.setExplication(explicationtf.getText());
-            reponse.setOrdre(Integer.parseInt(ordretf.getText()));
-            reponse.setEstCorrecte(est_correcte.isSelected());
-            qs.modifier(reponse);
+            if (selectedQuestionName != null) {
+                selectedQuestion = questions.stream()
+                        .filter(question -> question.getTexte().equals(selectedQuestionName))
+                        .findFirst()
+                        .orElse(null);
+            }
 
+            if (selectedQuestion != null) {
+                reponse.setQuestion(selectedQuestion);
+                reponse.setTexte(texttf.getText());
+                reponse.setExplication(explicationtf.getText());
+
+                if (ordretf.getText() != null && ordretf.getText().matches("\\d+")) {
+                    int ordre = Integer.parseInt(ordretf.getText());
+                    reponse.setOrdre(ordre);
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Erreur");
+                    alert.setContentText("Veuillez saisir un nombre entier valide pour l'ordre.");
+                    alert.showAndWait();
+                    return;
+                }
+
+                reponse.setEstCorrecte(est_correcte.isSelected());
+                qs.modifier(reponse);
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Réponse modifiée");
@@ -95,19 +106,18 @@ public class EditReponseController implements Initializable {
                 Parent root = loader.load();
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
-            stage.setTitle("Réponses");
-            stage.show();
-
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setContentText("Veuillez sélectionner une question.");
-            alert.showAndWait();
+                stage.setTitle("Réponses");
+                stage.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setContentText("Veuillez sélectionner une question.");
+                alert.showAndWait();
+            }
         }
-    }
 
 
-    @Override
+        @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         QuestionsService questionService = new QuestionsService();
         List<Questions> questions = questionService.afficher();

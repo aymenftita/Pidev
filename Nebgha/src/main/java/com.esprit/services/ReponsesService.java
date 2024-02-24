@@ -21,8 +21,8 @@ public class ReponsesService implements IService<Reponses>{
     @Override
     public void ajouter(Reponses reponses) {
         String req = "INSERT INTO reponses_quiz (questionId, texte, est_correcte, ordre, explication) VALUES (" +
-                reponses.getQuestion().getQuestionId() + ", '" + reponses.getTexte() + "', " + reponses.isEstCorrecte() + ", " +
-                reponses.getOrdre() + ", '" + reponses.getExplication() + "')";
+                reponses.getQuestion().getQuestionId() + ", '" + reponses.getTexte() + "', " + reponses.isEstCorrecte() +
+                ", " + reponses.getOrdre() + ", '" + reponses.getExplication() + "')";
         try {
             Statement statement = connection.createStatement();
             statement.executeUpdate(req);
@@ -31,6 +31,9 @@ public class ReponsesService implements IService<Reponses>{
             System.out.println(e.getMessage());
         }
     }
+
+
+
 
     @Override
     public void modifier(Reponses reponses) {

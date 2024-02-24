@@ -86,29 +86,6 @@ public class QuestionsService implements IService<Questions> {
 
     }
 
-    public List<Questions> afficherQuestionsQuiz(int quizId) {
-        List<Questions> questionsList = new ArrayList<>();
-        String req = "SELECT * FROM questions_quiz WHERE quizId = " + quizId;
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(req);
-            while (rs.next()) {
-                Quiz quiz = quizService.getQuiz(rs.getInt("quizId"));
-                questionsList.add(new Questions(rs.getInt("questionId"),
-                        quiz,
-                        rs.getString("texte"),
-                        rs.getString("type"),
-                        rs.getInt("points"),
-                        rs.getInt("ordre"),
-                        rs.getString("categorie")));
-
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return questionsList;
-
-    }
     public Questions getQuestion(int questionId) {
         Questions question = null;
         String req = "SELECT * FROM questions_quiz WHERE questionId = " + questionId;

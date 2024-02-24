@@ -42,6 +42,7 @@
             <Font size="17.0" />
          </font></Label>
         <TextField fx:id="texttf" layoutX="146.0" layoutY="130.0" prefHeight="26.0" prefWidth="366.0" />
+        <ComboBox fx:id="quizList" promptText="Select a quiz"/>
         <ComboBox fx:id="questionList" layoutX="146.0" layoutY="94.0" prefWidth="150.0" />
         <TextField fx:id="ordretf" layoutX="148.0" layoutY="198.0" prefHeight="26.0" prefWidth="74.0" />
         <TextField fx:id="explicationtf" layoutX="150.0" layoutY="233.0" prefHeight="26.0" prefWidth="366.0" />

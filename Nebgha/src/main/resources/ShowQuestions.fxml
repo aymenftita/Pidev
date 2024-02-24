@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,15 +13,14 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.ShowQuestionsController">
     <children>
-      <ImageView fitHeight="400.0" fitWidth="600.0">
-         <image>
-            <Image url="@images/Rb.png" />
-         </image>
-      </ImageView>
+        <ImageView fitHeight="400.0" fitWidth="600.0">
+            <image>
+                <Image url="@images/Rb.png" />
+            </image>
+        </ImageView>
+        <TextField fx:id="searchField" layoutX="429.0" layoutY="89.0" promptText="Rechercher question" />
         <TableView fx:id="questionTableView" layoutX="8.0" layoutY="124.0" prefHeight="200.0" prefWidth="584.0">
             <columns>
-                <TableColumn fx:id="questionId" prefWidth="75.0" text="questionId" />
-                <TableColumn fx:id="quizName" prefWidth="75.0" text="QuizName" />
                 <TableColumn fx:id="texte" prefWidth="75.0" text="Texte" />
                 <TableColumn fx:id="type" prefWidth="75.0" text="Type" />
                 <TableColumn fx:id="points" prefWidth="75.0" text="Points" />
@@ -29,37 +29,26 @@
             </columns>
         </TableView>
         <Label layoutX="181.0" layoutY="14.0" text="Liste des Questions" textFill="#000066">
-         <font>
-            <Font size="28.0" />
-         </font></Label>
-        <Button fx:id="btnEdit" layoutX="269.0" layoutY="348.0" mnemonicParsing="false" onAction="#openEdit" style="-fx-background-color: white;" text="Modifier" />
+            <font>
+                <Font size="28.0" />
+            </font>
+        </Label>
         <Button fx:id="btnQuiz" layoutX="113.0" layoutY="348.0" mnemonicParsing="false" onAction="#openAjout" style="-fx-background-color: white;" text="Ajouter " />
-        <Button fx:id="btnDelete" layoutX="419.0" layoutY="348.0" mnemonicParsing="false" onAction="#deleteQuestion" style="-fx-background-color: white;" text="Supprimer" />
-      <Label layoutX="28.0" layoutY="91.0" text="Select quiz" textFill="#000066">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <ComboBox fx:id="quizList" layoutX="131.0" layoutY="89.0" prefWidth="150.0" style="-fx-background-color: white;" />
+        <Label layoutX="28.0" layoutY="91.0" text="Select quiz" textFill="#000066">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Label>
+        <ComboBox fx:id="quizList" layoutX="131.0" layoutY="89.0" prefWidth="150.0" style="-fx-background-color: white;" />
         <ImageView fitHeight="51.0" fitWidth="56.0" layoutY="9.0" onMouseClicked="#previous">
             <image>
                 <Image url="@images/previous.gif" />
             </image>
         </ImageView>
-      <ImageView fitHeight="40.0" fitWidth="39.0" layoutX="64.0" layoutY="341.0">
-         <image>
-            <Image url="@images/add.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="40.0" fitWidth="39.0" layoutX="380.0" layoutY="341.0">
-         <image>
-            <Image url="@images/delete.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="40.0" fitWidth="39.0" layoutX="223.0" layoutY="341.0">
-         <image>
-            <Image url="@images/update.png" />
-         </image>
-      </ImageView>
+        <ImageView fitHeight="40.0" fitWidth="39.0" layoutX="64.0" layoutY="341.0">
+            <image>
+                <Image url="@images/add.png" />
+            </image>
+        </ImageView>
     </children>
 </AnchorPane>

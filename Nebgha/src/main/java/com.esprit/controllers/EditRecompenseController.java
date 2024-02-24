@@ -37,25 +37,50 @@ public class EditRecompenseController {
     @FXML
     void editRecompense(ActionEvent event) throws IOException {
         RecompensesService rs = new RecompensesService();
-        int score = Integer.parseInt(scoretf.getText());
-        recompenseToEdit.setNom(titretf.getText());
-        recompenseToEdit.setDescription(desctf.getText());
-        recompenseToEdit.setScoreRequis(score);
-        rs.modifier(recompenseToEdit);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Récompense modifié");
-        alert.setContentText("Récompense modifié!");
-        alert.showAndWait();
+        String title = titretf.getText();
+        String description = desctf.getText();
+        String scoreText = scoretf.getText();
 
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
+        if (!title.isEmpty() && !description.isEmpty() && !scoreText.isEmpty()) {
+            try {
+                int score = Integer.parseInt(scoreText);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowRecompenses.fxml"));
-        Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Récompenses");
-        stage.show();
+                if (score <= 0) {
+                    throw new NumberFormatException();
+                }
+
+                recompenseToEdit.setNom(title);
+                recompenseToEdit.setDescription(description);
+                recompenseToEdit.setScoreRequis(score);
+
+                rs.modifier(recompenseToEdit);
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Récompense modifié");
+                alert.setContentText("Récompense modifié!");
+                alert.showAndWait();
+
+                Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                currentStage.close();
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowRecompenses.fxml"));
+                Parent root = loader.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.setTitle("Récompenses");
+                stage.show();
+            } catch (NumberFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setContentText("Veuillez saisir une valeur numérique valide pour le score requis.");
+                alert.showAndWait();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setContentText("Veuillez remplir tous les champs.");
+            alert.showAndWait();
+        }
     }
 
     @FXML

@@ -37,6 +37,17 @@ public class AjoutQuizController implements Initializable {
     @FXML
     private TextField titletf;
 
+    private String role;
+
+    private int userId;
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         difficulteComboBox.setItems(FXCollections.observableArrayList(Difficulte.values()));
@@ -45,37 +56,83 @@ public class AjoutQuizController implements Initializable {
     @FXML
     void addQuiz(ActionEvent event) throws IOException {
         QuizService qs = new QuizService();
+        String title = titletf.getText();
+        String description = desctf.getText();
         Difficulte difficulte = difficulteComboBox.getValue();
-        int duration = Integer.parseInt(dureetf.getText());
-        int numberOfQuestions = Integer.parseInt(nbr_questionstf.getText());
-        qs.ajouter(new Quiz(1, titletf.getText(), desctf.getText(),  duration, numberOfQuestions, difficulte));
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Quiz ajouté");
-        alert.setContentText("Quiz ajouté!");
-        alert.showAndWait();
+        String durationText = dureetf.getText();
+        String numberOfQuestionsText = nbr_questionstf.getText();
 
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
+        if (title.isEmpty() || description.isEmpty() || difficulte == null || durationText.isEmpty() || numberOfQuestionsText.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setContentText("Veuillez remplir tous les champs.");
+            alert.showAndWait();
+            return;
+        }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuiz.fxml"));
-        Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Quizs");
-        stage.show();
+        try {
+            int duration = Integer.parseInt(durationText);
+            int numberOfQuestions = Integer.parseInt(numberOfQuestionsText);
 
+            if (duration <= 0 || numberOfQuestions <= 0) {
+                throw new NumberFormatException();
+            }
+
+            qs.ajouter(new Quiz(userId, title, description, duration, numberOfQuestions, difficulte));
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Quiz ajouté");
+            alert.setContentText("Quiz ajouté!");
+            alert.showAndWait();
+
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.close();
+if (role.equals("administrateur")) {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuiz.fxml"));
+    Parent root = loader.load();
+    Stage stage = new Stage();
+    stage.setScene(new Scene(root));
+    stage.setTitle("Quizs");
+    stage.show();
+} else if (role.equals("tuteur")) {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuizTuteur.fxml"));
+    Parent root = loader.load();
+    Stage stage = new Stage();
+    stage.setScene(new Scene(root));
+    stage.setTitle("Quizs");
+    stage.show();
+}
+        } catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setContentText("Veuillez saisir des valeurs numériques valides pour la durée et le nombre de questions.");
+            alert.showAndWait();
+        }
     }
+
 
     @FXML
     void previous(MouseEvent event) throws IOException {
+
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.close();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuiz.fxml"));
-        Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Quizs");
-        stage.show();
+        if (role.equals("administrateur")) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuiz.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Quizs");
+            stage.show();
+        }
+        else if (role.equals("tuteur")){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuizTuteur.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Quizs");
+            stage.show();
+        }
+
     }
 
 }

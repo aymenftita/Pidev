@@ -57,28 +57,54 @@ public class EditQuizController implements Initializable {
     void EditQuiz(ActionEvent event) throws IOException {
         QuizService qs = new QuizService();
         Difficulte difficulte = difficulteComboBox.getValue();
-        int duration = Integer.parseInt(dureetf.getText());
-        int numberOfQuestions = Integer.parseInt(nbr_questionstf.getText());
-        quizToEdit.setNom(titletf.getText());
-        quizToEdit.setDescription(desctf.getText());
-        quizToEdit.setDifficulte(difficulte);
-        quizToEdit.setDuree(duration);
-        quizToEdit.setNombreQuestions(numberOfQuestions);
-        qs.modifier(quizToEdit);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Quiz modifié");
-        alert.setContentText("Quiz modifié!");
-        alert.showAndWait();
+        String title = titletf.getText();
+        String description = desctf.getText();
+        String durationText = dureetf.getText();
+        String numberOfQuestionsText = nbr_questionstf.getText();
 
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
+        if (!title.isEmpty() && !description.isEmpty() && difficulte != null && !durationText.isEmpty() && !numberOfQuestionsText.isEmpty()) {
+            try {
+                int duration = Integer.parseInt(durationText);
+                int numberOfQuestions = Integer.parseInt(numberOfQuestionsText);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuiz.fxml"));
-        Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Quizs");
-        stage.show();
+                if (duration <= 0 || numberOfQuestions <= 0) {
+                    throw new NumberFormatException();
+                }
+
+                quizToEdit.setNom(title);
+                quizToEdit.setDescription(description);
+                quizToEdit.setDifficulte(difficulte);
+                quizToEdit.setDuree(duration);
+                quizToEdit.setNombreQuestions(numberOfQuestions);
+
+                qs.modifier(quizToEdit);
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Quiz modifié");
+                alert.setContentText("Quiz modifié!");
+                alert.showAndWait();
+
+                Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                currentStage.close();
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuiz.fxml"));
+                Parent root = loader.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.setTitle("Quizs");
+                stage.show();
+            } catch (NumberFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setContentText("Veuillez saisir des valeurs numériques valides pour la durée et le nombre de questions.");
+                alert.showAndWait();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setContentText("Veuillez remplir tous les champs.");
+            alert.showAndWait();
+        }
     }
 
     @FXML

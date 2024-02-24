@@ -1,5 +1,4 @@
 package com.esprit.services;
-import com.esprit.models.Quiz;
 import com.esprit.models.Recompenses;
 import com.esprit.models.RecompensesUtilisateur;
 import com.esprit.utils.DataSource;
@@ -11,6 +10,7 @@ public class RecompensesUtilisateurService implements IService<RecompensesUtilis
     private Connection connection;
     private RecompensesService recompensesService;
 
+
     public RecompensesUtilisateurService() {
         connection = DataSource.getInstance().getConnection();
         recompensesService = new RecompensesService();
@@ -20,9 +20,8 @@ public class RecompensesUtilisateurService implements IService<RecompensesUtilis
         String req = "INSERT INTO recompenses_utilisateur (userId, rewardId, date, statut, date_utilisation) VALUES (" +
                 recompensesUtilisateur.getUserId() + ", " +
                 recompensesUtilisateur.getReward().getRewardId()+ ", '" +
-                recompensesUtilisateur.getDate() + "', '" +
-                (recompensesUtilisateur.isStatut() ? 1 : 0)  + "', '" +
-                new java.sql.Date(recompensesUtilisateur.getDateUtilisation().getTime()) + "')";
+                new java.sql.Date(System.currentTimeMillis()) + "', '" +
+                (recompensesUtilisateur.isStatut() ? 1 : 0)  + "', NULL)";
         try {
             Statement statement = connection.createStatement();
             statement.executeUpdate(req);
