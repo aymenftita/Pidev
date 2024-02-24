@@ -1,6 +1,5 @@
 package com.esprit.services;
 import com.esprit.models.Quiz;
-import com.esprit.models.Recompenses;
 import com.esprit.models.Reponses;
 import com.esprit.models.ReponsesUtilisateur;
 import com.esprit.utils.DataSource;

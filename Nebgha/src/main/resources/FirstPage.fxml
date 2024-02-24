@@ -46,17 +46,17 @@
       </Button>
       <ImageView fitHeight="154.0" fitWidth="162.0" layoutX="394.0" layoutY="140.0">
          <image>
-            <Image url="@images/student%20icon.png" />
+            <Image url="@images/student_icon.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="106.0" fitWidth="149.0" layoutX="230.0" layoutY="164.0">
          <image>
-            <Image url="@images/teacher%20icon.png" />
+            <Image url="@images/teacher_icon.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="95.0" fitWidth="86.0" layoutX="81.0" layoutY="168.0">
          <image>
-            <Image url="@images/admin%20icon.png" />
+            <Image url="@images/admin_icon.png" />
          </image>
       </ImageView>
    </children>
