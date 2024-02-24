@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<?import javafx.scene.layout.VBox?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.QuizResultsController">
+    <children>
+        <Label fx:id="titleLabel" layoutX="49.0" layoutY="66.0" text="Quiz Results" textFill="#242424">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </Label>
+        <Label fx:id="scoreLabel" layoutX="49.0" layoutY="158.0" />
+        <Label fx:id="timeMessageLabel" layoutX="49.0" layoutY="194.0" />
+        <VBox fx:id="questionsContainer" layoutX="49.0" layoutY="230.0" spacing="10.0" />
+    </children>
+</AnchorPane>

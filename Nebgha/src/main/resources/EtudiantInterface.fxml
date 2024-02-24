@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="333.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.EtudiantInterfaceController">
+   <children>
+      <ImageView fitHeight="339.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Rb.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="scoreLabel" layoutX="14.0" layoutY="18.0" prefHeight="22.0" prefWidth="188.0" textFill="#000066">
+      <font>
+         <Font name="System Bold" size="15.0" />
+      </font>
+      </Label>
+      <Button layoutX="263.0" layoutY="66.0" mnemonicParsing="false" onAction="#ShowQuizs" prefHeight="58.0" prefWidth="294.0" stylesheets="@images/styles.css" text="Quizs">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button layoutX="265.0" layoutY="140.0" mnemonicParsing="false" onAction="#ShowHistorique" prefHeight="57.0" prefWidth="294.0" stylesheets="@images/styles.css" text="Historique">
+         <effect>
+            <DropShadow />
+         </effect>
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+
+      <Button layoutX="263.0" layoutY="213.0" mnemonicParsing="false" onAction="#ShowRecompenses" prefHeight="57.0" prefWidth="294.0" stylesheets="@images/styles.css" text="Récompenses">
+         <effect>
+            <DropShadow />
+         </effect>
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="57.0" fitWidth="51.0" layoutX="279.0" layoutY="216.0">
+         <image>
+            <Image url="@images/award.gif" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="57.0" fitWidth="65.0" layoutX="275.0" layoutY="140.0">
+         <image>
+            <Image url="@images/puzzle.gif" />
+         </image>
+      </ImageView>
+
+      <ImageView fitHeight="58.0" fitWidth="65.0" layoutX="273.0" layoutY="65.0">
+         <image>
+            <Image url="@images/quiz.gif" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="32.0" layoutY="69.0">
+         <image>
+            <Image url="@images/Black_Simple_Online_Education_Logo__1_-removebg-preview.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
