@@ -37,6 +37,9 @@ public class ModifierGroupeController {
     }
 
     public void initialize(){
+        AfficherGroupeController ag =new AfficherGroupeController();
+        tfTitre.setText(ag.selectedGroupe().getTitre());
+
         tfCreateur.setItems(utilisateur);
     }
 

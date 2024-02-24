@@ -58,8 +58,8 @@ public class AfficherGroupeController {
 
     public void supprimerSelection(ActionEvent actionEvent) throws Exception {
         try {
-            Groupe selectedReclamation = tableView.getSelectionModel().getSelectedItem();
-            int id = selectedReclamation.getId_groupe();
+            Groupe selectedGroupe = tableView.getSelectionModel().getSelectedItem();
+            int id = selectedGroupe.getId_groupe();
 
             GroupeService gs =new GroupeService();
 
@@ -77,6 +77,10 @@ public class AfficherGroupeController {
             alert.show();
         }
 
+    }
+
+    public Groupe selectedGroupe(){
+      return  tableView.getSelectionModel().getSelectedItem();
     }
 
 

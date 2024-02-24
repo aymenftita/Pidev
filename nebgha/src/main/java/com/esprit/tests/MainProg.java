@@ -1,5 +1,7 @@
 package com.esprit.tests;
 
+import com.esprit.models.Reclamation;
+import com.esprit.models.Utilisateur;
 import com.esprit.services.GroupeService;
 import com.esprit.services.ReclamationService;
 import com.esprit.services.UtilisateurService;
@@ -12,7 +14,8 @@ public class MainProg {
         //ReclamationService rs = new ReclamationService();
         //UtilisateurService us =new UtilisateurService();
         //test de reclamation valid
-        //Reclamation r = new Reclamation(user,"01/01/2024","testSujet1","testDescription1","testStatut1",1,"testResponsable1");
+        Utilisateur user = null;
+        Reclamation r = new Reclamation(user,"01/01/2024","testSujet1","testDescription1","testStatut1",1,"testResponsable1");
 
         System.out.println("******************************************************");
         System.out.println(gs.afficher());
