@@ -3,6 +3,7 @@ package com.esprit.controllers;
 import com.esprit.models.*;
 import com.esprit.services.*;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
