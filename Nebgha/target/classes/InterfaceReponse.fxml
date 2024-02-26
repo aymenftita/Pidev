@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="my-button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: white;" styleClass="my-anchor-pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InterfaceReponse">
+    <children>
+        <Pane layoutY="-1.0" prefHeight="57.0" prefWidth="1366.0" style="-fx-background-color: #dddee1;">
+            <children>
+                <ImageView fitHeight="49.0" fitWidth="51.0" layoutX="12.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@graphics/Logo1.png" />
+                    </image>
+                </ImageView>
+                <Label layoutX="775.0" layoutY="18.0" styleClass="link-label" stylesheets="@style.css" text="Cours" />
+                <Label layoutX="868.0" layoutY="18.0" styleClass="link-label" stylesheets="@style.css" text="Forum" />
+                <Label layoutX="966.0" layoutY="18.0" styleClass="link-label" stylesheets="@style.css" text="Planning" />
+                <Label layoutX="1098.0" layoutY="18.0" styleClass="link-label" stylesheets="@style.css" text="Quiz" />
+            </children>
+        </Pane>
+        <Separator layoutY="47.0" prefHeight="21.0" prefWidth="1280.0" />
+        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="56.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@graphics/name.png" />
+            </image>
+        </ImageView>
+        <Separator layoutY="135.0" prefHeight="4.0" prefWidth="1366.0" />
+        <Separator layoutX="234.0" layoutY="135.0" orientation="VERTICAL" prefHeight="639.0" prefWidth="6.0" />
+        <Label layoutX="14.0" layoutY="68.0" text="Forum" textFill="#144083">
+            <font>
+                <Font name="Segoe UI" size="35.0" />
+            </font>
+        </Label>
+        <TextField layoutX="277.0" layoutY="90.0" promptText="Rechercher" styleClass="modern-search-bar">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </TextField>
+        <ComboBox layoutX="489.0" layoutY="88.0" prefHeight="37.0" prefWidth="120.0" promptText="Plus récent" styleClass="modern-combo-box">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ComboBox>
+        <Button layoutX="1130.0" layoutY="91.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="169.0" styleClass="my-button" stylesheets="@style.css" text="Ajouter une Réponse" textFill="#d3d709">
+            <font>
+                <Font name="Segoe UI" size="15.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <ImageView fitHeight="31.0" fitWidth="30.0" layoutX="1308.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@graphics/update.png" />
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ImageView>
+        <TextField layoutX="79.0" layoutY="173.0" promptText="Mot Clés" styleClass="modern-textfield">
+            <font>
+                <Font name="Segoe UI" size="12.0" />
+            </font>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+        </TextField>
+        <DatePicker layoutX="82.0" layoutY="250.0" prefHeight="25.0" prefWidth="149.0" promptText="Date de création">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+            <styleClass>
+                <String fx:value="minimalist-datepicker" />
+                <String fx:value="calendar-cell" />
+                <String fx:value="arrow-button" />
+            </styleClass>
+        </DatePicker>
+        <TextField layoutX="79.0" layoutY="331.0" promptText="Auteur" styleClass="modern-textfield" />
+        <ImageView fitHeight="33.0" fitWidth="46.0" layoutX="244.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@graphics/magnifying-glass.gif" />
+            </image>
+        </ImageView>
+      <TableView layoutX="234.0" layoutY="199.0" prefHeight="570.0" prefWidth="1132.0">
+        <columns>
+          <TableColumn prefWidth="1040.0" text="Contenu" />
+          <TableColumn minWidth="0.0" prefWidth="89.0" text="Auteur" />
+        </columns>
+      </TableView>
+      <Label layoutX="263.0" layoutY="156.0" styleClass="selected-question-titre" text="Titre Question" />
+      <Label layoutX="737.0" layoutY="156.0" styleClass="selected-question-contenu" text="Contenu Question" />
+      <Label layoutX="1237.0" layoutY="148.0" styleClass="selected-question-auteur" text="Auteur" />
+      <Label layoutX="1200.0" layoutY="167.0" styleClass="selected-question-date" text="Date de publication" />
+      <Label layoutX="14.0" layoutY="115.0" styleClass="questions-label" text="Nom Sujet" />
+    </children>
+</AnchorPane>

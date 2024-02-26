@@ -17,6 +17,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -67,6 +69,18 @@ public class InterfaceReponseUserController {
     @FXML
     private TableColumn<Reponse, Date> tvAffichageReponseDate;
 
+    @FXML
+    private TableColumn<Reponse, Void> tvAffichageReponseActionAccept;
+
+    @FXML
+    private TableColumn<Reponse, Void> tvAffichageReponseActionDownVote;
+
+    @FXML
+    private TableColumn<Reponse, Void> tvAffichageReponseActionReport;
+
+    @FXML
+    private TableColumn<Reponse, Void> tvAffichageReponseActionUpVote;
+
     private Question relatedQuestion;
 
     private Sujet relatedSujet;
@@ -98,7 +112,8 @@ public class InterfaceReponseUserController {
             rs.modifier(r);
         });
 
-
+        boutonUpVote();
+        boutonDownVote();
 
 
 
@@ -259,7 +274,7 @@ public class InterfaceReponseUserController {
 
     @FXML
     void refreshReponse(MouseEvent event) {
-        loadReponse();
+        loadReponseParQuestion();
     }
 
     private void applyDateFilter(LocalDate selectedLocalDate) {
@@ -277,6 +292,62 @@ public class InterfaceReponseUserController {
             // Reset the filter if no date is selected
             filteredData.setPredicate(question -> true);
         }
+    }
+
+    private void boutonUpVote() {
+        tvAffichageReponseActionUpVote.setCellFactory(col -> new TableCell<Reponse, Void>() {
+            private final Button upVoteButton = new Button("▲"); // Set button text as upward arrow
+
+            {
+                upVoteButton.setOpacity(0.5);
+
+                upVoteButton.setOnAction(event -> {
+                    upVoteButton.setOpacity(1);
+                    Reponse reponse = getTableView().getItems().get(getIndex());
+                    System.out.println("upVote this: " + reponse);
+                });
+
+                upVoteButton.getStyleClass().add("upvote-button");
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(upVoteButton);
+                }
+            }
+        });
+    }
+
+    public void boutonDownVote() {
+        tvAffichageReponseActionDownVote.setCellFactory(col -> new TableCell<Reponse, Void>() {
+            private final Button downVoteButton = new Button("▼"); // Set button text as upward arrow
+
+            {
+                downVoteButton.setOpacity(0.5);
+
+                downVoteButton.setOnAction(event -> {
+                    downVoteButton.setOpacity(1);
+                    Reponse reponse = getTableView().getItems().get(getIndex());
+                    System.out.println("downVote this: " + reponse);
+                });
+
+                downVoteButton.getStyleClass().add("downvote-button");
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(downVoteButton);
+                }
+            }
+        });
     }
 
 }

@@ -238,7 +238,7 @@ public class InterfaceQuestionUserController {
 
     @FXML
     void refreshQuestion(MouseEvent event) {
-        loadQuestion();
+        loadQuestionParSujet();
     }
 
 

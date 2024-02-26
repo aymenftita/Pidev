@@ -1,5 +1,6 @@
 com\esprit\services\questionService.class
 com\esprit\controllers\sujet\AjoutSujetController.class
+com\esprit\controllers\InterfaceReponseUserController$2.class
 com\esprit\controllers\reponse\ModifierReponseController$1.class
 com\esprit\controllers\InterfacesAdminController$1.class
 com\esprit\controllers\InterfaceReponseUserController.class
@@ -19,5 +20,6 @@ com\esprit\controllers\InterfaceForumUserController.class
 com\esprit\controllers\InterfacesAdminController.class
 com\esprit\services\sujetService.class
 com\esprit\controllers\InterfacesAdminController$2.class
+com\esprit\controllers\InterfaceReponseUserController$1.class
 com\esprit\controllers\reponse\ModifierReponseController.class
 com\esprit\models\Reponse.class
