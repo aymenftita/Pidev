@@ -33,8 +33,11 @@ public class AjoutQuestionController {
     @FXML
     private TextField tfQuestionTitre;
 
+    private Sujet relatedSujet;
+
     @FXML
     void initialize() {
+        /*
         sujetService ss = new sujetService();
         List<Sujet> sujets = ss.afficher();
         cbChoixSujet.getItems().setAll(sujets);
@@ -49,20 +52,25 @@ public class AjoutQuestionController {
                     setText(null);
                 }
             }
-        });
+        });*/
+    }
+
+    public void setRelatedSujet(Sujet sujet) {
+        this.relatedSujet = sujet;
     }
 
     @FXML
     void ajouterQuestion(ActionEvent event) {
 
-        Sujet selectedSujet = cbChoixSujet.getValue();
+        //Sujet selectedSujet = cbChoixSujet.getValue();
 
         //Création du service et ajout d'entité
         questionService rs = new questionService();
         sujetService ss = new sujetService();
+        //TODO: auteur_id à changer quand la session est configuré
         rs.ajouter(new Question(0, tfQuestionTitre.getText(),
-                Integer.parseInt(tfQuestionAuteurID.getText()), Date.valueOf(DpDateQuestion.getValue()),
-                selectedSujet, taContenuQuestion.getText()));
+                1, new Date(System.currentTimeMillis()),
+                relatedSujet, taContenuQuestion.getText()));
 
         //Message de confirmation
         Alert alertAjout = new Alert(Alert.AlertType.INFORMATION);

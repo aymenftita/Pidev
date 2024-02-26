@@ -1,5 +1,7 @@
 package com.esprit.services;
 
+import com.esprit.models.Question;
+import com.esprit.models.Sujet;
 import com.esprit.utils.DataSource;
 import com.esprit.models.Reponse;
 
@@ -61,6 +63,27 @@ public class reponseService implements IService<Reponse> {
         List<Reponse> reponses = new ArrayList<>();
 
         String req = "SELECT * from reponse_forum";
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            sujetService ss = new sujetService();//sujet service pour récupérer le sujet d'aprés l'ID
+            questionService qs = new questionService();//question service pour récupérer le question d'aprés l'ID
+            while (rs.next()) {
+                reponses.add(new Reponse(rs.getInt("id"), rs.getInt("auteur_id"),
+                        qs.getQuestion(rs.getInt("question_id")), rs.getString("contenu"),
+                        rs.getDate("date_creation"), ss.getSujet(rs.getInt("sujet_id"))));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return reponses;
+    }
+
+    public List<Reponse> afficherParQuestion(Question question) {
+        List<Reponse> reponses = new ArrayList<>();
+
+        String req = "SELECT * from reponse_forum WHERE question_id =" + question.getId();
         try {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(req);

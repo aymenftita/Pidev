@@ -1,5 +1,6 @@
 package com.esprit.controllers.reponse;
 
+import com.esprit.controllers.InterfaceReponseUserController;
 import com.esprit.controllers.InterfacesAdminController;
 import com.esprit.models.Question;
 import com.esprit.models.Reponse;
@@ -34,8 +35,13 @@ public class AjoutReponseController {
     @FXML
     private ComboBox<Sujet> cbChoixSujet;
 
+    private Sujet relatedSujet;
+    private Question relatedQuestion;
+
     @FXML
     void initialize() {
+
+        /*
         sujetService ss = new sujetService();
         questionService qs = new questionService();
         List<Sujet> sujets = ss.afficher();
@@ -68,18 +74,20 @@ public class AjoutReponseController {
                 }
             }
         });
+
+         */
     }
 
     @FXML
     void ajouterReponse(ActionEvent event) {
-        Question selectedQuestion = cbChoixQuestion.getValue();
-        Sujet selectedSujet = cbChoixSujet.getValue();
+        //Question selectedQuestion = cbChoixQuestion.getValue();
+        //Sujet selectedSujet = cbChoixSujet.getValue();
 
         //Création du service et ajout d'entité
         reponseService rs = new reponseService();
-        rs.ajouter(new Reponse(0, Integer.parseInt(tfAuteurID.getText()),
-                selectedQuestion, tfContenuReponse.getText(),
-                Date.valueOf(dpDateReponse.getValue()), selectedSujet));
+        rs.ajouter(new Reponse(0, 1,
+                relatedQuestion, tfContenuReponse.getText(),
+                new Date(System.currentTimeMillis()), relatedSujet));
 
         //Message de confirmation
         Alert alertAjout = new Alert(Alert.AlertType.INFORMATION);
@@ -88,6 +96,13 @@ public class AjoutReponseController {
         alertAjout.setContentText("Réponse ajouté!");
         alertAjout.show();
 
+
+
+    }
+
+    public void setRelated(Sujet sujet, Question question) {
+        this.relatedSujet = sujet;
+        this.relatedQuestion = question;
     }
 
     @FXML

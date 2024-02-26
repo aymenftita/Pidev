@@ -101,4 +101,25 @@ public class questionService implements IService<Question> {
         return question;
     }
 
+
+    public List<Question> afficherParSujet(Sujet sujet) {
+        List<Question> questions = new ArrayList<>();
+
+        String req = "SELECT * from questions_forum WHERE sujet_id =" + sujet.getId();
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            sujetService ss = new sujetService();//sujet service pour récupérer le sujet d'aprés l'ID
+            while (rs.next()) {
+                questions.add(new Question(rs.getInt("id"), rs.getString("titre"),
+                        rs.getInt("auteur_id"), rs.getDate("date_creation"),
+                        ss.getSujet(rs.getInt("sujet_id")), rs.getString("contenu")));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return questions;
+    }
+
 }
