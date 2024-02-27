@@ -81,11 +81,13 @@ public class InterfaceReponseUserController {
     @FXML
     private TableColumn<Reponse, Void> tvAffichageReponseActionUpVote;
 
+    @FXML
+    private TableColumn<Reponse, Void> tvAffichageReponseScore;
+
     private Question relatedQuestion;
 
     private Sujet relatedSujet;
 
-    //TODO: ADD four columns with buttons: Upvote, Downvote, accept, Report
 
     public void initialize() {
 
@@ -114,8 +116,8 @@ public class InterfaceReponseUserController {
 
         boutonUpVote();
         boutonDownVote();
-
-
+        boutonAccept();
+        boutonReport();
 
     }
 
@@ -124,10 +126,9 @@ public class InterfaceReponseUserController {
         reponseService rs = new reponseService();
         ObservableList<Reponse> reponsesData = FXCollections.observableArrayList(rs.afficher());
         tvAffichageReponse.setItems(reponsesData);
-        //loadReponseParQuestion();
+
     }
 
-    //TODO: show only related questions
     public void loadReponseParQuestion() {
         reponseService rs = new reponseService();
         ObservableList<Reponse> reponsesData = FXCollections.observableArrayList(rs.afficherParQuestion(relatedQuestion));
@@ -139,28 +140,7 @@ public class InterfaceReponseUserController {
         this.relatedQuestion = question;
         changeLabel();
         loadReponseParQuestion();
-
-        reponseService rs = new reponseService();
-
-        ObservableList<Reponse> reponsesData = FXCollections.observableArrayList(rs.afficherParQuestion(relatedQuestion));
-
-        // Create FilteredList for real-time search
-        FilteredList<Reponse> filteredData = new FilteredList<>(reponsesData, b -> true);
-        tvAffichageReponse.setItems(filteredData);
-
-        tfSearchReponse.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(reponse -> {
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-                String lowerCaseFilter = newValue.toLowerCase();
-                if (reponse.getContenu().toLowerCase().indexOf(lowerCaseFilter) != -1) {
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-        });
+        handleSearch();
 
         /* //TODO: En attendant l'entité auteur
         tfAuteurQuestion.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -177,29 +157,6 @@ public class InterfaceReponseUserController {
             });
         });*/
     }
-/*
-    private void setupActionColumn() {
-        action.setCellFactory(col -> new TableCell<Participer, Void>() {
-            private final Button participerButton = new Button("supprimer");
-
-            {
-                participerButton.setOnAction(event -> {
-                    Participer participant = getTableView().getItems().get(getIndex());
-                    showDetails(participant);
-                });
-            }
-
-            @Override
-            protected void updateItem(Void item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty) {
-                    setGraphic(null);
-                } else {
-                    setGraphic(participerButton);
-                }
-            }
-        });
-    }*/
 
     public void changeLabel(){
         nomSujet.setText(relatedSujet.getTitre());
@@ -225,7 +182,7 @@ public class InterfaceReponseUserController {
         stage.setTitle("Ajout Réponse");
 
         // Set the size of the new window
-        stage.setScene(new Scene(root, 422, 405));  //TODO: Adjust width and height as needed
+        stage.setScene(new Scene(root, 422, 405));
 
         // Show the new window
         stage.show();
@@ -263,7 +220,28 @@ public class InterfaceReponseUserController {
     }
 
     @FXML
-    void handleSearch(ActionEvent event) {
+    void handleSearch() {
+        reponseService rs = new reponseService();
+
+        ObservableList<Reponse> reponsesData = FXCollections.observableArrayList(rs.afficherParQuestion(relatedQuestion));
+
+        // Create FilteredList for real-time search
+        FilteredList<Reponse> filteredData = new FilteredList<>(reponsesData, b -> true);
+        tvAffichageReponse.setItems(filteredData);
+
+        tfSearchReponse.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(reponse -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (reponse.getContenu().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+        });
 
     }
 
@@ -298,13 +276,33 @@ public class InterfaceReponseUserController {
         tvAffichageReponseActionUpVote.setCellFactory(col -> new TableCell<Reponse, Void>() {
             private final Button upVoteButton = new Button("▲"); // Set button text as upward arrow
 
+            private boolean isUpvoted = false;
             {
                 upVoteButton.setOpacity(0.5);
 
                 upVoteButton.setOnAction(event -> {
-                    upVoteButton.setOpacity(1);
-                    Reponse reponse = getTableView().getItems().get(getIndex());
-                    System.out.println("upVote this: " + reponse);
+                    if(isUpvoted) {
+                        upVoteButton.setOpacity(0.5);
+                        //upVoteButton.setDisable(false);
+                        isUpvoted = false;
+                        Reponse reponse = getTableView().getItems().get(getIndex());
+                        System.out.println("downVote this: " + reponse);
+                        reponseService rs = new reponseService();
+                        rs.downVote(reponse);
+                        loadReponseParQuestion();
+                        handleSearch();
+                    }
+                    else {
+                        isUpvoted = true;
+                        upVoteButton.setOpacity(1);
+                        Reponse reponse = getTableView().getItems().get(getIndex());
+                        //upVoteButton.setDisable(true);
+                        System.out.println("upVote this: " + reponse);
+                        reponseService rs = new reponseService();
+                        rs.upVote(reponse);
+                        loadReponseParQuestion();
+                        handleSearch();
+                    }
                 });
 
                 upVoteButton.getStyleClass().add("upvote-button");
@@ -326,13 +324,29 @@ public class InterfaceReponseUserController {
         tvAffichageReponseActionDownVote.setCellFactory(col -> new TableCell<Reponse, Void>() {
             private final Button downVoteButton = new Button("▼"); // Set button text as upward arrow
 
+            private boolean isDownvoted = false;
             {
                 downVoteButton.setOpacity(0.5);
 
                 downVoteButton.setOnAction(event -> {
-                    downVoteButton.setOpacity(1);
-                    Reponse reponse = getTableView().getItems().get(getIndex());
-                    System.out.println("downVote this: " + reponse);
+                    if(isDownvoted) {
+                        downVoteButton.setOpacity(0.5);
+                        Reponse reponse = getTableView().getItems().get(getIndex());
+                        System.out.println("upVote this: " + reponse);
+                        reponseService rs = new reponseService();
+                        rs.upVote(reponse);
+                        loadReponseParQuestion();
+                        handleSearch();
+                    }
+                    else {
+                        isDownvoted = true;
+                        downVoteButton.setOpacity(1);
+                        Reponse reponse = getTableView().getItems().get(getIndex());
+                        reponseService rs = new reponseService();
+                        rs.downVote(reponse);
+                        loadReponseParQuestion();
+                        handleSearch();
+                    }
                 });
 
                 downVoteButton.getStyleClass().add("downvote-button");
@@ -345,6 +359,87 @@ public class InterfaceReponseUserController {
                     setGraphic(null);
                 } else {
                     setGraphic(downVoteButton);
+                }
+            }
+        });
+    }
+
+
+    public void boutonAccept() {
+        tvAffichageReponseActionAccept.setCellFactory(col -> new TableCell<Reponse, Void>() {
+            private final Button acceptButton = new Button("✔"); // Set button text as upward arrow
+
+            private boolean isAccepeted = false;
+            {
+                acceptButton.setOpacity(0.5);
+
+                acceptButton.setOnAction(event -> {
+                    if (isAccepeted) {
+                        acceptButton.setOpacity(0.5);
+                        Reponse reponse = getTableView().getItems().get(getIndex());
+                        reponseService rs = new reponseService();
+                        rs.unAcceptReponse(reponse);
+                    }
+                    else {
+                        isAccepeted = true;
+                        acceptButton.setOpacity(1);
+                        Reponse reponse = getTableView().getItems().get(getIndex());
+                        System.out.println("accept this: " + reponse);
+                        reponseService rs = new reponseService();
+                        rs.acceptReponse(reponse);
+                    }
+                });
+
+                acceptButton.getStyleClass().add("accept-button");
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(acceptButton);
+                }
+            }
+        });
+    }
+
+    public void boutonReport() {
+        tvAffichageReponseActionReport.setCellFactory(col -> new TableCell<Reponse, Void>() {
+            private final Button reportButton = new Button("!"); // Set button text as upward arrow
+
+            private boolean isReported = false;
+            {
+                reportButton.setOpacity(0.5);
+
+                reportButton.setOnAction(event -> {
+                    if (isReported){
+                        reportButton.setOpacity(0.5);
+                        Reponse reponse = getTableView().getItems().get(getIndex());
+                        reponseService rs = new reponseService();
+                        rs.unreportReponse(reponse);
+                    }
+                    else {
+                        isReported = true;
+                        reportButton.setOpacity(1);
+                        Reponse reponse = getTableView().getItems().get(getIndex());
+                        System.out.println("report this: " + reponse);
+                        reponseService rs = new reponseService();
+                        rs.reportReponse(reponse);
+                    }
+                });
+
+                reportButton.getStyleClass().add("report-button");
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(reportButton);
                 }
             }
         });

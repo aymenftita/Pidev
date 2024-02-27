@@ -87,7 +87,7 @@ public class AjoutReponseController {
         reponseService rs = new reponseService();
         rs.ajouter(new Reponse(0, 1,
                 relatedQuestion, tfContenuReponse.getText(),
-                new Date(System.currentTimeMillis()), relatedSujet));
+                new Date(System.currentTimeMillis()), relatedSujet, 0, false, false));
 
         //Message de confirmation
         Alert alertAjout = new Alert(Alert.AlertType.INFORMATION);

@@ -39,6 +39,24 @@
     -fx-cursor: hand;
 }
 
+.accept-button {
+    -fx-background-color: transparent; /* Remove button background */
+    -fx-border-color: transparent;
+    -fx-text-fill: green; /* Set button text color to red */
+    -fx-font-size: 25px;             /* Set button font size */
+    -fx-padding: 0;                   /* Remove button padding */
+    -fx-cursor: hand;
+}
+
+.report-button {
+    -fx-background-color: transparent; /* Remove button background */
+    -fx-border-color: transparent;
+    -fx-text-fill: #ec5151; /* Set button text color to red */
+    -fx-font-size: 25px;             /* Set button font size */
+    -fx-padding: 0;                   /* Remove button padding */
+    -fx-cursor: hand;
+}
+
 .link-label {
     -fx-font-family: Segoe UI, sans-serif;
     -fx-font-size: 15px;

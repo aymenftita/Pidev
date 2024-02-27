@@ -11,6 +11,9 @@ public class Reponse {
     private String contenu;
     private Date date;
     private Sujet sujet;
+    private int score;
+    private boolean accepted;
+    private boolean reported;
 
     public Reponse() {
     }
@@ -29,13 +32,16 @@ public class Reponse {
                 '}';
     }
 
-    public Reponse(int id, int auteur_id, Question question, String contenu, Date date, Sujet sujet) {
+    public Reponse(int id, int auteur_id, Question question, String contenu, Date date, Sujet sujet, int score, boolean accepted, boolean reported) {
         this.id = id;
         this.auteur_id = auteur_id;
         this.question = question;
         this.contenu = contenu;
         this.date = date;
         this.sujet = sujet;
+        this.score = score;
+        this.accepted = accepted;
+        this.reported = reported;
     }
 
     public int getId() {
@@ -85,4 +91,29 @@ public class Reponse {
     public void setSujet_id(Sujet sujet) {
         this.sujet = sujet;
     }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public boolean isAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(boolean accepted) {
+        this.accepted = accepted;
+    }
+
+    public boolean isReported() {
+        return reported;
+    }
+
+    public void setReported(boolean reported) {
+        this.reported = reported;
+    }
+
 }

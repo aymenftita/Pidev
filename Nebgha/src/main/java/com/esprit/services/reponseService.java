@@ -71,7 +71,9 @@ public class reponseService implements IService<Reponse> {
             while (rs.next()) {
                 reponses.add(new Reponse(rs.getInt("id"), rs.getInt("auteur_id"),
                         qs.getQuestion(rs.getInt("question_id")), rs.getString("contenu"),
-                        rs.getDate("date_creation"), ss.getSujet(rs.getInt("sujet_id"))));
+                        rs.getDate("date_creation"), ss.getSujet(rs.getInt("sujet_id")),
+                        rs.getInt("score"), rs.getBoolean("accept_status"),
+                        rs.getBoolean("report_status")));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -92,13 +94,94 @@ public class reponseService implements IService<Reponse> {
             while (rs.next()) {
                 reponses.add(new Reponse(rs.getInt("id"), rs.getInt("auteur_id"),
                         qs.getQuestion(rs.getInt("question_id")), rs.getString("contenu"),
-                        rs.getDate("date_creation"), ss.getSujet(rs.getInt("sujet_id"))));
+                        rs.getDate("date_creation"), ss.getSujet(rs.getInt("sujet_id")),
+                        rs.getInt("score"), rs.getBoolean("accept_status"),
+                        rs.getBoolean("report_status")));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
         return reponses;
+    }
+
+    public void upVote(Reponse reponse) {
+        String req = "UPDATE reponse_forum set score = " + ( reponse.getScore() + 1 ) +
+                " where id = " + reponse.getId() + ";";
+        reponse.setScore(reponse.getScore()+1);
+        try {
+            Statement st = connection.createStatement();
+            st.executeUpdate(req);
+            System.out.println("Réponse upVoted!");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void downVote(Reponse reponse) {
+        String req = "UPDATE reponse_forum set score = " + ( reponse.getScore() - 1 ) +
+                " where id = " + reponse.getId() + ";";
+
+        reponse.setScore(reponse.getScore()-1);
+        try {
+            Statement st = connection.createStatement();
+            st.executeUpdate(req);
+            System.out.println("Réponse downVoted!");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void acceptReponse(Reponse reponse) {
+        String req = "UPDATE reponse_forum set accept_status = " + true +
+                " where id = " + reponse.getId() + ";";
+        reponse.setAccepted(true);
+        try {
+            Statement st = connection.createStatement();
+            st.executeUpdate(req);
+            System.out.println("Réponse accepté!");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void unAcceptReponse(Reponse reponse) {
+        String req = "UPDATE reponse_forum set accept_status = " + false +
+                " where id = " + reponse.getId() + ";";
+        reponse.setAccepted(false);
+        try {
+            Statement st = connection.createStatement();
+            st.executeUpdate(req);
+            System.out.println("Réponse un-accepté!");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
+    public void reportReponse(Reponse reponse) {
+        String req = "UPDATE reponse_forum set report_status = " + true +
+                " where id = " + reponse.getId() + ";";
+        reponse.setReported(true);
+        try {
+            Statement st = connection.createStatement();
+            st.executeUpdate(req);
+            System.out.println("Réponse reporté!");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void unreportReponse(Reponse reponse) {
+        String req = "UPDATE reponse_forum set report_status = " + false +
+                " where id = " + reponse.getId() + ";";
+        reponse.setReported(false);
+        try {
+            Statement st = connection.createStatement();
+            st.executeUpdate(req);
+            System.out.println("Réponse un-reporté!");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }

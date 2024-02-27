@@ -141,7 +141,8 @@ public class ModifierReponseController {
         reponseService RS = new reponseService();
         RS.modifier(new Reponse(reponseToModify.getId(), Integer.parseInt(tfAuteurID.getText()),
                 selectedQuestion, tfContenuReponse.getText(),
-                Date.valueOf(dpDateReponse.getValue()), selectedSujet));
+                Date.valueOf(dpDateReponse.getValue()), selectedSujet, reponseToModify.getScore(),
+                reponseToModify.isAccepted(), reponseToModify.isReported()));
 
         //Message de confirmation
         Alert alertModif = new Alert(Alert.AlertType.INFORMATION);

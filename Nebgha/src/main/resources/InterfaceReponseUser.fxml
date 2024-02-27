@@ -98,26 +98,31 @@
         </ImageView>
       <TableView fx:id="tvAffichageReponse" layoutX="234.0" layoutY="199.0" prefHeight="541.0" prefWidth="1133.0">
         <columns>
-          <TableColumn fx:id="tvAffichageReponseContenu" prefWidth="692.0" text="Contenu">
+          <TableColumn fx:id="tvAffichageReponseContenu" prefWidth="713.0" text="Contenu">
             <cellValueFactory>
                 <PropertyValueFactory property="contenu" />
             </cellValueFactory>
         </TableColumn>
-          <TableColumn fx:id="tvAffichageReponseAuteur" minWidth="0.0" prefWidth="149.0" text="Auteur">
+          <TableColumn fx:id="tvAffichageReponseAuteur" minWidth="0.0" prefWidth="128.0" text="Auteur">
               <!--
             <cellValueFactory>
                 <PropertyValueFactory property="auteur" />
             </cellValueFactory>-->
         </TableColumn>
-            <TableColumn fx:id="tvAffichageReponseDate" prefWidth="136.0" text="Date">
+            <TableColumn fx:id="tvAffichageReponseDate" prefWidth="111.0" text="Date">
             <cellValueFactory>
                 <PropertyValueFactory property="date" />
             </cellValueFactory>
         </TableColumn>
-            <TableColumn fx:id="tvAffichageReponseActionUpVote" prefWidth="38.0" />
+            <TableColumn fx:id="tvAffichageReponseActionUpVote" prefWidth="32.0" />
+            <TableColumn fx:id="tvAffichageReponseScore" prefWidth="36.0">
+                <cellValueFactory>
+                    <PropertyValueFactory property="score" />
+                </cellValueFactory>
+            </TableColumn>
             <TableColumn fx:id="tvAffichageReponseActionDownVote" prefWidth="37.0" />
             <TableColumn fx:id="tvAffichageReponseActionAccept" prefWidth="43.0" />
-            <TableColumn fx:id="tvAffichageReponseActionReport" prefWidth="34.0" />
+            <TableColumn fx:id="tvAffichageReponseActionReport" prefWidth="32.0" />
         </columns>
       </TableView>
       <Label fx:id="titreQuestion" layoutX="263.0" layoutY="156.0" onMouseClicked="#apercuQuestion" styleClass="selected-question-titre" text="Titre Question" />
