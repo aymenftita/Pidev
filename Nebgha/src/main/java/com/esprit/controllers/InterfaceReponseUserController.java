@@ -26,7 +26,9 @@ import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import javafx.collections.transformation.SortedList;
 
 public class InterfaceReponseUserController {
 
@@ -82,7 +84,7 @@ public class InterfaceReponseUserController {
     private TableColumn<Reponse, Void> tvAffichageReponseActionUpVote;
 
     @FXML
-    private TableColumn<Reponse, Void> tvAffichageReponseScore;
+    private TableColumn<Reponse, Integer> tvAffichageReponseScore;
 
     private Question relatedQuestion;
 
@@ -118,6 +120,7 @@ public class InterfaceReponseUserController {
         boutonDownVote();
         boutonAccept();
         boutonReport();
+
 
     }
 
@@ -246,7 +249,20 @@ public class InterfaceReponseUserController {
     }
 
     @FXML
-    void handleSort(ActionEvent event) {
+    void handleSort(ActionEvent event) { //TODO: doesn't work properly
+        FilteredList<Reponse> filteredData = (FilteredList<Reponse>) tvAffichageReponse.getItems();
+
+        SortedList<Reponse> sortedData = new SortedList<>(filteredData);
+
+        Comparator<Reponse> dateComparator = (r1, r2) -> r2.getDate().compareTo(r1.getDate());
+        sortedData.comparatorProperty().bind(cbSort.getSelectionModel().selectedItemProperty().asString().map(s -> {
+            if (s.equals("Populaire")) {
+                return (r1, r2) -> Integer.compare(r2.getScore(), r1.getScore());
+            }
+            return dateComparator;
+        }));
+
+        tvAffichageReponse.setItems(sortedData);
 
     }
 
@@ -369,19 +385,19 @@ public class InterfaceReponseUserController {
         tvAffichageReponseActionAccept.setCellFactory(col -> new TableCell<Reponse, Void>() {
             private final Button acceptButton = new Button("✔"); // Set button text as upward arrow
 
-            private boolean isAccepeted = false;
+            private boolean isAccepted = false;
             {
                 acceptButton.setOpacity(0.5);
 
                 acceptButton.setOnAction(event -> {
-                    if (isAccepeted) {
+                    if (isAccepted) {
                         acceptButton.setOpacity(0.5);
                         Reponse reponse = getTableView().getItems().get(getIndex());
                         reponseService rs = new reponseService();
                         rs.unAcceptReponse(reponse);
                     }
                     else {
-                        isAccepeted = true;
+                        isAccepted = true;
                         acceptButton.setOpacity(1);
                         Reponse reponse = getTableView().getItems().get(getIndex());
                         System.out.println("accept this: " + reponse);
