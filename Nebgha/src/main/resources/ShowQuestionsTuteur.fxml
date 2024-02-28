@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.ShowQuestionsTuteurController">
+    <children>
+        <ImageView fitHeight="400.0" fitWidth="600.0">
+            <image>
+                <Image url="@images/Rb.png" />
+            </image>
+        </ImageView>
+        <TextField fx:id="searchField" layoutX="436.0" layoutY="89.0" promptText="Rechercher question" />
+        <TableView fx:id="questionTableView" layoutX="8.0" layoutY="124.0" prefHeight="200.0" prefWidth="584.0">
+            <columns>
+                <TableColumn fx:id="texte" prefWidth="75.0" text="Texte" />
+                <TableColumn fx:id="type" prefWidth="75.0" text="Type" />
+                <TableColumn fx:id="points" prefWidth="75.0" text="Points" />
+                <TableColumn fx:id="ordre" prefWidth="75.0" text="Ordre" />
+                <TableColumn fx:id="categorie" prefWidth="130.40005493164062" text="Catégorie" />
+            </columns>
+        </TableView>
+        <Label layoutX="181.0" layoutY="14.0" text="Liste des Questions" textFill="#000066">
+            <font>
+                <Font size="28.0" />
+            </font>
+        </Label>
+        <Button fx:id="btnQuiz" layoutX="113.0" layoutY="348.0" mnemonicParsing="false" onAction="#openAjout" style="-fx-background-color: white;" text="Ajouter " />
+        <Label layoutX="28.0" layoutY="91.0" text="Select quiz" textFill="#000066">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Label>
+        <ComboBox fx:id="quizList" layoutX="131.0" layoutY="89.0" prefWidth="150.0" style="-fx-background-color: white;" />
+        <ImageView fitHeight="51.0" fitWidth="56.0" layoutY="9.0" onMouseClicked="#previous">
+            <image>
+                <Image url="@images/previous.gif" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="40.0" fitWidth="39.0" layoutX="64.0" layoutY="341.0">
+            <image>
+                <Image url="@images/add.png" />
+            </image>
+        </ImageView>
+    </children>
+</AnchorPane>
