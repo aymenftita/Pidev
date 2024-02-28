@@ -34,7 +34,9 @@ public class ModifierReclamationController {
         public void initialize() {
             cbstatus.setItems(status);
             tfUserId.setItems(users);
+
         }
+
 
     public void UpdateReclamation(ActionEvent actionEvent) {
 

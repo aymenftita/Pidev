@@ -24,7 +24,7 @@ public class MessageService {
         try {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
-            System.out.println("Groupe ajoutée !");
+            System.out.println("Message ajoutée !");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -46,7 +46,7 @@ public class MessageService {
         try {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
-            System.out.println("entité supprmiée !");
+            System.out.println("Message supprmiée !");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

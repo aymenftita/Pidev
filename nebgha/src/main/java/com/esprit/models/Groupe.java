@@ -3,7 +3,7 @@ package com.esprit.models;
 public class Groupe {
 
     private int id_groupe;
-    private Utilisateur uid;
+    public Utilisateur uid;
     private String titre;
     private String description;
 
@@ -55,10 +55,10 @@ public class Groupe {
     @Override
     public String toString() {
         return "Groupe{" +
-                "id_groupe=" + id_groupe +
-                ", uid=" + uid +
-                ", titre='" + titre + '\'' +
-                ", description='" + description + '\'' +
+                "id_groupe= " + id_groupe +
+                ", uid= " + uid +
+                ", titre= '" + titre +
+                ", description= '" + description +
                 '}';
     }
 }

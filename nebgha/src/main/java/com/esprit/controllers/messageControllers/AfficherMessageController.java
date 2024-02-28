@@ -2,10 +2,13 @@ package com.esprit.controllers.messageControllers;
 
 
 import com.esprit.controllers.otherControllers.SwitchScenesController;
+import com.esprit.models.Groupe;
 import com.esprit.models.Message;
 import com.esprit.services.MessageService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -13,22 +16,22 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyCode;
 
 import java.io.IOException;
-import java.sql.*;
 
 public class AfficherMessageController {
     @FXML
-    public TableColumn<Message,Integer> Cid;
+    public TableColumn<Message, Integer> CidG;
     @FXML
-    public TableColumn<Message,Integer> CidG;
+    public TableColumn<Message, String> CDate;
     @FXML
-    public TableColumn<Message,Date> CDate;
-    @FXML
-    public TableColumn<Message,String> Ctext;
+    public TableColumn<Message, String> Ctext;
     @FXML
     public TableView<Message> MessageTable;
     public TextField tf;
+    public TextField rsh;
     SwitchScenesController ss = new SwitchScenesController();
     ActionEvent event = null;
 
@@ -40,15 +43,53 @@ public class AfficherMessageController {
 
     @FXML
     private void initialize() {
-        Cid.setCellValueFactory(new PropertyValueFactory<>("idMessage"));
-        CidG.setCellValueFactory(new PropertyValueFactory<>("idGroupe"));
-        CDate.setCellValueFactory(new PropertyValueFactory<>("dateCreation"));
-        Ctext.setCellValueFactory(new PropertyValueFactory<>("text"));
+        CidG.setCellValueFactory(new PropertyValueFactory<Message, Integer>("idGroupe"));
+        CDate.setCellValueFactory(new PropertyValueFactory<Message, String>("dateCreation"));
+        Ctext.setCellValueFactory(new PropertyValueFactory<Message, String>("text"));
 
-        //chargerDonnees();
+
+
+        //CidG.setCellFactory(TextFieldTableCell.<Message>forTableColumn());
+        CDate.setCellFactory(TextFieldTableCell.<Message>forTableColumn());
+        Ctext.setCellFactory(TextFieldTableCell.<Message>forTableColumn());
 
         MessageTable.setItems(message);
-        System.out.println(message);
+        MessageTable.setEditable(true);
+        modifier();
+        search();
+    }
+
+
+    public void modifier(){
+
+        /*CidG.setOnEditCommit(event -> {
+            Message m = event.getRowValue();
+            m.setIdGroupe(event.getNewValue());
+            ms.modifier(m);
+        });*/
+
+        CDate.setOnEditCommit(event -> {
+            Message g = event.getRowValue();
+            g.setDateCreation(event.getNewValue());
+            ms.modifier(g);
+
+        });
+
+        Ctext.setOnEditCommit(event -> {
+            Message g = event.getRowValue();
+            g.setText(event.getNewValue());
+            ms.modifier(g);
+
+        });
+
+
+        MessageTable.setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.ENTER)) {
+                Message selectedProduit = MessageTable.getSelectionModel().getSelectedItem();
+                if (selectedProduit != null)
+                    ms.modifier(selectedProduit);
+            }
+        });
     }
 
     public void supprimerSelection(ActionEvent actionEvent) {
@@ -73,6 +114,34 @@ public class AfficherMessageController {
 
 
 
+
+    public void search(){
+
+        FilteredList<Message> filteredData = new FilteredList<>(message , b -> true);
+        rsh.textProperty().addListener((observable,oldValue,newValue)->{
+            filteredData.setPredicate(message->{
+                if(newValue == null || newValue.isEmpty()){
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if(message.getText().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                    return true;
+                }else if(message.getDateCreation().toLowerCase().indexOf(lowerCaseFilter) !=-1)
+                    return true;
+                else return false;
+            });
+
+
+
+        });
+
+        SortedList<Message> sortedData =new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(MessageTable.comparatorProperty());
+        MessageTable.setItems(sortedData);
+    }
+
+
+
     public void SwitchToAfficherGroupe(ActionEvent actionEvent) throws IOException {
         ss.SwitchScene2(event,"AfficherGroupe",tf);
     }
@@ -88,17 +157,7 @@ public class AfficherMessageController {
 
 
 
-    public void modifierTest(){
-        try {
-            Message selectedMesssage = MessageTable.getSelectionModel().getSelectedItem();
-
-            ModifierMessageController mm = new ModifierMessageController();
-            mm.tftext.setText(selectedMesssage.getText());
-            ss.SwitchScene(event,"ModifierMessage");
 
 
-        }catch (Exception e){
 
-        }
-    }
 }

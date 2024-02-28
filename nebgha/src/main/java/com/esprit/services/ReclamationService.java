@@ -66,6 +66,27 @@ public class ReclamationService {
 
 
 
+    public Reclamation rechercheReclamation(int id) {
+        Reclamation r = new Reclamation();
+        String req = "SELECT * FROM reclamations WHERE id_reclamation = " + id;
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            if (rs.next()) {
+
+                r.setIdReclamation(rs.getInt("id_reclamation"));
+                r.setSujet(rs.getString("sujet"));
+                r.setDescription(rs.getString("description"));
+                r.setDateCreation(rs.getString("date_creation"));
+
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return r;
+    }
+
+
 
     public ArrayList<Reclamation> afficher() {
         ArrayList<Reclamation> entities = new ArrayList<>();
@@ -77,23 +98,22 @@ public class ReclamationService {
             UtilisateurService us = new UtilisateurService();
             while (rs.next()) {
                Utilisateur user = us.rechercheUtilisateur( rs.getInt(2));
-                entities.add(new Reclamation(rs.getInt(1), user, rs.getString(3) , rs.getString(4) , rs.getString (5), rs.getString(
-                6), rs.getInt(7) , rs.getString(8) ));
-
+                entities.add(new Reclamation(rs.getInt(1),
+                        user, rs.getString(3) ,
+                        rs.getString(4) ,
+                        rs.getString (5),
+                        rs.getString(6),
+                        rs.getInt(7) ,
+                        rs.getString(8) ));
             }
-
-
 
             System.out.println(entities);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
-
         return entities;
-
     }
-
     public ResultSet afficher2() throws SQLException  {
         Statement st = connection.createStatement();
         ResultSet rs = st.executeQuery("SELECT * from reclamations");

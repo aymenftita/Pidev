@@ -26,18 +26,18 @@ public class GroupeService {
                 "creator_id, " +
                 "titre," +
                 "description)" +
-                "values ('" +
+                "values (" +
                 groupe.getId_groupe() + ", " +
-                groupe.getUid() + ", " +
-                groupe.getTitre() + ", " +
+                groupe.getUid().getId() + ", '" +
+                groupe.getTitre() + "', '" +
                 groupe.getDescription() +
                 "');";
 
-        String req2 = "INSERT INTO groupe(id_groupe,creator_id,titre,description) VALUES ('"+groupe.getId_groupe()+"','"+groupe.getUid()+"','"+groupe.getTitre()+"','"+groupe.getDescription()+"')";
+        //String req2 = "INSERT INTO groupe(id_groupe,creator_id,titre,description) VALUES ('"+ groupe.getId_groupe() + "','" + groupe.getUid() + "','"+groupe.getTitre()+"','"+groupe.getDescription()+"')";
 
         try {
             Statement st = connection.createStatement();
-            st.executeUpdate(req2);
+            st.executeUpdate(req);
             System.out.println("Groupe ajoutée !");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -46,7 +46,7 @@ public class GroupeService {
 
 
     public void modifier(Groupe groupe) {
-        String req = "UPDATE groupe set creator_id = '" + groupe.getUid() + "', titre = '" + groupe.getTitre() + "', description = '" + groupe.getDescription() + "' where id_groupe = " + groupe.getId_groupe() + ";";
+        String req = "UPDATE groupe set creator_id = '" + groupe.getUid().getId() + "', titre = '" + groupe.getTitre() + "', description = '" + groupe.getDescription() + "' where id_groupe = " + groupe.getId_groupe() ;
         try {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
@@ -77,7 +77,12 @@ public class GroupeService {
             ResultSet rs = st.executeQuery(req);
             UtilisateurService us =new UtilisateurService();
             while (rs.next()) {
-                entities.add(new Groupe(rs.getInt(1), us.rechercheUtilisateur(rs.getInt(2)), rs.getString(3) , rs.getString(4)));
+                Utilisateur user = us.rechercheUtilisateur( rs.getInt(2));
+                entities.add(new Groupe(
+                        rs.getInt(1),
+                        user,
+                        rs.getString(3) ,
+                        rs.getString(4)));
 
             }
 

@@ -2,63 +2,140 @@ package com.esprit.controllers.reclamationControllers;
 
 import com.esprit.controllers.otherControllers.SwitchScenesController;
 import com.esprit.models.Reclamation;
+import com.esprit.models.Status;
 import com.esprit.models.Utilisateur;
 import com.esprit.services.ReclamationService;
+import com.esprit.services.Session;
+import com.esprit.services.UtilisateurService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.ChoiceBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.*;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
+
+import static com.esprit.models.Status.*;
 
 public class AfficherReclamationController implements Initializable {
-    public TableColumn<Reclamation,Integer> idR;
-    public TableColumn<Reclamation, Integer> uid;
-    public TableColumn<Reclamation,Date> date;
+
+    public TableColumn<Reclamation, Utilisateur> uid;
+    public TableColumn<Reclamation,String> date;
     public TableColumn<Reclamation,String> sujet;
-    public TableColumn<Reclamation,String> desc;
-    public TableColumn<Reclamation,String> stat;
-    public TableColumn<Reclamation,Integer> priorite;
-    public TableColumn<Reclamation,String> resp;
+    public TableColumn <Reclamation,String> desc;
+    public TableColumn<Reclamation,Status> stat;
+    public TableColumn<Reclamation,String> priorite;
     public TableView<Reclamation> tableView;
     public TextField tf;
+
+    public TextField rsh;
+
+    public Label lbrsh;
 
 
     ReclamationService rss =new ReclamationService();
     SwitchScenesController ss = new SwitchScenesController();
     ActionEvent event = null;
 
+    UtilisateurService us = new UtilisateurService();
     private ObservableList<Reclamation> reclamation = FXCollections.observableArrayList(rss.afficher());
+    private ObservableList<Utilisateur> users = FXCollections.observableArrayList(us.afficher());
 
 
 
-
-    @FXML
+    @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        idR.setCellValueFactory(new PropertyValueFactory<Reclamation,Integer>("idReclamation"));
-        uid.setCellValueFactory(new PropertyValueFactory<>("userId"));
-        date.setCellValueFactory(new PropertyValueFactory<Reclamation,Date>("dateCreation"));
+        uid.setCellValueFactory(new PropertyValueFactory<Reclamation, Utilisateur>("userId"));
+        date.setCellValueFactory(new PropertyValueFactory<Reclamation,String>("dateCreation"));
         sujet.setCellValueFactory(new PropertyValueFactory<Reclamation,String>("sujet"));
         desc.setCellValueFactory(new PropertyValueFactory<Reclamation,String>("description"));
-        stat.setCellValueFactory(new PropertyValueFactory<Reclamation,String>("status"));
-        priorite.setCellValueFactory(new PropertyValueFactory<Reclamation,Integer>("priorite"));
-        resp.setCellValueFactory(new PropertyValueFactory<Reclamation,String>("responsable"));
+        stat.setCellValueFactory(new PropertyValueFactory<Reclamation,Status>("status"));
+        priorite.setCellValueFactory(new PropertyValueFactory<Reclamation,String>("priorite"));
 
 
-        //chargerDonnees();
+
+        desc.setCellFactory(TextFieldTableCell.<Reclamation>forTableColumn());
+        sujet.setCellFactory(TextFieldTableCell.<Reclamation>forTableColumn());
+        stat.setCellFactory(ChoiceBoxTableCell.<Reclamation,Status>forTableColumn(envoyé, Traité, EnCourDeTraitement, EnReponse));
+        uid.setCellFactory(ChoiceBoxTableCell.<Reclamation,Utilisateur>forTableColumn(users));
+        date.setCellFactory(TextFieldTableCell.<Reclamation>forTableColumn());
+
+
 
         tableView.setItems(reclamation);
+        tableView.setEditable(true);
 
 
+        modifier();
+
+        search();
+
+        rsh.setText(String.valueOf(Session.getUserId()));
+
+    }
+
+
+    public void modifier(){
+
+        desc.setOnEditCommit(event -> {
+            Reclamation r = event.getRowValue();
+            r.setDescription(event.getNewValue());
+            rss.modifier(r);
+        });
+
+        sujet.setOnEditCommit(event -> {
+            Reclamation r = event.getRowValue();
+            r.setSujet(event.getNewValue());
+            rss.modifier(r);
+
+        });
+
+        stat.setOnEditCommit(event -> {
+            Reclamation r = event.getRowValue();
+            r.setStatus(String.valueOf(event.getNewValue()));
+            rss.modifier(r);
+
+        });
+
+        uid.setOnEditCommit(event -> {
+            Reclamation r = event.getRowValue();
+            r.setUserId(event.getNewValue());
+            rss.modifier(r);
+
+        });
+
+        date.setOnEditCommit(event -> {
+            Reclamation r = event.getRowValue();
+            r.setDateCreation(event.getNewValue());
+            rss.modifier(r);
+
+        });
+
+
+
+
+        /*tableView.setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.ENTER)) {
+                Reclamation selectedProduit = tableView.getSelectionModel().getSelectedItem();
+                if (selectedProduit != null)
+                    rss.modifier(selectedProduit);
+            }
+        });*/
+    }
+
+    public void onEditCommit() {
+
+        if(rsh.getText().isEmpty()){
+            lbrsh.setText("deosen't Match");
+        }else lbrsh.setText("");
     }
 
     public void supprimerSelection(ActionEvent actionEvent) throws Exception {
@@ -70,7 +147,7 @@ public class AfficherReclamationController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Reclamation Supprimé");
             alert.show();
-
+            refreshTable();
         }catch (Exception e){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Aucune selection detecté");
@@ -80,6 +157,7 @@ public class AfficherReclamationController implements Initializable {
 
     }
 
+
     public void refreshTable() throws IOException {
 
         SwitchScenesController ss = new SwitchScenesController();
@@ -87,9 +165,7 @@ public class AfficherReclamationController implements Initializable {
 
     }
 
-    /*public Reclamation getSelectedReclamation(){
-        return tableView.getSelectionModel().getSelectedItem();
-    }*/
+
 
 
     public void SwitchToWelcomeAdmin() throws IOException {
@@ -117,53 +193,38 @@ public class AfficherReclamationController implements Initializable {
 
 
 
+    public void search(){
 
-
-
-
-
-
-
-
-    /* private void chargerDonnees() {
-
-        String url = "jdbc:mysql://localhost:3306/nebgha";
-        String utilisateur = "root";
-        String motDePasse = "";
-
-        try (Connection connection = DriverManager.getConnection(url, utilisateur, motDePasse)) {
-            String sql = "SELECT * FROM reclamations";
-            try (Statement statement = connection.createStatement();
-                 ResultSet rs = statement.executeQuery(sql)) {
-
-
-
-                while (rs.next()) {
-
-                    int id_reclamation = rs.getInt("id_reclamation");
-                    int uid = rs.getInt("uid");
-                    Date date_creation = rs.getDate("date_creation");
-                    String sujet = rs.getString("sujet");
-                    String description = rs.getString("description");
-                    String status = rs.getString("status");
-                    int priorite = rs.getInt("priorite");
-                    String responsable = rs.getString("responsable");
-
-                    reclamation.add(new Reclamation(rs.getInt(1),
-                            rs.getInt(2),
-                            date_creation.toString(),
-                            rs.getString(4),
-                            description,
-                            rs.getString(6),rs.getInt(7),
-                            rs.getString(8)));
-
-
+        FilteredList<Reclamation> filteredData = new FilteredList<>(reclamation , b -> true);
+        rsh.textProperty().addListener((observable,oldValue,newValue)->{
+            filteredData.setPredicate(reclamation->{
+                if(newValue == null || newValue.isEmpty()){
+                    return true;
                 }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }*/
+                String lowerCaseFilter = newValue.toLowerCase();
+                if(reclamation.getStatus().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                    return true;
+                }else if(reclamation.getDescription().toLowerCase().indexOf(lowerCaseFilter) !=-1)
+                    return true;
+                else if (reclamation.getSujet().toLowerCase().indexOf(lowerCaseFilter) !=-1)
+                    return true;
+                else if (reclamation.getDateCreation().toLowerCase().indexOf(lowerCaseFilter) !=-1)
+                    return true;
+                else return false;
+            });
+
+
+
+        });
+
+        SortedList<Reclamation> sortedData =new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(tableView.comparatorProperty());
+        tableView.setItems(sortedData);
+    }
+
+
+
+
 
 
 

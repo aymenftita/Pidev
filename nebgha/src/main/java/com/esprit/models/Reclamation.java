@@ -11,6 +11,9 @@ public class Reclamation {
     private int priorite;
     private String responsable;
 
+    public Reclamation() {
+    }
+
     public Reclamation(int idReclamation, Utilisateur userId, String dateCreation, String sujet, String description, String status, int priorite, String responsable) {
         this.idReclamation = idReclamation;
         this.userId = userId;

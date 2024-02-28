@@ -4,65 +4,36 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="443.0" prefWidth="497.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.reclamationControllers.AjouterReclamationController">
-    <Label layoutX="104.0" layoutY="128.0" text="Date :">
-        <font>
-        <Font size="21.0" />
-        </font>
-    </Label>
-    <Label layoutX="74.0" layoutY="237.0" text="Description :">
-        <font>
-        <Font size="21.0" />
-        </font>
-    </Label>
-    <TextField fx:id="tfDescription" layoutX="301.0" layoutY="240.0" />
-    <Button layoutX="165.0" layoutY="397.0" mnemonicParsing="false" onAction="#addReclamation" prefHeight="31.0" prefWidth="162.0" text="Ajouter Reclamation">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.reclamationControllers.AjouterReclamationController">
+    <TextField fx:id="tfDescription" alignment="CENTER" layoutX="160.0" layoutY="196.0" prefHeight="182.0" prefWidth="319.0" promptText="Description" style="-fx-background-radius: 50;">
+      <font>
+         <Font size="13.0" />
+      </font></TextField>
+    <Button layoutX="245.0" layoutY="394.0" mnemonicParsing="false" onAction="#addReclamation" prefHeight="62.0" prefWidth="162.0" style="-fx-background-color: #2749b9; -fx-border-radius: 50; -fx-border-color: #DEDDBA; -fx-background-radius: 50;" text="Ajouter Reclamation" textFill="WHITE">
         <font>
         <Font size="15.0" />
         </font>
     </Button>
-    <TextField fx:id="tfSujet" layoutX="301.0" layoutY="184.0" />
-    <Label layoutX="94.0" layoutY="73.0" text="User Id :">
-        <font>
-        <Font size="21.0" />
-        </font>
-    </Label>
-    <Label layoutX="103.0" layoutY="181.0" text="Sujet :">
-        <font>
-        <Font size="21.0" />
-        </font>
-    </Label>
-    <DatePicker fx:id="tfDate" layoutX="288.0" layoutY="131.0" />
-    <Label layoutX="114.0" layoutY="9.0" prefHeight="31.0" prefWidth="322.0" text="Ajouter Reclamation">
-        <font>
-          <Font name="System Bold" size="30.0" />
-        </font>
-    </Label>
-    <Label layoutX="97.0" layoutY="296.0" text="Status :">
-        <font>
-          <Font size="21.0" />
-        </font>
-    </Label>
-    <TextField fx:id="tfP" layoutX="301.0" layoutY="347.0" />
-    <Label layoutX="92.0" layoutY="344.0" text="Priorité :">
-        <font>
-          <Font size="21.0" />
-        </font>
-    </Label>
-    <Separator layoutY="117.0" prefHeight="3.0" prefWidth="518.0" />
-    <Separator layoutY="169.0" prefHeight="3.0" prefWidth="518.0" />
-    <Separator layoutY="220.0" prefHeight="3.0" prefWidth="518.0" />
-    <Separator layoutX="5.0" layoutY="281.0" prefHeight="3.0" prefWidth="518.0" />
-    <Separator layoutX="5.0" layoutY="333.0" prefHeight="3.0" prefWidth="518.0" />
-    <Separator layoutX="246.0" layoutY="62.0" orientation="VERTICAL" prefHeight="321.0" prefWidth="6.0" />
-    <Separator layoutX="7.0" layoutY="380.0" prefHeight="3.0" prefWidth="518.0" />
-    <Separator layoutX="7.0" layoutY="63.0" prefHeight="3.0" prefWidth="518.0" />
-   <ChoiceBox fx:id="cb" layoutX="300.0" layoutY="299.0" prefWidth="150.0" />
-   <ComboBox fx:id="cbUsers" layoutX="300.0" layoutY="76.0" prefWidth="150.0" />
+    <TextField fx:id="tfSujet" alignment="CENTER" layoutX="191.0" layoutY="119.0" prefHeight="46.0" prefWidth="258.0" promptText="Sujet" style="-fx-background-radius: 50;">
+      <font>
+         <Font name="Arial" size="13.0" />
+      </font></TextField>
+    <DatePicker fx:id="tfDate" layoutX="424.0" layoutY="19.0" style="-fx-background-radius: 0; -fx-background-color: #2749b9;" />
+    <TextField fx:id="tfP" alignment="CENTER" layoutX="584.0" layoutY="133.0" prefHeight="0.0" prefWidth="8.0" promptText="priorité" style="-fx-background-radius: 50;">
+      <font>
+         <Font size="13.0" />
+      </font></TextField>
+   <ChoiceBox fx:id="cb" layoutX="584.0" layoutY="183.0" prefHeight="7.0" prefWidth="16.0" style="-fx-background-color: #2749b9; -fx-background-radius: 50;" />
+   <ComboBox fx:id="cbUsers" layoutX="534.0" layoutY="55.0" prefHeight="38.0" prefWidth="0.0" style="-fx-background-radius: 50; -fx-background-color: #2749b9;" />
+   <ImageView fitHeight="143.0" fitWidth="183.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../Images/Logo.png" />
+      </image>
+   </ImageView>
 </AnchorPane>

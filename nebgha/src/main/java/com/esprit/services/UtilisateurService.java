@@ -47,16 +47,16 @@ public class UtilisateurService {
             ResultSet rs = st.executeQuery(req);
             if (rs.next()) {
 
-                user.setId(rs.getInt("id"));
-                user.setNom(rs.getString("nom"));
-                user.setPrenom(rs.getString("prenom"));
-                user.setEmail(rs.getString("email"));
-                user.setPassword(rs.getString("password"));
-                user.setRole(rs.getString("role"));
-                user.setSpecialite(rs.getString("specialite"));
-                user.setNiveau(rs.getInt("niveau"));
-                user.setDomaine(rs.getString("domaine"));
-                user.setExperience(rs.getInt("experience"));
+                user.setId(rs.getInt(1));
+                user.setNom(rs.getString(2));
+                user.setPrenom(rs.getString(3));
+                user.setEmail(rs.getString(4));
+                user.setPassword(rs.getString(5));
+                user.setRole(rs.getString(6));
+                user.setSpecialite(rs.getString(7));
+                user.setNiveau(rs.getInt(8));
+                user.setDomaine(rs.getString(9));
+                user.setExperience(rs.getInt(10));
 
             }
         } catch (SQLException e) {

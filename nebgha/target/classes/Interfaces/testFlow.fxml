@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.groupeControllers.AfficherGroupeUserController">
+   <center>
+      <FlowPane fx:id="flowPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
+   <left>
+      <Pane prefHeight="400.0" prefWidth="142.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="6.0" layoutY="56.0" mnemonicParsing="false" opacity="0.94" prefHeight="125.0" prefWidth="122.0" style="-fx-background-color: #DEDDBA; -fx-background-radius: 100;" text="Button" textFill="#2749b9">
+               <font>
+                  <Font size="18.0" />
+               </font></Button>
+            <ImageView fitHeight="96.0" fitWidth="108.0" layoutX="19.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/R.gif" />
+               </image>
+            </ImageView>
+            <Button layoutX="6.0" layoutY="221.0" mnemonicParsing="false" opacity="0.94" prefHeight="126.0" prefWidth="122.0" style="-fx-background-color: #DEDDBA; -fx-background-radius: 100;" textFill="#2749b9">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="96.0" fitWidth="108.0" layoutX="23.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/M.gif" />
+               </image>
+            </ImageView>
+            <Separator layoutX="133.0" layoutY="-15.0" orientation="VERTICAL" prefHeight="532.0" prefWidth="0.0" style="-fx-background-color: #2749b9;" />
+         </children>
+      </Pane>
+   </left>
+   <top>
+      <Pane prefHeight="87.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="rsh" alignment="CENTER" layoutX="280.0" layoutY="14.0" prefHeight="43.0" prefWidth="357.0" promptText="Rechercher Groupe" style="-fx-background-radius: 30;">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <Separator layoutY="73.0" prefHeight="9.0" prefWidth="900.0" style="-fx-background-color: #2749b9;" />
+            <ImageView fitHeight="102.0" fitWidth="126.0" layoutX="7.0" layoutY="-15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </top>
+</BorderPane>

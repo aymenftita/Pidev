@@ -18,9 +18,8 @@
             <Image url="@../Images/Rb.png" />
          </image>
       </ImageView>
-      <TableView fx:id="MessageTable" layoutX="113.0" layoutY="65.0" prefHeight="293.0" prefWidth="586.0">
+      <TableView fx:id="MessageTable" layoutX="112.0" layoutY="65.0" prefHeight="294.0" prefWidth="587.0">
         <columns>
-          <TableColumn fx:id="Cid" prefWidth="39.20001220703125" text="ID" />
           <TableColumn fx:id="CidG" prefWidth="76.79998779296875" text="Id Groupe" />
             <TableColumn fx:id="CDate" prefWidth="115.199951171875" text="Date Creation" />
             <TableColumn fx:id="Ctext" prefWidth="353.5999816894531" text="Text Message" />
@@ -77,6 +76,7 @@
             <Cursor fx:constant="HAND" />
          </cursor></Button>
       <TextField fx:id="tf" layoutX="402.0" layoutY="25.0" opacity="0.0" prefHeight="14.0" prefWidth="3.0" />
+      <TextField fx:id="rsh" layoutX="159.0" layoutY="25.0" prefHeight="26.0" prefWidth="211.0" />
    </children>
 
 </AnchorPane>

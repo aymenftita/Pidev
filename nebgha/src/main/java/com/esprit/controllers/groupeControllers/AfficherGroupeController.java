@@ -1,32 +1,46 @@
 package com.esprit.controllers.groupeControllers;
 import com.esprit.controllers.otherControllers.SwitchScenesController;
 import com.esprit.models.Groupe;
+import com.esprit.models.Reclamation;
+import com.esprit.models.Status;
 import com.esprit.models.Utilisateur;
 import com.esprit.services.GroupeService;
+import com.esprit.services.UtilisateurService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.ChoiceBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyCode;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import static com.esprit.models.Status.*;
+import static com.esprit.models.Status.EnReponse;
 
 
-public class AfficherGroupeController {
+public class AfficherGroupeController implements Initializable {
 
 
     public TextField tf;
+    public TextField rsh;
     @FXML
     private TableView<Groupe> tableView;
 
-    @FXML
-    private TableColumn<Groupe, Integer> idColumn;
+
     @FXML
     private TableColumn<Groupe, Utilisateur> idColumng;
 
@@ -39,20 +53,66 @@ public class AfficherGroupeController {
     SwitchScenesController ss = new SwitchScenesController();
     ActionEvent event = null;
 
+    UtilisateurService us = new UtilisateurService();
+    private ObservableList<Utilisateur> users = FXCollections.observableArrayList(us.afficher());
+
     private ObservableList<Groupe> groupe = FXCollections.observableArrayList(gs.afficher());
 
 
-    @FXML
-    private void initialize() {
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id_groupe"));
-        idColumng.setCellValueFactory(new PropertyValueFactory<>("uid"));
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        idColumng.setCellValueFactory(new PropertyValueFactory<Groupe,Utilisateur>("uid"));
         nomColumn.setCellValueFactory(new PropertyValueFactory<>("titre"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
 
-        //chargerDonnees();
+
+
+        nomColumn.setCellFactory(TextFieldTableCell.<Groupe>forTableColumn());
+        idColumng.setCellFactory(ChoiceBoxTableCell.<Groupe,Utilisateur>forTableColumn(users));
+        dateColumn.setCellFactory(TextFieldTableCell.<Groupe>forTableColumn());
+
+
 
         tableView.setItems(groupe);
         System.out.println(groupe);
+        tableView.setEditable(true);
+
+        search();
+        modifier();
+    }
+
+
+    public void modifier(){
+
+        idColumng.setOnEditCommit(event -> {
+            Groupe g = event.getRowValue();
+            g.setUid(event.getNewValue());
+            gs.modifier(g);
+        });
+
+        nomColumn.setOnEditCommit(event -> {
+            Groupe g = event.getRowValue();
+            g.setTitre(event.getNewValue());
+            gs.modifier(g);
+
+        });
+
+        dateColumn.setOnEditCommit(event -> {
+            Groupe g = event.getRowValue();
+            g.setDescription(event.getNewValue());
+            gs.modifier(g);
+
+        });
+
+
+        tableView.setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.ENTER)) {
+                Groupe selectedProduit = tableView.getSelectionModel().getSelectedItem();
+                if (selectedProduit != null)
+                    gs.modifier(selectedProduit);
+            }
+        });
     }
 
 
@@ -103,42 +163,33 @@ public class AfficherGroupeController {
 
 
 
+    public void search(){
 
-    public Groupe getSelectedGroupe() {
-        return tableView.getSelectionModel().getSelectedItem();
+        FilteredList<Groupe> filteredData = new FilteredList<>(groupe , b -> true);
+        rsh.textProperty().addListener((observable,oldValue,newValue)->{
+            filteredData.setPredicate(groupe->{
+                if(newValue == null || newValue.isEmpty()){
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if(groupe.getDescription().toLowerCase().indexOf(lowerCaseFilter) != -1){
+                    return true;
+                }else if(groupe.getTitre().toLowerCase().indexOf(lowerCaseFilter) !=-1)
+                    return true;
+                else return false;
+            });
+
+
+
+        });
+
+        SortedList<Groupe> sortedData =new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(tableView.comparatorProperty());
+        tableView.setItems(sortedData);
     }
 
 
 
 
-
-    /*private void chargerDonnees() {
-        // Connectez-vous à la base de données et exécutez une requête SQL pour récupérer les données
-        // Assurez-vous d'adapter ces informations à votre propre configuration de base de données
-        String url = "jdbc:mysql://localhost:3306/nebgha";
-        String utilisateur = "root";
-        String motDePasse = "";
-
-        try (Connection connection = DriverManager.getConnection(url, utilisateur, motDePasse)) {
-            String sql = "SELECT * FROM groupe";
-            try (Statement statement = connection.createStatement();
-                 ResultSet rs = statement.executeQuery(sql)) {
-
-                while (rs.next()) {
-
-                    Integer id_groupe = rs.getInt("id_groupe");
-                    Integer creator_id = rs.getInt("creator_id");
-                    String titre = rs.getString("titre");
-                    String descripton = rs.getString("description");
-
-                    groupe.add(new Groupe(id_groupe,creator_id,titre,descripton));
-
-
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }*/
 
 }

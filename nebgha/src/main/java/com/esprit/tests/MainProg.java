@@ -1,28 +1,53 @@
 package com.esprit.tests;
 
-import com.esprit.models.Reclamation;
-import com.esprit.models.Utilisateur;
-import com.esprit.services.GroupeService;
-import com.esprit.services.ReclamationService;
-import com.esprit.services.UtilisateurService;
+import com.esprit.models.*;
+import com.esprit.services.*;
+
+import java.sql.Date;
 import java.sql.SQLException;
+
 
 public class MainProg {
 
     public static void main(String[] args) throws SQLException {
         GroupeService gs = new GroupeService();
-        //ReclamationService rs = new ReclamationService();
-        //UtilisateurService us =new UtilisateurService();
+        ReclamationService rs = new ReclamationService();
+        UtilisateurService us =new UtilisateurService();
+        MessageService ms =new MessageService();
         //test de reclamation valid
-        Utilisateur user = null;
-        Reclamation r = new Reclamation(user,"01/01/2024","testSujet1","testDescription1","testStatut1",1,"testResponsable1");
+        Utilisateur user = new Utilisateur(
+                8,
+                "nomTest",
+                "prenomTest",
+                "nom.prenom@esprit.com",
+                "12345678",
+                "roleTest",
+                "specTest",
+                100,
+                "DomaineTest",
+                1000);
 
-        System.out.println("******************************************************");
-        System.out.println(gs.afficher());
+
+        //Reclamation r = new Reclamation(user, String.valueOf(2024-01-20),"testSujet1","testDescription1","testStatut1",1,"testResponsable1");
+
+        //Gs.ajouter(g3);
+
+        Groupe g3 = new Groupe(user,"testttttttttt","descriptiontesttttttttttttt");
+
+        gs.ajouter(g3);
+        /*GroupService Gs=new GroupService();
+
+        Gs.modifier(g3);
+
+        System.out.println(us.rechercheUtilisateur(2));*/
 
 
+        //UserGroupe ug = new UserGroupe(u,g3);
+        //UserGroupeService ugs = new UserGroupeService();
+        //ugs.ajouter(ug);
+        //System.out.println(ms.afficher());
 
-        //Groupe g3 = new Groupe(1,1,"test","descriptiontest");
+        //ms.modifier(new Message(23,23,"2024-02-15","hello everyone im knew here, i need some guidness"));
 
         //Groupe g2 = new Groupe(0,1,"test Title","test Description");
 
