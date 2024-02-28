@@ -23,6 +23,8 @@ public class AjoutReponseController implements Initializable {
 
     @FXML
     private CheckBox est_correcte;
+    @FXML
+    private ComboBox<String> quizList;
 
     @FXML
     private TextField explicationtf;
@@ -41,13 +43,17 @@ public class AjoutReponseController implements Initializable {
     @FXML
     private Questions selectedQuestion;
 
+    private String role=Session.getRole();
+
+    private int userId=Session.getUserId();
+
 
     @FXML
     void addReponse(ActionEvent event) throws IOException {
         ReponsesService reponseService = new ReponsesService();
         String selectedQuestionName = questionList.getValue();
 
-        if (selectedQuestionName != null) {
+        if (selectedQuestionName != null && selectedQuestion != null) {
             if (texttf.getText().isEmpty() || ordretf.getText().isEmpty() || explicationtf.getText().isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Erreur");
@@ -75,12 +81,23 @@ public class AjoutReponseController implements Initializable {
                 Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 currentStage.close();
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowReponses.fxml"));
-                Parent root = loader.load();
+                FXMLLoader loader;
+                Parent root;
+                if (role.equals("Tuteur")) {
+                    loader = new FXMLLoader(getClass().getResource("/ShowReponsesTuteur.fxml"));
+                } else if (role.equals("Administrateur")) {
+                    loader = new FXMLLoader(getClass().getResource("/ShowReponses.fxml"));
+                } else {
+                    System.out.println("invalid role");
+                    return;
+                }
+                root = loader.load();
+
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.setTitle("Réponses");
                 stage.show();
+
             } catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Erreur");
@@ -95,18 +112,38 @@ public class AjoutReponseController implements Initializable {
         }
     }
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        QuestionsService questionsService = new QuestionsService();
-        List<Questions> questions = questionsService.afficher();
+        QuizService quizService = new QuizService();
+        List<Quiz> quizzes = quizService.afficher();
 
-        List<String> questionTexts = questions.stream().map(Questions::getTexte).collect(Collectors.toList());
-        questionList.setItems(FXCollections.observableArrayList(questionTexts));
+        if (role.equals("Tuteur")) {
+            quizzes = quizzes.stream()
+                    .filter(quiz -> quiz.getCreatorId() == userId)
+                    .collect(Collectors.toList());
+        }
 
-        questionList.setOnAction(event -> {
-            String selectedQuestionName = questionList.getValue();
-            selectedQuestion = questions.stream().filter(q -> q.getTexte().equals(selectedQuestionName)).findFirst().orElse(null);
+        List<String> quizNames = quizzes.stream().map(Quiz::getNom).collect(Collectors.toList());
+        quizList.setItems(FXCollections.observableArrayList(quizNames));
+
+        List<Quiz> finalQuizzes = quizzes;
+        quizList.setOnAction(event -> {
+            String selectedQuizName = quizList.getValue();
+            Quiz selectedQuiz = finalQuizzes.stream().filter(q -> q.getNom().equals(selectedQuizName)).findFirst().orElse(null);
+            QuestionsService questionsService=new QuestionsService();
+            if (selectedQuiz != null) {
+                List<Questions> questions = questionsService.afficherParQuiz(selectedQuiz.getQuizId());
+                List<String> questionTexts = questions.stream().map(Questions::getTexte).collect(Collectors.toList());
+                questionList.setItems(FXCollections.observableArrayList(questionTexts));
+
+                questionList.setOnAction(questionEvent -> {
+                    String selectedQuestionText = questionList.getValue();
+                    selectedQuestion = questions.stream().filter(q -> q.getTexte().equals(selectedQuestionText)).findFirst().orElse(null);
+                });
+            }
         });
+
     }
 
     @FXML

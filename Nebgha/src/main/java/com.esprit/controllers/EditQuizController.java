@@ -37,6 +37,8 @@ public class EditQuizController implements Initializable {
     private TextField titletf;
 
     private Quiz quizToEdit;
+    private String role=Session.getRole();
+
 
     public void initData(Quiz quiz) {
 
@@ -87,8 +89,18 @@ public class EditQuizController implements Initializable {
                 Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 currentStage.close();
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuiz.fxml"));
-                Parent root = loader.load();
+                FXMLLoader loader;
+                Parent root;
+                if (role.equals("Tuteur")) {
+                    loader = new FXMLLoader(getClass().getResource("/ShowQuizsTuteur.fxml"));
+                } else if (role.equals("Administrateur")) {
+                    loader = new FXMLLoader(getClass().getResource("/ShowQuizs.fxml"));
+                } else {
+                    System.out.println("invalid role");
+                    return;
+                }
+                root = loader.load();
+
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.setTitle("Quizs");
@@ -111,8 +123,19 @@ public class EditQuizController implements Initializable {
     void previous(MouseEvent event) throws IOException {
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.close();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuiz.fxml"));
-        Parent root = loader.load();
+
+        FXMLLoader loader;
+        Parent root;
+        if (role.equals("Tuteur")) {
+            loader = new FXMLLoader(getClass().getResource("/ShowQuizsTuteur.fxml"));
+        } else if (role.equals("Administrateur")) {
+            loader = new FXMLLoader(getClass().getResource("/ShowQuizs.fxml"));
+        } else {
+            System.out.println("invalid role");
+            return;
+        }
+        root = loader.load();
+
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Quizs");

@@ -14,12 +14,12 @@
                 <Image url="@images/Rb.png" />
             </image>
         </ImageView>
-        <Button layoutX="261.0" layoutY="29.0" mnemonicParsing="false" onAction="#ShowQuizs" prefHeight="58.0" prefWidth="294.0" stylesheets="@images/styles.css" text="Quizs">
+        <Button layoutX="261.0" layoutY="56.0" mnemonicParsing="false" onAction="#ShowQuizs" prefHeight="58.0" prefWidth="294.0" stylesheets="@images/styles.css" text="Quizs">
             <font>
                 <Font size="20.0" />
             </font>
         </Button>
-        <Button layoutX="263.0" layoutY="103.0" mnemonicParsing="false" onAction="#ShowQuestions" prefHeight="57.0" prefWidth="294.0" stylesheets="@images/styles.css" text="Questions">
+        <Button layoutX="263.0" layoutY="130.0" mnemonicParsing="false" onAction="#ShowQuestions" prefHeight="57.0" prefWidth="294.0" stylesheets="@images/styles.css" text="Questions">
             <effect>
                 <DropShadow />
             </effect>
@@ -27,7 +27,7 @@
                 <Font size="20.0" />
             </font>
         </Button>
-        <Button layoutX="264.0" layoutY="176.0" mnemonicParsing="false" onAction="#ShowReponses" prefHeight="57.0" prefWidth="294.0" stylesheets="@images/styles.css" text="Réponses">
+        <Button layoutX="264.0" layoutY="203.0" mnemonicParsing="false" onAction="#ShowReponses" prefHeight="57.0" prefWidth="294.0" stylesheets="@images/styles.css" text="Réponses">
             <effect>
                 <DropShadow />
             </effect>
@@ -35,17 +35,17 @@
                 <Font size="20.0" />
             </font>
         </Button>
-        <ImageView fitHeight="57.0" fitWidth="65.0" layoutX="273.0" layoutY="103.0">
+        <ImageView fitHeight="57.0" fitWidth="65.0" layoutX="273.0" layoutY="130.0">
             <image>
                 <Image url="@images/puzzle.gif" />
             </image>
         </ImageView>
-        <ImageView fitHeight="50.0" fitWidth="51.0" layoutX="283.0" layoutY="180.0">
+        <ImageView fitHeight="50.0" fitWidth="51.0" layoutX="283.0" layoutY="207.0">
             <image>
                 <Image url="@images/answer.gif" />
             </image>
         </ImageView>
-        <ImageView fitHeight="58.0" fitWidth="65.0" layoutX="271.0" layoutY="28.0">
+        <ImageView fitHeight="58.0" fitWidth="65.0" layoutX="271.0" layoutY="55.0">
             <image>
                 <Image url="@images/quiz.gif" />
             </image>
@@ -55,5 +55,10 @@
                 <Image url="@images/Black_Simple_Online_Education_Logo__1_-removebg-preview.png" />
             </image>
         </ImageView>
+      <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="24.0" layoutY="24.0" onMouseClicked="#previous">
+         <image>
+            <Image url="@images/previous.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>

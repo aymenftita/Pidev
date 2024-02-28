@@ -9,13 +9,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 
 public class EtudiantInterfaceController {
 
-    private int userId=1;
+    private int userId=Session.getUserId();
     @FXML
     private Label scoreLabel;
 
@@ -62,6 +63,17 @@ public class EtudiantInterfaceController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.setTitle(title);
+        stage.show();
+    }
+    @FXML
+    void previous(MouseEvent event) throws IOException {
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstPage.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Nebgha");
         stage.show();
     }
 

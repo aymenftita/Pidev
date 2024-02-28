@@ -5,9 +5,11 @@ import com.esprit.services.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -35,7 +37,7 @@ public class QuizsHistoryController {
 
     private ReponsesUtilisateurService reponsesUtilisateurService = new ReponsesUtilisateurService();
 
-    private int userId = 1;
+    private int userId = Session.getUserId();
 
 
     public void initialize() {
@@ -91,36 +93,41 @@ public class QuizsHistoryController {
         if (hasAttempted) {
             Button resultButton = new Button("Show results");
             resultButton.setOnAction(event -> {
-                try {
-                    showQuizResult(quiz.getQuizId(), userId);
-                } catch (IOException e) {
-                    System.err.println("Error loading quiz result: " + e.getMessage());
-                }
+                showQuizResult(quiz.getQuizId());
             });
             quizBlock.getChildren().addAll(nameLabel, difficultyLabel, durationLabel, resultButton);
         }
         return quizBlock;
     }
 
-    private void showQuizResult(int quizId, int userId) throws IOException {
-        Quiz quiz = quizService.getQuiz(quizId);
-        int totalTimeTaken = reponsesUtilisateurService.afficherParQuizEtUser(quizId, userId)
-                .stream()
-                .mapToInt(ReponsesUtilisateur::getTempsPris)
-                .sum();
-        int quizDuration = quiz.getDuree();
-        boolean completedInTime = totalTimeTaken <= quizDuration;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/QuizResults.fxml"));
-        Parent root = loader.load();
-        QuizResultsController resultController = loader.getController();
-        resultController.initialize(userId, quizId, completedInTime);
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Quiz Results");
-        stage.show();
-
+    private void showQuizResult(int quizId) {
+        try {
+            Stage currentStage = (Stage) quizPane.getScene().getWindow();
+            currentStage.close();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/QuizResults.fxml"));
+            Parent root = loader.load();
+            QuizResultsController resultController = loader.getController();
+            resultController.initialize(quizId);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Quiz Results");
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Error loading quiz result: " + e.getMessage());
+        }
     }
 
 
+    @FXML
+    void previous(MouseEvent event) throws IOException {
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/EtudiantInterface.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Etudiant");
+        stage.show();
+    }
 
 }

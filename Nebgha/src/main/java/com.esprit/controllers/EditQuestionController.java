@@ -44,6 +44,9 @@ public class EditQuestionController implements Initializable {
 
     @FXML
     private TextField texttf;
+    private String role=Session.getRole();
+
+    private int userId=Session.getUserId();
 
     @FXML
     void EditQuestion(ActionEvent event) throws IOException {
@@ -51,9 +54,14 @@ public class EditQuestionController implements Initializable {
         QuizService quizService = new QuizService();
         Quiz selectedQuiz = null;
         String selectedQuizName = quizList.getValue();
-        List<Quiz> quizzes = quizService.afficher();
+        List<Quiz> quizzes = null;
+        if (role.equals("Administrateur")) {
+            quizzes = quizService.afficher();
+        } else if (role.equals("Tuteur")) {
+            quizzes=quizService.afficherParUser(userId);
+        }
 
-        if (selectedQuizName != null) {
+        if (selectedQuizName != null && quizzes!=null) {
             selectedQuiz = quizzes.stream()
                     .filter(quiz -> quiz.getNom().equals(selectedQuizName))
                     .findFirst()
@@ -80,8 +88,18 @@ public class EditQuestionController implements Initializable {
                 Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 currentStage.close();
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuestions.fxml"));
-                Parent root = loader.load();
+                FXMLLoader loader;
+                Parent root;
+                if (role.equals("Tuteur")) {
+                    loader = new FXMLLoader(getClass().getResource("/ShowQuestionsTuteur.fxml"));
+                } else if (role.equals("Administrateur")) {
+                    loader = new FXMLLoader(getClass().getResource("/ShowQuestions.fxml"));
+                } else {
+                    System.out.println("invalid role");
+                    return;
+                }
+                root = loader.load();
+
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.setTitle("Questions");
@@ -126,8 +144,19 @@ public class EditQuestionController implements Initializable {
     void previous(MouseEvent event) throws IOException {
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.close();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuestions.fxml"));
-        Parent root = loader.load();
+
+        FXMLLoader loader;
+        Parent root;
+        if (role.equals("Tuteur")) {
+            loader = new FXMLLoader(getClass().getResource("/ShowQuestionsTuteur.fxml"));
+        } else if (role.equals("Administrateur")) {
+            loader = new FXMLLoader(getClass().getResource("/ShowQuestions.fxml"));
+        } else {
+            System.out.println("invalid role");
+            return;
+        }
+        root = loader.load();
+
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Questions");

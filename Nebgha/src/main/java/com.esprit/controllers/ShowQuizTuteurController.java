@@ -6,6 +6,7 @@ import com.esprit.models.Quiz;
 import com.esprit.models.ReponsesUtilisateur;
 import com.esprit.services.QuizService;
 import com.esprit.services.ReponsesUtilisateurService;
+import com.esprit.services.Session;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -54,7 +55,7 @@ public class ShowQuizTuteurController implements Initializable {
 
     private int selectedQuizId;
 
-    private int userId = 4;
+    private int userId = Session.getUserId();
 
     private QuizService quizService;
     @FXML
@@ -63,7 +64,6 @@ public class ShowQuizTuteurController implements Initializable {
     @FXML
     private TableColumn<Quiz, Integer> timesPassedColumn;
 
-    private String role = "tuteur";
 
 
 
@@ -215,9 +215,6 @@ public class ShowQuizTuteurController implements Initializable {
     void openAjout(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjoutQuiz.fxml"));
         Parent root = loader.load();
-        AjoutQuizController ajoutQuizController = loader.getController();
-        ajoutQuizController.setRole(role);
-        ajoutQuizController.setUserId(4);
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(new Scene(root));
         currentStage.setTitle("Ajouter Quiz");

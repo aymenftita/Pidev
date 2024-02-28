@@ -59,7 +59,6 @@ public class ShowQuizController implements Initializable {
         private boolean ascendingOrder = true;
         @FXML
         private ComboBox<String> difficultyComboBox;
-        private String role = "administrateur";
 
 
     @Override
@@ -194,9 +193,6 @@ public class ShowQuizController implements Initializable {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjoutQuiz.fxml"));
         Parent root = loader.load();
-        AjoutQuizController ajoutQuizController = loader.getController();
-        ajoutQuizController.setRole(role);
-        ajoutQuizController.setUserId(2);
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(new Scene(root));
         currentStage.setTitle("Ajouter Quiz");

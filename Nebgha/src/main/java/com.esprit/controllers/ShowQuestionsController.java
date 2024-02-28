@@ -49,7 +49,6 @@ public class ShowQuestionsController implements Initializable {
     private int selectedQuestionId;
     @FXML
     private TextField searchField;
-    private String role = "administrateur";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -184,10 +183,6 @@ public class ShowQuestionsController implements Initializable {
     void openAjout(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjoutQuestion.fxml"));
         Parent root = loader.load();
-        AjoutQuestionController ajoutQuestionController = loader.getController();
-        ajoutQuestionController.setRole(role);
-        ajoutQuestionController.setUserId(2);
-        ajoutQuestionController.initialize();
         Stage currentStage = (Stage) questionTableView.getScene().getWindow();
         currentStage.setTitle("Ajouter Question");
         currentStage.setScene(new Scene(root));

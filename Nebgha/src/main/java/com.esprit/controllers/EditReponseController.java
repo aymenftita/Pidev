@@ -15,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -33,11 +34,22 @@ public class EditReponseController implements Initializable {
     private ComboBox<String> questionList;
 
     @FXML
+    private ComboBox<String> quizList;
+
+
+    @FXML
     private CheckBox est_correcte;
 
     @FXML
     private TextField texttf;
+    private String role=Session.getRole();
 
+    private int userId=Session.getUserId();
+    private List<Questions> allQuestions;
+
+
+
+    private Questions selectedQuestion; // Declaring selectedQuestion outside to be accessible
 
     public void initData(Reponses reponse) {
         this.reponse = reponse;
@@ -56,6 +68,7 @@ public class EditReponseController implements Initializable {
         }
         est_correcte.setSelected(reponse.isEstCorrecte());
     }
+
 
 
 
@@ -102,8 +115,18 @@ public class EditReponseController implements Initializable {
                 Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 currentStage.close();
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowReponses.fxml"));
-                Parent root = loader.load();
+                FXMLLoader loader;
+                Parent root;
+                if (role.equals("Tuteur")) {
+                    loader = new FXMLLoader(getClass().getResource("/ShowReponsesTuteur.fxml"));
+                } else if (role.equals("Administrateur")) {
+                    loader = new FXMLLoader(getClass().getResource("/ShowReponses.fxml"));
+                } else {
+                    System.out.println("invalid role");
+                    return;
+                }
+                root = loader.load();
+
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.setTitle("Réponses");
@@ -117,21 +140,58 @@ public class EditReponseController implements Initializable {
         }
 
 
-        @Override
+    @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        QuestionsService questionService = new QuestionsService();
-        List<Questions> questions = questionService.afficher();
+        QuizService quizService = new QuizService();
+        List<Quiz> quizzes = quizService.afficher();
 
-        List<String> questionNames = questions.stream().map(Questions::getTexte).collect(Collectors.toList());
-        questionList.setItems(FXCollections.observableArrayList(questionNames));
+        if (role.equals("Tuteur")) {
+            quizzes = quizzes.stream()
+                    .filter(quiz -> quiz.getCreatorId() == userId)
+                    .collect(Collectors.toList());
+        }
+
+        List<String> quizNames = quizzes.stream().map(Quiz::getNom).collect(Collectors.toList());
+        quizList.setItems(FXCollections.observableArrayList(quizNames));
+
+        allQuestions = new ArrayList<>();
+
+        List<Quiz> finalQuizzes = quizzes;
+        quizList.setOnAction(event -> {
+            String selectedQuizName = quizList.getValue();
+            Quiz selectedQuiz = finalQuizzes.stream().filter(q -> q.getNom().equals(selectedQuizName)).findFirst().orElse(null);
+            QuestionsService questionsService = new QuestionsService();
+            if (selectedQuiz != null) {
+                allQuestions = questionsService.afficherParQuiz(selectedQuiz.getQuizId());
+                List<String> questionTexts = allQuestions.stream().map(Questions::getTexte).collect(Collectors.toList());
+                questionList.setItems(FXCollections.observableArrayList(questionTexts));
+            }
+        });
+
+        questionList.setOnAction(event -> {
+            String selectedQuestionText = questionList.getValue();
+            selectedQuestion = allQuestions.stream().filter(q -> q.getTexte().equals(selectedQuestionText)).findFirst().orElse(null);
+        });
     }
+
 
     @FXML
     void previous(MouseEvent event) throws IOException {
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.close();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowReponses.fxml"));
-        Parent root = loader.load();
+
+        FXMLLoader loader;
+        Parent root;
+        if (role.equals("Tuteur")) {
+            loader = new FXMLLoader(getClass().getResource("/ShowReponsesTuteur.fxml"));
+        } else if (role.equals("Administrateur")) {
+            loader = new FXMLLoader(getClass().getResource("/ShowReponses.fxml"));
+        } else {
+            System.out.println("invalid role");
+            return;
+        }
+        root = loader.load();
+
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Réponses");

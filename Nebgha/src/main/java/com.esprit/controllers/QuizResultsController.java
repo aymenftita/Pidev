@@ -3,9 +3,16 @@ package com.esprit.controllers;
 import com.esprit.models.*;
 import com.esprit.services.*;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.List;
 
 public class QuizResultsController {
@@ -15,8 +22,7 @@ public class QuizResultsController {
     @FXML
     private Label scoreLabel;
 
-    @FXML
-    private Label timeMessageLabel;
+private int userId=Session.getUserId();
 
     @FXML
     private VBox questionsContainer;
@@ -26,7 +32,7 @@ public class QuizResultsController {
     private final ReponsesService reponseService = new ReponsesService();
     private final ReponsesUtilisateurService reponseUtilisateurService = new ReponsesUtilisateurService();
 
-    public void initialize(int userId, int quizId, boolean completedInTime) {
+    public void initialize( int quizId) {
         Quiz quiz = quizService.getQuiz(quizId);
         List<Questions> questions = questionService.afficherParQuiz(quizId);
         titleLabel.setText("Résultats du quiz - " + quiz.getNom());
@@ -70,6 +76,16 @@ public class QuizResultsController {
         double score = (double) correctAnswers / totalQuestions * 100;
         scoreLabel.setText("Vous avez répondu à " + correctAnswers + " de " + totalQuestions + " questions correctement.\n"
                 + "Votre score est: " + String.format("%.1f", score) + "%");
-        timeMessageLabel.setText(completedInTime ? "Vous avez terminé le quiz à temps." : "Vous avez dépassé la durée du quiz.");
+    }
+    @FXML
+    void previous(MouseEvent event) throws IOException {
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/QuizsHistory.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Historique");
+        stage.show();
     }
 }

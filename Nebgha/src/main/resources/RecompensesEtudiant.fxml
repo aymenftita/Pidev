@@ -20,4 +20,9 @@
          <Image url="@images/award.gif" />
       </image>
    </ImageView>
+   <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="14.0" layoutY="18.0" onMouseClicked="#previous">
+      <image>
+         <Image url="@images/previous.png" />
+      </image>
+   </ImageView>
 </AnchorPane>

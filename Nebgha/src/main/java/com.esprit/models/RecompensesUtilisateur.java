@@ -26,6 +26,12 @@ public class RecompensesUtilisateur {
         this.statut = statut;
         this.dateUtilisation = dateUtilisation;
     }
+    public RecompensesUtilisateur(int userId, Recompenses reward, boolean statut, Date dateUtilisation) {
+        this.userId = userId;
+        this.reward = reward;
+        this.statut = statut;
+        this.dateUtilisation = dateUtilisation;
+    }
 
     public int getUserRewardId() {
         return userRewardId;

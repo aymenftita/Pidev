@@ -42,17 +42,11 @@ public class AjoutQuestionController  {
     @FXML
     private Quiz selectedQuiz;
 
-    private String role;
+    private String role=Session.getRole();
 
-    private int userId;
+    private int userId=Session.getUserId();
 
 
-    public void setRole(String role) {
-        this.role = role;
-    }
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
 
 
 
@@ -83,20 +77,23 @@ public class AjoutQuestionController  {
 
                 Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 currentStage.close();
-               if (role.equals("administrateur")){
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuestions.fxml"));
-                Parent root = loader.load();
+
+                FXMLLoader loader;
+                Parent root;
+                if (role.equals("Tuteur")) {
+                    loader = new FXMLLoader(getClass().getResource("/ShowQuestionsTuteur.fxml"));
+                } else if (role.equals("Administrateur")) {
+                    loader = new FXMLLoader(getClass().getResource("/ShowQuestions.fxml"));
+                } else {
+                    System.out.println("invalid role");
+                    return;
+                }
+                root = loader.load();
+
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.setTitle("Questions");
-                stage.show();}
-             else if (role.equals("tuteur")){
-                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuestionsTuteur.fxml"));
-                 Parent root = loader.load();
-                 Stage stage = new Stage();
-                 stage.setScene(new Scene(root));
-                 stage.setTitle("Questions");
-                 stage.show();}
+                stage.show();
 
             } catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -117,32 +114,33 @@ public class AjoutQuestionController  {
     void previous(MouseEvent event) throws IOException {
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.close();
-        if (role.equals("administrateur")){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuestions.fxml"));
-        Parent root = loader.load();
+
+        FXMLLoader loader;
+        Parent root;
+        if (role.equals("Tuteur")) {
+            loader = new FXMLLoader(getClass().getResource("/ShowQuestionsTuteur.fxml"));
+        } else if (role.equals("Administrateur")) {
+            loader = new FXMLLoader(getClass().getResource("/ShowQuestions.fxml"));
+        } else {
+            System.out.println("invalid role");
+            return;
+        }
+        root = loader.load();
+
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Questions");
-        stage.show();}
-        else if (role.equals("tuteur")) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuestionsTuteur.fxml"));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Questions");
-            stage.show();
-        }
+        stage.show();
     }
 
     public void initialize() {
-        System.out.println(role);
-        System.out.println(userId);
+
         if (role != null) {
             QuizService quizService = new QuizService();
             List<Quiz> quizzes;
-            if (role.equals("administrateur")) {
+            if (role.equals("Administrateur")) {
                 quizzes = quizService.afficher();
-            } else if (role.equals("tuteur")) {
+            } else if (role.equals("Tuteur")) {
                 quizzes = quizService.afficherParUser(userId);
             } else {
                 quizzes = Collections.emptyList();

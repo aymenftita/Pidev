@@ -11,9 +11,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -53,7 +55,7 @@ public class QuizsEtudiantController {
     private ReponsesUtilisateurService reponsesUtilisateurService = new ReponsesUtilisateurService();
 
 
-    private int userId = 1;
+    private int userId = Session.getUserId();
 
     private int quizId;
     private int quizScore;
@@ -118,7 +120,7 @@ public class QuizsEtudiantController {
             startButton.setText("Show results");
             startButton.setOnAction(event -> {
                 try {
-                    showQuizResult(quiz.getQuizId(), userId);
+                    showQuizResult(quiz.getQuizId());
                 } catch (IOException e) {
                     System.err.println("Error loading quiz result: " + e.getMessage());
                 }
@@ -143,7 +145,7 @@ public class QuizsEtudiantController {
 
         try {
             if (hasAttempted) {
-                showQuizResult(quizId, userId);
+                showQuizResult(quizId);
             } else {
                 currentQuestions = questionsService.afficherParQuiz(quizId);
                 currentQuestionIndex = 0;
@@ -355,7 +357,7 @@ public class QuizsEtudiantController {
             Quiz quiz = quizService.getQuiz(quizId);
             Reponses reponse = reponsesService.getReponse(responseId);
             ReponsesUtilisateur reponsesUtilisateur = new ReponsesUtilisateur(
-                    userId, reponse, quiz,  Date.valueOf("2024-02-24"), timeTakenSeconds, isCorrect);
+                    userId, reponse, quiz, timeTakenSeconds, isCorrect);
             reponsesUtilisateurService.ajouter(reponsesUtilisateur);
 
             if (currentQuestionIndex < currentQuestions.size() - 1) {
@@ -368,8 +370,10 @@ public class QuizsEtudiantController {
     }
 
     private void showFinalResult() throws IOException {
-        Stage currentStage = (Stage) quizPane.getScene().getWindow();
-        currentStage.close();
+        if (executorService != null) {
+            executorService.shutdown();
+        }
+
         RecompensesService recompensesService = new RecompensesService();
         List<Recompenses> recompensesList = recompensesService.afficher();
         int rewardsRequiredScore = recompensesList.stream()
@@ -377,82 +381,68 @@ public class QuizsEtudiantController {
                 .findFirst()
                 .orElse(0);
 
-        RecompensesUtilisateurService recompensesUtilisateurService = new RecompensesUtilisateurService();
 
         int totalQuestionPoints = currentQuestions.stream()
                 .mapToInt(Questions::getPoints)
                 .sum();
         int totalQuestions = currentQuestions.size();
         double score = ((double) quizScore / totalQuestionPoints) * 100;
-        System.out.println(score);
 
         int correctAnswers = (int) currentQuestions.stream()
                 .filter(question -> reponsesUtilisateurService.afficherParQuizEtUser(quizId, userId)
                         .stream()
                         .anyMatch(reponse -> reponse.getReponse().getQuestion().getQuestionId() == question.getQuestionId() && reponse.isCorrect()))
                 .count();
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Quiz Result");
-        alert.setHeaderText(null);
-        if (score >= rewardsRequiredScore) {
-            Recompenses reachedReward = recompensesList.stream()
-                    .filter(recompenses -> score >= recompenses.getScoreRequis())
-                    .findFirst()
-                    .orElse(null);
 
-
-
-            if (reachedReward != null) {
-                RecompensesUtilisateur recompensesUtilisateur = new RecompensesUtilisateur(userId, reachedReward, Date.valueOf("2024-02-24"), true, Date.valueOf("2024-02-24"));
-                recompensesUtilisateurService.ajouter(recompensesUtilisateur);
-
-                alert.setTitle("Congratulations!");
-                alert.setHeaderText(null);
-                alert.setContentText("You answered " + correctAnswers + " out of " + totalQuestions + " questions correctly.\n"
-                        + "Your score: " + String.format("%.2f", score) + "%\n"
-                        + "Required score for reward: " + rewardsRequiredScore+"You have reached the required score for a reward!");
-
-                alert.showAndWait();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/QuizHistory.fxml"));
-                Parent root = loader.load();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.setTitle("Quiz History");
-                stage.show();
-            }
+        Recompenses reachedReward = recompensesList.stream()
+                .filter(recompenses -> score >= recompenses.getScoreRequis())
+                .findFirst()
+                .orElse(null);
+        RecompensesUtilisateurService recompensesUtilisateurService = new RecompensesUtilisateurService();
+        boolean hasReceivedReward = recompensesUtilisateurService.afficherParUser(userId)
+                .stream()
+                .anyMatch(recompensesUtilisateur -> recompensesUtilisateur.getReward().getRewardId() == reachedReward.getRewardId());
+        if (!hasReceivedReward) {
+            RecompensesUtilisateur recompensesUtilisateur = new RecompensesUtilisateur(userId, reachedReward, new Date(System.currentTimeMillis()),false,null);
+            recompensesUtilisateurService.ajouter(recompensesUtilisateur);
         }
-        else {
 
-            alert.setContentText("You answered " + correctAnswers + " out of " + totalQuestions + " questions correctly.\n"
-                    + "Your score: " + String.format("%.2f", score) + "%\n"
-                    + "Required score for reward: " + rewardsRequiredScore);
-            alert.showAndWait();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/QuizHistory.fxml"));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Quiz History");
-            stage.show();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/QuizComplete.fxml"));
+        Parent root = loader.load();
 
+        QuizCompleteController quizCompleteController = loader.getController();
+        if (reachedReward != null) {
+            quizCompleteController.setTitle("Vous avez obtenu une récompense!");
+        } else {
+            quizCompleteController.setTitle("Quiz terminé!");
         }
+        quizCompleteController.setQuizId(quizId);
+        quizCompleteController.setCorrect(correctAnswers);
+        quizCompleteController.setIncorrect(totalQuestions - correctAnswers);
+        quizCompleteController.setPercentage(String.format("%.2f", score) + "%\n");
+        quizCompleteController.setTotal(totalQuestions);
+        quizCompleteController.setScore(quizScore);
+
+        Stage currentStage = (Stage) quizPane.getScene().getWindow();
+        currentStage.close();
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Quiz Finished");
+        stage.show();
     }
 
 
 
 
 
-    private void showQuizResult(int quizId, int userId) throws IOException {
-        Quiz quiz = quizService.getQuiz(quizId);
-        int totalTimeTaken = reponsesUtilisateurService.afficherParQuizEtUser(quizId, userId)
-                .stream()
-                .mapToInt(ReponsesUtilisateur::getTempsPris)
-                .sum();
-        int quizDuration = quiz.getDuree();
-        boolean completedInTime = totalTimeTaken <= quizDuration;
+
+
+    private void showQuizResult(int quizId) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/QuizResults.fxml"));
         Parent root = loader.load();
         QuizResultsController resultController = loader.getController();
-        resultController.initialize(userId, quizId, completedInTime);
+        resultController.initialize(quizId);
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Quiz Results");
@@ -479,6 +469,16 @@ public class QuizsEtudiantController {
                 .collect(Collectors.toList());
         updateQuizList(sortedQuizzes);
     }
-
+    @FXML
+    void previous(MouseEvent event) throws IOException {
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/EtudiantInterface.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Etudiant");
+        stage.show();
+    }
 
 }

@@ -30,6 +30,14 @@ public class ReponsesUtilisateur {
         this.isCorrect = isCorrect;
     }
 
+    public ReponsesUtilisateur(int userId, Reponses reponse, Quiz quiz, int tempsPris, boolean isCorrect) {
+        this.userId=userId;
+        this.reponse=reponse;
+        this.quiz=quiz;
+        this.tempsPris=tempsPris;
+        this.isCorrect=isCorrect;
+    }
+
     public boolean isCorrect() {
         return isCorrect;
     }

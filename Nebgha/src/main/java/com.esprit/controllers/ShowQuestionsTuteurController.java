@@ -5,6 +5,7 @@ import com.esprit.models.Questions;
 import com.esprit.models.Quiz;
 import com.esprit.services.QuestionsService;
 import com.esprit.services.QuizService;
+import com.esprit.services.Session;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -55,7 +56,6 @@ public class ShowQuestionsTuteurController implements Initializable {
     @FXML
     private TextField searchField;
 
-    private String role = "tuteur";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -68,7 +68,7 @@ public class ShowQuestionsTuteurController implements Initializable {
         ordre.setCellValueFactory(new PropertyValueFactory<>("ordre"));
         categorie.setCellValueFactory(new PropertyValueFactory<>("categorie"));
 
-        List<Quiz> quizzes = quizService.afficherParUser(4);
+        List<Quiz> quizzes = quizService.afficherParUser(Session.getUserId());
         ObservableList<String> quizNames = FXCollections.observableArrayList(
                 quizzes.stream()
                         .map(Quiz::getNom)
@@ -184,10 +184,6 @@ public class ShowQuestionsTuteurController implements Initializable {
     void openAjout(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjoutQuestion.fxml"));
         Parent root = loader.load();
-        AjoutQuestionController ajoutQuestionController = loader.getController();
-        ajoutQuestionController.setRole(role);
-        ajoutQuestionController.setUserId(4);
-        ajoutQuestionController.initialize();
         Stage currentStage = (Stage) questionTableView.getScene().getWindow();
         currentStage.setTitle("Ajouter Question");
         currentStage.setScene(new Scene(root));
@@ -198,7 +194,7 @@ public class ShowQuestionsTuteurController implements Initializable {
 
     private void refreshQuestionsTable() {
         String selectedQuizName = quizList.getValue();
-        List<Quiz> quizzes = quizService.afficherParUser(4);
+        List<Quiz> quizzes = quizService.afficherParUser(Session.getUserId());
         if (selectedQuizName != null) {
             Quiz selectedQuiz = quizzes.stream()
                     .filter(quiz -> quiz.getNom().equals(selectedQuizName))

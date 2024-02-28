@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.esprit.controllers.QuizsHistoryController"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.QuizsHistoryController">
 
-    <TextField fx:id="searchField" promptText="Rechercher quiz" layoutX="10.0" layoutY="10.0"/>
-    <ComboBox fx:id="difficultyComboBox" promptText="Difficulté" layoutX="200.0" layoutY="10.0">
+    <TextField fx:id="searchField" layoutX="90.0" layoutY="23.0" promptText="Rechercher quiz" />
+    <ComboBox fx:id="difficultyComboBox" layoutX="253.0" layoutY="23.0" promptText="Difficulté">
         <items>
             <FXCollections fx:factory="observableArrayList">
                 <String fx:value="débutant" />
@@ -23,8 +22,12 @@
             </FXCollections>
         </items>
     </ComboBox>
-    <ScrollPane layoutX="10.0" layoutY="40.0" prefHeight="350.0" prefWidth="580.0">
-        <FlowPane fx:id="quizPane" prefWrapLength="580.0" hgap="10.0" vgap="10.0"/>
+    <ScrollPane layoutX="10.0" layoutY="69.0" prefHeight="350.0" prefWidth="580.0">
+        <FlowPane fx:id="quizPane" hgap="10.0" prefWrapLength="580.0" vgap="10.0" />
     </ScrollPane>
-
+   <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="24.0" layoutY="22.0" onMouseClicked="#previous">
+      <image>
+         <Image url="@images/previous.png" />
+      </image>
+   </ImageView>
 </AnchorPane>

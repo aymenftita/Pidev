@@ -6,6 +6,7 @@ import com.esprit.models.Reponses;
 import com.esprit.services.QuestionsService;
 import com.esprit.services.QuizService;
 import com.esprit.services.ReponsesService;
+import com.esprit.services.Session;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -170,7 +171,7 @@ public class ShowReponsesTuteurController implements Initializable {
     }
 
     private void refreshQuizzes() {
-        List<Quiz> quizzes = quizService.afficherParUser(4);
+        List<Quiz> quizzes = quizService.afficherParUser(Session.getUserId());
         ObservableList<String> quizNames = FXCollections.observableArrayList(
                 quizzes.stream()
                         .map(Quiz::getNom)

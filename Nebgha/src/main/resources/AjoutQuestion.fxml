@@ -57,9 +57,9 @@
          <font>
             <Font size="15.0" />
          </font></Button>
-      <ImageView fitHeight="51.0" fitWidth="56.0" layoutY="9.0" onMouseClicked="#previous">
+      <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="17.0" layoutY="14.0" onMouseClicked="#previous">
          <image>
-            <Image url="@images/previous.gif" />
+            <Image url="@images/previous.png" />
          </image>
       </ImageView>
    </children>
