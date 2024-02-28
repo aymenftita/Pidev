@@ -1,37 +1,64 @@
 package com.esprit.models;
 
+import javafx.beans.binding.BooleanExpression;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 import java.util.Date;
+import java.util.Objects;
 
 
 public class Evenement {
     private int id;
-    private int creatorId;
+
     private String nom;
     private Date date;
-    private int heure;
-    private int duree;
-    private int lieuId;
+    private Localisation lieuId;
     private String description;
-
-    public Evenement(int id, int creatorId, String nom, Date date, int heure, int duree, int lieuId, String description) {
-        this.id = id;
-        this.creatorId = creatorId;
-        this.nom = nom;
-        this.date = date;
-        this.heure = heure;
-        this.duree = duree;
-        this.lieuId = lieuId;
-        this.description = description;
+private String image;
+    public Evenement() {
     }
 
-    public Evenement(int creatorId, String nom, Date date, int heure, int duree, int lieuId, String description) {
-        this.creatorId = creatorId;
+    public Evenement(int id, String nom, Date date, Localisation lieuId, String description, String image) {
+        this.id = id;
         this.nom = nom;
         this.date = date;
-        this.heure = heure;
-        this.duree = duree;
         this.lieuId = lieuId;
         this.description = description;
+        this.image = image;
+    }
+
+    public Evenement(String nom, Date date, Localisation lieuId, String description, String image) {
+        this.nom = nom;
+        this.date = date;
+        this.lieuId = lieuId;
+        this.description = description;
+        this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return
+
+                "Nom '" + nom + '\'' +
+                ", date=" + date +
+                ", lieuId=" + lieuId +
+                ", description='" + description + '\'' +
+
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Evenement evenement = (Evenement) o;
+        return id == evenement.id && lieuId == evenement.lieuId && Objects.equals(nom, evenement.nom) && Objects.equals(date, evenement.date) && Objects.equals(description, evenement.description) && Objects.equals(image, evenement.image);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nom, date, lieuId, description, image);
     }
 
     public int getId() {
@@ -40,14 +67,6 @@ public class Evenement {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getCreatorId() {
-        return creatorId;
-    }
-
-    public void setCreatorId(int creatorId) {
-        this.creatorId = creatorId;
     }
 
     public String getNom() {
@@ -66,27 +85,11 @@ public class Evenement {
         this.date = date;
     }
 
-    public int getHeure() {
-        return heure;
-    }
-
-    public void setHeure(int heure) {
-        this.heure = heure;
-    }
-
-    public int getDuree() {
-        return duree;
-    }
-
-    public void setDuree(int duree) {
-        this.duree = duree;
-    }
-
-    public int getLieuId() {
+    public Localisation getLieuId() {
         return lieuId;
     }
 
-    public void setLieuId(int lieuId) {
+    public void setLieuId(Localisation lieuId) {
         this.lieuId = lieuId;
     }
 
@@ -96,6 +99,14 @@ public class Evenement {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
 

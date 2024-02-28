@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.UpdateEvenementController">
+   <children>
+      <TextField fx:id="Nom" layoutX="131.0" layoutY="76.0" />
+      <TextField fx:id="ImageF" layoutX="132.0" layoutY="228.0" />
+      <ComboBox fx:id="Lieu" layoutX="131.0" layoutY="175.0" prefWidth="150.0" />
+      <Button layoutX="381.0" layoutY="323.0" mnemonicParsing="false" onAction="#Ajouter" text="UPDATE" />
+      <Button layoutX="229.0" layoutY="228.0" mnemonicParsing="false" onAction="#importer" text="Import" />
+      <TextArea fx:id="Description" layoutX="319.0" layoutY="88.0" prefHeight="200.0" prefWidth="200.0" />
+      <ImageView fx:id="imageV" fitHeight="83.0" fitWidth="104.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="champ_nom" layoutX="132.0" layoutY="101.0" text="Label" textFill="RED">
+         <font>
+            <Font name="Candara" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="champ_date" layoutX="132.0" layoutY="150.0" text="Label" textFill="RED">
+         <font>
+            <Font name="Candara" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="champ_lieu" layoutX="132.0" layoutY="200.0" text="Label" textFill="RED">
+         <font>
+            <Font name="Candara" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="champ_desc" layoutX="319.0" layoutY="288.0" text="Label" textFill="RED">
+         <font>
+            <Font name="Candara" size="12.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="Datee" layoutX="132.0" layoutY="125.0" prefHeight="25.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>

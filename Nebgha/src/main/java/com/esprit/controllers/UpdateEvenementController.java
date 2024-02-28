@@ -9,23 +9,21 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.sql.Date;
-
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class AjoutEvenementController implements Initializable {
+public class UpdateEvenementController implements Initializable {
 
     @FXML
     private DatePicker Datee;
@@ -59,6 +57,7 @@ public class AjoutEvenementController implements Initializable {
     EvenementService es = new EvenementService();
     LocalisationService ls = new LocalisationService();
     private String nom_loc;
+    Evenement event=new Evenement();
     @FXML
     void Ajouter(ActionEvent event) {
         if (Datee.getValue()== null )
@@ -80,11 +79,13 @@ public class AjoutEvenementController implements Initializable {
 
                 Evenement e = new Evenement();
                 e.setNom(Nom.getText());
+                e.setId(this.event.getId());
                 e.setDate(Date.valueOf(Datee.getValue()));
                 e.setDescription(Description.getText());
                 e.setImage(ImageF.getText());
                 e.setLieuId(ls.findByName(nom_loc));
-                es.ajouter(e);
+
+                es.modifier(e);
                 System.out.println("Event ajouté avec succées !");
             } catch (SQLException ex) {
                 System.out.println("error" + ex.getMessage());
@@ -97,6 +98,17 @@ public class AjoutEvenementController implements Initializable {
 
 }
 
+    public Evenement setEvenement(Evenement e) {
+        Nom.setText(e.getNom());
+        Description.setText(e.getDescription());
+        ImageF.setText(e.getImage());
+        this.event.setId(e.getId());
+        //Date.setText(e.getNom());
+        //Lieu.setText(e.getNom());
+
+        return this.event;
+
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         champ_nom.setText("");

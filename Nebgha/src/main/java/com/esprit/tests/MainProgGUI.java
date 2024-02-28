@@ -16,11 +16,17 @@ public class MainProgGUI extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjoutEvenement.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Ajout Evenement");
-        primaryStage.show();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjoutEvenement.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root, 1300, 800);
+            primaryStage.setScene(scene);
+
+            primaryStage.setTitle("Menu ghada");
+            primaryStage.show();
+
+        } catch (IOException ex) {
+            System.out.println("error" + ex.getMessage());
+        }
     }
 }
