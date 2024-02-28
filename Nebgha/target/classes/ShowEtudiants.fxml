@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.esprit.controllers.ShowEtudiantsController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <children>
+
+        <TableView fx:id="etudiantTableView" layoutY="118.0" prefHeight="200.0" prefWidth="661.0">
+            <columns>
+                <TableColumn fx:id="nom" prefWidth="75.0" text="Nom" />
+                <TableColumn fx:id="prenom" prefWidth="75.0" text="Prénom" />
+
+            </columns>
+        </TableView>
+        <Label layoutX="239.0" layoutY="22.0" text="Liste des Etudiants" textFill="#000066">
+
+        </Label>
+
+    </children>
+
+</AnchorPane>
