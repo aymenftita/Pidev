@@ -64,6 +64,37 @@ public class AjoutQuestionController {
 
         //Sujet selectedSujet = cbChoixSujet.getValue();
 
+        String titreQuestion = tfQuestionTitre.getText().trim(); // Trim leading/trailing whitespaces
+
+        if (titreQuestion.isEmpty()) {
+            // Display error message (e.g., using an Alert)
+            Alert alertVide = new Alert(Alert.AlertType.ERROR);
+            alertVide.setTitle("Erreur de Saisie");
+            alertVide.setHeaderText("Titre vide!");
+            alertVide.setContentText("Veuillez saisir le titre de la question.");
+            alertVide.show();
+            return; // Prevent further execution if content is empty
+        } else if (titreQuestion.length() > 30) {
+            // Display error message for exceeding length
+            Alert alertLength = new Alert(Alert.AlertType.ERROR);
+            alertLength.setTitle("Erreur de Saisie");
+            alertLength.setHeaderText("Titre question trop longue!");
+            alertLength.setContentText("Le titre de question ne doit pas dépasser 30 caractères.");
+            alertLength.show();
+            return;
+        }
+
+        String contenuQuestion = taContenuQuestion.getText().trim();
+        if (contenuQuestion.isEmpty()) {
+            // Display error message (e.g., using an Alert)
+            Alert alertVide = new Alert(Alert.AlertType.ERROR);
+            alertVide.setTitle("Erreur de Saisie");
+            alertVide.setHeaderText("Contenu vide!");
+            alertVide.setContentText("Veuillez saisir le contenu de la question.");
+            alertVide.show();
+            return; // Prevent further execution if content is empty
+        }
+
         //Création du service et ajout d'entité
         questionService rs = new questionService();
         sujetService ss = new sujetService();

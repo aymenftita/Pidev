@@ -122,4 +122,24 @@ public class questionService implements IService<Question> {
         return questions;
     }
 
+    public int getNbrReponse(Question question) {
+
+        int count = 0;
+        String req = "SELECT COUNT(*) AS nbrReponses FROM reponse_forum WHERE question_id = " + question.getId();
+
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(req);
+
+            if (rs.next()) {  // Check if a row exists
+                count = rs.getInt("nbrReponses");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return count;
+
+    }
+
 }

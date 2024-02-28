@@ -57,18 +57,62 @@ public class InterfaceForumUserController {
 
         // Save changes on commit
         tvAffichageSujetSujet.setOnEditCommit(event -> {
+
+            String newSujet = event.getNewValue();
+            if (newSujet.trim().isEmpty()) {
+                // Display error message for empty text
+                Alert alertVide = new Alert(Alert.AlertType.ERROR);
+                alertVide.setTitle("Erreur de Saisie");
+                alertVide.setHeaderText("Titre vide!");
+                alertVide.setContentText("Veuillez saisir le titre du sujet.");
+                alertVide.show();
+                return;
+            } else if (newSujet.length() > 30) {
+                // Display error message for exceeding length
+                Alert alertLength = new Alert(Alert.AlertType.ERROR);
+                alertLength.setTitle("Erreur de Saisie");
+                alertLength.setHeaderText("Titre de sujet est trop longue!");
+                alertLength.setContentText("Le titre ne doit pas dépasser 30 caractères.");
+                alertLength.show();
+                return;
+            }
+
             Sujet s = event.getRowValue();
             s.setTitre(event.getNewValue());
             ss.modifier(s);
         });
 
         tvAffichageSujetDesc.setOnEditCommit(event -> {
+
+            String newSujet = event.getNewValue();
+            if (newSujet.trim().isEmpty()) {
+                // Display error message for empty text
+                Alert alertVide = new Alert(Alert.AlertType.ERROR);
+                alertVide.setTitle("Erreur de Saisie");
+                alertVide.setHeaderText("Description vide!");
+                alertVide.setContentText("Veuillez saisir la description du sujet.");
+                alertVide.show();
+                return;
+            }
+
             Sujet s = event.getRowValue();
             s.setDesc(event.getNewValue());
             ss.modifier(s);
         });
 
         tvAffichageSujetRegles.setOnEditCommit(event -> {
+
+            String newSujet = event.getNewValue();
+            if (newSujet.trim().isEmpty()) {
+                // Display error message for empty text
+                Alert alertVide = new Alert(Alert.AlertType.ERROR);
+                alertVide.setTitle("Erreur de Saisie");
+                alertVide.setHeaderText("Règles vide!");
+                alertVide.setContentText("Veuillez saisir les règles du sujet.");
+                alertVide.show();
+                return;
+            }
+
             Sujet s = event.getRowValue();
             s.setRegles(event.getNewValue());
             ss.modifier(s);

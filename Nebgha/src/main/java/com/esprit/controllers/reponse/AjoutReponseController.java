@@ -19,6 +19,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
+
 public class AjoutReponseController {
     @FXML
     private DatePicker dpDateReponse;
@@ -80,14 +81,25 @@ public class AjoutReponseController {
 
     @FXML
     void ajouterReponse(ActionEvent event) {
-        //Question selectedQuestion = cbChoixQuestion.getValue();
-        //Sujet selectedSujet = cbChoixSujet.getValue();
+        String contenuReponse = tfContenuReponse.getText().trim(); // Trim leading/trailing whitespaces
+
+        if (contenuReponse.isEmpty()) {
+            // Display error message (e.g., using an Alert)
+            Alert alertVide = new Alert(Alert.AlertType.ERROR);
+            alertVide.setTitle("Erreur de Saisie");
+            alertVide.setHeaderText("Contenu vide!");
+            alertVide.setContentText("Veuillez saisir le contenu de la réponse.");
+            alertVide.show();
+            return; // Prevent further execution if content is empty
+        }
+
 
         //Création du service et ajout d'entité
         reponseService rs = new reponseService();
         rs.ajouter(new Reponse(0, 1,
                 relatedQuestion, tfContenuReponse.getText(),
-                new Date(System.currentTimeMillis()), relatedSujet, 0, false, false));
+                new Date(System.currentTimeMillis()), relatedSujet,
+                0, false, false));
 
         //Message de confirmation
         Alert alertAjout = new Alert(Alert.AlertType.INFORMATION);

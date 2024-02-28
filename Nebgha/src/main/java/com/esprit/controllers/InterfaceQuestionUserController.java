@@ -2,12 +2,14 @@ package com.esprit.controllers;
 
 import com.esprit.controllers.question.AjoutQuestionController;
 import com.esprit.models.Question;
+import com.esprit.models.Reponse;
 import com.esprit.models.Sujet;
 import com.esprit.services.questionService;
 import com.esprit.services.sujetService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +24,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class InterfaceQuestionUserController {
@@ -80,6 +83,26 @@ public class InterfaceQuestionUserController {
 
         // Save changes on commit
         tvAffichageQuestionQuestion.setOnEditCommit(event -> {
+
+            String newQuestion = event.getNewValue();
+            if (newQuestion.trim().isEmpty()) {
+                // Display error message for empty text
+                Alert alertVide = new Alert(Alert.AlertType.ERROR);
+                alertVide.setTitle("Erreur de Saisie");
+                alertVide.setHeaderText("Titre vide!");
+                alertVide.setContentText("Veuillez saisir le titre du question.");
+                alertVide.show();
+                return;
+            } else if (newQuestion.length() > 30) {
+                // Display error message for exceeding length
+                Alert alertLength = new Alert(Alert.AlertType.ERROR);
+                alertLength.setTitle("Erreur de Saisie");
+                alertLength.setHeaderText("Titre de question est trop longue!");
+                alertLength.setContentText("La question ne doit pas dépasser 30 caractères.");
+                alertLength.show();
+                return;
+            }
+
             Question q = event.getRowValue();
             q.setTitre(event.getNewValue());
             qs.modifier(q);
@@ -233,6 +256,20 @@ public class InterfaceQuestionUserController {
     //TODO: sort by date or popularity
     @FXML
     void handleSort(ActionEvent event) {
+        FilteredList<Question> filteredData = (FilteredList<Question>) tvAffichageQuestion.getItems();
+
+        SortedList<Question> sortedData = new SortedList<>(filteredData);
+        questionService qs = new questionService();
+
+        Comparator<Question> dateComparator = (r1, r2) -> r2.getDate().compareTo(r1.getDate());
+        sortedData.comparatorProperty().bind(cbSort.getSelectionModel().selectedItemProperty().asString().map(s -> {
+            if (s.equals("Populaire")) {
+                return (r1, r2) -> Integer.compare(qs.getNbrReponse(r2), qs.getNbrReponse(r1));
+            }
+            return dateComparator;
+        }));
+
+        tvAffichageQuestion.setItems(sortedData);
 
     }
 

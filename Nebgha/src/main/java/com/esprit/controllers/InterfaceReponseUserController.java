@@ -103,6 +103,7 @@ public class InterfaceReponseUserController {
         cbSort.getItems().addAll(sortTypes);
 
 
+        //modification même ligne et interface
         tvAffichageReponse.setEditable(true);
 
         tvAffichageReponseContenu.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -111,6 +112,20 @@ public class InterfaceReponseUserController {
 
         // Save changes on commit
         tvAffichageReponseContenu.setOnEditCommit(event -> {
+
+            String newContenu = event.getNewValue();
+
+            // Check for empty text
+            if (newContenu.trim().isEmpty()) {
+                // Display error message (e.g., using an Alert)
+                Alert alertVide = new Alert(Alert.AlertType.ERROR);
+                alertVide.setTitle("Erreur de Saisie");
+                alertVide.setHeaderText("Contenu vide!");
+                alertVide.setContentText("Veuillez saisir le contenu de la réponse.");
+                alertVide.show();
+                return;
+            }
+
             Reponse r = event.getRowValue();
             r.setContenu(event.getNewValue());
             rs.modifier(r);

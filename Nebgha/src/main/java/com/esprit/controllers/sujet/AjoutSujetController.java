@@ -26,6 +26,52 @@ public class AjoutSujetController {
 
     @FXML
     void ajouterSujet(ActionEvent event) {
+
+        String titreSujet = tfSujetTitre.getText().trim(); // Trim leading/trailing whitespaces
+
+        if (titreSujet.isEmpty()) {
+            // Display error message (e.g., using an Alert)
+            Alert alertVide = new Alert(Alert.AlertType.ERROR);
+            alertVide.setTitle("Erreur de Saisie");
+            alertVide.setHeaderText("Titre vide!");
+            alertVide.setContentText("Veuillez saisir le titre du sujet.");
+            alertVide.show();
+            return; // Prevent further execution if content is empty
+        } else if (titreSujet.length() > 30) {
+            // Display error message for exceeding length
+            Alert alertLength = new Alert(Alert.AlertType.ERROR);
+            alertLength.setTitle("Erreur de Saisie");
+            alertLength.setHeaderText("Titre sujet trop longue!");
+            alertLength.setContentText("Le titre de sujet ne doit pas dépasser 30 caractères.");
+            alertLength.show();
+            return;
+        }
+
+        String descSujet = tfDescriptionSujet.getText().trim(); // Trim leading/trailing whitespaces
+
+        if (descSujet.isEmpty()) {
+            // Display error message (e.g., using an Alert)
+            Alert alertVide = new Alert(Alert.AlertType.ERROR);
+            alertVide.setTitle("Erreur de Saisie");
+            alertVide.setHeaderText("Description vide!");
+            alertVide.setContentText("Veuillez saisir la description du sujet.");
+            alertVide.show();
+            return; // Prevent further execution if content is empty
+        }
+
+        String reglesSujet = tfReglesSujet.getText().trim(); // Trim leading/trailing whitespaces
+
+        if (reglesSujet.isEmpty()) {
+            // Display error message (e.g., using an Alert)
+            Alert alertVide = new Alert(Alert.AlertType.ERROR);
+            alertVide.setTitle("Erreur de Saisie");
+            alertVide.setHeaderText("Règles vide!");
+            alertVide.setContentText("Veuillez saisir les règles du sujet.");
+            alertVide.show();
+            return; // Prevent further execution if content is empty
+        }
+
+
         //Création du service et ajout d'entité
         sujetService SS = new sujetService();
         SS.ajouter(new Sujet(11, tfSujetTitre.getText(), tfDescriptionSujet.getText(),
