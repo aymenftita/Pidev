@@ -78,29 +78,34 @@ public class LocalisationService implements IService<Localisation>  {
         return null;
     }
 
-    @Override
     public List<Localisation> recupererLocalisation() throws SQLException {
         List<Localisation> localisations = new ArrayList<>();
-        String s = "SELECT * from localisation";
-        Statement st = connection.createStatement();
-        ResultSet rs = st.executeQuery(s);
-        while (rs.next()) {
-            Localisation l = new Localisation();
-            l.setId(rs.getInt("id"));
 
-            l.setCodePostal(rs.getInt("codePostal"));
-            l.setVille(rs.getString("ville"));
+        // Utilisez try-with-resources pour assurer la fermeture automatique des ressources
+        try (Statement st = connection.createStatement();
+             ResultSet rs = st.executeQuery("SELECT * FROM localisation")) {
 
-            l.setPays(rs.getString("pays"));
-            l.setLatitude(rs.getInt("latitude"));
-            l.setLongitude(rs.getInt("longitude"));
+            while (rs.next()) {
+                Localisation l = new Localisation();
 
+                // Utilisez des constantes pour les noms de colonnes afin d'éviter des erreurs de frappe
+                l.setId(rs.getInt("id"));
+                l.setCodePostal(rs.getInt("codePostal"));
+                l.setVille(rs.getString("ville"));
+                l.setPays(rs.getString("pays"));
+                l.setLatitude(rs.getDouble("latitude"));
+                l.setLongitude(rs.getDouble("longitude"));
 
-            localisations.add(l);
-
+                localisations.add(l);
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la récupération des localisations : " + e.getMessage());
+            e.printStackTrace();  // Ajoutez cela pour imprimer la trace complète de l'erreur
         }
+
         return localisations;
     }
+
 
 
     public Localisation findByName(String name) throws SQLException {

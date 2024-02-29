@@ -40,12 +40,9 @@ private String image;
     public String toString() {
         return
 
-                "Nom '" + nom + '\'' +
-                ", date=" + date +
-                ", lieuId=" + lieuId +
-                ", description='" + description + '\'' +
-
-                '}';
+                "Evenement: '" + nom + '\'' +
+                ", Date" + date +
+                ", Description='" + description + '\'' ;
     }
 
     @Override

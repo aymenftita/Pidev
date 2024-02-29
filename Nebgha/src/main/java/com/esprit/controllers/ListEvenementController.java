@@ -38,7 +38,20 @@ public class ListEvenementController  implements Initializable {
 
     @FXML
     void ajoutEvenement(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjoutEvenement.fxml"));
+            root = loader.load();
 
+
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene =  new Scene(root, 800, 500);
+            stage.setScene(scene);
+            stage.setTitle("Ajouter Evenement");
+            stage.show();
+
+        } catch (IOException ex) {
+            System.out.println("error" + ex.getMessage());
+        }
     }
 
     @FXML
@@ -111,9 +124,9 @@ public class ListEvenementController  implements Initializable {
                 //Controller.id_categ = 1;
 
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
+                scene =  new Scene(root, 800, 500);
                 stage.setScene(scene);
-                stage.setTitle("Modifier Categorie");
+                stage.setTitle("Modifier Evenement");
                 stage.show();
 
             } catch (IOException ex) {

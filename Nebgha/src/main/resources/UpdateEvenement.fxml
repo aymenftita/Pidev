@@ -6,39 +6,64 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.UpdateEvenementController">
+<AnchorPane prefHeight="580.0" prefWidth="795.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.UpdateEvenementController">
    <children>
-      <TextField fx:id="Nom" layoutX="131.0" layoutY="76.0" />
-      <TextField fx:id="ImageF" layoutX="132.0" layoutY="228.0" />
-      <ComboBox fx:id="Lieu" layoutX="131.0" layoutY="175.0" prefWidth="150.0" />
-      <Button layoutX="381.0" layoutY="323.0" mnemonicParsing="false" onAction="#Ajouter" text="UPDATE" />
-      <Button layoutX="229.0" layoutY="228.0" mnemonicParsing="false" onAction="#importer" text="Import" />
-      <TextArea fx:id="Description" layoutX="319.0" layoutY="88.0" prefHeight="200.0" prefWidth="200.0" />
+      <Button layoutX="350.0" layoutY="218.0" mnemonicParsing="false" onAction="#importer" text="Import" />
       <ImageView fx:id="imageV" fitHeight="83.0" fitWidth="104.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="champ_nom" layoutX="132.0" layoutY="101.0" text="Label" textFill="RED">
+      <Label fx:id="champ_nom" layoutX="265.0" layoutY="190.0" text="Label" textFill="RED">
          <font>
             <Font name="Candara" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="champ_date" layoutX="132.0" layoutY="150.0" text="Label" textFill="RED">
+      <Label fx:id="champ_date" layoutX="450.0" layoutY="190.0" text="Label" textFill="RED">
          <font>
             <Font name="Candara" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="champ_lieu" layoutX="132.0" layoutY="200.0" text="Label" textFill="RED">
+      <Label fx:id="champ_lieu" layoutX="450.0" layoutY="244.0" text="Label" textFill="RED">
          <font>
             <Font name="Candara" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="champ_desc" layoutX="319.0" layoutY="288.0" text="Label" textFill="RED">
+      <Label fx:id="champ_desc" layoutX="279.0" layoutY="339.0" text="Label" textFill="RED">
          <font>
             <Font name="Candara" size="12.0" />
          </font>
       </Label>
-      <DatePicker fx:id="Datee" layoutX="132.0" layoutY="125.0" prefHeight="25.0" prefWidth="150.0" />
+      <ImageView fitHeight="101.0" fitWidth="159.0" layoutX="27.0" layoutY="24.0">
+         <image>
+            <Image url="@Images/421935935_2103323113360956_2155380558138833429_n.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="329.0" layoutY="55.0" text="Update Evenement" textFill="#0e1c57" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+         <font>
+            <Font name="Candara" size="38.0" />
+         </font>
+      </Label>
+      <TextField fx:id="Nom" layoutX="256.0" layoutY="163.0" prefHeight="27.0" prefWidth="146.0" promptText="Nom" style="-fx-background-color: transparent; -fx-border-color: grey; -fx-border-radius: 20px;">
+         <font>
+            <Font name="Candara" size="12.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="ImageF" layoutX="256.0" layoutY="217.0" prefHeight="8.0" prefWidth="146.0" promptText="Image" style="-fx-background-color: transparent; -fx-border-color: grey; -fx-border-radius: 20px;" />
+      <TextArea fx:id="Description" layoutX="256.0" layoutY="268.0" prefHeight="71.0" prefWidth="345.0" promptText="Description" style="-fx-background-color: transparent; -fx-border-color: grey; -fx-border-radius: 20px;">
+         <effect>
+            <Blend />
+         </effect>
+      </TextArea>
+      <Button layoutX="519.0" layoutY="375.0" mnemonicParsing="false" onAction="#Ajouter" prefHeight="32.0" prefWidth="82.0" style="-fx-border-radius: 20; -fx-background-color: transparent; -fx-border-color: GREY;" text="UPDATE" textFill="#0e1c57">
+         <font>
+            <Font name="Candara" size="16.0" />
+         </font>
+      </Button>
+      <DatePicker fx:id="Datee" focusTraversable="false" layoutX="441.0" layoutY="163.0" prefHeight="16.0" prefWidth="139.0" promptText="jj/mm/yyyy" style="-fx-background-color: transparent; -fx-border-color: grey; -fx-border-radius: 20px;" />
+      <ComboBox fx:id="Lieu" layoutX="437.0" layoutY="217.0" prefHeight="6.0" prefWidth="146.0" promptText="Lieu" style="-fx-background-color: transparent; -fx-border-color: grey; -fx-border-radius: 20px;" />
+      <Button layoutX="107.0" layoutY="407.0" mnemonicParsing="false" onAction="#Retour" style="-fx-background-color: transparent; -fx-border-radius: 20px; -fx-border-color: grey;" text="Retour" textFill="#0e1c57" />
    </children>
 </AnchorPane>

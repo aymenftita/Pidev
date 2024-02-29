@@ -17,9 +17,9 @@ public class MainProgGUI extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjoutEvenement.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListLocalisation.fxml"));
             Parent root = loader.load();
-            Scene scene = new Scene(root, 1300, 800);
+            Scene scene = new Scene(root, 800, 500);
             primaryStage.setScene(scene);
 
             primaryStage.setTitle("Menu ghada");
