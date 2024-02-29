@@ -1,7 +1,9 @@
+com\esprit\controllers\InterfacesAdminController$5.class
 com\esprit\services\questionService.class
 com\esprit\controllers\sujet\AjoutSujetController.class
 com\esprit\controllers\InterfaceReponseUserController$2.class
 com\esprit\controllers\reponse\ModifierReponseController$1.class
+com\esprit\models\Role.class
 com\esprit\controllers\InterfaceReponseUserController$3.class
 com\esprit\controllers\InterfacesAdminController$1.class
 com\esprit\controllers\InterfaceReponseUserController.class
@@ -10,6 +12,8 @@ com\esprit\models\Question.class
 com\esprit\services\reponseService.class
 com\esprit\controllers\reponse\ModifierReponseController$2.class
 com\esprit\controllers\reponse\AjoutReponseController.class
+com\esprit\services\ServiceUtilisateur.class
+com\esprit\models\utilisateur.class
 com\esprit\controllers\InterfacesAdminController$3.class
 com\esprit\controllers\question\ModifierQuestionController$1.class
 com\esprit\tests\MainProgGUI.class
@@ -18,6 +22,7 @@ com\esprit\controllers\InterfaceQuestionUserController.class
 com\esprit\controllers\question\AjoutQuestionController.class
 com\esprit\models\Sujet.class
 com\esprit\controllers\InterfaceForumUserController.class
+com\esprit\controllers\InterfacesAdminController$4.class
 com\esprit\controllers\InterfacesAdminController.class
 com\esprit\services\sujetService.class
 com\esprit\controllers\InterfacesAdminController$2.class

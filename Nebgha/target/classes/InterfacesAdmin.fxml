@@ -13,66 +13,44 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.InterfacesAdminController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="my-anchor-pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.InterfacesAdminController">
    <children>
-      <TabPane layoutX="-3.0" layoutY="-2.0" prefHeight="400.0" prefWidth="607.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="-3.0" layoutY="-2.0" prefHeight="740.0" prefWidth="1366.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="tabSujet" text="Sujet">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="374.0" fitWidth="74.0" layoutX="533.0" pickOnBounds="true">
-                           <image>
-                              <Image url="@graphics/Rb.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="76.0" fitWidth="65.0" layoutX="538.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@graphics/remove.gif" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="71.0" fitWidth="62.0" layoutX="538.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@graphics/update.gif" />
-                           </image></ImageView>
-                        <ImageView fitHeight="79.0" fitWidth="71.0" layoutX="533.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@graphics/addG.gif" />
-                           </image>
-                        </ImageView>
-                        <TableView fx:id="tvAffichageSujet" layoutX="5.0" layoutY="-2.0" prefHeight="374.0" prefWidth="527.0">
+                        <TableView fx:id="tvAffichageSujet" layoutX="5.0" layoutY="-2.0" prefHeight="717.0" prefWidth="1288.0" stylesheets="@style.css">
                           <columns>
-                              <TableColumn prefWidth="24.0" text="ID">
-                                  <cellValueFactory>
-                                      <PropertyValueFactory property="id" />
-                                  </cellValueFactory>
-                              </TableColumn>
-                              <TableColumn prefWidth="103.0" text="Titre">
+                              <TableColumn prefWidth="315.0" text="Titre">
                                   <cellValueFactory>
                                       <PropertyValueFactory property="titre" />
                                   </cellValueFactory>
                               </TableColumn>
-                              <TableColumn prefWidth="151.0" text="Description">
+                              <TableColumn prefWidth="377.0" text="Description">
                                   <cellValueFactory>
                                       <PropertyValueFactory property="desc" />
                                   </cellValueFactory>
                               </TableColumn>
-                              <TableColumn prefWidth="248.0" text="Règles">
+                              <TableColumn prefWidth="593.0" text="Règles">
                                   <cellValueFactory>
                                       <PropertyValueFactory property="regles" />
                                   </cellValueFactory>
                               </TableColumn>
                           </columns>
                         </TableView>
-                        <Button blendMode="MULTIPLY" layoutX="535.0" layoutY="48.0" mnemonicParsing="false" onAction="#ajouterSujet" prefHeight="80.0" prefWidth="70.0">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor></Button>
-                        <Button blendMode="MULTIPLY" layoutX="535.0" layoutY="151.0" mnemonicParsing="false" onAction="#modifierSujet" prefHeight="84.0" prefWidth="69.0">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor></Button>
-                        <Button blendMode="MULTIPLY" layoutX="536.0" layoutY="260.0" mnemonicParsing="false" onAction="#supprimerSujet" prefHeight="78.0" prefWidth="68.0">
+                        <ImageView fitHeight="749.0" fitWidth="74.0" layoutX="1293.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@graphics/Rb.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="76.0" fitWidth="65.0" layoutX="1294.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@graphics/remove.gif" />
+                           </image>
+                        </ImageView>
+                        <Button blendMode="MULTIPLY" layoutX="1293.0" layoutY="228.0" mnemonicParsing="false" onAction="#supprimerSujet" prefHeight="93.0" prefWidth="68.0">
                            <font>
                               <Font size="11.0" />
                            </font>
@@ -80,25 +58,16 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Label layoutX="544.0" layoutY="108.0" text="Ajouter">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="540.0" layoutY="216.0" text="Modifier">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="539.0" layoutY="318.0" text="Supprimer">
+                        <Label layoutX="1297.0" layoutY="288.0" text="Supprimer">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="45.0" fitWidth="71.0" layoutX="547.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="45.0" fitWidth="71.0" layoutX="1305.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@graphics/Logo1.png" />
-                           </image></ImageView>
+                           </image>
+                        </ImageView>
                      </children>
                   </AnchorPane>
             </content>
@@ -107,84 +76,51 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="374.0" fitWidth="74.0" layoutX="532.0" layoutY="-1.0" pickOnBounds="true">
+                        <ImageView fitHeight="713.0" fitWidth="74.0" layoutX="1292.0" pickOnBounds="true">
                            <image>
                               <Image url="@graphics/Rb.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="76.0" fitWidth="65.0" layoutX="537.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="76.0" fitWidth="65.0" layoutX="1296.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@graphics/remove.gif" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="71.0" fitWidth="62.0" layoutX="537.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@graphics/update.gif" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="79.0" fitWidth="71.0" layoutX="532.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@graphics/addG.gif" />
-                           </image>
-                        </ImageView>
-                        <Label layoutX="543.0" layoutY="107.0" text="Ajouter">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="539.0" layoutY="215.0" text="Modifier">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="538.0" layoutY="317.0" text="Supprimer">
+                        <Label layoutX="1297.0" layoutY="212.0" text="Supprimer">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <TableView fx:id="tvAffichageQuestion" layoutX="5.0" prefHeight="369.0" prefWidth="527.0">
+                        <TableView fx:id="tvAffichageQuestion" layoutX="5.0" prefHeight="713.0" prefWidth="1285.0" stylesheets="@style.css">
                            <columns>
-                               <TableColumn prefWidth="26.0" text="ID">
-                                   <cellValueFactory>
-                                       <PropertyValueFactory property="id" />
-                                   </cellValueFactory>
-                               </TableColumn>
-                               <TableColumn prefWidth="116.0" text="Titre">
+                               <TableColumn prefWidth="230.0" text="Titre">
                                    <cellValueFactory>
                                        <PropertyValueFactory property="titre" />
                                    </cellValueFactory>
                                </TableColumn>
-                               <TableColumn prefWidth="70.0" text="Auteur id">
+                               <TableColumn prefWidth="119.0" text="Auteur">
                                    <cellValueFactory>
                                        <PropertyValueFactory property="auteur_id" />
                                    </cellValueFactory>
                                </TableColumn>
-                               <TableColumn prefWidth="77.0" text="Date">
+                               <TableColumn prefWidth="124.0" text="Date">
                                    <cellValueFactory>
                                        <PropertyValueFactory property="date" />
                                    </cellValueFactory>
                                </TableColumn>
-                               <TableColumn prefWidth="54.0" text="Sujet id">
+                               <TableColumn prefWidth="245.0" text="Sujet">
                                    <cellValueFactory>
                                        <PropertyValueFactory property="sujet_id" />
                                    </cellValueFactory>
                                </TableColumn>
-                               <TableColumn prefWidth="183.0" text="Contenu">
+                               <TableColumn prefWidth="563.0" text="Contenu">
                                    <cellValueFactory>
                                        <PropertyValueFactory property="contenu" />
                                    </cellValueFactory>
                                </TableColumn>
                            </columns>
                         </TableView>
-                        <Button blendMode="MULTIPLY" layoutX="537.0" layoutY="49.0" mnemonicParsing="false" onAction="#ajouterQuestion" prefHeight="78.0" prefWidth="65.0">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor></Button>
-                        <Button blendMode="MULTIPLY" layoutX="535.0" layoutY="146.0" mnemonicParsing="false" onAction="#modifierQuestion" prefHeight="88.0" prefWidth="65.0">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor></Button>
-                        <Button blendMode="MULTIPLY" layoutX="536.0" layoutY="248.0" mnemonicParsing="false" onAction="#supprimerQuestion" prefHeight="88.0" prefWidth="66.0">
+                        <Button blendMode="MULTIPLY" layoutX="1295.0" layoutY="143.0" mnemonicParsing="false" onAction="#supprimerQuestion" prefHeight="88.0" prefWidth="66.0">
                            <font>
                               <Font size="11.0" />
                            </font>
@@ -192,7 +128,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <ImageView fitHeight="45.0" fitWidth="71.0" layoutX="546.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="45.0" fitWidth="71.0" layoutX="1306.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@graphics/Logo1.png" />
                            </image>
@@ -205,84 +141,51 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="374.0" fitWidth="74.0" layoutX="532.0" layoutY="-1.0" pickOnBounds="true">
+                        <ImageView fitHeight="713.0" fitWidth="74.0" layoutX="1292.0" pickOnBounds="true">
                            <image>
                               <Image url="@graphics/Rb.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="76.0" fitWidth="65.0" layoutX="537.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="76.0" fitWidth="65.0" layoutX="1298.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@graphics/remove.gif" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="71.0" fitWidth="62.0" layoutX="537.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@graphics/update.gif" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="79.0" fitWidth="71.0" layoutX="533.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@graphics/addG.gif" />
-                           </image>
-                        </ImageView>
-                        <Label layoutX="544.0" layoutY="107.0" text="Ajouter">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="539.0" layoutY="197.0" text="Modifier">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="538.0" layoutY="317.0" text="Supprimer">
+                        <Label layoutX="1299.0" layoutY="212.0" text="Supprimer">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <TableView fx:id="tvAffichageReponse" layoutX="5.0" prefHeight="373.0" prefWidth="527.0">
+                        <TableView fx:id="tvAffichageReponse" layoutX="5.0" prefHeight="713.0" prefWidth="1284.0" stylesheets="@style.css">
                            <columns>
-                               <TableColumn prefWidth="28.0" text="ID">
-                                   <cellValueFactory>
-                                       <PropertyValueFactory property="id" />
-                                   </cellValueFactory>
-                               </TableColumn>
-                               <TableColumn prefWidth="59.0" text="Auteur id">
+                               <TableColumn prefWidth="116.0" text="Auteur">
                                    <cellValueFactory>
                                        <PropertyValueFactory property="auteur_id" />
                                    </cellValueFactory>
                                </TableColumn>
-                               <TableColumn prefWidth="73.0" text="Question id">
+                               <TableColumn prefWidth="270.0" text="Question">
                                    <cellValueFactory>
                                        <PropertyValueFactory property="question_id" />
                                    </cellValueFactory>
                                </TableColumn>
-                               <TableColumn prefWidth="74.0" text="Date">
+                               <TableColumn prefWidth="116.0" text="Date">
                                    <cellValueFactory>
                                        <PropertyValueFactory property="date" />
                                    </cellValueFactory>
                                </TableColumn>
-                               <TableColumn prefWidth="61.0" text="Sujet id">
+                               <TableColumn prefWidth="187.0" text="Sujet">
                                    <cellValueFactory>
                                        <PropertyValueFactory property="sujet_id" />
                                    </cellValueFactory>
                                </TableColumn>
-                               <TableColumn prefWidth="231.0" text="Contenu">
+                               <TableColumn prefWidth="594.0" text="Contenu">
                                    <cellValueFactory>
                                        <PropertyValueFactory property="contenu" />
                                    </cellValueFactory>
                                </TableColumn>
                            </columns>
                         </TableView>
-                        <Button blendMode="MULTIPLY" layoutX="538.0" layoutY="46.0" mnemonicParsing="false" onAction="#ajouterReponse" prefHeight="92.0" prefWidth="64.0">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor></Button>
-                        <Button blendMode="MULTIPLY" layoutX="536.0" layoutY="145.0" mnemonicParsing="false" onAction="#modifierReponse" prefHeight="82.0" prefWidth="64.0">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor></Button>
-                        <Button blendMode="MULTIPLY" layoutX="535.0" layoutY="251.0" mnemonicParsing="false" onAction="#supprimerReponse" prefHeight="84.0" prefWidth="66.0">
+                        <Button blendMode="MULTIPLY" layoutX="1296.0" layoutY="146.0" mnemonicParsing="false" onAction="#supprimerReponse" prefHeight="84.0" prefWidth="66.0">
                            <font>
                               <Font size="11.0" />
                            </font>
@@ -290,7 +193,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <ImageView fitHeight="45.0" fitWidth="71.0" layoutX="548.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="45.0" fitWidth="71.0" layoutX="1308.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@graphics/Logo1.png" />
                            </image>

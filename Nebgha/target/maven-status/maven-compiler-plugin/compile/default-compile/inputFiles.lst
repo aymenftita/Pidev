@@ -1,7 +1,9 @@
+C:\Users\Nassim\Desktop\Pidev\Nebgha\src\main\java\com\esprit\models\Role.java
 C:\Users\Nassim\Desktop\Pidev\Nebgha\src\main\java\com\esprit\services\reponseService.java
 C:\Users\Nassim\Desktop\Pidev\Nebgha\src\main\java\com\esprit\tests\MainProgGUI.java
 C:\Users\Nassim\Desktop\Pidev\Nebgha\src\main\java\com\esprit\services\questionService.java
 C:\Users\Nassim\Desktop\Pidev\Nebgha\src\main\java\com\esprit\services\sujetService.java
+C:\Users\Nassim\Desktop\Pidev\Nebgha\src\main\java\com\esprit\models\utilisateur.java
 C:\Users\Nassim\Desktop\Pidev\Nebgha\src\main\java\com\esprit\controllers\question\AjoutQuestionController.java
 C:\Users\Nassim\Desktop\Pidev\Nebgha\src\main\java\com\esprit\controllers\InterfaceQuestionUserController.java
 C:\Users\Nassim\Desktop\Pidev\Nebgha\src\main\java\com\esprit\controllers\sujet\ModifierSujetController.java
@@ -17,4 +19,5 @@ C:\Users\Nassim\Desktop\Pidev\Nebgha\src\main\java\com\esprit\controllers\Interf
 C:\Users\Nassim\Desktop\Pidev\Nebgha\src\main\java\com\esprit\controllers\question\ModifierQuestionController.java
 C:\Users\Nassim\Desktop\Pidev\Nebgha\src\main\java\com\esprit\controllers\reponse\AjoutReponseController.java
 C:\Users\Nassim\Desktop\Pidev\Nebgha\src\main\java\com\esprit\models\Question.java
+C:\Users\Nassim\Desktop\Pidev\Nebgha\src\main\java\com\esprit\services\ServiceUtilisateur.java
 C:\Users\Nassim\Desktop\Pidev\Nebgha\src\main\java\com\esprit\services\IService.java
