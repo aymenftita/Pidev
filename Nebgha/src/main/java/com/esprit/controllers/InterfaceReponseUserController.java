@@ -5,8 +5,11 @@ import com.esprit.controllers.reponse.AjoutReponseController;
 import com.esprit.models.Question;
 import com.esprit.models.Reponse;
 import com.esprit.models.Sujet;
+import com.esprit.models.utilisateur;
 import com.esprit.services.questionService;
 import com.esprit.services.reponseService;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -110,14 +113,14 @@ public class InterfaceReponseUserController {
 
         reponseService rs = new reponseService();
 
-        // Save changes on commit
+        // Enregistrer les modifications lors de la validation
         tvAffichageReponseContenu.setOnEditCommit(event -> {
 
             String newContenu = event.getNewValue();
 
-            // Check for empty text
+            // Vérification du texte vide
             if (newContenu.trim().isEmpty()) {
-                // Display error message (e.g., using an Alert)
+                // Affichage de message d'erreur
                 Alert alertVide = new Alert(Alert.AlertType.ERROR);
                 alertVide.setTitle("Erreur de Saisie");
                 alertVide.setHeaderText("Contenu vide!");
@@ -149,7 +152,13 @@ public class InterfaceReponseUserController {
 
     public void loadReponseParQuestion() {
         reponseService rs = new reponseService();
+
+
+        //Collecter l'email de chaque utilisateur pour l'affichage
         ObservableList<Reponse> reponsesData = FXCollections.observableArrayList(rs.afficherParQuestion(relatedQuestion));
+
+        tvAffichageReponseAuteur.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAuteur().getEmail())); // Assuming email is retrieved
+
         tvAffichageReponse.setItems(reponsesData);
     }
 
@@ -160,27 +169,14 @@ public class InterfaceReponseUserController {
         loadReponseParQuestion();
         handleSearch();
 
-        /* //TODO: En attendant l'entité auteur
-        tfAuteurQuestion.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(question -> {
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-                String lowerCaseFilter = newValue.toLowerCase();
-                if (question.getAuteur().getNom().toLowerCase().indexOf(lowerCaseFilter) != -1) {
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-        });*/
+
     }
 
     public void changeLabel(){
         nomSujet.setText(relatedSujet.getTitre());
         titreQuestion.setText(relatedQuestion.getTitre());
         dateQuestion.setText(relatedQuestion.getDate().toString());
-        //auteurQuestion.setText(relatedQuestion.getAuteur_id());TODO: till auteur is added
+        auteurQuestion.setText(relatedQuestion.getAuteur().getEmail());
         contenuQuestion.setText(relatedQuestion.getContenu());
     }
 
@@ -193,16 +189,12 @@ public class InterfaceReponseUserController {
         AjoutReponseController arc = loader.getController();
         arc.setRelated(relatedSujet, relatedQuestion);
 
-        // Create a new stage (window)
         Stage stage = new Stage();
 
-        // Set the title of the new window
         stage.setTitle("Ajout Réponse");
 
-        // Set the size of the new window
         stage.setScene(new Scene(root, 422, 405));
 
-        // Show the new window
         stage.show();
 
     }
@@ -243,9 +235,8 @@ public class InterfaceReponseUserController {
 
         ObservableList<Reponse> reponsesData = FXCollections.observableArrayList(rs.afficherParQuestion(relatedQuestion));
 
-        // Create FilteredList for real-time search
+        // Créer une liste filtrée pour une recherche en temps réel
         FilteredList<Reponse> filteredData = new FilteredList<>(reponsesData, b -> true);
-        tvAffichageReponse.setItems(filteredData);
 
         tfSearchReponse.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(reponse -> {
@@ -261,14 +252,31 @@ public class InterfaceReponseUserController {
             });
         });
 
+
+        tfAuteurReponse.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(reponse -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (reponse.getAuteur().getNom().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+        });
+
+        tvAffichageReponse.setItems(filteredData);
+
     }
 
     @FXML
-    void handleSort(ActionEvent event) { //TODO: doesn't work properly
+    void handleSort(ActionEvent event) {
         FilteredList<Reponse> filteredData = (FilteredList<Reponse>) tvAffichageReponse.getItems();
 
         SortedList<Reponse> sortedData = new SortedList<>(filteredData);
-
+        //Par défaut, trié par date
         Comparator<Reponse> dateComparator = (r1, r2) -> r2.getDate().compareTo(r1.getDate());
         sortedData.comparatorProperty().bind(cbSort.getSelectionModel().selectedItemProperty().asString().map(s -> {
             if (s.equals("Populaire")) {
@@ -291,21 +299,20 @@ public class InterfaceReponseUserController {
         FilteredList<Reponse> filteredData = (FilteredList<Reponse>) tvAffichageReponse.getItems();
         if (selectedLocalDate != null) {
             Date selectedDate = Date.valueOf(selectedLocalDate);
-            // Set a predicate to filter by date
+            // Utiliser predicate pour filter par date
             filteredData.setPredicate(reponse -> {
-                Date reponseDate = reponse.getDate();  // Assuming this is the date property
-                return reponseDate.equals(selectedDate);  // Filter for exact match
-                // You can also modify this condition for different filtering logic (e.g., before, after, etc.)
+                Date reponseDate = reponse.getDate();
+                return reponseDate.equals(selectedDate);
             });
         } else {
-            // Reset the filter if no date is selected
+            // Réinitialiser le filtre si aucune date n'est sélectionnée
             filteredData.setPredicate(question -> true);
         }
     }
 
     private void boutonUpVote() {
         tvAffichageReponseActionUpVote.setCellFactory(col -> new TableCell<Reponse, Void>() {
-            private final Button upVoteButton = new Button("▲"); // Set button text as upward arrow
+            private final Button upVoteButton = new Button("▲"); // le bouton est un symbole
 
             private boolean isUpvoted = false;
             {
@@ -313,6 +320,7 @@ public class InterfaceReponseUserController {
 
                 upVoteButton.setOnAction(event -> {
                     if(isUpvoted) {
+                        System.out.println(isUpvoted);
                         upVoteButton.setOpacity(0.5);
                         //upVoteButton.setDisable(false);
                         isUpvoted = false;
@@ -324,6 +332,7 @@ public class InterfaceReponseUserController {
                         handleSearch();
                     }
                     else {
+                        System.out.println(isUpvoted);
                         isUpvoted = true;
                         upVoteButton.setOpacity(1);
                         Reponse reponse = getTableView().getItems().get(getIndex());
@@ -353,7 +362,7 @@ public class InterfaceReponseUserController {
 
     public void boutonDownVote() {
         tvAffichageReponseActionDownVote.setCellFactory(col -> new TableCell<Reponse, Void>() {
-            private final Button downVoteButton = new Button("▼"); // Set button text as upward arrow
+            private final Button downVoteButton = new Button("▼"); // le bouton est un symbole
 
             private boolean isDownvoted = false;
             {
@@ -398,7 +407,7 @@ public class InterfaceReponseUserController {
 
     public void boutonAccept() {
         tvAffichageReponseActionAccept.setCellFactory(col -> new TableCell<Reponse, Void>() {
-            private final Button acceptButton = new Button("✔"); // Set button text as upward arrow
+            private final Button acceptButton = new Button("✔"); // le bouton est un symbole
 
             private boolean isAccepted = false;
             {
@@ -438,7 +447,7 @@ public class InterfaceReponseUserController {
 
     public void boutonReport() {
         tvAffichageReponseActionReport.setCellFactory(col -> new TableCell<Reponse, Void>() {
-            private final Button reportButton = new Button("!"); // Set button text as upward arrow
+            private final Button reportButton = new Button("!");
 
             private boolean isReported = false;
             {

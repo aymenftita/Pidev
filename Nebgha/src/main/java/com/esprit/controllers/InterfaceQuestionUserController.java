@@ -4,8 +4,11 @@ import com.esprit.controllers.question.AjoutQuestionController;
 import com.esprit.models.Question;
 import com.esprit.models.Reponse;
 import com.esprit.models.Sujet;
+import com.esprit.models.utilisateur;
 import com.esprit.services.questionService;
 import com.esprit.services.sujetService;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -58,9 +61,11 @@ public class InterfaceQuestionUserController {
     @FXML
     private TableColumn<Question, String> tvAffichageQuestionQuestion;
 
+    @FXML
+    private TableColumn<Question, String> tvAffichageQuestionNbrReponses;
+
     private Sujet relatedSujet;
 
-    //TODO: ADD three columns with buttons: number of responses, response status(accepted or not), Report
 
     public void initialize() {
 
@@ -81,12 +86,12 @@ public class InterfaceQuestionUserController {
 
         questionService qs = new questionService();
 
-        // Save changes on commit
+        // Enregistrer les modifications lors de la validation
         tvAffichageQuestionQuestion.setOnEditCommit(event -> {
 
             String newQuestion = event.getNewValue();
             if (newQuestion.trim().isEmpty()) {
-                // Display error message for empty text
+                // Affichage de message d'erreur
                 Alert alertVide = new Alert(Alert.AlertType.ERROR);
                 alertVide.setTitle("Erreur de Saisie");
                 alertVide.setHeaderText("Titre vide!");
@@ -94,7 +99,7 @@ public class InterfaceQuestionUserController {
                 alertVide.show();
                 return;
             } else if (newQuestion.length() > 30) {
-                // Display error message for exceeding length
+                // Afficher un message d'erreur en cas de dépassement de la longueur
                 Alert alertLength = new Alert(Alert.AlertType.ERROR);
                 alertLength.setTitle("Erreur de Saisie");
                 alertLength.setHeaderText("Titre de question est trop longue!");
@@ -114,6 +119,7 @@ public class InterfaceQuestionUserController {
             qs.modifier(q);
         });
 
+        tvAffichageQuestionNbrReponses.setStyle("-fx-text-fill: yellow;");
 
 
     }
@@ -123,13 +129,17 @@ public class InterfaceQuestionUserController {
         questionService qs = new questionService();
         ObservableList<Question> questionsData = FXCollections.observableArrayList(qs.afficher());
         tvAffichageQuestion.setItems(questionsData);
-        //loadQuestionParSujet();
+
     }
 
-    //TODO: show only related questions
     public void loadQuestionParSujet() {
         questionService qs = new questionService();
+
+
         ObservableList<Question> questionsData = FXCollections.observableArrayList(qs.afficherParSujet(relatedSujet));
+        //Collecter l'email de chaque utilisateur pour l'affichage
+        tvAffichageQuestionAuteur.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAuteur().getEmail()));
+        tvAffichageQuestionNbrReponses.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(qs.getNbrReponse(cellData.getValue()))));
         tvAffichageQuestion.setItems(questionsData);
     }
 
@@ -142,7 +152,7 @@ public class InterfaceQuestionUserController {
 
         ObservableList<Question> questionsData = FXCollections.observableArrayList(qs.afficherParSujet(relatedSujet));
 
-        // Create FilteredList for real-time search
+        // Créer une liste filtrée pour une recherche en temps réel
         FilteredList<Question> filteredData = new FilteredList<>(questionsData, b -> true);
         tvAffichageQuestion.setItems(filteredData);
 
@@ -162,7 +172,7 @@ public class InterfaceQuestionUserController {
             });
         });
 
-        /* //TODO: En attendant l'entité auteur
+        //Filtrer par utilisateur
         tfAuteurQuestion.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(question -> {
                 if (newValue == null || newValue.isEmpty()) {
@@ -175,7 +185,7 @@ public class InterfaceQuestionUserController {
                     return false;
                 }
             });
-        });*/
+        });
     }
 
     public void changeLabel(){
@@ -191,16 +201,12 @@ public class InterfaceQuestionUserController {
         AjoutQuestionController aqc = loader.getController();
         aqc.setRelatedSujet(relatedSujet);
 
-        // Create a new stage (window)
         Stage stage = new Stage();
 
-        // Set the title of the new window
         stage.setTitle("Ajout Question");
 
-        // Set the size of the new window
         stage.setScene(new Scene(root, 402, 402));  // Adjust width and height as needed
 
-        // Show the new window
         stage.show();
 
 
@@ -253,14 +259,13 @@ public class InterfaceQuestionUserController {
 
     }
 
-    //TODO: sort by date or popularity
     @FXML
     void handleSort(ActionEvent event) {
         FilteredList<Question> filteredData = (FilteredList<Question>) tvAffichageQuestion.getItems();
 
         SortedList<Question> sortedData = new SortedList<>(filteredData);
         questionService qs = new questionService();
-
+        //Trié par date par défaut
         Comparator<Question> dateComparator = (r1, r2) -> r2.getDate().compareTo(r1.getDate());
         sortedData.comparatorProperty().bind(cbSort.getSelectionModel().selectedItemProperty().asString().map(s -> {
             if (s.equals("Populaire")) {
@@ -284,14 +289,13 @@ public class InterfaceQuestionUserController {
         FilteredList<Question> filteredData = (FilteredList<Question>) tvAffichageQuestion.getItems();
         if (selectedLocalDate != null) {
             Date selectedDate = Date.valueOf(selectedLocalDate);
-            // Set a predicate to filter by date
+            // Utiliser predicate pour filtrer par date
             filteredData.setPredicate(question -> {
-                Date questionDate = question.getDate();  // Assuming this is the date property
-                return questionDate.equals(selectedDate);  // Filter for exact match
-                // You can also modify this condition for different filtering logic (e.g., before, after, etc.)
+                Date questionDate = question.getDate();
+                return questionDate.equals(selectedDate);
             });
         } else {
-            // Reset the filter if no date is selected
+            // Réinitialiser le filtre si aucune date n'est sélectionnée
             filteredData.setPredicate(question -> true);
         }
     }

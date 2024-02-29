@@ -3,6 +3,7 @@ package com.esprit.controllers.question;
 import com.esprit.controllers.InterfacesAdminController;
 import com.esprit.models.Question;
 import com.esprit.models.Sujet;
+import com.esprit.services.ServiceUtilisateur;
 import com.esprit.services.questionService;
 import com.esprit.services.sujetService;
 import javafx.event.ActionEvent;
@@ -68,6 +69,7 @@ public class ModifierQuestionController {
     }
 
     private void populateTextFields() {
+        /*
         //chargement des champs de textes
         if (questionToModify != null) {
             tfQuestionTitre.setText(questionToModify.getTitre());
@@ -92,7 +94,7 @@ public class ModifierQuestionController {
             tfQuestionAuteurID.clear();
             taContenuQuestion.clear();
             DpDateQuestion.setValue(null);
-        }
+        }*/
     }
 
     @FXML
@@ -100,8 +102,10 @@ public class ModifierQuestionController {
         Sujet selectedSujet = cbChoixSujet.getValue();
         //Création du service et modification d'entité
         questionService qs = new questionService();
+        ServiceUtilisateur su = new ServiceUtilisateur();
         qs.modifier(new Question(questionToModify.getId(), tfQuestionTitre.getText(),
-                Integer.parseInt(tfQuestionAuteurID.getText()), Date.valueOf(DpDateQuestion.getValue()),
+                su.getUtilisateur(Integer.parseInt(tfQuestionAuteurID.getText())),
+                Date.valueOf(DpDateQuestion.getValue()),
                 selectedSujet, taContenuQuestion.getText()));
 
         //Message de confirmation

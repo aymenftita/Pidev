@@ -4,6 +4,7 @@ import com.esprit.controllers.InterfacesAdminController;
 import com.esprit.models.Question;
 import com.esprit.models.Reponse;
 import com.esprit.models.Sujet;
+import com.esprit.services.ServiceUtilisateur;
 import com.esprit.services.questionService;
 import com.esprit.services.reponseService;
 import com.esprit.services.sujetService;
@@ -87,6 +88,7 @@ public class ModifierReponseController {
 
     private void populateTextFields() {
         //chargement des champs de textes
+        /*
         if (reponseToModify != null) {
             tfAuteurID.setText(String.valueOf(reponseToModify.getAuteur_id()));
             tfContenuReponse.setText(reponseToModify.getContenu());
@@ -120,7 +122,7 @@ public class ModifierReponseController {
             cbChoixSujet.getSelectionModel().clearSelection();
             cbChoixQuestion.getSelectionModel().clearSelection();
             dpDateReponse.setValue(null);
-        }
+        }*/
     }
 
     @FXML
@@ -136,10 +138,11 @@ public class ModifierReponseController {
 
         Question selectedQuestion = cbChoixQuestion.getValue();
         Sujet selectedSujet = cbChoixSujet.getValue();
+        ServiceUtilisateur su = new ServiceUtilisateur();
 
         //Création du service et modification d'entité
         reponseService RS = new reponseService();
-        RS.modifier(new Reponse(reponseToModify.getId(), Integer.parseInt(tfAuteurID.getText()),
+        RS.modifier(new Reponse(reponseToModify.getId(), su.getUtilisateur(Integer.parseInt(tfAuteurID.getText())),
                 selectedQuestion, tfContenuReponse.getText(),
                 Date.valueOf(dpDateReponse.getValue()), selectedSujet, reponseToModify.getScore(),
                 reponseToModify.isAccepted(), reponseToModify.isReported()));

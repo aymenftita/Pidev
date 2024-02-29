@@ -27,18 +27,18 @@ public class AjoutSujetController {
     @FXML
     void ajouterSujet(ActionEvent event) {
 
-        String titreSujet = tfSujetTitre.getText().trim(); // Trim leading/trailing whitespaces
+        String titreSujet = tfSujetTitre.getText().trim(); // Trim pour effacer l'espace vide
 
         if (titreSujet.isEmpty()) {
-            // Display error message (e.g., using an Alert)
+            //Affichage de message d'erreur
             Alert alertVide = new Alert(Alert.AlertType.ERROR);
             alertVide.setTitle("Erreur de Saisie");
             alertVide.setHeaderText("Titre vide!");
             alertVide.setContentText("Veuillez saisir le titre du sujet.");
             alertVide.show();
-            return; // Prevent further execution if content is empty
+            return; // Empêcher toute exécution ultérieure si le contenu est vide
         } else if (titreSujet.length() > 30) {
-            // Display error message for exceeding length
+            // Afficher un message d'erreur en cas de dépassement de la longueur
             Alert alertLength = new Alert(Alert.AlertType.ERROR);
             alertLength.setTitle("Erreur de Saisie");
             alertLength.setHeaderText("Titre sujet trop longue!");
@@ -47,28 +47,28 @@ public class AjoutSujetController {
             return;
         }
 
-        String descSujet = tfDescriptionSujet.getText().trim(); // Trim leading/trailing whitespaces
+        String descSujet = tfDescriptionSujet.getText().trim(); // Trim pour effacer l'espace vide
 
         if (descSujet.isEmpty()) {
-            // Display error message (e.g., using an Alert)
+            // Affichage de message d'erreur
             Alert alertVide = new Alert(Alert.AlertType.ERROR);
             alertVide.setTitle("Erreur de Saisie");
             alertVide.setHeaderText("Description vide!");
             alertVide.setContentText("Veuillez saisir la description du sujet.");
             alertVide.show();
-            return; // Prevent further execution if content is empty
+            return; // Empêcher toute exécution ultérieure si le contenu est vide
         }
 
-        String reglesSujet = tfReglesSujet.getText().trim(); // Trim leading/trailing whitespaces
+        String reglesSujet = tfReglesSujet.getText().trim(); // Trim pour effacer l'espace vide
 
         if (reglesSujet.isEmpty()) {
-            // Display error message (e.g., using an Alert)
+            // Affichage de message d'erreur
             Alert alertVide = new Alert(Alert.AlertType.ERROR);
             alertVide.setTitle("Erreur de Saisie");
             alertVide.setHeaderText("Règles vide!");
             alertVide.setContentText("Veuillez saisir les règles du sujet.");
             alertVide.show();
-            return; // Prevent further execution if content is empty
+            return; // Empêcher toute exécution ultérieure si le contenu est vide
         }
 
 

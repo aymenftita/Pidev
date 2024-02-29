@@ -10,6 +10,7 @@ import com.esprit.controllers.sujet.ModifierSujetController;
 import com.esprit.models.Question;
 import com.esprit.models.Reponse;
 import com.esprit.models.Sujet;
+import com.esprit.models.utilisateur;
 import com.esprit.services.questionService;
 import com.esprit.services.reponseService;
 import com.esprit.services.sujetService;
@@ -55,16 +56,32 @@ public class InterfacesAdminController {
         //charger la table des questions
         questionService QS = new questionService();
 
-        //Collecter l'ID de chaque sujet pour l'affichage
+        //Collecter le titre de chaque sujet pour l'affichage
         TableColumn<Question, Sujet> sujetColumn = (TableColumn<Question, Sujet>) tvAffichageQuestion.getColumns()
-                .filtered(c -> c.getText().equals("Sujet id")).get(0);
+                .filtered(c -> c.getText().equals("Sujet")).get(0);
         sujetColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getSujet())); // Wrap in ObservableValue
         sujetColumn.setCellFactory(col -> new TableCell<Question, Sujet>() {
             @Override
             protected void updateItem(Sujet sujet, boolean empty) {
                 super.updateItem(sujet, empty);
                 if (sujet != null) {
-                    setText(String.valueOf(sujet.getId())); // afficher sujet ID
+                    setText(String.valueOf(sujet.getTitre())); // afficher sujet titre
+                } else {
+                    setText(null);
+                }
+            }
+        });
+
+        //Collecter l'email de chaque utilisateur pour l'affichage
+        TableColumn<Question, utilisateur> userColumn = (TableColumn<Question, utilisateur>) tvAffichageQuestion.getColumns()
+                .filtered(c -> c.getText().equals("Auteur")).get(0);
+        userColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getAuteur())); // Wrap in ObservableValue
+        userColumn.setCellFactory(col -> new TableCell<Question, utilisateur>() {
+            @Override
+            protected void updateItem(utilisateur user, boolean empty) {
+                super.updateItem(user, empty);
+                if (user != null) {
+                    setText(String.valueOf(user.getEmail())); // afficher user email
                 } else {
                     setText(null);
                 }
@@ -82,14 +99,14 @@ public class InterfacesAdminController {
 
         //Collecter l'ID de chaque sujet pour l'affichage
         TableColumn<Reponse, Sujet> sujetColumn = (TableColumn<Reponse, Sujet>) tvAffichageReponse.getColumns().
-                filtered(c -> c.getText().equals("Sujet id")).get(0);
+                filtered(c -> c.getText().equals("Sujet")).get(0);
         sujetColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getSujet()));
         sujetColumn.setCellFactory(col -> new TableCell<Reponse, Sujet>() {
             @Override
             protected void updateItem(Sujet sujet, boolean empty) {
                 super.updateItem(sujet, empty);
                 if (sujet != null) {
-                    setText(String.valueOf(sujet.getId())); // Afficher sujet ID
+                    setText(String.valueOf(sujet.getTitre())); // Afficher sujet titre
                 } else {
                     setText(null);
                 }
@@ -98,14 +115,30 @@ public class InterfacesAdminController {
 
         //Collecter l'ID de chaque question pour l'affichage
         TableColumn<Reponse, Question> questionColumn = (TableColumn<Reponse, Question>) tvAffichageReponse.getColumns().
-                filtered(c -> c.getText().equals("Question id")).get(0);
+                filtered(c -> c.getText().equals("Question")).get(0);
         questionColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getQuestion()));
         questionColumn.setCellFactory(col -> new TableCell<Reponse, Question>() {
             @Override
             protected void updateItem(Question question, boolean empty) {
                 super.updateItem(question, empty);
                 if (question != null) {
-                    setText(String.valueOf(question.getId())); // Afficher question ID
+                    setText(String.valueOf(question.getTitre())); // Afficher question titre
+                } else {
+                    setText(null);
+                }
+            }
+        });
+
+        //Collecter l'email de chaque utilisateur pour l'affichage
+        TableColumn<Reponse, utilisateur> userColumn = (TableColumn<Reponse, utilisateur>) tvAffichageReponse.getColumns()
+                .filtered(c -> c.getText().equals("Auteur")).get(0);
+        userColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getAuteur())); // Wrap in ObservableValue
+        userColumn.setCellFactory(col -> new TableCell<Reponse, utilisateur>() {
+            @Override
+            protected void updateItem(utilisateur user, boolean empty) {
+                super.updateItem(user, empty);
+                if (user != null) {
+                    setText(String.valueOf(user.getEmail())); // afficher user email
                 } else {
                     setText(null);
                 }
@@ -125,96 +158,6 @@ public class InterfacesAdminController {
         tvAffichageSujet.setItems(sujetsData);
     }
 
-
-    @FXML
-    void ajouterQuestion(ActionEvent event) throws IOException {
-        //redirection à l'interface d'ajout
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesQuestion/AjoutQuestion.fxml"));
-        Parent root = loader.load();
-        tvAffichageSujet.getScene().setRoot(root);
-    }
-
-    @FXML
-    void ajouterReponse(ActionEvent event) throws IOException {
-        //redirection à l'interface d'ajout
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesReponse/AjoutReponse.fxml"));
-        Parent root = loader.load();
-        tvAffichageSujet.getScene().setRoot(root);
-    }
-
-    @FXML
-    void ajouterSujet(ActionEvent event) throws IOException {
-        //redirection à l'interface d'ajout
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesSujet/AjoutSujet.fxml"));
-        Parent root = loader.load();
-        tvAffichageReponse.getScene().setRoot(root);
-    }
-
-    @FXML
-    void modifierQuestion(ActionEvent event) throws IOException {
-        //Collecter l'élément choisi du table
-        Question selectedQuestion = tvAffichageQuestion.getSelectionModel().getSelectedItem();
-        if (selectedQuestion != null) {
-            //Redirection vers l'interface de modification avec l'object sélectionné
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesQuestion/ModifierQuestion.fxml"));
-            Parent root = loader.load();
-            ModifierQuestionController mqc = loader.getController();
-            mqc.setQuestionToModify(selectedQuestion);
-            tvAffichageQuestion.getScene().setRoot(root);
-        } else {
-            // Si pas d'élement choisi
-            Alert alertAjout = new Alert(Alert.AlertType.ERROR);
-            alertAjout.setTitle("Erreur de modification");
-            alertAjout.setHeaderText("Erreur!");
-            alertAjout.setContentText("Choisir une question pour la modifier!");
-            alertAjout.show();
-        }
-
-    }
-
-    @FXML
-    void modifierReponse(ActionEvent event) throws IOException {
-        //Collecter l'élément choisi du table
-        Reponse selectedReponse = tvAffichageReponse.getSelectionModel().getSelectedItem();
-        if (selectedReponse != null) {
-            //Redirection vers l'interface de modification avec l'object sélectionné
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesReponse/ModifierReponse.fxml"));
-            Parent root = loader.load();
-            ModifierReponseController mrc = loader.getController();
-            mrc.setReponseToModify(selectedReponse);
-            tvAffichageReponse.getScene().setRoot(root);
-        } else {
-            // Si pas d'élément choisi
-            Alert alertAjout = new Alert(Alert.AlertType.ERROR);
-            alertAjout.setTitle("Erreur de modification");
-            alertAjout.setHeaderText("Erreur!");
-            alertAjout.setContentText("Choisir une réponse pour la modifier!");
-            alertAjout.show();
-        }
-
-    }
-
-    @FXML
-    void modifierSujet(ActionEvent event) throws IOException {
-        //Collecter l'élément choisi du table
-        Sujet selectedSujet = tvAffichageSujet.getSelectionModel().getSelectedItem();
-        if (selectedSujet != null) {
-            //Redirection vers l'interface de modification avec l'object sélectionné
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesSujet/ModifierSujet.fxml"));
-            Parent root = loader.load();
-            ModifierSujetController msc = loader.getController();
-            msc.setSujetToModify(selectedSujet);
-            tvAffichageSujet.getScene().setRoot(root);
-        } else {
-            // Si pas d'élément choisi
-            Alert alertAjout = new Alert(Alert.AlertType.ERROR);
-            alertAjout.setTitle("Erreur de modification");
-            alertAjout.setHeaderText("Erreur!");
-            alertAjout.setContentText("Choisir un sujet pour le modifier!");
-            alertAjout.show();
-        }
-
-    }
 
     //TODO: foreign key constraints stop elements from deleting, add a pop up to indicate this
 

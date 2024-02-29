@@ -17,7 +17,7 @@ public class questionService implements IService<Question> {
     @Override
     public void ajouter(Question question) {
         String req = "INSERT into questions_forum(id, titre, auteur_id, date_creation, sujet_id, contenu) values (" + question.getId() +
-                ", '" + question.getTitre() + "', " + question.getAuteur_id() +
+                ", '" + question.getTitre() + "', " + question.getAuteur().getId() +
                 ", '" + question.getDate()  + "', " +
                 question.getSujet().getId() + ", '" + question.getContenu() + "');";
         try {
@@ -31,7 +31,7 @@ public class questionService implements IService<Question> {
     @Override
     public void modifier(Question question) {
         String req = "UPDATE questions_forum set titre = '" + question.getTitre() +
-                "', auteur_id = " + question.getAuteur_id() +
+                "', auteur_id = " + question.getAuteur().getId() +
                 ", date_creation = '" + question.getDate() +
                 "', sujet_id = " + question.getSujet().getId() +
                 ", contenu = '" + question.getContenu() +
@@ -66,9 +66,10 @@ public class questionService implements IService<Question> {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(req);
             sujetService ss = new sujetService();//sujet service pour récupérer le sujet d'aprés l'ID
+            ServiceUtilisateur su = new ServiceUtilisateur();
             while (rs.next()) {
                 questions.add(new Question(rs.getInt("id"), rs.getString("titre"),
-                        rs.getInt("auteur_id"), rs.getDate("date_creation"),
+                        su.getUtilisateur(rs.getInt("auteur_id")), rs.getDate("date_creation"),
                         ss.getSujet(rs.getInt("sujet_id")), rs.getString("contenu")));
             }
         } catch (SQLException e) {
@@ -90,8 +91,9 @@ public class questionService implements IService<Question> {
 
             if (rs.next()) {  // Check if a row exists
                 sujetService ss = new sujetService();//sujet service pour récupérer le sujet d'aprés l'ID
+                ServiceUtilisateur su = new ServiceUtilisateur();
                 question = new Question(rs.getInt("id"), rs.getString("titre"),
-                        rs.getInt("auteur_id"), rs.getDate("date_creation"),
+                        su.getUtilisateur(rs.getInt("auteur_id")), rs.getDate("date_creation"),
                         ss.getSujet(rs.getInt("sujet_id")), rs.getString("contenu"));
             }
         } catch (SQLException e) {
@@ -110,9 +112,10 @@ public class questionService implements IService<Question> {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(req);
             sujetService ss = new sujetService();//sujet service pour récupérer le sujet d'aprés l'ID
+            ServiceUtilisateur su = new ServiceUtilisateur();
             while (rs.next()) {
                 questions.add(new Question(rs.getInt("id"), rs.getString("titre"),
-                        rs.getInt("auteur_id"), rs.getDate("date_creation"),
+                        su.getUtilisateur(rs.getInt("auteur_id")), rs.getDate("date_creation"),
                         ss.getSujet(rs.getInt("sujet_id")), rs.getString("contenu")));
             }
         } catch (SQLException e) {

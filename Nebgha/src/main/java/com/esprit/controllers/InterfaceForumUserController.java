@@ -55,26 +55,26 @@ public class InterfaceForumUserController {
 
 
 
-        // Save changes on commit
+        // Enregistrer les modifications lors de la validation(click sur entré)
         tvAffichageSujetSujet.setOnEditCommit(event -> {
 
             String newSujet = event.getNewValue();
             if (newSujet.trim().isEmpty()) {
-                // Display error message for empty text
+                // Affichage de message d'erreur
                 Alert alertVide = new Alert(Alert.AlertType.ERROR);
                 alertVide.setTitle("Erreur de Saisie");
                 alertVide.setHeaderText("Titre vide!");
                 alertVide.setContentText("Veuillez saisir le titre du sujet.");
                 alertVide.show();
-                return;
+                return; //Empêcher toute exécution ultérieure si le contenu est vide
             } else if (newSujet.length() > 30) {
-                // Display error message for exceeding length
+                // Afficher un message d'erreur en cas de dépassement de la longueur
                 Alert alertLength = new Alert(Alert.AlertType.ERROR);
                 alertLength.setTitle("Erreur de Saisie");
                 alertLength.setHeaderText("Titre de sujet est trop longue!");
                 alertLength.setContentText("Le titre ne doit pas dépasser 30 caractères.");
                 alertLength.show();
-                return;
+                return; //Empêcher toute exécution ultérieure si le contenu est vide
             }
 
             Sujet s = event.getRowValue();
@@ -86,7 +86,7 @@ public class InterfaceForumUserController {
 
             String newSujet = event.getNewValue();
             if (newSujet.trim().isEmpty()) {
-                // Display error message for empty text
+                // Affichage de message d'erreur
                 Alert alertVide = new Alert(Alert.AlertType.ERROR);
                 alertVide.setTitle("Erreur de Saisie");
                 alertVide.setHeaderText("Description vide!");
@@ -104,7 +104,7 @@ public class InterfaceForumUserController {
 
             String newSujet = event.getNewValue();
             if (newSujet.trim().isEmpty()) {
-                // Display error message for empty text
+                // Affichage de message d'erreur
                 Alert alertVide = new Alert(Alert.AlertType.ERROR);
                 alertVide.setTitle("Erreur de Saisie");
                 alertVide.setHeaderText("Règles vide!");
@@ -120,7 +120,7 @@ public class InterfaceForumUserController {
 
         ObservableList<Sujet> sujetsData = FXCollections.observableArrayList(ss.afficher());
 
-        // Create FilteredList for real-time search
+        // Créer une liste filtrée pour une recherche en temps réel
         FilteredList<Sujet> filteredData = new FilteredList<>(sujetsData, b -> true);
         tvAffichageSujet.setItems(filteredData);
 
@@ -157,16 +157,12 @@ public class InterfaceForumUserController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesSujet/InterfaceAjoutSujet.fxml"));
         Parent root = loader.load();
 
-        // Create a new stage (window)
         Stage stage = new Stage();
 
-        // Set the title of the new window
         stage.setTitle("Ajout Sujet");
 
-        // Set the size of the new window
-        stage.setScene(new Scene(root, 422, 399));  // Adjust width and height as needed
+        stage.setScene(new Scene(root, 422, 399));
 
-        // Show the new window
         stage.show();
 
     }
@@ -195,11 +191,6 @@ public class InterfaceForumUserController {
         }
     }
 
-    @FXML
-    void handleSearch(KeyEvent event) {
-
-
-    }
 
     @FXML
     void refreshSujet(MouseEvent event) {

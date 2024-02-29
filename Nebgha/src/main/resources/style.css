@@ -1,6 +1,6 @@
 .my-anchor-pane {
     -fx-pref-width: 1366px; /* Set the preferred width to screen width */
-    -fx-pref-height: 740px; /* Set the preferred height to screen height */
+    -fx-pref-height: 720px; /* Set the preferred height to screen height */
     -fx-background-color: white;
 }
 
@@ -128,12 +128,12 @@
     -fx-border-color: #29292D;
     -fx-text-fill: white;
     -fx-font-family: "Segoe UI", sans-serif;
-    -fx-font-size: 16px;
+    -fx-font-size: 20px;
 }
 
-.table-row-cell:selected {
+.table-row-cell:focused {
     -fx-background-color: whitesmoke;
-    -fx-text-fill: blue;
+    -fx-text-fill: #ffff24;
 }
 
 

@@ -5,6 +5,7 @@ import com.esprit.controllers.InterfacesAdminController;
 import com.esprit.models.Question;
 import com.esprit.models.Reponse;
 import com.esprit.models.Sujet;
+import com.esprit.services.ServiceUtilisateur;
 import com.esprit.services.questionService;
 import com.esprit.services.reponseService;
 import com.esprit.services.sujetService;
@@ -42,61 +43,28 @@ public class AjoutReponseController {
     @FXML
     void initialize() {
 
-        /*
-        sujetService ss = new sujetService();
-        questionService qs = new questionService();
-        List<Sujet> sujets = ss.afficher();
-        cbChoixSujet.getItems().setAll(sujets);
 
-        // Configuer cell factory pour cbChoixSujet pour afficher seulement le titre
-        cbChoixSujet.setCellFactory(listView -> new ListCell<Sujet>() {
-            @Override
-            protected void updateItem(Sujet sujet, boolean empty) {
-                super.updateItem(sujet, empty);
-                if (sujet != null) {
-                    setText(sujet.getTitre());
-                } else {
-                    setText(null);
-                }
-            }
-        });
-
-        List<Question> questions = qs.afficher();
-        cbChoixQuestion.getItems().setAll(questions);
-        // Configuer cell factory pour cbChoixQuestion pour afficher seulement le titre
-        cbChoixQuestion.setCellFactory(listView -> new ListCell<Question>() {
-            @Override
-            protected void updateItem(Question question, boolean empty) {
-                super.updateItem(question, empty);
-                if (question != null) {
-                    setText(question.getTitre());
-                } else {
-                    setText(null);
-                }
-            }
-        });
-
-         */
     }
 
     @FXML
     void ajouterReponse(ActionEvent event) {
-        String contenuReponse = tfContenuReponse.getText().trim(); // Trim leading/trailing whitespaces
+        String contenuReponse = tfContenuReponse.getText().trim(); // Trim pour effacer l'espace vide
 
         if (contenuReponse.isEmpty()) {
-            // Display error message (e.g., using an Alert)
+            // Affichage de message d'erreur
             Alert alertVide = new Alert(Alert.AlertType.ERROR);
             alertVide.setTitle("Erreur de Saisie");
             alertVide.setHeaderText("Contenu vide!");
             alertVide.setContentText("Veuillez saisir le contenu de la réponse.");
             alertVide.show();
-            return; // Prevent further execution if content is empty
+            return; // Empêcher toute exécution ultérieure si le contenu est vide
         }
 
 
         //Création du service et ajout d'entité
         reponseService rs = new reponseService();
-        rs.ajouter(new Reponse(0, 1,
+        ServiceUtilisateur su = new ServiceUtilisateur();
+        rs.ajouter(new Reponse(0, su.getUtilisateur(1),
                 relatedQuestion, tfContenuReponse.getText(),
                 new Date(System.currentTimeMillis()), relatedSujet,
                 0, false, false));
@@ -107,8 +75,6 @@ public class AjoutReponseController {
         alertAjout.setHeaderText("Succées!");
         alertAjout.setContentText("Réponse ajouté!");
         alertAjout.show();
-
-
 
     }
 

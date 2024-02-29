@@ -3,6 +3,7 @@ package com.esprit.controllers.question;
 import com.esprit.controllers.InterfacesAdminController;
 import com.esprit.models.Question;
 import com.esprit.models.Sujet;
+import com.esprit.services.ServiceUtilisateur;
 import com.esprit.services.questionService;
 import com.esprit.services.sujetService;
 import javafx.event.ActionEvent;
@@ -37,22 +38,7 @@ public class AjoutQuestionController {
 
     @FXML
     void initialize() {
-        /*
-        sujetService ss = new sujetService();
-        List<Sujet> sujets = ss.afficher();
-        cbChoixSujet.getItems().setAll(sujets);
-        // Configuration pour afficher seulement les titres dans le ComboBox
-        cbChoixSujet.setCellFactory(listView -> new ListCell<Sujet>() {
-            @Override
-            protected void updateItem(Sujet sujet, boolean empty) {
-                super.updateItem(sujet, empty);
-                if (sujet != null) {
-                    setText(sujet.getTitre());
-                } else {
-                    setText(null);
-                }
-            }
-        });*/
+
     }
 
     public void setRelatedSujet(Sujet sujet) {
@@ -62,20 +48,19 @@ public class AjoutQuestionController {
     @FXML
     void ajouterQuestion(ActionEvent event) {
 
-        //Sujet selectedSujet = cbChoixSujet.getValue();
 
-        String titreQuestion = tfQuestionTitre.getText().trim(); // Trim leading/trailing whitespaces
+        String titreQuestion = tfQuestionTitre.getText().trim(); // Trim pour couper l'espace vide
 
         if (titreQuestion.isEmpty()) {
-            // Display error message (e.g., using an Alert)
+            // Affichage de message d'erreur
             Alert alertVide = new Alert(Alert.AlertType.ERROR);
             alertVide.setTitle("Erreur de Saisie");
             alertVide.setHeaderText("Titre vide!");
             alertVide.setContentText("Veuillez saisir le titre de la question.");
             alertVide.show();
-            return; // Prevent further execution if content is empty
+            return; // Empêcher toute exécution ultérieure si le contenu est vide
         } else if (titreQuestion.length() > 30) {
-            // Display error message for exceeding length
+            // Afficher un message d'erreur en cas de dépassement de la longueur
             Alert alertLength = new Alert(Alert.AlertType.ERROR);
             alertLength.setTitle("Erreur de Saisie");
             alertLength.setHeaderText("Titre question trop longue!");
@@ -86,21 +71,22 @@ public class AjoutQuestionController {
 
         String contenuQuestion = taContenuQuestion.getText().trim();
         if (contenuQuestion.isEmpty()) {
-            // Display error message (e.g., using an Alert)
+            // Affichage de message d'erreur
             Alert alertVide = new Alert(Alert.AlertType.ERROR);
             alertVide.setTitle("Erreur de Saisie");
             alertVide.setHeaderText("Contenu vide!");
             alertVide.setContentText("Veuillez saisir le contenu de la question.");
             alertVide.show();
-            return; // Prevent further execution if content is empty
+            return; // Empêcher toute exécution ultérieure si le contenu est vide
         }
 
         //Création du service et ajout d'entité
         questionService rs = new questionService();
         sujetService ss = new sujetService();
-        //TODO: auteur_id à changer quand la session est configuré
+        ServiceUtilisateur su = new ServiceUtilisateur();
+        //TODO: auteur à changer quand la session est configuré
         rs.ajouter(new Question(0, tfQuestionTitre.getText(),
-                1, new Date(System.currentTimeMillis()),
+                su.getUtilisateur(1), new Date(System.currentTimeMillis()),
                 relatedSujet, taContenuQuestion.getText()));
 
         //Message de confirmation

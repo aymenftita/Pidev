@@ -19,7 +19,8 @@ public class reponseService implements IService<Reponse> {
 
     @Override
     public void ajouter(Reponse reponse) {
-        String req = "INSERT into reponse_forum(auteur_id, question_id, contenu, date_creation, sujet_id) values ('" + reponse.getAuteur_id() + "', '"
+        String req = "INSERT into reponse_forum(auteur_id, question_id, contenu, date_creation, sujet_id) values ('" +
+                reponse.getAuteur().getId() + "', '"
                 + reponse.getQuestion().getId() + "', '" + reponse.getContenu() + "', '" + reponse.getDate() +
                 "', "+ reponse.getSujet().getId() + ");";
         try {
@@ -33,7 +34,7 @@ public class reponseService implements IService<Reponse> {
 
     @Override
     public void modifier(Reponse reponse) {
-        String req = "UPDATE reponse_forum set auteur_id = " + reponse.getAuteur_id() + ", question_id = "
+        String req = "UPDATE reponse_forum set auteur_id = " + reponse.getAuteur().getId() + ", question_id = "
                 + reponse.getQuestion().getId() + ", contenu = '" + reponse.getContenu()
                 + "', date_creation = '" + reponse.getDate() + "', sujet_id = " + reponse.getSujet().getId() +
                 " where id = " + reponse.getId() + ";";
@@ -68,8 +69,9 @@ public class reponseService implements IService<Reponse> {
             ResultSet rs = st.executeQuery(req);
             sujetService ss = new sujetService();//sujet service pour récupérer le sujet d'aprés l'ID
             questionService qs = new questionService();//question service pour récupérer le question d'aprés l'ID
+            ServiceUtilisateur su = new ServiceUtilisateur();
             while (rs.next()) {
-                reponses.add(new Reponse(rs.getInt("id"), rs.getInt("auteur_id"),
+                reponses.add(new Reponse(rs.getInt("id"), su.getUtilisateur(rs.getInt("auteur_id")),
                         qs.getQuestion(rs.getInt("question_id")), rs.getString("contenu"),
                         rs.getDate("date_creation"), ss.getSujet(rs.getInt("sujet_id")),
                         rs.getInt("score"), rs.getBoolean("accept_status"),
@@ -91,8 +93,9 @@ public class reponseService implements IService<Reponse> {
             ResultSet rs = st.executeQuery(req);
             sujetService ss = new sujetService();//sujet service pour récupérer le sujet d'aprés l'ID
             questionService qs = new questionService();//question service pour récupérer le question d'aprés l'ID
+            ServiceUtilisateur su = new ServiceUtilisateur();
             while (rs.next()) {
-                reponses.add(new Reponse(rs.getInt("id"), rs.getInt("auteur_id"),
+                reponses.add(new Reponse(rs.getInt("id"), su.getUtilisateur(rs.getInt("auteur_id")),
                         qs.getQuestion(rs.getInt("question_id")), rs.getString("contenu"),
                         rs.getDate("date_creation"), ss.getSujet(rs.getInt("sujet_id")),
                         rs.getInt("score"), rs.getBoolean("accept_status"),

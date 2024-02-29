@@ -4,9 +4,9 @@ package com.esprit.models;
 import java.sql.Date;
 
 public class Reponse {
-    //TODO: change auteur_id to a class
+
     private int id;
-    private int auteur_id;
+    private utilisateur auteur;
     private Question question;
     private String contenu;
     private Date date;
@@ -24,7 +24,7 @@ public class Reponse {
     public String toString() {
         return "reponse{" +
                 "id=" + id +
-                ", auteur_id=" + auteur_id +
+                ", auteur_id=" + auteur +
                 ", question_id=" + question.getId() +
                 ", contenu='" + contenu + '\'' +
                 ", date='" + date + '\'' +
@@ -32,9 +32,9 @@ public class Reponse {
                 '}';
     }
 
-    public Reponse(int id, int auteur_id, Question question, String contenu, Date date, Sujet sujet, int score, boolean accepted, boolean reported) {
+    public Reponse(int id, utilisateur auteur, Question question, String contenu, Date date, Sujet sujet, int score, boolean accepted, boolean reported) {
         this.id = id;
-        this.auteur_id = auteur_id;
+        this.auteur = auteur;
         this.question = question;
         this.contenu = contenu;
         this.date = date;
@@ -52,12 +52,12 @@ public class Reponse {
         this.id = id;
     }
 
-    public int getAuteur_id() {
-        return auteur_id;
+    public utilisateur getAuteur() {
+        return auteur;
     }
 
-    public void setAuteur_id(int auteur_id) {
-        this.auteur_id = auteur_id;
+    public void setAuteur(utilisateur auteur) {
+        this.auteur = auteur;
     }
 
     public Question getQuestion() {
