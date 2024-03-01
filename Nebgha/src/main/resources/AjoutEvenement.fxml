@@ -10,17 +10,23 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="581.0" prefWidth="797.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.AjoutEvenementController">
    <children>
+      <ImageView fitHeight="581.0" fitWidth="813.0">
+         <image>
+            <Image url="@Images/bg.jpg" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#01030d" height="351.0" layoutX="191.0" layoutY="123.0" opacity="0.65" stroke="BLACK" strokeType="INSIDE" width="447.0" />
       <TextField fx:id="Nom" layoutX="246.0" layoutY="153.0" prefHeight="27.0" prefWidth="146.0" promptText="Nom" style="-fx-background-color: transparent; -fx-border-color: grey; -fx-border-radius: 20px;">
          <font>
             <Font name="Candara" size="12.0" />
          </font>
       </TextField>
-      <ImageView fx:id="imageV" fitHeight="124.0" fitWidth="170.0" layoutX="39.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" />
-      <Label layoutX="319.0" layoutY="45.0" text="Ajout Evenement" textFill="#0e1c57" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+      <Label layoutX="256.0" layoutY="51.0" text="Ajout Evenement" textFill="#0e1c57" textOverrun="CENTER_ELLIPSIS" wrapText="true">
          <font>
             <Font name="Candara" size="38.0" />
          </font>
@@ -31,7 +37,7 @@
          </font>
       </Label>
       <TextField fx:id="ImageF" layoutX="246.0" layoutY="207.0" prefHeight="8.0" prefWidth="146.0" promptText="Image" style="-fx-background-color: transparent; -fx-border-color: grey; -fx-border-radius: 20px;" />
-      <Button layoutX="331.0" layoutY="207.0" mnemonicParsing="false" onAction="#importer" prefHeight="27.0" prefWidth="64.0" style="-fx-border-radius: 20; -fx-background-color: transparent;" text="Import">
+      <Button layoutX="331.0" layoutY="207.0" mnemonicParsing="false" onAction="#importer" prefHeight="27.0" prefWidth="64.0" style="-fx-border-radius: 20; -fx-background-color: transparent;" text="Import" textFill="#ebe2e2">
          <font>
             <Font name="Candara Bold" size="11.0" />
          </font>
@@ -63,7 +69,7 @@
             <Font name="Candara" size="12.0" />
          </font>
       </Label>
-      <Button layoutX="97.0" layoutY="397.0" mnemonicParsing="false" onAction="#Retour" style="-fx-background-color: transparent; -fx-border-radius: 20px; -fx-border-color: grey;" text="Retour" textFill="#0e1c57" />
+      <Button layoutX="137.0" layoutY="474.0" mnemonicParsing="false" onAction="#Retour" prefHeight="27.0" prefWidth="54.0" style="-fx-background-color: transparent; -fx-border-radius: 20px; -fx-border-color: grey;" text="Retour" textFill="#0e1c57" />
       <ImageView fitHeight="101.0" fitWidth="159.0" layoutX="17.0" layoutY="14.0">
          <image>
             <Image url="@Images/421935935_2103323113360956_2155380558138833429_n.png" />

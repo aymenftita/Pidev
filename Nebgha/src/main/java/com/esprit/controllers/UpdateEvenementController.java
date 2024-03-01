@@ -175,7 +175,7 @@ public class UpdateEvenementController implements Initializable {
 
 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene =  new Scene(root, 800, 500);
+            scene =  new Scene(root, 800, 550);
             stage.setScene(scene);
             stage.setTitle("Ajouter Evenement");
             stage.show();

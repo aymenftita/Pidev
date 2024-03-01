@@ -57,8 +57,7 @@ public class ListEvenementController  implements Initializable {
     @FXML
     void delete(ActionEvent event) throws SQLException {
         Evenement evt;
-        evt =   listEvenement.getSelectionModel().getSelectedItem();
-        es.supprimer(evt);
+
         if (  listEvenement.getSelectionModel().getSelectedItem() == null) {
             Alert alerte = new Alert(Alert.AlertType.ERROR);
             alerte.setTitle("Error");
@@ -124,7 +123,7 @@ public class ListEvenementController  implements Initializable {
                 //Controller.id_categ = 1;
 
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene =  new Scene(root, 800, 500);
+                scene =  new Scene(root, 800, 550);
                 stage.setScene(scene);
                 stage.setTitle("Modifier Evenement");
                 stage.show();
