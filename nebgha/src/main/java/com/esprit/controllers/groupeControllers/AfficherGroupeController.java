@@ -87,12 +87,31 @@ public class AfficherGroupeController implements Initializable {
 
         idColumng.setOnEditCommit(event -> {
             Groupe g = event.getRowValue();
+            if (event.getNewValue()==null) {
+                // Display error message for empty text
+                Alert alertVide = new Alert(Alert.AlertType.ERROR);
+                alertVide.setTitle("Erreur de Saisie");
+                alertVide.setHeaderText("id vide!");
+                alertVide.setContentText("Veuillez saisir l'id' du Groupe.");
+                alertVide.show();
+                return;
+            }
             g.setUid(event.getNewValue());
             gs.modifier(g);
         });
 
         nomColumn.setOnEditCommit(event -> {
             Groupe g = event.getRowValue();
+            String s = event.getNewValue();
+            if (s.trim().isEmpty()) {
+                // Display error message for empty text
+                Alert alertVide = new Alert(Alert.AlertType.ERROR);
+                alertVide.setTitle("Erreur de Saisie");
+                alertVide.setHeaderText("nom vide!");
+                alertVide.setContentText("Veuillez saisir le nom du Groupe.");
+                alertVide.show();
+                return;
+            }
             g.setTitre(event.getNewValue());
             gs.modifier(g);
 
@@ -100,6 +119,16 @@ public class AfficherGroupeController implements Initializable {
 
         dateColumn.setOnEditCommit(event -> {
             Groupe g = event.getRowValue();
+            String s = event.getNewValue();
+            if (s.trim().isEmpty()) {
+                // Display error message for empty text
+                Alert alertVide = new Alert(Alert.AlertType.ERROR);
+                alertVide.setTitle("Erreur de Saisie");
+                alertVide.setHeaderText("date vide!");
+                alertVide.setContentText("Veuillez saisir la date du Groupe.");
+                alertVide.show();
+                return;
+            }
             g.setDescription(event.getNewValue());
             gs.modifier(g);
 

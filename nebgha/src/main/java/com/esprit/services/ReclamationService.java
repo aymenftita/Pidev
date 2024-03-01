@@ -114,10 +114,30 @@ public class ReclamationService {
 
         return entities;
     }
-    public ResultSet afficher2() throws SQLException  {
-        Statement st = connection.createStatement();
-        ResultSet rs = st.executeQuery("SELECT * from reclamations");
+    public ArrayList<Reclamation> afficherparUser(int id) {
+        ArrayList<Reclamation> entities = new ArrayList<>();
 
-        return rs;
+        String req = "SELECT * from reclamations where uid ="+ id +";";
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            UtilisateurService us = new UtilisateurService();
+            while (rs.next()) {
+                Utilisateur user = us.rechercheUtilisateur( rs.getInt(2));
+                entities.add(new Reclamation(rs.getInt(1),
+                        user, rs.getString(3) ,
+                        rs.getString(4) ,
+                        rs.getString (5),
+                        rs.getString(6),
+                        rs.getInt(7) ,
+                        rs.getString(8) ));
+            }
+
+            System.out.println(entities);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return entities;
     }
 }

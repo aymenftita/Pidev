@@ -62,14 +62,24 @@ public class AfficherMessageController {
 
     public void modifier(){
 
-        /*CidG.setOnEditCommit(event -> {
+        CidG.setOnEditCommit(event -> {
             Message m = event.getRowValue();
-            m.setIdGroupe(event.getNewValue());
+            m.setIdGroupe(Integer.parseInt(String.valueOf(event.getNewValue())));
             ms.modifier(m);
-        });*/
+        });
 
         CDate.setOnEditCommit(event -> {
             Message g = event.getRowValue();
+            String s = event.getNewValue();
+            if (s.trim().isEmpty()) {
+                // Display error message for empty text
+                Alert alertVide = new Alert(Alert.AlertType.ERROR);
+                alertVide.setTitle("Erreur de Saisie");
+                alertVide.setHeaderText("Description vide!");
+                alertVide.setContentText("Veuillez saisir la description du Reclamation.");
+                alertVide.show();
+                return;
+            }
             g.setDateCreation(event.getNewValue());
             ms.modifier(g);
 
@@ -77,6 +87,16 @@ public class AfficherMessageController {
 
         Ctext.setOnEditCommit(event -> {
             Message g = event.getRowValue();
+            String s = event.getNewValue();
+            if (s.trim().isEmpty()) {
+                // Display error message for empty text
+                Alert alertVide = new Alert(Alert.AlertType.ERROR);
+                alertVide.setTitle("Erreur de Saisie");
+                alertVide.setHeaderText("Description vide!");
+                alertVide.setContentText("Veuillez saisir la description du Reclamation.");
+                alertVide.show();
+                return;
+            }
             g.setText(event.getNewValue());
             ms.modifier(g);
 

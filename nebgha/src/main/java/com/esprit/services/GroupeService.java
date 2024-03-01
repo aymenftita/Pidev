@@ -68,6 +68,58 @@ public class GroupeService {
         }
     }
 
+    public List<Groupe> afficherG(int id) {
+        List<Groupe> entities = new ArrayList<>();
+
+        String req = "SELECT * from groupe where creator_id = "+ id +";";
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            UtilisateurService us =new UtilisateurService();
+            while (rs.next()) {
+                Utilisateur user = us.rechercheUtilisateur( rs.getInt(2));
+                entities.add(new Groupe(
+                        rs.getInt(1),
+                        user,
+                        rs.getString(3) ,
+                        rs.getString(4)));
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return entities;
+
+    }
+
+
+    public Groupe afficherById(int id) {
+        Groupe g = new Groupe();
+        String req = "SELECT * from groupe where id_groupe =" + id+";";
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            UtilisateurService us =new UtilisateurService();
+            while (rs.next()) {
+                Utilisateur user = us.rechercheUtilisateur( rs.getInt(2));
+                g.setId_groupe(rs.getInt(1));
+                g.setUid(user);
+                g.setTitre(rs.getString(3));
+                g.setDescription(rs.getString(4));
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return g;
+
+    }
+
+
     public List<Groupe> afficher() {
         List<Groupe> entities = new ArrayList<>();
 

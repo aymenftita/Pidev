@@ -5,6 +5,10 @@ public class UserGroupe {
     private Utilisateur idUser;
     private Groupe idGroupe;
 
+
+    public UserGroupe() {
+    }
+
     public UserGroupe(Utilisateur idUser, Groupe idGroupe) {
         this.idUser = idUser;
         this.idGroupe = idGroupe;

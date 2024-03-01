@@ -7,6 +7,9 @@ public class Groupe {
     private String titre;
     private String description;
 
+    public Groupe() {
+    }
+
     public Groupe(int id_groupe, Utilisateur uid, String titre, String description) {
         this.id_groupe = id_groupe;
         this.uid = uid;

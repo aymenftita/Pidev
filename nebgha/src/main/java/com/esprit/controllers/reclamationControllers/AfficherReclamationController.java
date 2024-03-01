@@ -17,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.ChoiceBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyCode;
 
 import java.io.IOException;
 import java.net.URL;
@@ -87,12 +88,32 @@ public class AfficherReclamationController implements Initializable {
 
         desc.setOnEditCommit(event -> {
             Reclamation r = event.getRowValue();
+            String s = event.getNewValue();
+            if (s.trim().isEmpty()) {
+                // Display error message for empty text
+                Alert alertVide = new Alert(Alert.AlertType.ERROR);
+                alertVide.setTitle("Erreur de Saisie");
+                alertVide.setHeaderText("Description vide!");
+                alertVide.setContentText("Veuillez saisir la description du Reclamation.");
+                alertVide.show();
+                return;
+            }
             r.setDescription(event.getNewValue());
             rss.modifier(r);
         });
 
         sujet.setOnEditCommit(event -> {
             Reclamation r = event.getRowValue();
+            String s = event.getNewValue();
+            if (s.trim().isEmpty()) {
+                // Display error message for empty text
+                Alert alertVide = new Alert(Alert.AlertType.ERROR);
+                alertVide.setTitle("Erreur de Saisie");
+                alertVide.setHeaderText("sujet vide!");
+                alertVide.setContentText("Veuillez saisir le sujet du Reclamation.");
+                alertVide.show();
+                return;
+            }
             r.setSujet(event.getNewValue());
             rss.modifier(r);
 
@@ -100,13 +121,30 @@ public class AfficherReclamationController implements Initializable {
 
         stat.setOnEditCommit(event -> {
             Reclamation r = event.getRowValue();
+            if (event.getNewValue()==null) {
+                // Display error message for empty text
+                Alert alertVide = new Alert(Alert.AlertType.ERROR);
+                alertVide.setTitle("Erreur de Saisie");
+                alertVide.setHeaderText("status vide!");
+                alertVide.setContentText("Veuillez saisir la status du Reclamation.");
+                alertVide.show();
+                return;
+            }
             r.setStatus(String.valueOf(event.getNewValue()));
             rss.modifier(r);
-
         });
 
         uid.setOnEditCommit(event -> {
             Reclamation r = event.getRowValue();
+            if (event.getNewValue()==null) {
+                // Display error message for empty text
+                Alert alertVide = new Alert(Alert.AlertType.ERROR);
+                alertVide.setTitle("Erreur de Saisie");
+                alertVide.setHeaderText("user id vide!");
+                alertVide.setContentText("Veuillez saisir le user id du Reclamation.");
+                alertVide.show();
+                return;
+            }
             r.setUserId(event.getNewValue());
             rss.modifier(r);
 
@@ -114,21 +152,29 @@ public class AfficherReclamationController implements Initializable {
 
         date.setOnEditCommit(event -> {
             Reclamation r = event.getRowValue();
+            String s = event.getNewValue();
+            if (s.trim().isEmpty()) {
+                // Display error message for empty text
+                Alert alertVide = new Alert(Alert.AlertType.ERROR);
+                alertVide.setTitle("Erreur de Saisie");
+                alertVide.setHeaderText("Description vide!");
+                alertVide.setContentText("Veuillez saisir la description du Reclamation.");
+                alertVide.show();
+                return;
+            }
             r.setDateCreation(event.getNewValue());
             rss.modifier(r);
 
         });
 
 
-
-
-        /*tableView.setOnKeyPressed(event -> {
+        tableView.setOnKeyPressed(event -> {
             if (event.getCode().equals(KeyCode.ENTER)) {
                 Reclamation selectedProduit = tableView.getSelectionModel().getSelectedItem();
                 if (selectedProduit != null)
                     rss.modifier(selectedProduit);
             }
-        });*/
+        });
     }
 
     public void onEditCommit() {

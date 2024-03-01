@@ -28,13 +28,10 @@ public class MainProg {
                 1000);
 
 
-        //Reclamation r = new Reclamation(user, String.valueOf(2024-01-20),"testSujet1","testDescription1","testStatut1",1,"testResponsable1");
+        //System.out.println(gs.afficherG(2));
+        /*Groupe g3 = new Groupe(user,"testttttttttt","descriptiontesttttttttttttt");
 
-        //Gs.ajouter(g3);
-
-        Groupe g3 = new Groupe(user,"testttttttttt","descriptiontesttttttttttttt");
-
-        gs.ajouter(g3);
+        gs.ajouter(g3);*/
         /*GroupService Gs=new GroupService();
 
         Gs.modifier(g3);
@@ -43,7 +40,8 @@ public class MainProg {
 
 
         //UserGroupe ug = new UserGroupe(u,g3);
-        //UserGroupeService ugs = new UserGroupeService();
+        UserGroupeService ugs = new UserGroupeService();
+        System.out.println(ugs.afficherUG(2,20));
         //ugs.ajouter(ug);
         //System.out.println(ms.afficher());
 
