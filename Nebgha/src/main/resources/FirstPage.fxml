@@ -22,7 +22,7 @@
 
       <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="201.0" layoutY="-16.0">
          <image>
-            <Image url="@images/Black_Simple_Online_Education_Logo__1_-removebg-preview.png" />
+            <Image url="@images/Logo2.png" />
          </image>
       </ImageView>
       <Button alignment="BOTTOM_CENTER" layoutX="411.0" layoutY="160.0" mnemonicParsing="false" onAction="#EtudiantInterface" prefHeight="134.0" prefWidth="127.0" stylesheets="@images/styles.css" text="Etudiant">

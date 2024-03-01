@@ -55,15 +55,14 @@ public class AjoutRecompenseController {
             alert.setContentText("Récompense ajoutée!");
             alert.showAndWait();
 
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            currentStage.close();
+
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowRecompenses.fxml"));
             Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Récompenses");
-            stage.show();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Récompenses");
+            currentStage.show();
         } catch (NumberFormatException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");
@@ -75,14 +74,13 @@ public class AjoutRecompenseController {
 
     @FXML
     void previous(MouseEvent event) throws IOException {
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowRecompenses.fxml"));
         Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Récompenses");
-        stage.show();
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.setTitle("Récompenses");
+        currentStage.show();
     }
 
 }

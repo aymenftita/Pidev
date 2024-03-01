@@ -4,11 +4,14 @@ import com.esprit.models.*;
 import com.esprit.services.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
@@ -41,7 +44,8 @@ public class QuizsHistoryController {
 
 
     public void initialize() {
-
+        String cssPath = getClass().getResource("/images/styles.css").toExternalForm();
+        quizPane.getStylesheets().add(cssPath);
         allQuizzes = quizService.afficher();
         updateQuizList(allQuizzes);
 
@@ -89,29 +93,41 @@ public class QuizsHistoryController {
         Label nameLabel = new Label(quiz.getNom());
         Label difficultyLabel = new Label(quiz.getDifficulte().toString());
         Label durationLabel = new Label(String.valueOf(quiz.getDuree()));
+        Image doneImage = new Image(getClass().getResourceAsStream("/images/done.png"));
+
+        ImageView imageView = new ImageView(doneImage);
+        imageView.setFitWidth(30);
+        imageView.setFitHeight(30);
 
         if (hasAttempted) {
             Button resultButton = new Button("Show results");
             resultButton.setOnAction(event -> {
                 showQuizResult(quiz.getQuizId());
+                imageView.setImage(doneImage);
+                imageView.setFitWidth(30);
+                imageView.setFitHeight(30);
             });
-            quizBlock.getChildren().addAll(nameLabel, difficultyLabel, durationLabel, resultButton);
+
+            resultButton.getStyleClass().add("submit-button");
+
+            quizBlock.getChildren().addAll(nameLabel, imageView, difficultyLabel, durationLabel, resultButton);
         }
+
+
         return quizBlock;
     }
 
     private void showQuizResult(int quizId) {
         try {
-            Stage currentStage = (Stage) quizPane.getScene().getWindow();
-            currentStage.close();
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/QuizResults.fxml"));
             Parent root = loader.load();
             QuizResultsController resultController = loader.getController();
             resultController.initialize(quizId);
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Quiz Results");
-            stage.show();
+            Stage currentStage = (Stage) quizPane.getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Résultat du quiz");
+            currentStage.show();
         } catch (IOException e) {
             System.err.println("Error loading quiz result: " + e.getMessage());
         }
@@ -120,14 +136,13 @@ public class QuizsHistoryController {
 
     @FXML
     void previous(MouseEvent event) throws IOException {
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/EtudiantInterface.fxml"));
         Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Etudiant");
-        stage.show();
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.setTitle("Etudiant");
+        currentStage.show();
     }
 
 }

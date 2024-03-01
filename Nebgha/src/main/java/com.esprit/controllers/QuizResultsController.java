@@ -8,7 +8,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -31,8 +34,10 @@ private int userId=Session.getUserId();
     private final QuizService quizService = new QuizService();
     private final ReponsesService reponseService = new ReponsesService();
     private final ReponsesUtilisateurService reponseUtilisateurService = new ReponsesUtilisateurService();
+    private int quizId;
 
     public void initialize( int quizId) {
+        this.quizId=quizId;
         Quiz quiz = quizService.getQuiz(quizId);
         List<Questions> questions = questionService.afficherParQuiz(quizId);
         titleLabel.setText("Résultats du quiz - " + quiz.getNom());
@@ -47,7 +52,9 @@ private int userId=Session.getUserId();
 
             List<Reponses> reponses = reponseService.afficherParQuestion(question.getQuestionId());
             for (Reponses reponse : reponses) {
+                HBox answerBox = new HBox();
                 Label reponseLabel = new Label(reponse.getTexte());
+                answerBox.getChildren().add(reponseLabel);
 
                 for (ReponsesUtilisateur reponsesUtilisateur : reponsesUtilisateurList) {
                     if (reponsesUtilisateur.getReponse().getReponseId() == reponse.getReponseId()) {
@@ -55,22 +62,39 @@ private int userId=Session.getUserId();
                             reponseLabel.setText(reponseLabel.getText() + " (Correcte)");
                             reponseLabel.setStyle("-fx-background-color: rgba(0, 255, 0, 0.3); -fx-padding: 5px;");
                             correctAnswers++;
+                            ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/images/check.png")));
+                            imageView.setFitHeight(20);
+                            imageView.setFitWidth(20);
+                            answerBox.getChildren().add(imageView);
                         } else {
                             reponseLabel.setText(reponseLabel.getText() + " (Fausse)");
                             reponseLabel.setStyle("-fx-background-color: rgba(255, 0, 0, 0.3); -fx-padding: 5px;");
+                            ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/images/cancel.png")));
+                            imageView.setFitHeight(20);
+                            imageView.setFitWidth(20);
+                            answerBox.getChildren().add(imageView);
                         }
                     }
                 }
-                questionsContainer.getChildren().add(reponseLabel);
+                questionsContainer.getChildren().add(answerBox);
             }
 
             String explanation = reponses.get(0).getExplication();
             if (!explanation.isEmpty()) {
                 Label explicationLabel = new Label("Explication: " + explanation);
-                explicationLabel.setStyle("-fx-background-color: rgba(0, 0, 255, 0.3); -fx-padding: 5px;");
-                questionsContainer.getChildren().add(explicationLabel);
+                explicationLabel.setStyle("-fx-background-color: rgba(255, 255, 0, 0.3); -fx-padding: 5px;");
+
+                ImageView explanationImageView = new ImageView(new Image(getClass().getResourceAsStream("/images/lightbulb.png")));
+                explanationImageView.setFitHeight(20);
+                explanationImageView.setFitWidth(20);
+
+                HBox explanationBox = new HBox();
+                explanationBox.getChildren().addAll(explicationLabel, explanationImageView);
+                questionsContainer.getChildren().add(explanationBox);
             }
         }
+
+
 
         int totalQuestions = questions.size();
         double score = (double) correctAnswers / totalQuestions * 100;
@@ -79,13 +103,13 @@ private int userId=Session.getUserId();
     }
     @FXML
     void previous(MouseEvent event) throws IOException {
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/QuizsHistory.fxml"));
         Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Historique");
-        stage.show();
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.setTitle("Historique");
+        currentStage.show();
     }
+
+
 }

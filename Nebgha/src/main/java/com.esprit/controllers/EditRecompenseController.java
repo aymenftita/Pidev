@@ -60,15 +60,14 @@ public class EditRecompenseController {
                 alert.setContentText("Récompense modifié!");
                 alert.showAndWait();
 
-                Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                currentStage.close();
+
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowRecompenses.fxml"));
                 Parent root = loader.load();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.setTitle("Récompenses");
-                stage.show();
+                Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                currentStage.setScene(new Scene(root));
+                currentStage.setTitle("Récompenses");
+                currentStage.show();
             } catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Erreur");
@@ -85,14 +84,14 @@ public class EditRecompenseController {
 
     @FXML
     void previous(MouseEvent event) throws IOException {
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowRecompenses.fxml"));
         Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Récompenses");
-        stage.show();
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.setTitle("Récompenses");
+        currentStage.show();
+
     }
 
 }

@@ -11,18 +11,14 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.ShowQuizController">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="663.0">
-         <image>
-            <Image url="@images/Rb.png" />
-         </image>
-      </ImageView>
-       <TextField fx:id="searchField" layoutX="20.0" layoutY="81.0" promptText="Rechercher quiz" />
-       <Button fx:id="sortButton" layoutX="560.0" layoutY="81.0" onAction="#toggleSortOrder" text="Tri par date" />
-       <ComboBox fx:id="difficultyComboBox" layoutX="181.0" layoutY="81.0" promptText="Difficulté">
+       <TextField fx:id="searchField" layoutX="20.0" layoutY="81.0" promptText="Rechercher quiz" style="-fx-background-color: white; -fx-border-color: #FDFD96;" />
+       <Button fx:id="sortButton" layoutX="560.0" layoutY="81.0" onAction="#toggleSortOrder" style="-fx-background-color: white; -fx-border-color: #FDFD96;" text="Tri par date" />
+       <ComboBox fx:id="difficultyComboBox" layoutX="214.0" layoutY="81.0" promptText="Difficulté" style="-fx-background-color: white; -fx-border-color: #FDFD96;">
            <items>
                <FXCollections fx:factory="observableArrayList">
                    <String fx:value="débutant" />
@@ -31,30 +27,46 @@
                </FXCollections>
            </items>
        </ComboBox>
-       <TableView fx:id="quizTableView" layoutY="118.0" prefHeight="200.0" prefWidth="661.0">
+       <TableView fx:id="quizTableView" layoutY="118.0" prefHeight="200.0" prefWidth="661.0" style="-fx-border-color: #FDFD96;">
         <columns>
             <TableColumn fx:id="title" prefWidth="75.0" text="Titre" />
-            <TableColumn fx:id="description" prefWidth="75.0" text="Description" />
-            <TableColumn fx:id="date" prefWidth="75.0" text="Date" />
-            <TableColumn fx:id="duree" prefWidth="75.0" text="Durée (min)" />
-            <TableColumn fx:id="nbr_questions" prefWidth="130.40005493164062" text="Nombre de questions" />
-            <TableColumn fx:id="difficulte" prefWidth="77.5999755859375" text="Difficulte" />
+            <TableColumn fx:id="description" prefWidth="130.40001678466797" text="Description" />
+            <TableColumn fx:id="date" prefWidth="112.79998779296875" text="Date" />
+            <TableColumn fx:id="duree" prefWidth="101.5999755859375" text="Durée (min)" />
+            <TableColumn fx:id="nbr_questions" prefWidth="132.00003051757812" text="Nombre de questions" />
+            <TableColumn fx:id="difficulte" prefWidth="110.39996337890625" text="Difficulte" />
         </columns>
       </TableView>
-      <Label layoutX="239.0" layoutY="22.0" text="Liste des Quizs" textFill="#000066">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Label>
-      <Button fx:id="btnQuiz" layoutX="111.0" layoutY="356.0" mnemonicParsing="false" onAction="#openAjout" style="-fx-background-color: white;" text="Ajouter " />
+      <Button fx:id="btnQuiz" layoutX="120.0" layoutY="356.0" mnemonicParsing="false" onAction="#openAjout" stylesheets="@images/styles.css" text="Ajouter " />
       <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="79.0" layoutY="356.0">
          <image>
             <Image url="@images/add.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#previous">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="58.0" layoutX="1.0" stroke="TRANSPARENT" strokeType="INSIDE" width="659.0" />
+      <ImageView fitHeight="19.0" fitWidth="134.0" layoutX="120.0" layoutY="20.0">
+         <image>
+            <Image url="@images/55.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="72.0" layoutY="10.0">
+         <image>
+            <Image url="@images/Logo1.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="478.0" layoutY="13.0" text="Liste des Quizs" textFill="#000066">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="15.0" layoutY="17.0" onMouseClicked="#previous">
          <image>
             <Image url="@images/previous.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="loupe" fitHeight="21.0" fitWidth="22.0" layoutX="176.0" layoutY="84.0">
+         <image>
+            <Image url="@images/loupe.png" />
          </image>
       </ImageView>
    </children>

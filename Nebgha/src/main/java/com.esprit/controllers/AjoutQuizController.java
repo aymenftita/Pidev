@@ -80,25 +80,19 @@ public class AjoutQuizController implements Initializable {
             alert.setContentText("Quiz ajouté!");
             alert.showAndWait();
 
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            currentStage.close();
+
 
             FXMLLoader loader;
             Parent root;
-            if (role.equals("Tuteur")) {
-                loader = new FXMLLoader(getClass().getResource("/ShowQuizsTuteur.fxml"));
-            } else if (role.equals("Administrateur")) {
-                loader = new FXMLLoader(getClass().getResource("/ShowQuizs.fxml"));
-            } else {
-                System.out.println("invalid role");
-                return;
-            }
+
+                loader = new FXMLLoader(getClass().getResource("/ShowQuiz.fxml"));
+
             root = loader.load();
 
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Quizs");
-            stage.show();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Quizs");
+            currentStage.show();
 
         } catch (NumberFormatException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -112,24 +106,14 @@ public class AjoutQuizController implements Initializable {
     @FXML
     void previous(MouseEvent event) throws IOException {
 
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
-        if (role.equals("Administrateur")) {
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuiz.fxml"));
             Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Quizs");
-            stage.show();
-        }
-        else if (role.equals("Tuteur")){
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuizTuteur.fxml"));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Quizs");
-            stage.show();
-        }
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.setTitle("Quizs");
+        currentStage.show();
+
 
     }
 

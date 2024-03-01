@@ -112,25 +112,19 @@ public class EditReponseController implements Initializable {
                 alert.setContentText("Réponse modifiée!");
                 alert.showAndWait();
 
-                Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                currentStage.close();
+
 
                 FXMLLoader loader;
                 Parent root;
-                if (role.equals("Tuteur")) {
-                    loader = new FXMLLoader(getClass().getResource("/ShowReponsesTuteur.fxml"));
-                } else if (role.equals("Administrateur")) {
-                    loader = new FXMLLoader(getClass().getResource("/ShowReponses.fxml"));
-                } else {
-                    System.out.println("invalid role");
-                    return;
-                }
-                root = loader.load();
 
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.setTitle("Réponses");
-                stage.show();
+
+                    loader = new FXMLLoader(getClass().getResource("/ShowReponses.fxml"));
+
+                root = loader.load();
+                Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                currentStage.setScene(new Scene(root));
+                currentStage.setTitle("Réponses");
+                currentStage.show();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Erreur");
@@ -177,24 +171,17 @@ public class EditReponseController implements Initializable {
 
     @FXML
     void previous(MouseEvent event) throws IOException {
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
+
 
         FXMLLoader loader;
         Parent root;
-        if (role.equals("Tuteur")) {
-            loader = new FXMLLoader(getClass().getResource("/ShowReponsesTuteur.fxml"));
-        } else if (role.equals("Administrateur")) {
-            loader = new FXMLLoader(getClass().getResource("/ShowReponses.fxml"));
-        } else {
-            System.out.println("invalid role");
-            return;
-        }
-        root = loader.load();
 
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Réponses");
-        stage.show();
+            loader = new FXMLLoader(getClass().getResource("/ShowReponses.fxml"));
+
+        root = loader.load();
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.setTitle("Réponses");
+        currentStage.show();
     }
 }

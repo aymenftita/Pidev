@@ -15,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -47,6 +48,7 @@ public class ShowQuestionsController implements Initializable {
     private QuestionsService questionsService;
     private QuizService quizService;
     private int selectedQuestionId;
+
     @FXML
     private TextField searchField;
 
@@ -61,7 +63,15 @@ public class ShowQuestionsController implements Initializable {
         ordre.setCellValueFactory(new PropertyValueFactory<>("ordre"));
         categorie.setCellValueFactory(new PropertyValueFactory<>("categorie"));
 
-        List<Quiz> quizzes = quizService.afficher();
+        String role = Session.getRole();
+
+        List<Quiz> quizzes;
+        if (role.equals("Tuteur")) {
+            quizzes = quizService.afficherParUser(Session.getUserId());
+        } else {
+            quizzes = quizService.afficher();
+        }
+
         ObservableList<String> quizNames = FXCollections.observableArrayList(
                 quizzes.stream()
                         .map(Quiz::getNom)
@@ -81,6 +91,8 @@ public class ShowQuestionsController implements Initializable {
                 }
             }
         });
+
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> filterQuestions(newValue));
 
         questionTableView.setRowFactory(tv -> {
             TableRow<Questions> row = new TableRow<>();
@@ -114,6 +126,7 @@ public class ShowQuestionsController implements Initializable {
                     questionsService.supprimer(question);
                     refreshQuestionsTable();
                 });
+
             }
 
             @Override
@@ -133,11 +146,7 @@ public class ShowQuestionsController implements Initializable {
         if (selectedQuestion != null) {
             selectedQuestionId = selectedQuestion.getQuestionId();
         }
-        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-            filterQuestions(newValue);
-        });
     }
-
 
     private void filterQuestions(String searchText) {
         String selectedQuizName = quizList.getValue();
@@ -168,11 +177,6 @@ public class ShowQuestionsController implements Initializable {
         }
     }
 
-
-
-
-
-
     private void refreshQuestionsTable(int selectedQuizId) {
         List<Questions> questions = questionsService.afficherParQuiz(selectedQuizId);
         ObservableList<Questions> questionObservableList = FXCollections.observableArrayList(questions);
@@ -188,12 +192,14 @@ public class ShowQuestionsController implements Initializable {
         currentStage.setScene(new Scene(root));
     }
 
-
-
-
     private void refreshQuestionsTable() {
         String selectedQuizName = quizList.getValue();
-        List<Quiz> quizzes = quizService.afficher();
+        List<Quiz> quizzes;
+        if (Session.getRole().equals("Tuteur")) {
+            quizzes = quizService.afficherParUser(Session.getUserId());
+        } else {
+            quizzes = quizService.afficher();
+        }
         if (selectedQuizName != null) {
             Quiz selectedQuiz = quizzes.stream()
                     .filter(quiz -> quiz.getNom().equals(selectedQuizName))
@@ -207,16 +213,20 @@ public class ShowQuestionsController implements Initializable {
 
     @FXML
     void previous(MouseEvent event) throws IOException {
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AdminInterface.fxml"));
-        Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Nebgha");
-        stage.show();
-    }
 
+        String role = Session.getRole();
+        String fxmlPath = "/AdminInterface.fxml";
+        if (role.equals("Tuteur")) {
+            fxmlPath = "/TuteurInterface.fxml";
+        }
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        Parent root = loader.load();
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.setTitle("Nebgha");
+        currentStage.show();
+    }
 
 
 }

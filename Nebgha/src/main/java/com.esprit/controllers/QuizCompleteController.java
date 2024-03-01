@@ -57,27 +57,32 @@ public class QuizCompleteController {
 
     public void setScore(int score) {
         scoreLabel.setText(String.valueOf(score));
+        titleLabel.setAlignment(Pos.CENTER);
+
     }
 
     public void setTitle(String title) {
         titleLabel.setText(title);
+        titleLabel.setAlignment(Pos.CENTER);
+
     }
 
     public void setTotal(int total) {
         totalLabel.setText(String.valueOf(total));
+        titleLabel.setAlignment(Pos.CENTER);
+
     }
 
     @FXML
     void OpenRecompenses(MouseEvent event) {
         try {
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            currentStage.close();
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/RecompensesEtudiant.fxml"));
             Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Vos récompenses");
-            stage.show();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Vos récompenses");
+            currentStage.show();
         } catch (IOException e) {
             System.err.println("Error loading RecompensesEtudiant.fxml: " + e.getMessage());
         }
@@ -86,14 +91,13 @@ public class QuizCompleteController {
     @FXML
     void openEtudiantInterface(MouseEvent event) {
         try {
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            currentStage.close();
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/EtudiantInterface.fxml"));
             Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Etudiant");
-            stage.show();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Etudiant");
+            currentStage.show();
         } catch (IOException e) {
             System.err.println("Error loading EtudiantInterface.fxml: " + e.getMessage());
         }
@@ -102,16 +106,15 @@ public class QuizCompleteController {
     @FXML
     void openResults(MouseEvent event) {
         try {
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            currentStage.close();
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/QuizResults.fxml"));
             Parent root = loader.load();
             QuizResultsController resultsController = loader.getController();
             resultsController.initialize(quizId);
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Vos récompenses");
-            stage.show();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Résultat du quiz");
+            currentStage.show();
         } catch (IOException e) {
             System.err.println("Error loading QuizResults.fxml: " + e.getMessage());
         }

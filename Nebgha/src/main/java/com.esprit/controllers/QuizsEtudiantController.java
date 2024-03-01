@@ -15,10 +15,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -35,6 +38,11 @@ public class QuizsEtudiantController {
 
     @FXML
     private TextField searchField;
+    @FXML
+    private ImageView loupe;
+    @FXML
+    private Rectangle rectangle;
+
 
     @FXML
     private ComboBox<String> difficultyComboBox;
@@ -64,7 +72,6 @@ public class QuizsEtudiantController {
     private boolean ascendingOrder = true;
 
     private VBox durationBox;
-
 
     public void initialize() {
         String cssPath = getClass().getResource("/images/styles.css").toExternalForm();
@@ -99,17 +106,22 @@ public class QuizsEtudiantController {
             quizPane.getChildren().add(quizBlock);
         }
     }
-
     private VBox createQuizBlock(Quiz quiz) {
         VBox quizBlock = new VBox();
         quizBlock.setSpacing(10);
         quizBlock.setStyle("-fx-border-color: #000066; -fx-border-radius: 5;-fx-padding: 10;");
         quizBlock.setAlignment(Pos.CENTER);
 
-        Label questionNumberLabel = new Label("Question 1");
         Label nameLabel = new Label(quiz.getNom());
         Label difficultyLabel = new Label(quiz.getDifficulte().toString());
         Label durationLabel = new Label(String.valueOf(quiz.getDuree()));
+
+        Image image = new Image(getClass().getResourceAsStream("/images/question.png"));
+        Image doneImage = new Image(getClass().getResourceAsStream("/images/done.png"));
+
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(30);
+        imageView.setFitHeight(30);
 
         boolean hasAttempted = reponsesUtilisateurService.afficherParQuizEtUser(quiz.getQuizId(), userId)
                 .stream()
@@ -117,6 +129,9 @@ public class QuizsEtudiantController {
 
         Button startButton = new Button();
         if (hasAttempted) {
+            imageView=new ImageView(doneImage);
+            imageView.setFitWidth(30);
+            imageView.setFitHeight(30);
             startButton.setText("Show results");
             startButton.setOnAction(event -> {
                 try {
@@ -130,9 +145,10 @@ public class QuizsEtudiantController {
             startButton.setOnAction(event -> startQuiz(quiz));
         }
 
-        quizBlock.getChildren().addAll(questionNumberLabel, nameLabel, difficultyLabel, durationLabel, startButton);
+        quizBlock.getChildren().addAll(nameLabel, imageView, difficultyLabel, durationLabel, startButton);
         return quizBlock;
     }
+
 
 
 
@@ -162,6 +178,9 @@ public class QuizsEtudiantController {
         searchField.setVisible(false);
         difficultyComboBox.setVisible(false);
         sortButton.setVisible(false);
+        loupe.setVisible(false);
+        rectangle.setVisible(false);
+
     }
 
 
@@ -230,6 +249,7 @@ public class QuizsEtudiantController {
 
         Label questionLabel = new Label(question.getTexte());
         questionLabel.getStyleClass().add("question-label");
+
 
         ToggleGroup responseGroup = new ToggleGroup();
 
@@ -313,7 +333,17 @@ public class QuizsEtudiantController {
 
             timeline.currentTimeProperty().addListener((observable, oldValue, newValue) -> {
                 long remainingSeconds = Math.round((durationSeconds - newValue.toSeconds()));
-                Platform.runLater(() -> timeLabel.setText("Time left: " + formatTime(remainingSeconds)));
+                Platform.runLater(() -> {
+                    timeLabel.setText("Time left: " + formatTime(remainingSeconds));
+                    if (remainingSeconds <= 0) {
+                        timeline.stop();
+                        try {
+                            showTimeUpAlert();
+                        } catch (IOException e) {
+                            System.err.println("Error showing time up alert: " + e.getMessage());
+                        }
+                    }
+                });
             });
 
             timeline.play();
@@ -321,6 +351,22 @@ public class QuizsEtudiantController {
 
         return durationBox;
     }
+
+    private void showTimeUpAlert() throws IOException {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Temps Ecoulé!");
+        alert.setHeaderText(null);
+        alert.setContentText("Temps écoulé. Le quiz sera enregistré.");
+        alert.setOnCloseRequest(event -> {
+            try {
+                showFinalResult();
+            } catch (IOException e) {
+                System.err.println("Error showing final result: " + e.getMessage());
+            }
+        });
+        alert.showAndWait();
+    }
+
 
     private String formatTime(long totalSeconds) {
         long minutes = totalSeconds / 60;
@@ -424,13 +470,11 @@ public class QuizsEtudiantController {
         quizCompleteController.setScore(quizScore);
 
         Stage currentStage = (Stage) quizPane.getScene().getWindow();
-        currentStage.close();
-
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Quiz Finished");
-        stage.show();
+        currentStage.setScene(new Scene(root));
+        currentStage.setTitle("Quiz Finished");
+        currentStage.show();
     }
+
 
 
 
@@ -471,14 +515,12 @@ public class QuizsEtudiantController {
     }
     @FXML
     void previous(MouseEvent event) throws IOException {
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/EtudiantInterface.fxml"));
         Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Etudiant");
-        stage.show();
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.setTitle("Etudiant");
+        currentStage.show();
     }
 
 }

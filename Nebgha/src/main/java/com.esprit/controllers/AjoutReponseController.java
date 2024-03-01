@@ -78,25 +78,19 @@ public class AjoutReponseController implements Initializable {
                 alert.setContentText("Réponse ajoutée!");
                 alert.showAndWait();
 
-                Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                currentStage.close();
+
 
                 FXMLLoader loader;
                 Parent root;
-                if (role.equals("Tuteur")) {
-                    loader = new FXMLLoader(getClass().getResource("/ShowReponsesTuteur.fxml"));
-                } else if (role.equals("Administrateur")) {
+
                     loader = new FXMLLoader(getClass().getResource("/ShowReponses.fxml"));
-                } else {
-                    System.out.println("invalid role");
-                    return;
-                }
+
                 root = loader.load();
 
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.setTitle("Réponses");
-                stage.show();
+                Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                currentStage.setScene(new Scene(root));
+                currentStage.setTitle("Réponses");
+                currentStage.show();
 
             } catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -148,14 +142,13 @@ public class AjoutReponseController implements Initializable {
 
     @FXML
     void previous(MouseEvent event) throws IOException {
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowReponses.fxml"));
         Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Réponses");
-        stage.show();
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.setTitle("Réponses");
+        currentStage.show();
     }
 
 }

@@ -85,26 +85,12 @@ public class EditQuizController implements Initializable {
                 alert.setTitle("Quiz modifié");
                 alert.setContentText("Quiz modifié!");
                 alert.showAndWait();
-
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuiz.fxml"));
+                Parent root = loader.load();
                 Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                currentStage.close();
-
-                FXMLLoader loader;
-                Parent root;
-                if (role.equals("Tuteur")) {
-                    loader = new FXMLLoader(getClass().getResource("/ShowQuizsTuteur.fxml"));
-                } else if (role.equals("Administrateur")) {
-                    loader = new FXMLLoader(getClass().getResource("/ShowQuizs.fxml"));
-                } else {
-                    System.out.println("invalid role");
-                    return;
-                }
-                root = loader.load();
-
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.setTitle("Quizs");
-                stage.show();
+                currentStage.setScene(new Scene(root));
+                currentStage.setTitle("Quizs");
+                currentStage.show();
             } catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Erreur");
@@ -119,28 +105,17 @@ public class EditQuizController implements Initializable {
         }
     }
 
+
     @FXML
     void previous(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuiz.fxml"));
+        Parent root = loader.load();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
-
-        FXMLLoader loader;
-        Parent root;
-        if (role.equals("Tuteur")) {
-            loader = new FXMLLoader(getClass().getResource("/ShowQuizsTuteur.fxml"));
-        } else if (role.equals("Administrateur")) {
-            loader = new FXMLLoader(getClass().getResource("/ShowQuizs.fxml"));
-        } else {
-            System.out.println("invalid role");
-            return;
-        }
-        root = loader.load();
-
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Quizs");
-        stage.show();
+        currentStage.setScene(new Scene(root));
+        currentStage.setTitle("Quizs");
+        currentStage.show();
     }
+
 
 }
 

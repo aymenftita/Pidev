@@ -10,25 +10,25 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="491.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.QuizCompleteController">
+<AnchorPane prefHeight="560.0" prefWidth="661.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.QuizCompleteController">
    <children>
-      <Circle fill="WHITE" layoutX="300.0" layoutY="134.0" radius="70.0" stroke="#c1c1c1" strokeType="INSIDE">
+      <Circle fill="WHITE" layoutX="330.0" layoutY="197.0" radius="70.0" stroke="#c1c1c1" strokeType="INSIDE">
          <effect>
             <DropShadow />
          </effect>
       </Circle>
-      <Label layoutX="250.0" layoutY="94.0" text="Votre score" textFill="#000066">
+      <Label layoutX="280.0" layoutY="157.0" text="Votre score" textFill="#000066">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="scoreLabel" layoutX="257.0" layoutY="109.0" text="100" textFill="#000066">
+      <Label fx:id="scoreLabel" layoutX="286.0" layoutY="172.0" text="100" textFill="#000066">
          <font>
             <Font name="System Bold" size="50.0" />
          </font>
       </Label>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="257.0" layoutX="71.0" layoutY="221.0" stroke="#000066" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeMiterLimit="50.0" strokeType="OUTSIDE" strokeWidth="2.0" width="459.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="51.0" layoutX="326.0" layoutY="246.0" stroke="#ffe66b" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeMiterLimit="50.0" strokeType="OUTSIDE" strokeWidth="2.0" width="140.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="257.0" layoutX="101.0" layoutY="284.0" stroke="#000066" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeMiterLimit="50.0" strokeType="OUTSIDE" strokeWidth="2.0" width="459.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="51.0" layoutX="356.0" layoutY="309.0" stroke="#ffe66b" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeMiterLimit="50.0" strokeType="OUTSIDE" strokeWidth="2.0" width="140.0">
          <effect>
             <DropShadow height="16.32" radius="7.075" width="13.98">
                <color>
@@ -37,7 +37,7 @@
             </DropShadow>
          </effect>
       </Rectangle>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="51.0" layoutX="136.0" layoutY="324.0" stroke="#ffe66b" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeMiterLimit="50.0" strokeType="OUTSIDE" strokeWidth="2.0" width="140.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="51.0" layoutX="166.0" layoutY="387.0" stroke="#ffe66b" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeMiterLimit="50.0" strokeType="OUTSIDE" strokeWidth="2.0" width="140.0">
          <effect>
             <DropShadow height="16.32" radius="7.075" width="13.98">
                <color>
@@ -46,7 +46,7 @@
             </DropShadow>
          </effect>
       </Rectangle>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="51.0" layoutX="326.0" layoutY="325.0" stroke="#ffe66b" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeMiterLimit="50.0" strokeType="OUTSIDE" strokeWidth="2.0" width="140.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="51.0" layoutX="356.0" layoutY="388.0" stroke="#ffe66b" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeMiterLimit="50.0" strokeType="OUTSIDE" strokeWidth="2.0" width="140.0">
          <effect>
             <DropShadow height="16.32" radius="7.075" width="13.98">
                <color>
@@ -55,7 +55,7 @@
             </DropShadow>
          </effect>
       </Rectangle>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="51.0" layoutX="136.0" layoutY="246.0" stroke="#ffe66b" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeMiterLimit="50.0" strokeType="OUTSIDE" strokeWidth="2.0" width="140.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="51.0" layoutX="166.0" layoutY="309.0" stroke="#ffe66b" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeMiterLimit="50.0" strokeType="OUTSIDE" strokeWidth="2.0" width="140.0">
          <effect>
             <DropShadow height="16.32" radius="7.075" width="13.98">
                <color>
@@ -64,77 +64,88 @@
             </DropShadow>
          </effect>
       </Rectangle>
-      <Label fx:id="totalLabel" layoutX="330.0" layoutY="240.0" prefHeight="46.0" prefWidth="79.0" text="Label" textFill="#000066">
+      <Label fx:id="totalLabel" layoutX="360.0" layoutY="303.0" prefHeight="46.0" prefWidth="79.0" text="Label" textFill="#000066">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
-      <Label layoutX="330.0" layoutY="272.0" prefHeight="30.0" prefWidth="140.0" text="Total des questions" textFill="#000066">
+      <Label layoutX="360.0" layoutY="335.0" prefHeight="30.0" prefWidth="140.0" text="Total des questions" textFill="#000066">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="140.0" layoutY="350.0" prefHeight="30.0" prefWidth="68.0" text="Correctes" textFill="#2fcf37">
+      <Label layoutX="170.0" layoutY="413.0" prefHeight="30.0" prefWidth="68.0" text="Correctes" textFill="#2fcf37">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="140.0" layoutY="270.0" prefHeight="30.0" prefWidth="68.0" text="Accompli">
+      <Label layoutX="170.0" layoutY="333.0" prefHeight="30.0" prefWidth="68.0" text="Accompli">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="330.0" layoutY="353.0" prefHeight="22.0" prefWidth="79.0" text="Incorrectes" textFill="RED">
+      <Label layoutX="360.0" layoutY="416.0" prefHeight="22.0" prefWidth="79.0" text="Incorrectes" textFill="RED">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label fx:id="correctLabel" layoutX="140.0" layoutY="316.0" prefHeight="46.0" prefWidth="79.0" text="Label" textFill="#2fcf37">
+      <Label fx:id="correctLabel" layoutX="170.0" layoutY="379.0" prefHeight="46.0" prefWidth="79.0" text="Label" textFill="#2fcf37">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
-      <Label fx:id="percentageLabel" layoutX="140.0" layoutY="241.0" prefHeight="46.0" prefWidth="79.0" text="Label" textFill="#000066">
+      <Label fx:id="percentageLabel" layoutX="170.0" layoutY="304.0" prefHeight="46.0" prefWidth="79.0" text="Label" textFill="#000066">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
-      <Label fx:id="incorrectLabel" layoutX="330.0" layoutY="317.0" prefHeight="46.0" prefWidth="79.0" text="Label" textFill="RED">
+      <Label fx:id="incorrectLabel" layoutX="360.0" layoutY="380.0" prefHeight="46.0" prefWidth="79.0" text="Label" textFill="RED">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
-      <Circle fill="#e4e4e4" layoutX="238.0" layoutY="414.0" radius="28.0" stroke="#e4e4e4" strokeType="INSIDE" />
-      <Circle fill="#e4e4e4" layoutX="377.0" layoutY="414.0" radius="28.0" stroke="#e4e4e4" strokeType="INSIDE" />
-      <Label layoutX="194.0" layoutY="432.0" prefHeight="46.0" prefWidth="86.0" text="Voir résultat" textFill="#000066">
+      <Circle fill="#e4e4e4" layoutX="268.0" layoutY="477.0" radius="28.0" stroke="#e4e4e4" strokeType="INSIDE" />
+      <Circle fill="#e4e4e4" layoutX="407.0" layoutY="477.0" radius="28.0" stroke="#e4e4e4" strokeType="INSIDE" />
+      <Label layoutX="224.0" layoutY="495.0" prefHeight="46.0" prefWidth="86.0" text="Voir résultat" textFill="#000066">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="314.0" layoutY="432.0" prefHeight="46.0" prefWidth="125.0" text="Voir récompenses" textFill="#000066">
+      <Label layoutX="344.0" layoutY="495.0" prefHeight="46.0" prefWidth="125.0" text="Voir récompenses" textFill="#000066">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="218.0" layoutY="395.0" onMouseClicked="#openResults">
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="248.0" layoutY="458.0" onMouseClicked="#openResults">
          <image>
             <Image url="@images/loupe.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="34.0" layoutX="360.0" layoutY="395.0" onMouseClicked="#OpenRecompenses">
+      <ImageView fitHeight="38.0" fitWidth="34.0" layoutX="390.0" layoutY="458.0" onMouseClicked="#OpenRecompenses">
          <image>
             <Image url="@images/trophy.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="46.0" fitWidth="48.0" layoutX="14.0" layoutY="18.0" onMouseClicked="#openEtudiantInterface">
-         <image>
-            <Image url="@images/home.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="titleLabel" layoutX="242.0" layoutY="18.0" text="Félicitations !" textFill="#000066">
+      <Label fx:id="titleLabel" layoutX="273.0" layoutY="80.0" text="Félicitations !" textFill="#000066">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="58.0" layoutX="2.0" stroke="TRANSPARENT" strokeType="INSIDE" width="659.0" />
+      <ImageView fitHeight="19.0" fitWidth="134.0" layoutX="139.0" layoutY="19.0">
+         <image>
+            <Image url="@images/55.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="92.0" layoutY="9.0">
+         <image>
+            <Image url="@images/Logo1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="14.0" layoutY="9.0" onMouseClicked="#openEtudiantInterface">
+         <image>
+            <Image url="@images/home.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -15,37 +15,36 @@ public class TuteurInterfaceController {
 
     @FXML
     void ShowQuestions(ActionEvent event) throws IOException {
-        changeScene(event, "/ShowQuestionsTuteur.fxml","Questions");
+        changeScene(event, "/ShowQuestions.fxml","Questions");
     }
 
     @FXML
     void ShowQuizs(ActionEvent event) throws IOException {
-        changeScene(event, "/ShowQuizTuteur.fxml","Quizs");
+        changeScene(event, "/ShowQuiz.fxml","Quizs");
     }
 
 
     @FXML
     void ShowReponses(ActionEvent event) throws IOException {
-        changeScene(event, "/ShowReponsesTuteur.fxml","Réponses");
+        changeScene(event, "/ShowReponses.fxml","Réponses");
     }
 
     private void changeScene(ActionEvent event, String fxmlPath,String title) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         Parent root = loader.load();
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.setTitle(title);
-        stage.show();
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.setTitle(title);
+        currentStage.show();
     }
     @FXML
     void previous(MouseEvent event) throws IOException {
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstPage.fxml"));
         Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Nebgha");
-        stage.show();
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.setTitle("Nebgha");
+        currentStage.show();
     }
 }

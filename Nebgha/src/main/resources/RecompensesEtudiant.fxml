@@ -5,17 +5,19 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="482.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.RecompensesEtudiantController">
-    <Label layoutX="99.0" layoutY="14.0" text="Vos Récompenses" textFill="#000066">
+<AnchorPane prefHeight="482.0" prefWidth="518.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.RecompensesEtudiantController">
+   <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="58.0" layoutY="-3.0" stroke="TRANSPARENT" strokeType="INSIDE" width="518.0" />
+    <Label layoutX="281.0" layoutY="15.0" text="Vos Récompenses" textFill="#000066">
         <font>
             <Font name="System Bold" size="24.0" />
         </font>
     </Label>
-    <VBox fx:id="rewardsContainer" layoutX="20.0" layoutY="162.0" prefWidth="360.0" spacing="10" style="-fx-background-color: #f0f0f0; -fx-border-color: #000066; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-padding: 10px;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="162.0">
+    <VBox fx:id="rewardsContainer" layoutX="20.0" layoutY="173.0" prefWidth="360.0" spacing="10" style="-fx-background-color: #f0f0f0; -fx-border-color: #000066; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-padding: 10px;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="173.0">
     </VBox>
-   <ImageView fitHeight="99.0" fitWidth="100.0" layoutX="150.0" layoutY="49.0">
+   <ImageView fitHeight="99.0" fitWidth="100.0" layoutX="209.0" layoutY="61.0">
       <image>
          <Image url="@images/award.gif" />
       </image>
@@ -23,6 +25,16 @@
    <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="14.0" layoutY="18.0" onMouseClicked="#previous">
       <image>
          <Image url="@images/previous.png" />
+      </image>
+   </ImageView>
+   <ImageView fitHeight="19.0" fitWidth="134.0" layoutX="106.0" layoutY="23.0">
+      <image>
+         <Image url="@images/55.png" />
+      </image>
+   </ImageView>
+   <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="57.0" layoutY="13.0">
+      <image>
+         <Image url="@images/Logo1.png" />
       </image>
    </ImageView>
 </AnchorPane>
