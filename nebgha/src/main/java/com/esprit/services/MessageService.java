@@ -70,11 +70,11 @@ public class MessageService {
         return entities;
     }
 
-    public List<Message> read() {
+    public List<Message> readByid(int id) {
 
         List<Message> categories = new ArrayList<>();
 
-        String req = "SELECT * from message";
+        String req = "SELECT * from message where id_g ="+id+";";
         try {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(req);

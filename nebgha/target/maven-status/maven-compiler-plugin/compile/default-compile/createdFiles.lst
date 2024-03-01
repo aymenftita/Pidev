@@ -2,11 +2,13 @@ com\esprit\controllers\messageControllers\AfficherMessageController.class
 com\esprit\tests\MainProg.class
 com\esprit\controllers\groupeControllers\AfficherGroupeController.class
 com\esprit\services\UtilisateurService.class
+com\esprit\controllers\DashboardController.class
 com\esprit\controllers\messageControllers\ChatBoxController.class
 com\esprit\controllers\messageControllers\AjouterMessageController.class
 com\esprit\tests\MainProgGUI.class
 com\esprit\controllers\otherControllers\SwitchScenesController.class
 com\esprit\controllers\groupeControllers\ModifierGroupeController.class
+com\esprit\controllers\ChatboxController.class
 com\esprit\controllers\reclamationControllers\AjouterReclamationController.class
 com\esprit\controllers\reclamationControllers\ModifierReclamationController.class
 com\esprit\controllers\messageControllers\ModifierMessageController.class
@@ -16,5 +18,6 @@ com\esprit\controllers\reclamationControllers\AfficherReclamationPerUserControll
 com\esprit\controllers\groupeControllers\AfficherGroupeUserController.class
 com\esprit\controllers\reclamationControllers\AfficherReclamationUserController.class
 com\esprit\models\UtilisateurGroupes.class
+com\esprit\controllers\testController.class
 com\esprit\controllers\otherControllers\WelcomePageController.class
 com\esprit\services\Session.class

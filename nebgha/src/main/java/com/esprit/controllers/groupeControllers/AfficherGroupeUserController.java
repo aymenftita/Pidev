@@ -25,6 +25,7 @@ import javafx.scene.text.TextFlow;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -49,10 +50,14 @@ public class AfficherGroupeUserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
 
-        updateQuizList(allGroupes);
+        try {
+            updateQuizList(allGroupes);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         //handleSearch();
     }
-    private void updateQuizList(List<Groupe> groupes) {
+    private void updateQuizList(List<Groupe> groupes) throws SQLException {
         flowPane.getChildren().clear();
         for (Groupe groupe : groupes) {
 
@@ -63,7 +68,7 @@ public class AfficherGroupeUserController implements Initializable {
 
         }
     }
-    private VBox createGroupeBlock(Groupe groupe) {
+    private VBox createGroupeBlock(Groupe groupe) throws SQLException {
 
         VBox quizBlock = new VBox(20);
         quizBlock.setSpacing(20);
@@ -87,18 +92,19 @@ public class AfficherGroupeUserController implements Initializable {
         participateBt.setOnAction(event->{
 
             UserGroupe ug = new UserGroupe();
-                if(ugs.afficherUG(Session.getUserId(),groupe.getId_groupe()) != null){
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setContentText("Vous etes deja dans ce groupe");
-                    alert.show();
 
-                }else{
+                try{
                     ugs.ajouter(Session.getUserId(),groupe.getId_groupe());
                     Utilisateur u = us.rechercheUtilisateur(Session.getUserId());
                     System.out.println(time);
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setContentText("User : " + u.getNom() + " ajouté au groupe "  + groupe.getTitre());
                     alert.show();
+                }catch(Exception e){
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setContentText("Vous etes deja dans ce groupe");
+                    alert.show();
+                    System.out.println(e.getMessage());
                 }
 
 
