@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.List;
 
 public class EditRecompenseController {
 
@@ -27,6 +28,16 @@ public class EditRecompenseController {
     private TextField titretf;
 
     private Recompenses recompenseToEdit;
+    public boolean checkUnicity(String title) {
+        RecompensesService recompensesService = new RecompensesService();
+        List<Recompenses> recompenses = recompensesService.afficher();
+        for (Recompenses recompense : recompenses) {
+            if (recompense.getNom().equalsIgnoreCase(title)) {
+                return false;
+            }
+        }
+        return true;
+    }
     public void initData(Recompenses recompense) {
         recompenseToEdit = recompense;
         titretf.setText(recompense.getNom());
@@ -48,7 +59,13 @@ public class EditRecompenseController {
                 if (score <= 0) {
                     throw new NumberFormatException();
                 }
-
+                if (!title.equals(recompenseToEdit.getNom()) && !checkUnicity(title)) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setContentText("Reward already exists!");
+                    alert.showAndWait();
+                    return;
+                }
                 recompenseToEdit.setNom(title);
                 recompenseToEdit.setDescription(description);
                 recompenseToEdit.setScoreRequis(score);
@@ -56,8 +73,8 @@ public class EditRecompenseController {
                 rs.modifier(recompenseToEdit);
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Récompense modifié");
-                alert.setContentText("Récompense modifié!");
+                alert.setTitle("Récompense Edited");
+                alert.setContentText("Récompense edited successfully!");
                 alert.showAndWait();
 
 
@@ -66,18 +83,18 @@ public class EditRecompenseController {
                 Parent root = loader.load();
                 Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 currentStage.setScene(new Scene(root));
-                currentStage.setTitle("Récompenses");
+                currentStage.setTitle("Rewards");
                 currentStage.show();
             } catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erreur");
-                alert.setContentText("Veuillez saisir une valeur numérique valide pour le score requis.");
+                alert.setTitle("Error");
+                alert.setContentText("Please enter a valid numeric value for the required score.");
                 alert.showAndWait();
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setContentText("Veuillez remplir tous les champs.");
+            alert.setTitle("Error");
+            alert.setContentText("Please fill in all fields.");
             alert.showAndWait();
         }
     }
@@ -89,7 +106,7 @@ public class EditRecompenseController {
         Parent root = loader.load();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(new Scene(root));
-        currentStage.setTitle("Récompenses");
+        currentStage.setTitle("Rewards");
         currentStage.show();
 
     }

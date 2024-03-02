@@ -1,5 +1,5 @@
 package com.esprit.services;
-import com.esprit.models.Difficulte;
+import com.esprit.models.Difficulty;
 import com.esprit.models.Quiz;
 import com.esprit.models.Recompenses;
 import com.esprit.models.Reponses;

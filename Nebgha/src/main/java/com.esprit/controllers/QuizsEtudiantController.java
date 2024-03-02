@@ -63,7 +63,7 @@ public class QuizsEtudiantController {
     private ReponsesUtilisateurService reponsesUtilisateurService = new ReponsesUtilisateurService();
 
 
-    private int userId = Session.getUserId();
+    private Utilisateur user = Session.getCurrentUser();
 
     private int quizId;
     private int quizScore;
@@ -72,9 +72,10 @@ public class QuizsEtudiantController {
     private boolean ascendingOrder = true;
 
     private VBox durationBox;
+    private Timeline timeline=new Timeline();;
 
     public void initialize() {
-        String cssPath = getClass().getResource("/images/styles.css").toExternalForm();
+        String cssPath = getClass().getResource("/media/styles.css").toExternalForm();
         quizPane.getStylesheets().add(cssPath);
         questionsService = new QuestionsService();
 
@@ -106,6 +107,7 @@ public class QuizsEtudiantController {
             quizPane.getChildren().add(quizBlock);
         }
     }
+
     private VBox createQuizBlock(Quiz quiz) {
         VBox quizBlock = new VBox();
         quizBlock.setSpacing(10);
@@ -114,22 +116,22 @@ public class QuizsEtudiantController {
 
         Label nameLabel = new Label(quiz.getNom());
         Label difficultyLabel = new Label(quiz.getDifficulte().toString());
-        Label durationLabel = new Label(String.valueOf(quiz.getDuree()));
+        Label durationLabel = new Label("Duration : "+String.valueOf(quiz.getDuree())+" min");
 
-        Image image = new Image(getClass().getResourceAsStream("/images/question.png"));
-        Image doneImage = new Image(getClass().getResourceAsStream("/images/done.png"));
+        Image image = new Image(getClass().getResourceAsStream("/media/question.png"));
+        Image doneImage = new Image(getClass().getResourceAsStream("/media/done.png"));
 
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(30);
         imageView.setFitHeight(30);
 
-        boolean hasAttempted = reponsesUtilisateurService.afficherParQuizEtUser(quiz.getQuizId(), userId)
+        boolean hasAttempted = reponsesUtilisateurService.afficherParQuizEtUser(quiz.getQuizId(), user.getId())
                 .stream()
-                .anyMatch(response -> response.getQuiz().getQuizId() == quiz.getQuizId() && response.getUserId() == userId);
+                .anyMatch(response -> response.getQuiz().getQuizId() == quiz.getQuizId() && response.getUser().getId() == user.getId());
 
         Button startButton = new Button();
         if (hasAttempted) {
-            imageView=new ImageView(doneImage);
+            imageView = new ImageView(doneImage);
             imageView.setFitWidth(30);
             imageView.setFitHeight(30);
             startButton.setText("Show results");
@@ -150,14 +152,12 @@ public class QuizsEtudiantController {
     }
 
 
-
-
     private void startQuiz(Quiz quiz) {
         quizId = quiz.getQuizId();
         currentQuestions = new ArrayList<>();
-        boolean hasAttempted = reponsesUtilisateurService.afficherParQuizEtUser(quizId, userId)
+        boolean hasAttempted = reponsesUtilisateurService.afficherParQuizEtUser(quizId, user.getId())
                 .stream()
-                .anyMatch(response -> response.getQuiz().getQuizId() == quizId && response.getUserId() == userId);
+                .anyMatch(response -> response.getQuiz().getQuizId() == quizId && response.getUser().getId() == user.getId());
 
         try {
             if (hasAttempted) {
@@ -216,11 +216,6 @@ public class QuizsEtudiantController {
     }
 
 
-
-
-
-
-
     private void startNextQuestion() {
         if (currentQuestionIndex < currentQuestions.size()) {
             if (quizPane.getChildren().size() > 0) {
@@ -230,7 +225,7 @@ public class QuizsEtudiantController {
             Questions question = currentQuestions.get(currentQuestionIndex);
             displayQuestion(question);
         } else {
-            System.out.println("Quiz finished");
+            currentQuestionIndex = currentQuestions.size();
         }
     }
 
@@ -250,53 +245,113 @@ public class QuizsEtudiantController {
         Label questionLabel = new Label(question.getTexte());
         questionLabel.getStyleClass().add("question-label");
 
+        List<Reponses> responsesList = reponsesService.afficherParQuestion(question.getQuestionId());
+        if (question.getType().equals("multiple")) {
+            VBox responsesBox = new VBox();
+            responsesBox.setAlignment(Pos.CENTER_LEFT);
 
-        ToggleGroup responseGroup = new ToggleGroup();
+            for (Reponses response : responsesList) {
+                CheckBox responseCheckBox = new CheckBox(response.getTexte());
+                responsesBox.getChildren().add(responseCheckBox);
+            }
 
-        List<String> responses = reponsesService.afficherParQuestion(question.getQuestionId())
-                .stream()
-                .map(Reponses::getTexte)
-                .collect(Collectors.toList());
-
-        VBox responsesBox = new VBox();
-        responsesBox.setAlignment(Pos.CENTER_LEFT);
-
-        for (String response : responses) {
-            RadioButton responseButton = new RadioButton(response);
-            responseButton.setToggleGroup(responseGroup);
-            responseButton.getStyleClass().add("response-radio-button");
-            responseButton.setSelected(false);
-            responseButton.selectedProperty().addListener((obs, wasSelected, isSelected) -> {
-                if (isSelected) {
-                    responseButton.setStyle("-fx-background-color: #fdfd96;-fx-border-radius: 20px");
-                } else {
-                    responseButton.setStyle("");
+            Button submitButton = new Button("Submit");
+            submitButton.getStyleClass().add("submit-button");
+            VBox.setMargin(submitButton, new Insets(10, 0, 0, 0));
+            submitButton.setOnAction(event -> {
+                try {
+                    saveMultipleChoiceResponse(responsesBox, question);
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
                 }
             });
-            responsesBox.getChildren().add(responseButton);
-        }
 
-        Button submitButton = new Button("Submit");
-        submitButton.getStyleClass().add("submit-button");
-        VBox.setMargin(submitButton, new Insets(10, 0, 0, 0));
-        submitButton.setOnAction(event -> {
-            Questions currentQuestion = currentQuestions.get(currentQuestionIndex);
-            try {
-                saveResponse(responseGroup, currentQuestion);
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
+            HBox buttonBox = new HBox(submitButton);
+            buttonBox.setAlignment(Pos.CENTER);
+
+            questionBox.getChildren().addAll(questionIndexLabel, questionLabel, responsesBox, buttonBox);
+        } else {
+            ToggleGroup responseGroup = new ToggleGroup();
+
+            VBox responsesBox = new VBox();
+            responsesBox.setAlignment(Pos.CENTER_LEFT);
+
+            for (Reponses response : responsesList) {
+                RadioButton responseRadioButton = new RadioButton(response.getTexte());
+                responseRadioButton.setToggleGroup(responseGroup);
+                responsesBox.getChildren().add(responseRadioButton);
             }
-        });
 
-        HBox buttonBox = new HBox(submitButton);
-        buttonBox.setAlignment(Pos.CENTER);
+            Button submitButton = new Button("Submit");
+            submitButton.getStyleClass().add("submit-button");
+            VBox.setMargin(submitButton, new Insets(10, 0, 0, 0));
+            submitButton.setOnAction(event -> {
+                try {
+                    saveResponse(responseGroup, question);
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
+            });
 
-        questionBox.getChildren().addAll(questionIndexLabel, questionLabel, responsesBox, buttonBox);
+            HBox buttonBox = new HBox(submitButton);
+            buttonBox.setAlignment(Pos.CENTER);
+
+            questionBox.getChildren().addAll(questionIndexLabel, questionLabel, responsesBox, buttonBox);
+        }
 
         VBox durationBox = displayDuration(quizId);
         VBox.setMargin(durationBox, new Insets(0, 10, 10, 10));
 
         quizPane.getChildren().addAll(questionBox, durationBox);
+    }
+
+    private void saveMultipleChoiceResponse(VBox responsesBox, Questions question) throws IOException {
+        List<String> selectedResponses = new ArrayList<>();
+        for (Node node : responsesBox.getChildren()) {
+            if (node instanceof CheckBox) {
+                CheckBox checkBox = (CheckBox) node;
+                if (checkBox.isSelected()) {
+                    selectedResponses.add(checkBox.getText());
+                }
+            }
+        }
+
+        for (String selectedResponse : selectedResponses) {
+            boolean isCorrect = reponsesService.afficherParQuestion(question.getQuestionId())
+                    .stream()
+                    .filter(response -> response.getTexte().equals(selectedResponse))
+                    .findFirst()
+                    .map(Reponses::isEstCorrecte)
+                    .orElse(false);
+
+            int points = isCorrect ? question.getPoints() : 0;
+            quizScore += points;
+
+            int responseId = reponsesService.afficherParQuestion(question.getQuestionId())
+                    .stream()
+                    .filter(response -> response.getTexte().equals(selectedResponse))
+                    .findFirst()
+                    .map(Reponses::getReponseId)
+                    .orElse(-1);
+
+            System.out.println("Selected response: " + selectedResponse + ", Correct: " + isCorrect);
+
+            long timeTakenMillis = (3 - countdownSeconds) * 1000;
+            int timeTakenSeconds = (int) (timeTakenMillis / 1000);
+
+            Quiz quiz = quizService.getQuiz(quizId);
+            Reponses reponse = reponsesService.getReponse(responseId);
+            ReponsesUtilisateur reponsesUtilisateur = new ReponsesUtilisateur(
+                    user, reponse, quiz, timeTakenSeconds, isCorrect);
+            reponsesUtilisateurService.ajouter(reponsesUtilisateur);
+
+            if (currentQuestionIndex < currentQuestions.size() - 1) {
+                currentQuestionIndex++;
+                startNextQuestion();
+            } else {
+                showFinalResult();
+            }
+        }
     }
 
 
@@ -320,7 +375,7 @@ public class QuizsEtudiantController {
 
             durationBox.getChildren().addAll(timeLabel, progressBar);
 
-            Timeline timeline = new Timeline(
+             timeline = new Timeline(
                     new KeyFrame(Duration.ZERO, new KeyValue(progressBar.progressProperty(), 1)),
                     new KeyFrame(Duration.seconds(durationSeconds), e -> {
                         try {
@@ -337,12 +392,14 @@ public class QuizsEtudiantController {
                     timeLabel.setText("Time left: " + formatTime(remainingSeconds));
                     if (remainingSeconds <= 0) {
                         timeline.stop();
+                        durationBox = null;
                         try {
                             showTimeUpAlert();
-                        } catch (IOException e) {
-                            System.err.println("Error showing time up alert: " + e.getMessage());
+                        } catch (IOException ex) {
+                            System.err.println("Error showing time up alert: " + ex.getMessage());
                         }
                     }
+
                 });
             });
 
@@ -352,19 +409,19 @@ public class QuizsEtudiantController {
         return durationBox;
     }
 
+
     private void showTimeUpAlert() throws IOException {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Temps Ecoulé!");
+        alert.setTitle("Time's Up!");
         alert.setHeaderText(null);
-        alert.setContentText("Temps écoulé. Le quiz sera enregistré.");
-        alert.setOnCloseRequest(event -> {
+        alert.setContentText("Times's up. Your progress will be saved.");
+        alert.showAndWait();
             try {
                 showFinalResult();
             } catch (IOException e) {
                 System.err.println("Error showing final result: " + e.getMessage());
             }
-        });
-        alert.showAndWait();
+
     }
 
 
@@ -403,7 +460,7 @@ public class QuizsEtudiantController {
             Quiz quiz = quizService.getQuiz(quizId);
             Reponses reponse = reponsesService.getReponse(responseId);
             ReponsesUtilisateur reponsesUtilisateur = new ReponsesUtilisateur(
-                    userId, reponse, quiz, timeTakenSeconds, isCorrect);
+                    user, reponse, quiz, timeTakenSeconds, isCorrect);
             reponsesUtilisateurService.ajouter(reponsesUtilisateur);
 
             if (currentQuestionIndex < currentQuestions.size() - 1) {
@@ -416,17 +473,13 @@ public class QuizsEtudiantController {
     }
 
     private void showFinalResult() throws IOException {
-        if (executorService != null) {
-            executorService.shutdown();
-        }
-
+        stopDuration();
         RecompensesService recompensesService = new RecompensesService();
         List<Recompenses> recompensesList = recompensesService.afficher();
         int rewardsRequiredScore = recompensesList.stream()
                 .mapToInt(Recompenses::getScoreRequis)
                 .findFirst()
                 .orElse(0);
-
 
         int totalQuestionPoints = currentQuestions.stream()
                 .mapToInt(Questions::getPoints)
@@ -435,50 +488,51 @@ public class QuizsEtudiantController {
         double score = ((double) quizScore / totalQuestionPoints) * 100;
 
         int correctAnswers = (int) currentQuestions.stream()
-                .filter(question -> reponsesUtilisateurService.afficherParQuizEtUser(quizId, userId)
+                .filter(question -> reponsesUtilisateurService.afficherParQuizEtUser(quizId, user.getId())
                         .stream()
                         .anyMatch(reponse -> reponse.getReponse().getQuestion().getQuestionId() == question.getQuestionId() && reponse.isCorrect()))
                 .count();
 
-        Recompenses reachedReward = recompensesList.stream()
+        List<Recompenses> reachedRewards = recompensesList.stream()
                 .filter(recompenses -> score >= recompenses.getScoreRequis())
-                .findFirst()
-                .orElse(null);
+                .collect(Collectors.toList());
+
         RecompensesUtilisateurService recompensesUtilisateurService = new RecompensesUtilisateurService();
-        boolean hasReceivedReward = recompensesUtilisateurService.afficherParUser(userId)
-                .stream()
-                .anyMatch(recompensesUtilisateur -> recompensesUtilisateur.getReward().getRewardId() == reachedReward.getRewardId());
-        if (!hasReceivedReward) {
-            RecompensesUtilisateur recompensesUtilisateur = new RecompensesUtilisateur(userId, reachedReward, new Date(System.currentTimeMillis()),false,null);
-            recompensesUtilisateurService.ajouter(recompensesUtilisateur);
+        for (Recompenses reachedReward : reachedRewards) {
+            boolean hasReceivedReward = recompensesUtilisateurService.afficherParUser(user.getId())
+                    .stream()
+                    .anyMatch(recompensesUtilisateur -> recompensesUtilisateur.getReward().getRewardId() == reachedReward.getRewardId());
+            if (!hasReceivedReward) {
+                RecompensesUtilisateur recompensesUtilisateur = new RecompensesUtilisateur(user, reachedReward, new Date(System.currentTimeMillis()), false, null);
+                recompensesUtilisateurService.ajouter(recompensesUtilisateur);
+            }
         }
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/QuizComplete.fxml"));
         Parent root = loader.load();
 
         QuizCompleteController quizCompleteController = loader.getController();
-        if (reachedReward != null) {
-            quizCompleteController.setTitle("Vous avez obtenu une récompense!");
+        if (!reachedRewards.isEmpty()) {
+            quizCompleteController.setTitle("You unlocked a new level!");
         } else {
-            quizCompleteController.setTitle("Quiz terminé!");
+            quizCompleteController.setTitle("Quiz Finished!");
         }
         quizCompleteController.setQuizId(quizId);
         quizCompleteController.setCorrect(correctAnswers);
         quizCompleteController.setIncorrect(totalQuestions - correctAnswers);
-        quizCompleteController.setPercentage(String.format("%.2f", score) + "%\n");
+        quizCompleteController.setPercentage(String.format("%.0f", score) + "%\n");
         quizCompleteController.setTotal(totalQuestions);
         quizCompleteController.setScore(quizScore);
 
         Stage currentStage = (Stage) quizPane.getScene().getWindow();
-        currentStage.setScene(new Scene(root));
-        currentStage.setTitle("Quiz Finished");
-        currentStage.show();
+        if (currentStage != null) {
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Quiz Finished");
+            currentStage.show();
+        } else {
+            System.err.println("Current stage is null.");
+        }
     }
-
-
-
-
-
 
 
 
@@ -487,12 +541,13 @@ public class QuizsEtudiantController {
         Parent root = loader.load();
         QuizResultsController resultController = loader.getController();
         resultController.initialize(quizId);
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Quiz Results");
-        stage.show();
+        Stage currentStage = (Stage) quizPane.getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.setTitle("Quiz results");
+        currentStage.show();
 
     }
+
     public void toggleSortOrder(ActionEvent event) {
         ascendingOrder = !ascendingOrder;
         if (ascendingOrder) {
@@ -513,14 +568,39 @@ public class QuizsEtudiantController {
                 .collect(Collectors.toList());
         updateQuizList(sortedQuizzes);
     }
+
     @FXML
     void previous(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/EtudiantInterface.fxml"));
-        Parent root = loader.load();
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.setScene(new Scene(root));
-        currentStage.setTitle("Etudiant");
-        currentStage.show();
+        if (currentQuestions != null && currentQuestionIndex > 0) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation");
+            alert.setHeaderText("Quit Quiz");
+            alert.setContentText("Are you sure you want to quit the quiz? Your progress will be saved.");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                showFinalResult();
+            }
+        } else {
+            stopDuration();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/EtudiantInterface.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Student");
+            currentStage.show();
+        }
     }
+
+    private void stopDuration() {
+        if (executorService != null) {
+            executorService.shutdown();
+        }
+        executorService = null;
+        timeline.stop();
+        durationBox = null;
+    }
+
+
 
 }

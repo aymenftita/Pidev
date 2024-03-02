@@ -12,17 +12,22 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class EtudiantInterfaceController {
 
-    private int userId=Session.getUserId();
+    private int userId=Session.getCurrentUser().getId();
     @FXML
     private Label scoreLabel;
 
 
     @FXML
     void initialize() {
+
+            NotificationService notificationService = new NotificationService();
+            notificationService.showQuizzesAddedTodayNotification();
         ReponsesUtilisateurService reponsesUtilisateurService = new ReponsesUtilisateurService();
         QuestionsService questionsService = new QuestionsService();
         List<ReponsesUtilisateur> reponsesUtilisateurList = reponsesUtilisateurService.afficherParUser(userId);
@@ -39,22 +44,22 @@ public class EtudiantInterfaceController {
                 })
                 .sum();
 
-        scoreLabel.setText("Votre score est: " + totalScore);
+        scoreLabel.setText("Your score is : " + totalScore);
     }
 
     @FXML
     void ShowQuizs(ActionEvent event) throws IOException {
-        changeScene(event, "/QuizsEtudiant.fxml","Quizs");
+        changeScene(event, "/QuizsEtudiant.fxml","Quizzes");
     }
 
     @FXML
     void ShowRecompenses(ActionEvent event) throws IOException {
-        changeScene(event, "/RecompensesEtudiant.fxml","Mes Récompenses");
+        changeScene(event, "/RecompensesEtudiant.fxml","My rewards");
     }
 
     @FXML
     void ShowHistorique(ActionEvent event) throws IOException {
-        changeScene(event, "/QuizsHistory.fxml","Historique");
+        changeScene(event, "/QuizsHistory.fxml","History");
     }
 
     private void changeScene(ActionEvent event, String fxmlPath,String title) throws IOException {

@@ -20,7 +20,7 @@ public class AdminInterfaceController {
 
     @FXML
     void ShowQuizs(ActionEvent event) throws IOException {
-        changeScene(event, "/ShowQuiz.fxml","Quizs");
+        changeScene(event, "/ShowQuiz.fxml","Quizzes");
 
     }
 
@@ -28,12 +28,12 @@ public class AdminInterfaceController {
 
     @FXML
     void ShowRecompenses(ActionEvent event) throws IOException {
-        changeScene(event, "/ShowRecompenses.fxml","Récompenses");
+        changeScene(event, "/ShowRecompenses.fxml","Rewards");
     }
 
     @FXML
     void ShowReponses(ActionEvent event) throws IOException {
-        changeScene(event, "/ShowReponses.fxml","Réponses");
+        changeScene(event, "/ShowReponses.fxml","Answers");
     }
 
     private void changeScene(ActionEvent event, String fxmlPath,String title) throws IOException {

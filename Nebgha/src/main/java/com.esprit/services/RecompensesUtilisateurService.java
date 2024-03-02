@@ -1,6 +1,7 @@
 package com.esprit.services;
 import com.esprit.models.Recompenses;
 import com.esprit.models.RecompensesUtilisateur;
+import com.esprit.models.Utilisateur;
 import com.esprit.utils.DataSource;
 
 import java.sql.*;
@@ -9,16 +10,20 @@ import java.util.*;
 public class RecompensesUtilisateurService implements IService<RecompensesUtilisateur>{
     private Connection connection;
     private RecompensesService recompensesService;
+    private UtilisateurService utilisateurService;
+
 
 
     public RecompensesUtilisateurService() {
         connection = DataSource.getInstance().getConnection();
         recompensesService = new RecompensesService();
+        utilisateurService = new UtilisateurService();
+
     }
     @Override
     public void ajouter(RecompensesUtilisateur recompensesUtilisateur) {
         String req = "INSERT INTO recompenses_utilisateur (userId, rewardId, date, statut, date_utilisation) VALUES (" +
-                recompensesUtilisateur.getUserId() + ", " +
+                recompensesUtilisateur.getUser().getId() + ", " +
                 recompensesUtilisateur.getReward().getRewardId()+ ", '" +
                 new java.sql.Date(System.currentTimeMillis()) + "', '" +
                 (recompensesUtilisateur.isStatut() ? 1 : 0)  + "', NULL)";
@@ -35,7 +40,7 @@ public class RecompensesUtilisateurService implements IService<RecompensesUtilis
 
     @Override
     public void modifier(RecompensesUtilisateur recompensesUtilisateur) {
-        String req = "UPDATE recompenses_utilisateur SET userId = " + recompensesUtilisateur.getUserId() +
+        String req = "UPDATE recompenses_utilisateur SET userId = " + recompensesUtilisateur.getUser().getId() +
                 ", rewardId = " + recompensesUtilisateur.getReward().getRewardId() +
                 ", date = '" + recompensesUtilisateur.getDate() +
                 "', statut = " + (recompensesUtilisateur.isStatut() ? 1 : 0) +
@@ -72,9 +77,10 @@ public class RecompensesUtilisateurService implements IService<RecompensesUtilis
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(req);
             while (rs.next()) {
+                Utilisateur user = utilisateurService.getUser(rs.getInt("userId"));
                 Recompenses reward = recompensesService.getRecompense(rs.getInt("rewardId"));
                 recUserList.add(new RecompensesUtilisateur(rs.getInt("userRewardId"),
-                        rs.getInt("userId"),
+                        user,
                         reward,
                         rs.getDate("date"),
                         rs.getBoolean("statut"),
@@ -94,9 +100,10 @@ public class RecompensesUtilisateurService implements IService<RecompensesUtilis
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(req);
             while (rs.next()) {
+                Utilisateur user = utilisateurService.getUser(rs.getInt("userId"));
                 Recompenses reward = recompensesService.getRecompense(rs.getInt("rewardId"));
                 recUserList.add(new RecompensesUtilisateur(rs.getInt("userRewardId"),
-                        rs.getInt("userId"),
+                        user,
                         reward,
                         rs.getDate("date"),
                         rs.getBoolean("statut"),

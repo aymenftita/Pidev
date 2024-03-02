@@ -4,30 +4,30 @@ import java.sql.Date;
 
 public class RecompensesUtilisateur {
     private int userRewardId;
-    private int userId;
+    private Utilisateur user;
     private Recompenses reward;
     private Date date;
     private boolean statut;
     private Date dateUtilisation;
 
-    public RecompensesUtilisateur(int userRewardId, int userId, Recompenses reward, Date date, boolean statut, Date dateUtilisation) {
+    public RecompensesUtilisateur(int userRewardId, Utilisateur user, Recompenses reward, Date date, boolean statut, Date dateUtilisation) {
         this.userRewardId = userRewardId;
-        this.userId = userId;
+        this.user = user;
         this.reward = reward;
         this.date = date;
         this.statut = statut;
         this.dateUtilisation = dateUtilisation;
     }
 
-    public RecompensesUtilisateur(int userId, Recompenses reward, Date date, boolean statut, Date dateUtilisation) {
-        this.userId = userId;
+    public RecompensesUtilisateur(Utilisateur user, Recompenses reward, Date date, boolean statut, Date dateUtilisation) {
+        this.user = user;
         this.reward = reward;
         this.date = date;
         this.statut = statut;
         this.dateUtilisation = dateUtilisation;
     }
-    public RecompensesUtilisateur(int userId, Recompenses reward, boolean statut, Date dateUtilisation) {
-        this.userId = userId;
+    public RecompensesUtilisateur(Utilisateur user, Recompenses reward, boolean statut, Date dateUtilisation) {
+        this.user = user;
         this.reward = reward;
         this.statut = statut;
         this.dateUtilisation = dateUtilisation;
@@ -41,12 +41,12 @@ public class RecompensesUtilisateur {
         this.userRewardId = userRewardId;
     }
 
-    public int getUserId() {
-        return userId;
+    public Utilisateur getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(Utilisateur user) {
+        this.user = user;
     }
 
     public Recompenses getReward() {
@@ -85,7 +85,7 @@ public class RecompensesUtilisateur {
     public String toString() {
         return "RecompensesUtilisateur{" +
                 "userRewardId=" + userRewardId +
-                ", userId=" + userId +
+                ", user=" + user +
                 ", reward=" + reward +
                 ", date=" + date +
                 ", statut=" + statut +

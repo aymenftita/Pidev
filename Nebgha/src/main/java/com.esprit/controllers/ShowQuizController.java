@@ -1,8 +1,6 @@
 package com.esprit.controllers;
 
-import com.esprit.models.Difficulte;
-import com.esprit.models.Quiz;
-import com.esprit.models.ReponsesUtilisateur;
+import com.esprit.models.*;
 import com.esprit.services.QuizService;
 import com.esprit.services.ReponsesUtilisateurService;
 import com.esprit.services.Session;
@@ -32,7 +30,7 @@ public class ShowQuizController implements Initializable {
     private TableColumn<Quiz, String> description;
 
     @FXML
-    private TableColumn<Quiz, Difficulte> difficulte;
+    private TableColumn<Quiz, Difficulty> difficulte;
 
     @FXML
     private TableColumn<Quiz, Integer> duree;
@@ -57,7 +55,7 @@ public class ShowQuizController implements Initializable {
     private boolean ascendingOrder = true;
 
     private int selectedQuizId;
-    private int userId = Session.getUserId();
+    private int userId = Session.getCurrentUser().getId();
     private QuizService quizService;
     @FXML
     private TableColumn<Quiz, Date> date;
@@ -71,11 +69,11 @@ public class ShowQuizController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         quizService = new QuizService();
         List<Quiz> quizzes;
-        if (Session.getRole().equals("Administrateur")) {
+        if (Session.getCurrentRole().equals(Role.Administrateur)) {
             quizzes = quizService.afficher();
         } else {
             quizzes = quizService.afficherParUser(userId);
-            TableColumn<Quiz, Integer> timesPassedColumn = new TableColumn<>("Nbr fois passé");
+            TableColumn<Quiz, Integer> timesPassedColumn = new TableColumn<>("Times passed");
             timesPassedColumn.setCellValueFactory(cellData -> {
                 Quiz quiz = cellData.getValue();
                 int timesPassed = calculateNumberOfTimesQuizPassed(quiz.getQuizId());
@@ -158,7 +156,7 @@ public class ShowQuizController implements Initializable {
         ReponsesUtilisateurService reponsesUtilisateurService = new ReponsesUtilisateurService();
         List<ReponsesUtilisateur> responses = reponsesUtilisateurService.afficherParQuiz(quizId);
 
-        Set<Integer> uniqueUsers = responses.stream().map(ReponsesUtilisateur::getUserId).collect(Collectors.toSet());
+        Set<Utilisateur> uniqueUsers = responses.stream().map(ReponsesUtilisateur::getUser).collect(Collectors.toSet());
 
         return uniqueUsers.size();
     }
@@ -212,7 +210,7 @@ public class ShowQuizController implements Initializable {
         Parent root = loader.load();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(new Scene(root));
-        currentStage.setTitle("Ajouter Quiz");
+        currentStage.setTitle("Add Quiz");
         currentStage.show();
     }
 
@@ -220,7 +218,7 @@ public class ShowQuizController implements Initializable {
     void previous(MouseEvent event) throws IOException {
 
         String fxmlPath = "/AdminInterface.fxml";
-        if (Session.getRole().equals("Tuteur")) {
+        if (Session.getCurrentRole().equals(Role.Tuteur)) {
             fxmlPath = "/TuteurInterface.fxml";
         }
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));

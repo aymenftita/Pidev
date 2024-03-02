@@ -6,27 +6,27 @@ public class Quiz {
     private int quizId;
     private String nom;
     private String description;
-    private int creatorId;
+    private Utilisateur creator;
     private Date dateCreation;
     private int duree;
     private int nombreQuestions;
-    private Difficulte difficulte;
+    private Difficulty difficulte;
 
-    public Quiz(int quizId, int creatorId, String nom, String description, Date dateCreation, int duree, int nombreQuestions, Difficulte difficulte) {
+    public Quiz(int quizId, Utilisateur creator, String nom, String description, Date dateCreation, int duree, int nombreQuestions, Difficulty difficulte) {
         this.quizId = quizId;
         this.nom = nom;
         this.description = description;
-        this.creatorId = creatorId;
+        this.creator = creator;
         this.dateCreation = dateCreation;
         this.duree = duree;
         this.nombreQuestions = nombreQuestions;
         this.difficulte = difficulte;
     }
 
-    public Quiz(int creatorId, String nom, String description,  int duree, int nombreQuestions, Difficulte difficulte) {
+    public Quiz(Utilisateur creator, String nom, String description,  int duree, int nombreQuestions, Difficulty difficulte) {
         this.nom = nom;
         this.description = description;
-        this.creatorId = creatorId;
+        this.creator = creator;
         this.duree = duree;
         this.nombreQuestions = nombreQuestions;
         this.difficulte = difficulte;
@@ -60,12 +60,12 @@ public class Quiz {
         this.description = description;
     }
 
-    public int getCreatorId() {
-        return creatorId;
+    public Utilisateur getCreator() {
+        return creator;
     }
 
-    public void setCreatorId(int creatorId) {
-        this.creatorId = creatorId;
+    public void setCreator(Utilisateur creator) {
+        this.creator = creator;
     }
 
     public Date getDateCreation() {
@@ -92,11 +92,11 @@ public class Quiz {
         this.nombreQuestions = nombreQuestions;
     }
 
-    public Difficulte getDifficulte() {
+    public Difficulty getDifficulte() {
         return difficulte;
     }
 
-    public void setDifficulte(Difficulte difficulte) {
+    public void setDifficulte(Difficulty difficulte) {
         this.difficulte = difficulte;
     }
 
@@ -106,7 +106,7 @@ public class Quiz {
                 "quizId=" + quizId +
                 ", nom='" + nom + '\'' +
                 ", description='" + description + '\'' +
-                ", creatorId=" + creatorId +
+                ", creator=" + creator +
                 ", dateCreation=" + dateCreation +
                 ", duree=" + duree +
                 ", nombreQuestions=" + nombreQuestions +

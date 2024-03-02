@@ -44,9 +44,11 @@ public class EditQuestionController implements Initializable {
 
     @FXML
     private TextField texttf;
-    private String role=Session.getRole();
+    private final Role role=Session.getCurrentRole();
 
-    private int userId=Session.getUserId();
+    private final int userId=Session.getCurrentUser().getId();
+
+
 
     @FXML
     void EditQuestion(ActionEvent event) throws IOException {
@@ -55,9 +57,9 @@ public class EditQuestionController implements Initializable {
         Quiz selectedQuiz = null;
         String selectedQuizName = quizList.getValue();
         List<Quiz> quizzes = null;
-        if (role.equals("Administrateur")) {
+        if (role.equals(Role.Administrateur)) {
             quizzes = quizService.afficher();
-        } else if (role.equals("Tuteur")) {
+        } else if (role.equals(Role.Tuteur)) {
             quizzes=quizService.afficherParUser(userId);
         }
 
@@ -77,12 +79,12 @@ public class EditQuestionController implements Initializable {
                 question.setPoints(Integer.parseInt(pointstf.getText()));
                 question.setOrdre(Integer.parseInt(ordretf.getText()));
                 question.setCategorie(categorietf.getText());
-
+                System.out.println(question);
                 qs.modifier(question);
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Question modifiée");
-                alert.setContentText("Question modifiée!");
+                alert.setTitle("Question Edited");
+                alert.setContentText("Question edited successfully!");
                 alert.showAndWait();
 
 
@@ -100,14 +102,14 @@ public class EditQuestionController implements Initializable {
                 currentStage.show();
             } catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erreur");
-                alert.setContentText("Veuillez saisir des valeurs numériques valides pour les points et l'ordre.");
+                alert.setTitle("Error");
+                alert.setContentText("Please enter valid numeric values for points and order.");
                 alert.showAndWait();
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setContentText("Veuillez remplir tous les champs, sélectionner un quiz et choisir un type de réponse.");
+            alert.setTitle("Error");
+            alert.setContentText("Please fill in all fields, select a quiz, and choose an answer type.");
             alert.showAndWait();
         }
     }

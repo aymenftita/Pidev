@@ -14,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 public class AjoutRecompenseController {
 
@@ -25,7 +26,16 @@ public class AjoutRecompenseController {
 
     @FXML
     private TextField titretf;
-
+    public boolean checkUnicity(String title) {
+        RecompensesService recompensesService = new RecompensesService();
+        List<Recompenses> recompenses = recompensesService.afficher();
+        for (Recompenses recompense : recompenses) {
+            if (recompense.getNom().equalsIgnoreCase(title)) {
+                return false;
+            }
+        }
+        return true;
+    }
     @FXML
     void ajoutRecompense(ActionEvent event) throws IOException {
         RecompensesService qs = new RecompensesService();
@@ -35,12 +45,18 @@ public class AjoutRecompenseController {
 
         if (titre.isEmpty() || description.isEmpty() || scoreRequisText.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setContentText("Veuillez remplir tous les champs.");
+            alert.setTitle("Error");
+            alert.setContentText("Please fill in all fields.");
             alert.showAndWait();
             return;
         }
-
+        if (!checkUnicity(titre)) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("Reward already exists!");
+            alert.showAndWait();
+            return;
+        }
         try {
             int scoreRequis = Integer.parseInt(scoreRequisText);
 
@@ -51,8 +67,8 @@ public class AjoutRecompenseController {
             qs.ajouter(new Recompenses(titre, description, scoreRequis));
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Récompense ajoutée");
-            alert.setContentText("Récompense ajoutée!");
+            alert.setTitle("Reward Added");
+            alert.setContentText("Reward added successfully!");
             alert.showAndWait();
 
 
@@ -61,12 +77,12 @@ public class AjoutRecompenseController {
             Parent root = loader.load();
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             currentStage.setScene(new Scene(root));
-            currentStage.setTitle("Récompenses");
+            currentStage.setTitle("Rewards");
             currentStage.show();
         } catch (NumberFormatException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setContentText("Veuillez saisir une valeur numérique valide pour le score requis.");
+            alert.setTitle("Error");
+            alert.setContentText("Please enter a valid numeric value for the required score.");
             alert.showAndWait();
         }
     }
@@ -79,7 +95,7 @@ public class AjoutRecompenseController {
         Parent root = loader.load();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(new Scene(root));
-        currentStage.setTitle("Récompenses");
+        currentStage.setTitle("Rewards");
         currentStage.show();
     }
 

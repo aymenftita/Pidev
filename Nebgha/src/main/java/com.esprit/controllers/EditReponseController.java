@@ -42,14 +42,14 @@ public class EditReponseController implements Initializable {
 
     @FXML
     private TextField texttf;
-    private String role=Session.getRole();
+    private Role role=Session.getCurrentRole();
 
-    private int userId=Session.getUserId();
+    private Utilisateur user=Session.getCurrentUser();
     private List<Questions> allQuestions;
 
 
 
-    private Questions selectedQuestion; // Declaring selectedQuestion outside to be accessible
+    private Questions selectedQuestion;
 
     public void initData(Reponses reponse) {
         this.reponse = reponse;
@@ -98,18 +98,19 @@ public class EditReponseController implements Initializable {
                     reponse.setOrdre(ordre);
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Erreur");
-                    alert.setContentText("Veuillez saisir un nombre entier valide pour l'ordre.");
+                    alert.setTitle("Error");
+                    alert.setContentText("Please enter a valid number for the order.");
                     alert.showAndWait();
                     return;
                 }
 
                 reponse.setEstCorrecte(est_correcte.isSelected());
+                System.out.println(reponse);
                 qs.modifier(reponse);
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Réponse modifiée");
-                alert.setContentText("Réponse modifiée!");
+                alert.setTitle("Answer Edited");
+                alert.setContentText("Answer edited successfully!");
                 alert.showAndWait();
 
 
@@ -123,12 +124,12 @@ public class EditReponseController implements Initializable {
                 root = loader.load();
                 Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 currentStage.setScene(new Scene(root));
-                currentStage.setTitle("Réponses");
+                currentStage.setTitle("Answers");
                 currentStage.show();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erreur");
-                alert.setContentText("Veuillez sélectionner une question.");
+                alert.setTitle("Error");
+                alert.setContentText("Please select a question.");
                 alert.showAndWait();
             }
         }
@@ -139,9 +140,9 @@ public class EditReponseController implements Initializable {
         QuizService quizService = new QuizService();
         List<Quiz> quizzes = quizService.afficher();
 
-        if (role.equals("Tuteur")) {
+        if (role.equals(Role.Tuteur)) {
             quizzes = quizzes.stream()
-                    .filter(quiz -> quiz.getCreatorId() == userId)
+                    .filter(quiz -> quiz.getCreator().equals(user))
                     .collect(Collectors.toList());
         }
 
@@ -181,7 +182,7 @@ public class EditReponseController implements Initializable {
         root = loader.load();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(new Scene(root));
-        currentStage.setTitle("Réponses");
+        currentStage.setTitle("Answers");
         currentStage.show();
     }
 }

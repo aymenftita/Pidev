@@ -42,13 +42,22 @@ public class AjoutQuestionController  {
     @FXML
     private Quiz selectedQuiz;
 
-    private String role=Session.getRole();
+    private Role role=Session.getCurrentRole();
 
-    private int userId=Session.getUserId();
-
-
+    private int userId=Session.getCurrentUser().getId();
 
 
+
+    public boolean checkUnicity(String text,Quiz selectedQuiz) {
+        QuestionsService questionsService = new QuestionsService();
+        List<Questions> questions = questionsService.afficherParQuiz(selectedQuiz.getQuizId());
+        for (Questions question : questions) {
+            if (question.getTexte().equalsIgnoreCase(text)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     @FXML
     void addQuestion(ActionEvent event) throws IOException {
@@ -67,12 +76,19 @@ public class AjoutQuestionController  {
                         points,
                         ordre,
                         categorietf.getText());
+                if (!checkUnicity(texttf.getText(),selectedQuiz)) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setContentText("Question already exists!");
+                    alert.showAndWait();
+                    return;
+                }
 
                 qs.ajouter(question);
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Question ajoutée");
-                alert.setContentText("Question ajoutée!");
+                alert.setTitle("Question added");
+                alert.setContentText("Question added successfully!");
                 alert.showAndWait();
 
 
@@ -88,14 +104,14 @@ public class AjoutQuestionController  {
 
             } catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erreur");
-                alert.setContentText("Veuillez saisir des valeurs numériques valides pour les points et l'ordre.");
+                alert.setTitle("Error");
+                alert.setContentText("Please enter valid numeric values for points and order.");
                 alert.showAndWait();
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setContentText("Veuillez remplir tous les champs, sélectionner un quiz et choisir un type de réponse.");
+            alert.setTitle("Error");
+            alert.setContentText("Please fill in all fields, select a quiz, and choose an answer type.");
             alert.showAndWait();
         }
     }
@@ -122,9 +138,9 @@ public class AjoutQuestionController  {
         if (role != null) {
             QuizService quizService = new QuizService();
             List<Quiz> quizzes;
-            if (role.equals("Administrateur")) {
+            if (role.equals(Role.Administrateur)) {
                 quizzes = quizService.afficher();
-            } else if (role.equals("Tuteur")) {
+            } else if (role.equals(Role.Tuteur)) {
                 quizzes = quizService.afficherParUser(userId);
             } else {
                 quizzes = Collections.emptyList();
@@ -136,7 +152,10 @@ public class AjoutQuestionController  {
 
             quizList.setOnAction(event -> {
                 String selectedQuizName = quizList.getValue();
-                selectedQuiz = quizzes.stream().filter(q -> q.getNom().equals(selectedQuizName)).findFirst().orElse(null);
+                if (quizzes != null) {
+                    selectedQuiz = quizzes.stream().filter(q -> q.getNom().equals(selectedQuizName)).findFirst().orElse(null);
+
+                }
 
             });
         }

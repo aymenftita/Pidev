@@ -3,6 +3,7 @@ package com.esprit.controllers;
 import com.esprit.models.Quiz;
 import com.esprit.models.Questions;
 import com.esprit.models.Reponses;
+import com.esprit.models.Role;
 import com.esprit.services.QuestionsService;
 import com.esprit.services.QuizService;
 import com.esprit.services.ReponsesService;
@@ -113,7 +114,7 @@ public class ShowReponsesController implements Initializable {
                         EditReponseController editReponseController = loader.getController();
                         editReponseController.initData(rowData);
                         Stage currentStage = (Stage) reponseTableView.getScene().getWindow();
-                        currentStage.setTitle("Modifier Réponse");
+                        currentStage.setTitle("Edit Answer");
                         currentStage.setScene(new Scene(root));
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -172,10 +173,10 @@ public class ShowReponsesController implements Initializable {
 
     private void refreshQuizzes() {
         List<Quiz> quizzes=null;
-        if (Session.getRole().equals("Administrateur")) {
+        if (Session.getCurrentRole().equals(Role.Administrateur)) {
             quizzes = quizService.afficher();
-        } else if (Session.getRole().equals("Tuteur")) {
-            quizzes = quizService.afficherParUser(Session.getUserId());
+        } else if (Session.getCurrentRole().equals(Role.Tuteur)) {
+            quizzes = quizService.afficherParUser(Session.getCurrentUser().getId());
         }
         if(quizzes!=null) {
 
@@ -213,20 +214,20 @@ public class ShowReponsesController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjoutReponse.fxml"));
         Parent root = loader.load();
         Stage currentStage = (Stage) reponseTableView.getScene().getWindow();
-        currentStage.setTitle("Ajouter Réponse");
+        currentStage.setTitle("Add Answer");
         currentStage.setScene(new Scene(root));
     }
     @FXML
     void previous(MouseEvent event) throws IOException {
 
-        if (Session.getRole().equals("Administrateur")) {
+        if (Session.getCurrentRole().equals(Role.Administrateur)) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AdminInterface.fxml"));
             Parent root = loader.load();
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             currentStage.setScene(new Scene(root));
             currentStage.setTitle("Nebgha");
             currentStage.show();
-        } else if (Session.getRole().equals("Tuteur")) {
+        } else if (Session.getCurrentRole().equals(Role.Tuteur)) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/TuteurInterface.fxml"));
             Parent root = loader.load();
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class EditQuizController implements Initializable {
@@ -25,7 +26,7 @@ public class EditQuizController implements Initializable {
     private TextField desctf;
 
     @FXML
-    private ComboBox<Difficulte> difficulteComboBox;
+    private ComboBox<Difficulty> difficulteComboBox;
 
     @FXML
     private TextField dureetf;
@@ -37,9 +38,18 @@ public class EditQuizController implements Initializable {
     private TextField titletf;
 
     private Quiz quizToEdit;
-    private String role=Session.getRole();
+    private Role role=Session.getCurrentRole();
 
-
+    public boolean checkUnicity(String title) {
+        QuizService quizService = new QuizService();
+        List<Quiz> quizzes = quizService.afficher();
+        for (Quiz quiz : quizzes) {
+            if (quiz.getNom().equalsIgnoreCase(title)) {
+                return false;
+            }
+        }
+        return true;
+    }
     public void initData(Quiz quiz) {
 
         quizToEdit = quiz;
@@ -52,13 +62,13 @@ public class EditQuizController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        difficulteComboBox.setItems(FXCollections.observableArrayList(Difficulte.values()));
+        difficulteComboBox.setItems(FXCollections.observableArrayList(Difficulty.values()));
     }
 
     @FXML
     void EditQuiz(ActionEvent event) throws IOException {
         QuizService qs = new QuizService();
-        Difficulte difficulte = difficulteComboBox.getValue();
+        Difficulty difficulte = difficulteComboBox.getValue();
         String title = titletf.getText();
         String description = desctf.getText();
         String durationText = dureetf.getText();
@@ -72,7 +82,13 @@ public class EditQuizController implements Initializable {
                 if (duration <= 0 || numberOfQuestions <= 0) {
                     throw new NumberFormatException();
                 }
-
+                if (!title.equals(quizToEdit.getNom()) && !checkUnicity(title)) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setContentText("Quiz already exists!");
+                    alert.showAndWait();
+                    return;
+                }
                 quizToEdit.setNom(title);
                 quizToEdit.setDescription(description);
                 quizToEdit.setDifficulte(difficulte);
@@ -82,25 +98,25 @@ public class EditQuizController implements Initializable {
                 qs.modifier(quizToEdit);
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Quiz modifié");
-                alert.setContentText("Quiz modifié!");
+                alert.setTitle("Quiz Edited");
+                alert.setContentText("Quiz edited successfully!");
                 alert.showAndWait();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuiz.fxml"));
                 Parent root = loader.load();
                 Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 currentStage.setScene(new Scene(root));
-                currentStage.setTitle("Quizs");
+                currentStage.setTitle("Quizzes");
                 currentStage.show();
             } catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erreur");
-                alert.setContentText("Veuillez saisir des valeurs numériques valides pour la durée et le nombre de questions.");
+                alert.setTitle("Error");
+                alert.setContentText("Please enter valid numeric values for duration and number of questions.");
                 alert.showAndWait();
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setContentText("Veuillez remplir tous les champs.");
+            alert.setTitle("Error");
+            alert.setContentText("Please fill in all fields.");
             alert.showAndWait();
         }
     }
@@ -112,7 +128,7 @@ public class EditQuizController implements Initializable {
         Parent root = loader.load();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(new Scene(root));
-        currentStage.setTitle("Quizs");
+        currentStage.setTitle("Quizzes");
         currentStage.show();
     }
 

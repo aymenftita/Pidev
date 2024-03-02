@@ -63,11 +63,11 @@ public class ShowQuestionsController implements Initializable {
         ordre.setCellValueFactory(new PropertyValueFactory<>("ordre"));
         categorie.setCellValueFactory(new PropertyValueFactory<>("categorie"));
 
-        String role = Session.getRole();
+        Role role = Session.getCurrentRole();
 
         List<Quiz> quizzes;
-        if (role.equals("Tuteur")) {
-            quizzes = quizService.afficherParUser(Session.getUserId());
+        if (role.equals(Role.Tuteur)) {
+            quizzes = quizService.afficherParUser(Session.getCurrentUser().getId());
         } else {
             quizzes = quizService.afficher();
         }
@@ -105,7 +105,7 @@ public class ShowQuestionsController implements Initializable {
                         EditQuestionController editQuestionController = loader.getController();
                         editQuestionController.initData(rowData);
                         Stage currentStage = (Stage) questionTableView.getScene().getWindow();
-                        currentStage.setTitle("Modifier Question");
+                        currentStage.setTitle("Edit Question");
                         currentStage.setScene(new Scene(root));
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -188,15 +188,15 @@ public class ShowQuestionsController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjoutQuestion.fxml"));
         Parent root = loader.load();
         Stage currentStage = (Stage) questionTableView.getScene().getWindow();
-        currentStage.setTitle("Ajouter Question");
+        currentStage.setTitle("Add Question");
         currentStage.setScene(new Scene(root));
     }
 
     private void refreshQuestionsTable() {
         String selectedQuizName = quizList.getValue();
         List<Quiz> quizzes;
-        if (Session.getRole().equals("Tuteur")) {
-            quizzes = quizService.afficherParUser(Session.getUserId());
+        if (Session.getCurrentRole().equals(Role.Tuteur)) {
+            quizzes = quizService.afficherParUser(Session.getCurrentUser().getId());
         } else {
             quizzes = quizService.afficher();
         }
@@ -214,9 +214,9 @@ public class ShowQuestionsController implements Initializable {
     @FXML
     void previous(MouseEvent event) throws IOException {
 
-        String role = Session.getRole();
+        Role role = Session.getCurrentRole();
         String fxmlPath = "/AdminInterface.fxml";
-        if (role.equals("Tuteur")) {
+        if (role.equals(Role.Tuteur)) {
             fxmlPath = "/TuteurInterface.fxml";
         }
 

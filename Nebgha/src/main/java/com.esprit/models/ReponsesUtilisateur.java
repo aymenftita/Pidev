@@ -3,7 +3,7 @@ package com.esprit.models;
 import java.sql.Date;
 public class ReponsesUtilisateur {
     private int userResponseId;
-    private int userId;
+    private Utilisateur user;
     private Reponses reponse;
     private Quiz quiz;
     private Date date;
@@ -11,9 +11,9 @@ public class ReponsesUtilisateur {
     private boolean isCorrect;
 
 
-    public ReponsesUtilisateur(int userResponseId, int userId, Reponses reponse, Quiz quiz, Date date, int tempsPris, boolean isCorrect) {
+    public ReponsesUtilisateur(int userResponseId, Utilisateur user, Reponses reponse, Quiz quiz, Date date, int tempsPris, boolean isCorrect) {
         this.userResponseId = userResponseId;
-        this.userId = userId;
+        this.user = user;
         this.reponse = reponse;
         this.quiz = quiz;
         this.date = date;
@@ -21,8 +21,8 @@ public class ReponsesUtilisateur {
         this.isCorrect = isCorrect;
     }
 
-    public ReponsesUtilisateur(int userId, Reponses reponse, Quiz quiz, Date date, int tempsPris, boolean isCorrect) {
-        this.userId = userId;
+    public ReponsesUtilisateur(Utilisateur user, Reponses reponse, Quiz quiz, Date date, int tempsPris, boolean isCorrect) {
+        this.user = user;
         this.reponse = reponse;
         this.quiz = quiz;
         this.date = date;
@@ -30,8 +30,8 @@ public class ReponsesUtilisateur {
         this.isCorrect = isCorrect;
     }
 
-    public ReponsesUtilisateur(int userId, Reponses reponse, Quiz quiz, int tempsPris, boolean isCorrect) {
-        this.userId=userId;
+    public ReponsesUtilisateur(Utilisateur user, Reponses reponse, Quiz quiz, int tempsPris, boolean isCorrect) {
+        this.user=user;
         this.reponse=reponse;
         this.quiz=quiz;
         this.tempsPris=tempsPris;
@@ -54,12 +54,12 @@ public class ReponsesUtilisateur {
         this.userResponseId = userResponseId;
     }
 
-    public int getUserId() {
-        return userId;
+    public Utilisateur getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(Utilisateur user) {
+        this.user = user;
     }
 
     public Reponses getReponse() {
@@ -98,7 +98,7 @@ public class ReponsesUtilisateur {
     public String toString() {
         return "ReponsesUtilisateur{" +
                 "userResponseId=" + userResponseId +
-                ", userId=" + userId +
+                ", user=" + user +
                 ", reponse=" + reponse+
                 ", quiz=" + quiz +
                 ", date=" + date +

@@ -12,6 +12,7 @@
 
 <AnchorPane prefHeight="690.0" prefWidth="659.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.QuizResultsController">
     <children>
+
         <HBox layoutX="205.0" layoutY="121.0" prefHeight="94.0" prefWidth="442.0" spacing="10.0">
             <children>
                 <VBox spacing="10.0">
@@ -33,30 +34,32 @@
         </VBox>
 
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="58.0" layoutY="1.0" stroke="TRANSPARENT" strokeType="INSIDE" width="659.0" />
-        <Label fx:id="titleLabel" layoutX="330.0" layoutY="17.0" text="Résultats du quiz" textFill="#000066">
+        <Label fx:id="titleLabel" layoutX="330.0" layoutY="17.0" text="Quiz Results" textFill="#000066">
             <font>
                 <Font name="System Bold" size="24.0" />
             </font>
         </Label>
         <ImageView fitHeight="19.0" fitWidth="134.0" layoutX="129.0" layoutY="25.0">
             <image>
-                <Image url="@images/55.png" />
+                <Image url="@media/55.png" />
             </image>
         </ImageView>
         <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="81.0" layoutY="15.0">
             <image>
-                <Image url="@images/Logo1.png" />
+                <Image url="@media/Logo1.png" />
             </image>
         </ImageView>
         <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="14.0" layoutY="21.0" onMouseClicked="#previous">
             <image>
-                <Image url="@images/previous.png" />
+                <Image url="@media/previous.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="4.0" layoutY="46.0">
+        <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="2.0" layoutY="44.0">
             <image>
-                <Image url="@images/certificate.png" />
+                <Image url="@media/certificate.png" />
             </image>
         </ImageView>
+        <Button fx:id="sendEmailbtn" layoutX="35.0" layoutY="215.0" mnemonicParsing="false" onAction="#sendEmail" prefHeight="35.0" prefWidth="134.0" stylesheets="@media/styles.css" text="Send results by Email" />
+
     </children>
 </AnchorPane>

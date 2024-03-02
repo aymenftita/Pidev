@@ -8,15 +8,19 @@ import java.util.*;
 
 public class QuizService implements IService<Quiz> {
     private Connection connection;
+    private UtilisateurService utilisateurService;
+
 
     public QuizService() {
         connection = DataSource.getInstance().getConnection();
+        utilisateurService = new UtilisateurService();
+
     }
 
     @Override
     public void ajouter(Quiz quiz) {
         String req = "INSERT INTO quiz (creatorId, nom, description, date_creation, duree, nbr_questions, difficulte) VALUES (" +
-                quiz.getCreatorId() + ", '" + quiz.getNom() + "', '" + quiz.getDescription() + "', '" +
+                quiz.getCreator().getId() + ", '" + quiz.getNom() + "', '" + quiz.getDescription() + "', '" +
                 new java.sql.Date(System.currentTimeMillis()) + "', " + quiz.getDuree() + ", " +
                 quiz.getNombreQuestions() + ", '" + quiz.getDifficulte().toString() + "')";
         try {
@@ -32,7 +36,7 @@ public class QuizService implements IService<Quiz> {
     @Override
     public void modifier(Quiz quiz) {
         String req = "UPDATE quiz SET nom = '" + quiz.getNom() + "', description = '" + quiz.getDescription() +
-                "', creatorId = " + quiz.getCreatorId() + ", date_creation = '" +
+                "', creatorId = " + quiz.getCreator().getId() + ", date_creation = '" +
                 new java.sql.Date(quiz.getDateCreation().getTime()) + "', duree = " + quiz.getDuree() +
                 ", nbr_questions = " + quiz.getNombreQuestions() + ", difficulte = '" + quiz.getDifficulte().toString() +
                 "' WHERE quizId = " + quiz.getQuizId();
@@ -66,20 +70,24 @@ public class QuizService implements IService<Quiz> {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(req);
             while (rs.next()) {
-                quizzes.add(new Quiz(rs.getInt("quizId"),
-                        rs.getInt("creatorId"),
+                Utilisateur user = utilisateurService.getUser(rs.getInt("creatorId"));
+                quizzes.add(new Quiz(
+                        rs.getInt("quizId"),
+                        user,
                         rs.getString("nom"),
                         rs.getString("description"),
                         rs.getDate("date_creation"),
                         rs.getInt("duree"),
                         rs.getInt("nbr_questions"),
-                        Difficulte.valueOf(rs.getString("difficulte"))));
+                        Difficulty.valueOf(rs.getString("difficulte"))
+                ));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return quizzes;
     }
+
 
     public List<Quiz> afficherParUser(int userId) {
         List<Quiz> quizzes = new ArrayList<>();
@@ -88,14 +96,15 @@ public class QuizService implements IService<Quiz> {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(req);
             while (rs.next()) {
+                Utilisateur user = utilisateurService.getUser(rs.getInt("creatorId"));
                 quizzes.add(new Quiz(rs.getInt("quizId"),
-                        rs.getInt("creatorId"),
+                        user,
                         rs.getString("nom"),
                         rs.getString("description"),
                         rs.getDate("date_creation"),
                         rs.getInt("duree"),
                         rs.getInt("nbr_questions"),
-                        Difficulte.valueOf(rs.getString("difficulte"))));
+                        Difficulty.valueOf(rs.getString("difficulte"))));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -110,14 +119,15 @@ public class QuizService implements IService<Quiz> {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(req);
             if (rs.next()) {
+                Utilisateur user = utilisateurService.getUser(rs.getInt("creatorId"));
                 quiz = new Quiz(rs.getInt("quizId"),
-                        rs.getInt("creatorId"),
+                        user,
                         rs.getString("nom"),
                         rs.getString("description"),
                         rs.getDate("date_creation"),
                         rs.getInt("duree"),
                         rs.getInt("nbr_questions"),
-                        Difficulte.valueOf(rs.getString("difficulte")));
+                        Difficulty.valueOf(rs.getString("difficulte")));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

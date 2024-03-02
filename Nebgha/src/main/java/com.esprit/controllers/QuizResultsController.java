@@ -2,11 +2,14 @@ package com.esprit.controllers;
 
 import com.esprit.models.*;
 import com.esprit.services.*;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -25,7 +28,7 @@ public class QuizResultsController {
     @FXML
     private Label scoreLabel;
 
-private int userId=Session.getUserId();
+private Utilisateur user=Session.getCurrentUser();
 
     @FXML
     private VBox questionsContainer;
@@ -35,56 +38,86 @@ private int userId=Session.getUserId();
     private final ReponsesService reponseService = new ReponsesService();
     private final ReponsesUtilisateurService reponseUtilisateurService = new ReponsesUtilisateurService();
     private int quizId;
+    private int correctAnswers = 0;
+    private  int totalQuestions =0;
+    private double score = 0;
+    private List<Questions> questions = null;
+    private List<ReponsesUtilisateur> reponsesUtilisateurList = null;
 
-    public void initialize( int quizId) {
-        this.quizId=quizId;
+
+    public void initialize(int quizId) {
+        this.quizId = quizId;
         Quiz quiz = quizService.getQuiz(quizId);
-        List<Questions> questions = questionService.afficherParQuiz(quizId);
-        titleLabel.setText("Résultats du quiz - " + quiz.getNom());
+        questions = questionService.afficherParQuiz(quizId);
+        titleLabel.setText("Quiz results - " + quiz.getNom());
 
-        int correctAnswers = 0;
-        List<ReponsesUtilisateur> reponsesUtilisateurList = reponseUtilisateurService.afficherParQuizEtUser(quizId, userId);
+        reponsesUtilisateurList = reponseUtilisateurService.afficherParQuizEtUser(quizId, user.getId());
+
+        int totalQuestionPoints = 0; // Track total points possible
+        int quizScore = 0; // Track user's score
 
         for (Questions question : questions) {
+            totalQuestionPoints += question.getPoints(); // Add question points to total points possible
+
             Label questionLabel = new Label(question.getTexte());
             questionLabel.setStyle("-fx-font-weight: bold; -fx-background-color: #f0f0f0; -fx-padding: 5px;");
             questionsContainer.getChildren().add(questionLabel);
 
             List<Reponses> reponses = reponseService.afficherParQuestion(question.getQuestionId());
+            int totalCorrectAnswers = (int) reponses.stream().filter(Reponses::isEstCorrecte).count();
+            int userCorrectAnswers = 0; // Track user's correct answers for this question
+
             for (Reponses reponse : reponses) {
                 HBox answerBox = new HBox();
                 Label reponseLabel = new Label(reponse.getTexte());
                 answerBox.getChildren().add(reponseLabel);
 
+                boolean isAnswerSelected = false;
+
                 for (ReponsesUtilisateur reponsesUtilisateur : reponsesUtilisateurList) {
                     if (reponsesUtilisateur.getReponse().getReponseId() == reponse.getReponseId()) {
                         if (reponsesUtilisateur.isCorrect()) {
-                            reponseLabel.setText(reponseLabel.getText() + " (Correcte)");
+                            reponseLabel.setText(reponseLabel.getText() + " (Correct)");
                             reponseLabel.setStyle("-fx-background-color: rgba(0, 255, 0, 0.3); -fx-padding: 5px;");
-                            correctAnswers++;
-                            ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/images/check.png")));
+                            userCorrectAnswers++;
+                            ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/media/check.png")));
                             imageView.setFitHeight(20);
                             imageView.setFitWidth(20);
                             answerBox.getChildren().add(imageView);
+                            isAnswerSelected = true;
                         } else {
-                            reponseLabel.setText(reponseLabel.getText() + " (Fausse)");
+                            reponseLabel.setText(reponseLabel.getText() + " (Incorrect)");
                             reponseLabel.setStyle("-fx-background-color: rgba(255, 0, 0, 0.3); -fx-padding: 5px;");
-                            ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/images/cancel.png")));
+                            ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/media/cancel.png")));
                             imageView.setFitHeight(20);
                             imageView.setFitWidth(20);
                             answerBox.getChildren().add(imageView);
                         }
                     }
                 }
+
+                if (!isAnswerSelected && reponse.isEstCorrecte()) {
+                    reponseLabel.setStyle("-fx-background-color: rgba(255, 165, 0, 0.3); -fx-padding: 5px;");
+                    reponseLabel.setText(reponseLabel.getText()+" (Missed correct)");
+                }
+
                 questionsContainer.getChildren().add(answerBox);
+            }
+
+
+
+            boolean isQuestionCorrect = userCorrectAnswers == totalCorrectAnswers;
+            if (isQuestionCorrect) {
+                quizScore += question.getPoints();
+                correctAnswers++;
             }
 
             String explanation = reponses.get(0).getExplication();
             if (!explanation.isEmpty()) {
-                Label explicationLabel = new Label("Explication: " + explanation);
+                Label explicationLabel = new Label("Explanation: " + explanation);
                 explicationLabel.setStyle("-fx-background-color: rgba(255, 255, 0, 0.3); -fx-padding: 5px;");
 
-                ImageView explanationImageView = new ImageView(new Image(getClass().getResourceAsStream("/images/lightbulb.png")));
+                ImageView explanationImageView = new ImageView(new Image(getClass().getResourceAsStream("/media/lightbulb.png")));
                 explanationImageView.setFitHeight(20);
                 explanationImageView.setFitWidth(20);
 
@@ -94,22 +127,50 @@ private int userId=Session.getUserId();
             }
         }
 
-
-
-        int totalQuestions = questions.size();
-        double score = (double) correctAnswers / totalQuestions * 100;
-        scoreLabel.setText("Vous avez répondu à " + correctAnswers + " de " + totalQuestions + " questions correctement.\n"
-                + "Votre score est: " + String.format("%.1f", score) + "%");
+        totalQuestions = questions.size();
+        score = ((double) quizScore / totalQuestionPoints) * 100;
+        scoreLabel.setText("You answered " + correctAnswers + " out of " + totalQuestions + " questions correctly.\n" + "Your score is: " + String.format("%.1f", score) + "%");
     }
+
     @FXML
     void previous(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/QuizsHistory.fxml"));
         Parent root = loader.load();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(new Scene(root));
-        currentStage.setTitle("Historique");
+        currentStage.setTitle("History");
         currentStage.show();
     }
+    @FXML
+    void sendEmail(ActionEvent event) {
+        try {
+            NotificationService.showLoadingNotification("Sending Email", "Please wait...");
+            new Thread(() -> {
+                try {
+                    EmailService.sendResultsByEmail(user.getEmail(), quizService.getQuiz(quizId).getNom(), correctAnswers, totalQuestions, score, questions, reponsesUtilisateurList);
+                    System.out.println("Email sent successfully!");
+                    Platform.runLater(() -> {
+                        NotificationService.showSuccessNotification("Email Sent", "Email sent successfully!");
+                    });
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.err.println("Error sending email: " + e.getMessage());
+                    Platform.runLater(() -> {
+                        NotificationService.showErrorNotification("Error", "Failed to send email. Please try again.");
+                    });
+                }
+            }).start();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error sending email: " + e.getMessage());
+        }
+    }
+
+
+
+
 
 
 }

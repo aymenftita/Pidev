@@ -1,22 +1,34 @@
 package com.esprit.services;
 
+import com.esprit.models.Role;
+import com.esprit.models.Utilisateur;
+
 public class Session {
-    private static int userId;
-    private static String role;
+    private static Utilisateur currentUser;
+    private static Role currentRole;
 
-    public static int getUserId() {
-        return userId;
+    public static void setCurrentUser(Utilisateur user) {
+        currentUser = user;
     }
 
-    public static void setUserId(int userId) {
-        Session.userId = userId;
+    public static Utilisateur getCurrentUser() {
+        return currentUser;
     }
 
-    public static String getRole() {
-        return role;
+    public static void setCurrentRole(Role role) {
+        currentRole = role;
     }
 
-    public static void setRole(String role) {
-        Session.role = role;
+    public static Role getCurrentRole() {
+        return currentRole;
+    }
+
+    public static boolean isLoggedIn() {
+        return currentUser != null;
+    }
+
+    public static void logout() {
+        currentUser = null;
+        currentRole = null;
     }
 }

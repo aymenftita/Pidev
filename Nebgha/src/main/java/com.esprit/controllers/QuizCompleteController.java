@@ -1,5 +1,8 @@
 package com.esprit.controllers;
 
+import com.esprit.models.Quiz;
+import com.esprit.models.Utilisateur;
+import com.esprit.services.QuizService;
 import com.esprit.services.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,7 +36,7 @@ public class QuizCompleteController {
     @FXML
     private Label totalLabel;
 
-    private int userId = Session.getUserId();
+    private Utilisateur user = Session.getCurrentUser();
 
     private int quizId;
 
@@ -81,7 +84,7 @@ public class QuizCompleteController {
             Parent root = loader.load();
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             currentStage.setScene(new Scene(root));
-            currentStage.setTitle("Vos récompenses");
+            currentStage.setTitle("My rewards");
             currentStage.show();
         } catch (IOException e) {
             System.err.println("Error loading RecompensesEtudiant.fxml: " + e.getMessage());
@@ -96,7 +99,7 @@ public class QuizCompleteController {
             Parent root = loader.load();
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             currentStage.setScene(new Scene(root));
-            currentStage.setTitle("Etudiant");
+            currentStage.setTitle("Student");
             currentStage.show();
         } catch (IOException e) {
             System.err.println("Error loading EtudiantInterface.fxml: " + e.getMessage());
@@ -113,11 +116,13 @@ public class QuizCompleteController {
             resultsController.initialize(quizId);
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             currentStage.setScene(new Scene(root));
-            currentStage.setTitle("Résultat du quiz");
+            currentStage.setTitle("Quiz results");
             currentStage.show();
         } catch (IOException e) {
             System.err.println("Error loading QuizResults.fxml: " + e.getMessage());
         }
     }
+
+
 
 }

@@ -46,7 +46,7 @@ public class ShowRecompensesController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjoutRecompense.fxml"));
         Parent root = loader.load();
         Stage currentStage = (Stage) recompenseTableView.getScene().getWindow();
-        currentStage.setTitle("Ajouter Récompense");
+        currentStage.setTitle("Add Reward");
         currentStage.setScene(new Scene(root));
     }
 
@@ -74,7 +74,7 @@ public class ShowRecompensesController implements Initializable {
                         EditRecompenseController editRecompenseController = loader.getController();
                         editRecompenseController.initData(rowData);
                         Stage currentStage = (Stage) recompenseTableView.getScene().getWindow();
-                        currentStage.setTitle("Modifier Récompense");
+                        currentStage.setTitle("Edit Reward");
                         currentStage.setScene(new Scene(root));
                     } catch (IOException e) {
                         e.printStackTrace();

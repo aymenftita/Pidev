@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -8,33 +9,35 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
+<?import java.net.URL?>
 <AnchorPane prefHeight="482.0" prefWidth="518.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.RecompensesEtudiantController">
-   <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="58.0" layoutY="-3.0" stroke="TRANSPARENT" strokeType="INSIDE" width="518.0" />
-    <Label layoutX="281.0" layoutY="15.0" text="Vos Récompenses" textFill="#000066">
+    <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="58.0" layoutY="-3.0" stroke="TRANSPARENT" strokeType="INSIDE" width="518.0" />
+    <Label layoutX="342.0" layoutY="15.0" text="Your Rewards" textFill="#000066">
         <font>
             <Font name="System Bold" size="24.0" />
         </font>
     </Label>
-    <VBox fx:id="rewardsContainer" layoutX="20.0" layoutY="173.0" prefWidth="360.0" spacing="10" style="-fx-background-color: #f0f0f0; -fx-border-color: #000066; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-padding: 10px;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="173.0">
+    <VBox fx:id="rewardsContainer" layoutX="19.0" layoutY="220.0" prefWidth="360.0" spacing="10" style="-fx-background-color: #f0f0f0; -fx-border-color: #000066; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-padding: 10px;" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="220.0">
     </VBox>
-   <ImageView fitHeight="99.0" fitWidth="100.0" layoutX="209.0" layoutY="61.0">
+   <ImageView fitHeight="99.0" fitWidth="100.0" layoutX="209.0" layoutY="70.0">
       <image>
-         <Image url="@images/award.gif" />
+         <Image url="@media/award.gif" />
       </image>
    </ImageView>
    <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="14.0" layoutY="18.0" onMouseClicked="#previous">
       <image>
-         <Image url="@images/previous.png" />
+         <Image url="@media/previous.png" />
       </image>
    </ImageView>
    <ImageView fitHeight="19.0" fitWidth="134.0" layoutX="106.0" layoutY="23.0">
       <image>
-         <Image url="@images/55.png" />
+         <Image url="@media/55.png" />
       </image>
    </ImageView>
    <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="57.0" layoutY="13.0">
       <image>
-         <Image url="@images/Logo1.png" />
+         <Image url="@media/Logo1.png" />
       </image>
    </ImageView>
+    <Button layoutX="212.0" layoutY="180.0" mnemonicParsing="false" onAction="#showRanking" stylesheets="@media/styles.css" text="Show Ranking" />
 </AnchorPane>

@@ -43,9 +43,21 @@ public class AjoutReponseController implements Initializable {
     @FXML
     private Questions selectedQuestion;
 
-    private String role=Session.getRole();
+    private final Role role=Session.getCurrentRole();
 
-    private int userId=Session.getUserId();
+    private final Utilisateur user=Session.getCurrentUser();
+
+
+    public boolean checkUnicity(String text,Questions question) {
+        ReponsesService reponsesService = new ReponsesService();
+        List<Reponses> response = reponsesService.afficherParQuestion(question.getQuestionId());
+        for (Reponses reponses : response) {
+            if (reponses.getTexte().equalsIgnoreCase(text)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 
     @FXML
@@ -54,10 +66,10 @@ public class AjoutReponseController implements Initializable {
         String selectedQuestionName = questionList.getValue();
 
         if (selectedQuestionName != null && selectedQuestion != null) {
-            if (texttf.getText().isEmpty() || ordretf.getText().isEmpty() || explicationtf.getText().isEmpty()) {
+            if (texttf.getText().isEmpty() || ordretf.getText().isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erreur");
-                alert.setContentText("Veuillez remplir tous les champs.");
+                alert.setTitle("Error");
+                alert.setContentText("Please fill in all fields.");
                 alert.showAndWait();
                 return;
             }
@@ -71,37 +83,41 @@ public class AjoutReponseController implements Initializable {
                 Reponses reponse = new Reponses(selectedQuestion, texttf.getText(),
                         est_correcte.isSelected(), ordre, explicationtf.getText()
                 );
+                if (!checkUnicity(texttf.getText(),selectedQuestion)) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setContentText("Answer already exists!");
+                    alert.showAndWait();
+                    return;
+                }
 
                 reponseService.ajouter(reponse);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Réponse ajoutée");
-                alert.setContentText("Réponse ajoutée!");
+                alert.setTitle("Answer added");
+                alert.setContentText("Answer added successfully!");
                 alert.showAndWait();
 
 
 
                 FXMLLoader loader;
                 Parent root;
-
-                    loader = new FXMLLoader(getClass().getResource("/ShowReponses.fxml"));
-
+                loader = new FXMLLoader(getClass().getResource("/ShowReponses.fxml"));
                 root = loader.load();
-
                 Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 currentStage.setScene(new Scene(root));
-                currentStage.setTitle("Réponses");
+                currentStage.setTitle("Answers");
                 currentStage.show();
 
             } catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erreur");
-                alert.setContentText("Veuillez saisir une valeur numérique valide pour l'ordre.");
+                alert.setTitle("Error");
+                alert.setContentText("Please enter a valid numeric value for the order.");
                 alert.showAndWait();
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setContentText("Veuillez sélectionner une question");
+            alert.setTitle("Error");
+            alert.setContentText("Please select a question");
             alert.showAndWait();
         }
     }
@@ -109,12 +125,14 @@ public class AjoutReponseController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        est_correcte.setSelected(false);
         QuizService quizService = new QuizService();
+
         List<Quiz> quizzes = quizService.afficher();
 
-        if (role.equals("Tuteur")) {
+        if (role.equals(Role.Tuteur)) {
             quizzes = quizzes.stream()
-                    .filter(quiz -> quiz.getCreatorId() == userId)
+                    .filter(quiz -> quiz.getCreator().getId()==user.getId())
                     .collect(Collectors.toList());
         }
 
@@ -147,7 +165,7 @@ public class AjoutReponseController implements Initializable {
         Parent root = loader.load();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(new Scene(root));
-        currentStage.setTitle("Réponses");
+        currentStage.setTitle("Answers");
         currentStage.show();
     }
 

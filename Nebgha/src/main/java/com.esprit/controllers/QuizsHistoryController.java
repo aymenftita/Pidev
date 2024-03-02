@@ -40,15 +40,14 @@ public class QuizsHistoryController {
 
     private ReponsesUtilisateurService reponsesUtilisateurService = new ReponsesUtilisateurService();
 
-    private int userId = Session.getUserId();
+    private Utilisateur user = Session.getCurrentUser();
 
 
     public void initialize() {
-        String cssPath = getClass().getResource("/images/styles.css").toExternalForm();
+        String cssPath = getClass().getResource("/media/styles.css").toExternalForm();
         quizPane.getStylesheets().add(cssPath);
         allQuizzes = quizService.afficher();
         updateQuizList(allQuizzes);
-
         searchField.textProperty().addListener((observable, oldValue, newValue) -> filterQuizzes());
         difficultyComboBox.valueProperty().addListener((observable, oldValue, newValue) -> filterQuizzes());
     }
@@ -68,22 +67,25 @@ public class QuizsHistoryController {
     private void updateQuizList(List<Quiz> quizzes) {
         quizPane.getChildren().clear();
         for (Quiz quiz : quizzes) {
-            boolean hasAttempted = reponsesUtilisateurService.afficherParQuizEtUser(quiz.getQuizId(), userId)
-                    .stream()
-                    .anyMatch(response -> response.getQuiz().getQuizId() == quiz.getQuizId() && response.getUserId() == userId);
 
+            boolean hasAttempted = reponsesUtilisateurService.afficherParQuizEtUser(quiz.getQuizId(), user.getId())
+                    .stream()
+                    .anyMatch(response -> response.getQuiz().getQuizId() == quiz.getQuizId() && response.getUser().getId() == user.getId());
+            System.out.println(hasAttempted);
             if (hasAttempted) {
                 VBox quizBlock = createQuizBlock(quiz);
                 quizPane.getChildren().add(quizBlock);
+                System.out.println("Attempted quiz: " + quiz.getNom());
             }
         }
     }
 
 
+
     private VBox createQuizBlock(Quiz quiz) {
-        boolean hasAttempted = reponsesUtilisateurService.afficherParQuizEtUser(quiz.getQuizId(), userId)
+        boolean hasAttempted = reponsesUtilisateurService.afficherParQuizEtUser(quiz.getQuizId(), user.getId())
                 .stream()
-                .anyMatch(response -> response.getQuiz().getQuizId() == quiz.getQuizId() && response.getUserId() == userId);
+                .anyMatch(response -> response.getQuiz().getQuizId() == quiz.getQuizId() && response.getUser().getId() == user.getId());
 
         VBox quizBlock = new VBox();
         quizBlock.setSpacing(10);
@@ -93,7 +95,7 @@ public class QuizsHistoryController {
         Label nameLabel = new Label(quiz.getNom());
         Label difficultyLabel = new Label(quiz.getDifficulte().toString());
         Label durationLabel = new Label(String.valueOf(quiz.getDuree()));
-        Image doneImage = new Image(getClass().getResourceAsStream("/images/done.png"));
+        Image doneImage = new Image(getClass().getResourceAsStream("/media/done.png"));
 
         ImageView imageView = new ImageView(doneImage);
         imageView.setFitWidth(30);
@@ -126,7 +128,7 @@ public class QuizsHistoryController {
             resultController.initialize(quizId);
             Stage currentStage = (Stage) quizPane.getScene().getWindow();
             currentStage.setScene(new Scene(root));
-            currentStage.setTitle("Résultat du quiz");
+            currentStage.setTitle("Quiz results");
             currentStage.show();
         } catch (IOException e) {
             System.err.println("Error loading quiz result: " + e.getMessage());
@@ -141,7 +143,7 @@ public class QuizsHistoryController {
         Parent root = loader.load();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(new Scene(root));
-        currentStage.setTitle("Etudiant");
+        currentStage.setTitle("Student");
         currentStage.show();
     }
 

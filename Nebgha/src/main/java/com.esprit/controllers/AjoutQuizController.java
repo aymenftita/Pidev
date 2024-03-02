@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class AjoutQuizController implements Initializable {
@@ -25,7 +26,7 @@ public class AjoutQuizController implements Initializable {
     private TextField desctf;
 
     @FXML
-    private ComboBox<Difficulte> difficulteComboBox;
+    private ComboBox<Difficulty> difficulteComboBox;
 
 
     @FXML
@@ -37,15 +38,25 @@ public class AjoutQuizController implements Initializable {
     @FXML
     private TextField titletf;
 
-    private String role=Session.getRole();
+    private Role role=Session.getCurrentRole();
 
-    private int userId=Session.getUserId();
+    private Utilisateur user=Session.getCurrentUser();
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        difficulteComboBox.setItems(FXCollections.observableArrayList(Difficulte.values()));
+        difficulteComboBox.setItems(FXCollections.observableArrayList(Difficulty.values()));
+    }
+    public boolean checkUnicity(String title) {
+        QuizService quizService = new QuizService();
+        List<Quiz> quizzes = quizService.afficher();
+        for (Quiz quiz : quizzes) {
+            if (quiz.getNom().equalsIgnoreCase(title)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @FXML
@@ -53,14 +64,14 @@ public class AjoutQuizController implements Initializable {
         QuizService qs = new QuizService();
         String title = titletf.getText();
         String description = desctf.getText();
-        Difficulte difficulte = difficulteComboBox.getValue();
+        Difficulty difficulte = difficulteComboBox.getValue();
         String durationText = dureetf.getText();
         String numberOfQuestionsText = nbr_questionstf.getText();
 
         if (title.isEmpty() || description.isEmpty() || difficulte == null || durationText.isEmpty() || numberOfQuestionsText.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setContentText("Veuillez remplir tous les champs.");
+            alert.setTitle("Error");
+            alert.setContentText("Please fill in all fields.");
             alert.showAndWait();
             return;
         }
@@ -73,45 +84,51 @@ public class AjoutQuizController implements Initializable {
                 throw new NumberFormatException();
             }
 
-            qs.ajouter(new Quiz(userId, title, description, duration, numberOfQuestions, difficulte));
+            if (!checkUnicity(title)) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("Quiz already exists!");
+                alert.showAndWait();
+                return;
+            }
+
+            qs.ajouter(new Quiz(user, title, description, duration, numberOfQuestions, difficulte));
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Quiz ajouté");
-            alert.setContentText("Quiz ajouté!");
+            alert.setTitle("Quiz added");
+            alert.setContentText("Quiz added successfully!");
             alert.showAndWait();
-
-
 
             FXMLLoader loader;
             Parent root;
 
-                loader = new FXMLLoader(getClass().getResource("/ShowQuiz.fxml"));
+            loader = new FXMLLoader(getClass().getResource("/ShowQuiz.fxml"));
 
             root = loader.load();
 
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             currentStage.setScene(new Scene(root));
-            currentStage.setTitle("Quizs");
+            currentStage.setTitle("Quizzes");
             currentStage.show();
 
         } catch (NumberFormatException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setContentText("Veuillez saisir des valeurs numériques valides pour la durée et le nombre de questions.");
+            alert.setTitle("Error");
+            alert.setContentText("Please enter valid numerical values for the duration and questions' number.");
             alert.showAndWait();
         }
     }
 
 
+
+
     @FXML
     void previous(MouseEvent event) throws IOException {
-
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuiz.fxml"));
-            Parent root = loader.load();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuiz.fxml"));
+        Parent root = loader.load();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(new Scene(root));
-        currentStage.setTitle("Quizs");
+        currentStage.setTitle("Quizzes");
         currentStage.show();
 
 
