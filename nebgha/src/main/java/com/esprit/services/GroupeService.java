@@ -68,7 +68,7 @@ public class GroupeService {
         }
     }
 
-    public List<Groupe> afficherG(int id) {
+    public List<Groupe> listGroupeParCreateur(int id) {
         List<Groupe> entities = new ArrayList<>();
 
         String req = "SELECT * from groupe where creator_id = "+ id +";";

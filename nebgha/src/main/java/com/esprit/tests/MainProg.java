@@ -1,10 +1,15 @@
 package com.esprit.tests;
 
+import com.esprit.controllers.NotificationUtil;
 import com.esprit.models.*;
 import com.esprit.services.*;
+import javafx.application.Platform;
+import org.controlsfx.control.Notifications;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainProg {
@@ -40,8 +45,19 @@ public class MainProg {
 
 
         //UserGroupe ug = new UserGroupe(u,g3);
-        UserGroupeService ugs = new UserGroupeService();
-        System.out.println(ugs.afficherUG(2,20));
+        /*UserGroupeService ugs = new UserGroupeService();
+        System.out.println(us.rechercheUtilisateur(2));
+        System.out.println("********************************************************");
+        List<Groupe> g = new ArrayList<>();
+
+        List<UserGroupe> uglist =ugs.ListUserGroupeByIdUser(2);
+        System.out.println(uglist);
+        System.out.println("********************************************************");
+        for(UserGroupe ugl : uglist){
+            g.add(gs.afficherById(ugl.getIdGroupe().getId_groupe()));
+        }
+
+        System.out.println(g);*/
         //ugs.ajouter(ug);
         //System.out.println(ms.afficher());
 
@@ -52,6 +68,7 @@ public class MainProg {
         //MessageService ms = new MessageService();
 
         //Message m = new Message(1,1,"dzdzd","hfhff");
+
 
 
 

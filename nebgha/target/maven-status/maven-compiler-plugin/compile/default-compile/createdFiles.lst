@@ -1,5 +1,7 @@
 com\esprit\controllers\messageControllers\AfficherMessageController.class
 com\esprit\tests\MainProg.class
+com\esprit\controllers\DashboardController$1.class
+com\esprit\controllers\NotificationUtil.class
 com\esprit\controllers\groupeControllers\AfficherGroupeController.class
 com\esprit\services\UtilisateurService.class
 com\esprit\controllers\DashboardController.class

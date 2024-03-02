@@ -31,6 +31,29 @@ public class UserGroupeService {
         }
     }
 
+    public List<UserGroupe> ListUserGroupeByIdUser(int id) {
+        List<UserGroupe> entities = new ArrayList<>();
+
+        String req = "SELECT * from utilisateurs_groupes where uid = "+ id +";";
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            UtilisateurService us =new UtilisateurService();
+            GroupeService gs = new GroupeService();
+            while (rs.next()) {
+                Utilisateur u = us.rechercheUtilisateur(rs.getInt(1));
+                Groupe g = gs.afficherById(rs.getInt(2));
+                UserGroupe ug = new UserGroupe(u,g);
+                entities.add(ug);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return entities;
+
+    }
     public UserGroupe afficherUG(int id,int idg) {
         UserGroupe ug =new UserGroupe();
         String req = "SELECT * from utilisateurs_groupes where uid ="+id+" and groupe_id ="+idg+";";
