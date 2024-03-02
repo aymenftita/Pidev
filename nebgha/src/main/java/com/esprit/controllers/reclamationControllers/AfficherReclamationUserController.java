@@ -1,5 +1,6 @@
 package com.esprit.controllers.reclamationControllers;
 
+import com.esprit.controllers.ChatboxController;
 import com.esprit.controllers.otherControllers.SwitchScenesController;
 import com.esprit.models.Groupe;
 import com.esprit.models.Reclamation;
@@ -8,34 +9,52 @@ import com.esprit.services.ReclamationService;
 import com.esprit.services.Session;
 import com.esprit.services.UtilisateurService;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextFlow;
+import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class AfficherReclamationUserController {
+public class AfficherReclamationUserController implements Initializable {
 
 
     public FlowPane flowPane;
     public TextField tfS;
-
+    @FXML
+    public VBox mainVBox;
+    @FXML
+    public TilePane tilePane;
 
 
     ReclamationService rss =new ReclamationService();
     SwitchScenesController ss = new SwitchScenesController();
     ActionEvent event = null;
 
-    UtilisateurService us = new UtilisateurService();
+    @Override
+    public void initialize(URL location, ResourceBundle resources){
+        //showAllReclamation(rss.afficher());
 
-    public void initialize(){
-        showAllReclamation(rss.afficher());
+        List<Reclamation> items = new ArrayList<>(rss.afficher());
 
+        for (Reclamation item : items) {
+            tilePane.getChildren().add(createCard(item));
+        }
     }
 
 
@@ -49,12 +68,13 @@ public class AfficherReclamationUserController {
             flowPane.getChildren().addAll(quizBlock,seperator);
 
         }
+
     }
     private VBox createGroupeBlock(Reclamation groupe) {
 
         VBox quizBlock = new VBox(20);
         quizBlock.setSpacing(20);
-        quizBlock.setStyle("-fx-background-color: #EFF4FC; -fx-border-color: #000066;  -fx-border-radius: 5;-fx-padding: 20; -fx-margin:100; -fx-spacing: 50");
+        quizBlock.setStyle("-fx-background-color: ; -fx-border-color: #000066;  -fx-border-radius: 5;-fx-padding: 20; -fx-margin:100; -fx-spacing: 50");
         quizBlock.setAlignment(Pos.CENTER);
 
         Separator seperator = new Separator(Orientation.HORIZONTAL);
@@ -87,5 +107,31 @@ public class AfficherReclamationUserController {
 
     public void SwitchToGroupes(ActionEvent actionEvent) throws IOException {
         ss.SwitchScene2(event,"testFlow",tfS);
+    }
+
+    @FXML
+    private AnchorPane createCard(Reclamation item) {
+        AnchorPane card = new AnchorPane();
+        card.getStyleClass().add("item-card");
+
+        Label titleLabel = new Label(item.getSujet());
+        titleLabel.getStyleClass().add("Subject-label");
+        AnchorPane.setTopAnchor(titleLabel, 10.0);
+        AnchorPane.setLeftAnchor(titleLabel, 10.0);
+
+        Label descriptionLabel = new Label(item.getDescription());
+        descriptionLabel.getStyleClass().add("description-label");
+        AnchorPane.setTopAnchor(descriptionLabel, 30.0);
+        AnchorPane.setLeftAnchor(descriptionLabel, 10.0);
+
+
+
+
+        card.getChildren().addAll(titleLabel, descriptionLabel);
+
+
+
+
+        return card;
     }
 }

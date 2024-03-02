@@ -2,22 +2,43 @@ package com.esprit.models;
 
 public class Message {
     private int idMessage;
+    private int uid;
     private int idGroupe;
     private String dateCreation;
     private String text;
+    private int signal;
 
+    public int getUid() {
+        return uid;
+    }
 
-    public Message(int idMessage, int idGroupe, String dateCreation, String text) {
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
+
+    public Message(int idMessage,  int idGroupe, String dateCreation, String text,int uid ,int signal) {
         this.idMessage = idMessage;
         this.idGroupe = idGroupe;
         this.dateCreation = dateCreation;
         this.text = text;
+        this.uid=uid;
+        this.signal=signal;
     }
 
-    public Message(int idGroupe, String dateCreation, String text) {
+    public Message(int idGroupe, String dateCreation, String text,int uid,int signal) {
         this.idGroupe = idGroupe;
         this.dateCreation = dateCreation;
         this.text = text;
+        this.uid=uid;
+        this.signal=signal;
+    }
+
+    public int isSignal() {
+        return signal;
+    }
+
+    public void setSignal(int signal) {
+        this.signal = signal;
     }
 
     public int getIdMessage() {
@@ -54,11 +75,13 @@ public class Message {
 
     @Override
     public String toString() {
-        return
-                  idMessage +
-                "                   " + idGroupe +
-                "                   " + dateCreation + "                    " +
-                "                   " + text ;
-
+        return "Message{" +
+                "idMessage=" + idMessage +
+                ", uid=" + uid +
+                ", idGroupe=" + idGroupe +
+                ", dateCreation='" + dateCreation + '\'' +
+                ", text='" + text + '\'' +
+                ", signal=" + signal +
+                '}';
     }
 }

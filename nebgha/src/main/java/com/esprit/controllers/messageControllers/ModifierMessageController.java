@@ -22,11 +22,11 @@ public class ModifierMessageController {
     @FXML
     private void UpdateMessage(){
 
-        ms.modifier(new Message(
+        /*ms.modifier(new Message(
                 Integer.parseInt(tfidmessage.getText()),
                 Integer.parseInt(tfidgroupe.getText()),
                 tfdate.getValue().toString(),
-                tftext.getText()));
+                tftext.getText()));*/
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Message Modifié");
         alert.setContentText("Message Modifié !");

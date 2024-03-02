@@ -2,7 +2,6 @@ package com.esprit.controllers.messageControllers;
 
 
 import com.esprit.controllers.otherControllers.SwitchScenesController;
-import com.esprit.models.Groupe;
 import com.esprit.models.Message;
 import com.esprit.services.MessageService;
 import javafx.collections.FXCollections;
@@ -18,10 +17,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
 public class AfficherMessageController {
+
+    @FXML
+    private TextField rsh;
     @FXML
     public TableColumn<Message, Integer> CidG;
     @FXML
@@ -30,8 +33,7 @@ public class AfficherMessageController {
     public TableColumn<Message, String> Ctext;
     @FXML
     public TableView<Message> MessageTable;
-    public TextField tf;
-    public TextField rsh;
+
     SwitchScenesController ss = new SwitchScenesController();
     ActionEvent event = null;
 
@@ -56,7 +58,7 @@ public class AfficherMessageController {
         MessageTable.setItems(message);
         MessageTable.setEditable(true);
         modifier();
-        search();
+        //search();
     }
 
 
@@ -112,7 +114,8 @@ public class AfficherMessageController {
         });
     }
 
-    public void supprimerSelection(ActionEvent actionEvent) {
+    @FXML
+    public void supprimerSelection(MouseEvent actionEvent) {
         try {
             Message selectedReclamation = MessageTable.getSelectionModel().getSelectedItem();
             int id = selectedReclamation.getIdMessage();
@@ -163,10 +166,10 @@ public class AfficherMessageController {
 
 
     public void SwitchToAfficherGroupe(ActionEvent actionEvent) throws IOException {
-        ss.SwitchScene2(event,"AfficherGroupe",tf);
+        ss.SwitchScene2(event,"AfficherGroupe",rsh);
     }
     public void SwitchToAfficherReclamation(ActionEvent actionEvent) throws IOException {
-        ss.SwitchScene2(event,"AfficherReclamation",tf);
+        ss.SwitchScene2(event,"AfficherReclamation",rsh);
     }
     public void SwitchToModifierMessage(ActionEvent actionEvent) throws IOException {
         ss.SwitchScene(event,"ModifierMessage");

@@ -1,8 +1,6 @@
 package com.esprit.controllers.groupeControllers;
 import com.esprit.controllers.otherControllers.SwitchScenesController;
 import com.esprit.models.Groupe;
-import com.esprit.models.Reclamation;
-import com.esprit.models.Status;
 import com.esprit.models.Utilisateur;
 import com.esprit.services.GroupeService;
 import com.esprit.services.UtilisateurService;
@@ -12,9 +10,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -23,13 +19,11 @@ import javafx.scene.control.cell.ChoiceBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import static com.esprit.models.Status.*;
-import static com.esprit.models.Status.EnReponse;
 
 
 public class AfficherGroupeController implements Initializable {
@@ -145,7 +139,7 @@ public class AfficherGroupeController implements Initializable {
     }
 
 
-    public void supprimerSelection(ActionEvent actionEvent) throws Exception {
+    public void supprimerSelection(MouseEvent actionEvent) throws Exception {
         try {
             Groupe selectedGroupe = tableView.getSelectionModel().getSelectedItem();
             int id = selectedGroupe.getId_groupe();

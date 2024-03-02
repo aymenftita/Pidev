@@ -20,7 +20,7 @@ public class MessageService {
 
     public void ajouter(Message message) {
 
-       String req = "INSERT INTO message(id_g,text,date_creation) VALUES ('"+message.getIdGroupe()+"','"+message.getText()+"','"+message.getDateCreation()+"')";
+       String req = "INSERT INTO message(uid,id_g,text,date_creation,signale) VALUES ('"+message.getUid()+"','"+message.getIdGroupe()+"','"+message.getText()+"','"+message.getDateCreation()+"','"+message.isSignal()+"')";
         try {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
@@ -60,7 +60,7 @@ public class MessageService {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
-                entities.add(new Message(rs.getInt(1),rs.getInt(2), rs.getString(3), rs.getString(4)));
+                entities.add(new Message(rs.getInt("id_message"),rs.getInt("id_g"), rs.getString("date_creation"), rs.getString("text"),rs.getInt("uid"),0));
             }
 
         } catch (SQLException e) {
@@ -79,7 +79,7 @@ public class MessageService {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
-                categories.add(new Message(rs.getInt(1),rs.getInt(2), rs.getString(3), rs.getString(4)));
+                categories.add(new Message(rs.getInt(1),rs.getInt(2), rs.getString(3), rs.getString(4),rs.getInt(5),0));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

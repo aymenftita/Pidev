@@ -1,81 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="670.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.groupeControllers.AfficherGroupeController">
-   <ImageView fitHeight="460.0" fitWidth="654.0" layoutX="109.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../Images/R.jpeg" />
-      </image>
-   </ImageView>
-        <TableView fx:id="tableView" layoutX="109.0" layoutY="96.0" prefHeight="258.0" prefWidth="650.0">
-              <columns>
-                  <TableColumn fx:id="idColumng" prefWidth="47.20001220703125" text="User ID" />
-                  <TableColumn fx:id="nomColumn" prefWidth="136.79998779296875" text="Nom Groupe" />
-                  <TableColumn fx:id="dateColumn" prefWidth="399.20001220703125" text="Description" />
-              </columns>
-          </TableView>
-         <Button defaultButton="true" layoutX="-1.0" layoutY="96.0" mnemonicParsing="false" onAction="#SwitchToAfficherReclamation" prefHeight="188.0" prefWidth="110.0" text="Reclamations" />
-         <Button defaultButton="true" layoutX="-1.0" layoutY="284.0" mnemonicParsing="false" onAction="#SwitchToAfficherMessage" prefHeight="188.0" prefWidth="110.0" text="Messages" />
-   <ImageView fitHeight="78.0" fitWidth="74.0" layoutX="181.0" layoutY="368.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../Images/addG.gif" />
-      </image>
-   </ImageView>
-         <Button layoutX="147.0" layoutY="371.0" mnemonicParsing="false" onAction="#SwitchToAjouterGroupe" opacity="0.0" prefHeight="94.0" prefWidth="142.0" textFill="#0f890f">
-      <cursor>
-         <Cursor fx:constant="HAND" />
-      </cursor></Button>
-   <Label layoutX="170.0" layoutY="442.0" text="Ajouter Groupe">
-      <font>
-         <Font name="System Bold" size="13.0" />
-      </font>
-   </Label>
-   <Label layoutX="382.0" layoutY="442.0" text="Modifier Groupe">
-      <font>
-         <Font name="System Bold" size="13.0" />
-      </font>
-   </Label>
-   <Label layoutX="594.0" layoutY="442.0" text="Supprimer Groupe">
-      <font>
-         <Font name="System Bold" size="13.0" />
-      </font>
-   </Label>
-   <ImageView fitHeight="74.0" fitWidth="74.0" layoutX="614.0" layoutY="368.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../Images/remove.gif" />
-      </image>
-   </ImageView>
-         <Button defaultButton="true" layoutX="581.0" layoutY="371.0" mnemonicParsing="false" onAction="#supprimerSelection" opacity="0.0" prefHeight="94.0" prefWidth="134.0" textFill="#e41e1e">
-      <cursor>
-         <Cursor fx:constant="HAND" />
-      </cursor></Button>
-   <ImageView fitHeight="74.0" fitWidth="64.0" layoutX="402.0" layoutY="373.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../Images/update.gif" />
-      </image>
-   </ImageView>
-         <Button layoutX="370.0" layoutY="371.0" mnemonicParsing="false" onAction="#SwitchToModifierGroupe" opacity="0.0" prefHeight="94.0" prefWidth="126.0" textFill="#284ad4">
-      <cursor>
-         <Cursor fx:constant="HAND" />
-      </cursor></Button>
-   <TextField fx:id="tf" layoutX="427.0" layoutY="22.0" opacity="0.0" prefHeight="19.0" prefWidth="0.0" />
-   <TextField fx:id="rsh" alignment="CENTER" layoutX="268.0" layoutY="35.0" prefHeight="41.0" prefWidth="267.0" promptText="Recherche" style="-fx-background-radius: 50;">
-      <font>
-         <Font size="20.0" />
-      </font></TextField>
-   <ImageView fitHeight="139.0" fitWidth="142.0" layoutY="-28.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../Images/Logo.png" />
-      </image>
-   </ImageView>
-   </AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" styleClass="bkImage" stylesheets="@testStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.groupeControllers.AfficherGroupeController">
+   <left>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EFF4FC;" BorderPane.alignment="CENTER">
+         <top>
+                  <Button alignment="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#SwitchToAfficherReclamation" prefHeight="194.0" prefWidth="110.0" style="-fx-background-radius: 50; -fx-background-color: #4B87F6;" text="Reclamations" BorderPane.alignment="CENTER" />
+         </top>
+         <bottom>
+                  <Button defaultButton="true" mnemonicParsing="false" onAction="#SwitchToAfficherMessage" prefHeight="188.0" prefWidth="110.0" style="-fx-background-radius: 50; -fx-background-color: #4B87F6;" text="Messages" BorderPane.alignment="CENTER" />
+         </bottom>
+      </BorderPane>
+   </left>
+   <bottom>
+      <BorderPane prefHeight="63.0" prefWidth="850.0" BorderPane.alignment="CENTER">
+         <center>
+            <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@../Images/remove.gif" />
+               </image>
+            </ImageView>
+         </center>
+         <right>
+            <TextField fx:id="tf" opacity="0.0" prefHeight="19.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+         </right>
+      </BorderPane>
+   </bottom>
+   <top>
+      <TextField fx:id="rsh" alignment="CENTER" prefHeight="41.0" prefWidth="267.0" promptText="Recherche" style="-fx-background-radius: 50;" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+   </top>
+   <center>
+           <TableView fx:id="tableView" prefHeight="258.0" prefWidth="650.0" BorderPane.alignment="CENTER">
+                 <columns>
+                     <TableColumn fx:id="idColumng" prefWidth="47.20001220703125" text="User ID" />
+                     <TableColumn fx:id="nomColumn" prefWidth="136.79998779296875" text="Nom Groupe" />
+                     <TableColumn fx:id="dateColumn" prefWidth="399.20001220703125" text="Description" />
+                 </columns>
+             </TableView>
+   </center>
+</BorderPane>

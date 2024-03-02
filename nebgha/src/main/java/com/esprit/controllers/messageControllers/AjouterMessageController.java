@@ -2,6 +2,7 @@ package com.esprit.controllers.messageControllers;
 
 import com.esprit.models.Message;
 import com.esprit.services.MessageService;
+import com.esprit.services.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +31,7 @@ public class AjouterMessageController {
 
     try{
         MessageService ps = new MessageService();
-            ps.ajouter(new Message(Integer.parseInt(tfAjouterMessage.getText()) , dpAjouterMessage.getValue().toString(), taAjouterMessage.getText())) ;
+            ps.ajouter(new Message(Integer.parseInt(tfAjouterMessage.getText()) , dpAjouterMessage.getValue().toString(), taAjouterMessage.getText(),Session.getUserId(),0)) ;
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Message ajoutée");
             alert.setContentText("Message ajoutée !");

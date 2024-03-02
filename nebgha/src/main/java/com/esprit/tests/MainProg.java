@@ -68,9 +68,7 @@ public class MainProg {
         //MessageService ms = new MessageService();
 
         //Message m = new Message(1,1,"dzdzd","hfhff");
-
-
-
+        System.out.println(ms.afficher());
 
     }
 }

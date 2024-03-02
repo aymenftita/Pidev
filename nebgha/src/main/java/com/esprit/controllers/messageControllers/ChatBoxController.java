@@ -119,7 +119,7 @@ public class ChatBoxController implements Initializable {
 
         try {
             MessageService ms = new MessageService();
-            ms.ajouter(new Message(20,"2024-02-15",M.getText()));
+
             showMessages(allMessages);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Interfaces/ChatBox.fxml"));
             Parent root = loader.load();

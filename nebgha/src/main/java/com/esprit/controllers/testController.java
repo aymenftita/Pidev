@@ -37,7 +37,7 @@ public class testController implements Initializable {
         GroupeService gs=new GroupeService();
         List<Groupe> items = gs.afficher();
 
-        // Populate TilePane with cards for each item
+
         for (Groupe item : items) {
             tilePane.getChildren().add(createCard(item));
         }
@@ -57,9 +57,7 @@ public class testController implements Initializable {
         AnchorPane.setTopAnchor(descriptionLabel, 30.0);
         AnchorPane.setLeftAnchor(descriptionLabel, 10.0);
 
-        /*Button btgotogroupe = new Button("Go to chat" );
-        AnchorPane.setTopAnchor(descriptionLabel, 60.0);
-        AnchorPane.setRightAnchor(btgotogroupe, 10.0);*/
+
 
         titleLabel.setOnMouseClicked(event->{
             try {
@@ -79,23 +77,6 @@ public class testController implements Initializable {
             }
         });
 
-        /*btgotogroupe.setOnAction(event->{
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Interfaces/chat.fxml"));
-                Parent root = loader.load();
-
-                ChatboxController chatboxController = loader.getController();
-                chatboxController.initData(item);
-
-                Scene scene = new Scene(root,600,700);
-                Stage stage = new Stage();
-                stage.setScene(scene);
-                stage.setTitle(item.getTitre() + " Chat");
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });*/
         card.getChildren().addAll(titleLabel, descriptionLabel);
 
         // You can add more details like name, description, etc., to the card as needed
