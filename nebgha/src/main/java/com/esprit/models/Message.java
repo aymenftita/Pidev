@@ -41,6 +41,8 @@ public class Message {
         this.signal = signal;
     }
 
+
+
     public int getIdMessage() {
         return idMessage;
     }
