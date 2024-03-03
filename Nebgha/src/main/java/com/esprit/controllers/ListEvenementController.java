@@ -31,6 +31,8 @@ public class ListEvenementController  implements Initializable {
     @FXML
     private ListView<Evenement> listEvenement;
     EvenementService es = new EvenementService();
+    @FXML
+    private Button serachButton;
 
     private Stage stage;
     private Scene scene;
@@ -98,6 +100,7 @@ public class ListEvenementController  implements Initializable {
 
 
     }
+
 
     @FXML
     void update(ActionEvent event) {

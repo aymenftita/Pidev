@@ -32,7 +32,7 @@ public class LocalisationService implements IService<Localisation>  {
     }
 
     @Override
-    public void modifier(Localisation localisation) {
+    public void modifier(Localisation localisation)  {
         String req = "UPDATE localisation set codePostal = '" +  localisation.getCodePostal() + "', ville = '" + localisation.getVille()  + "' , pays = '" + localisation.getPays() + "' , latitude = '" + localisation.getLatitude() +"' , longitude = '" + localisation.getLongitude() + "'     where id = " + localisation.getId() + ";";
         try {
             Statement st = connection.createStatement();
