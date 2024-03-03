@@ -3,6 +3,8 @@ package com.esprit.controllers;
 import com.esprit.models.Question;
 import com.esprit.models.Sujet;
 import com.esprit.services.sujetService;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -20,6 +22,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URLEncoder;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,6 +85,23 @@ public class InterfaceForumUserController {
                 return; //Empêcher toute exécution ultérieure si le contenu est vide
             }
 
+            try {
+                if (profanityFilter(tvAffichageSujetSujet.getText())) {
+                    // Display a warning message
+                    Alert alertProfanity = new Alert(Alert.AlertType.WARNING);
+                    alertProfanity.setTitle("Profanity detected!");
+                    alertProfanity.setHeaderText("The rules contain profanity.");
+                    alertProfanity.setContentText("Belehi traba la nchid nrabik");
+                    alertProfanity.show();
+                    return;
+
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
             Sujet s = event.getRowValue();
             s.setTitre(event.getNewValue());
             ss.modifier(s);
@@ -95,6 +120,23 @@ public class InterfaceForumUserController {
                 return;
             }
 
+            try {
+                if (profanityFilter(tvAffichageSujetDesc.getText())) {
+                    // Display a warning message
+                    Alert alertProfanity = new Alert(Alert.AlertType.WARNING);
+                    alertProfanity.setTitle("Profanity detected!");
+                    alertProfanity.setHeaderText("The rules contain profanity.");
+                    alertProfanity.setContentText("Belehi traba la nchid nrabik");
+                    alertProfanity.show();
+                    return;
+
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
             Sujet s = event.getRowValue();
             s.setDesc(event.getNewValue());
             ss.modifier(s);
@@ -111,6 +153,23 @@ public class InterfaceForumUserController {
                 alertVide.setContentText("Veuillez saisir les règles du sujet.");
                 alertVide.show();
                 return;
+            }
+
+            try {
+                if (profanityFilter(tvAffichageSujetRegles.getText())) {
+                    // Display a warning message
+                    Alert alertProfanity = new Alert(Alert.AlertType.WARNING);
+                    alertProfanity.setTitle("Profanity detected!");
+                    alertProfanity.setHeaderText("The rules contain profanity.");
+                    alertProfanity.setContentText("Belehi traba la nchid nrabik");
+                    alertProfanity.show();
+                    return;
+
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
 
             Sujet s = event.getRowValue();
@@ -197,4 +256,30 @@ public class InterfaceForumUserController {
         loadSujet();
     }
 
+    public void handleSearch(KeyEvent keyEvent) {
+    }
+
+    public boolean profanityFilter(String text) throws IOException, InterruptedException {
+
+        String encodedText = URLEncoder.encode(text, StandardCharsets.UTF_8);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://profanity-filter-by-api-ninjas.p.rapidapi.com/v1/profanityfilter?text=" + encodedText))
+                .header("X-RapidAPI-Key", "7d2775d2bdmshb8ee0d858ecdfdcp163823jsn6438f8d333df")
+                .header("X-RapidAPI-Host", "profanity-filter-by-api-ninjas.p.rapidapi.com")
+                .method("GET", HttpRequest.BodyPublishers.noBody())
+                .build();
+        HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+        //System.out.println(response.body());
+        ObjectMapper mapper = new ObjectMapper(); // Use Jackson for parsing
+        JsonNode root = mapper.readTree(response.body());
+        if (root.path("has_profanity").asBoolean()) {
+            System.out.println("Profanity detected!");
+            return true;
+        } else {
+            // The text is clean
+            System.out.println("The text is clean.");
+            return false;
+        }
+    }
 }

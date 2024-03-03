@@ -8,6 +8,8 @@ import com.esprit.models.Sujet;
 import com.esprit.models.utilisateur;
 import com.esprit.services.questionService;
 import com.esprit.services.reponseService;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -26,6 +28,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URLEncoder;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -127,6 +135,23 @@ public class InterfaceReponseUserController {
                 alertVide.setContentText("Veuillez saisir le contenu de la réponse.");
                 alertVide.show();
                 return;
+            }
+
+            try {
+                if (profanityFilter(tvAffichageReponseContenu.getText())) {
+                    // Display a warning message
+                    Alert alertProfanity = new Alert(Alert.AlertType.WARNING);
+                    alertProfanity.setTitle("Profanity detected!");
+                    alertProfanity.setHeaderText("The rules contain profanity.");
+                    alertProfanity.setContentText("Belehi traba la nchid nrabik");
+                    alertProfanity.show();
+                    return;
+
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
 
             Reponse r = event.getRowValue();
@@ -320,24 +345,24 @@ public class InterfaceReponseUserController {
 
                 upVoteButton.setOnAction(event -> {
                     if(isUpvoted) {
-                        System.out.println(isUpvoted);
+                        //System.out.println(isUpvoted);
                         upVoteButton.setOpacity(0.5);
                         //upVoteButton.setDisable(false);
                         isUpvoted = false;
                         Reponse reponse = getTableView().getItems().get(getIndex());
-                        System.out.println("downVote this: " + reponse);
+                        //System.out.println("downVote this: " + reponse);
                         reponseService rs = new reponseService();
                         rs.downVote(reponse);
                         loadReponseParQuestion();
                         handleSearch();
                     }
                     else {
-                        System.out.println(isUpvoted);
+                        //System.out.println(isUpvoted);
                         isUpvoted = true;
                         upVoteButton.setOpacity(1);
                         Reponse reponse = getTableView().getItems().get(getIndex());
                         //upVoteButton.setDisable(true);
-                        System.out.println("upVote this: " + reponse);
+                        //System.out.println("upVote this: " + reponse);
                         reponseService rs = new reponseService();
                         rs.upVote(reponse);
                         loadReponseParQuestion();
@@ -483,6 +508,30 @@ public class InterfaceReponseUserController {
                 }
             }
         });
+    }
+
+    public boolean profanityFilter(String text) throws IOException, InterruptedException {
+
+        String encodedText = URLEncoder.encode(text, StandardCharsets.UTF_8);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://profanity-filter-by-api-ninjas.p.rapidapi.com/v1/profanityfilter?text=" + encodedText))
+                .header("X-RapidAPI-Key", "7d2775d2bdmshb8ee0d858ecdfdcp163823jsn6438f8d333df")
+                .header("X-RapidAPI-Host", "profanity-filter-by-api-ninjas.p.rapidapi.com")
+                .method("GET", HttpRequest.BodyPublishers.noBody())
+                .build();
+        HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+        //System.out.println(response.body());
+        ObjectMapper mapper = new ObjectMapper(); // Use Jackson for parsing
+        JsonNode root = mapper.readTree(response.body());
+        if (root.path("has_profanity").asBoolean()) {
+            System.out.println("Profanity detected!");
+            return true;
+        } else {
+            // The text is clean
+            System.out.println("The text is clean.");
+            return false;
+        }
     }
 
 }

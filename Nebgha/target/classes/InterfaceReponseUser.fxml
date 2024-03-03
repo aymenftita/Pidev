@@ -89,23 +89,23 @@
         </ImageView>
       <TableView fx:id="tvAffichageReponse" layoutX="234.0" layoutY="199.0" prefHeight="541.0" prefWidth="1133.0">
         <columns>
-          <TableColumn fx:id="tvAffichageReponseContenu" prefWidth="631.0" text="Contenu">
+          <TableColumn fx:id="tvAffichageReponseContenu" prefWidth="600.0" text="Contenu">
             <cellValueFactory>
                 <PropertyValueFactory property="contenu" />
             </cellValueFactory>
         </TableColumn>
-          <TableColumn fx:id="tvAffichageReponseAuteur" minWidth="0.0" prefWidth="210.0" text="Auteur">
+          <TableColumn fx:id="tvAffichageReponseAuteur" minWidth="0.0" prefWidth="213.0" text="Auteur">
               <!--
             <cellValueFactory>
                 <PropertyValueFactory property="auteur" />
             </cellValueFactory>-->
         </TableColumn>
-            <TableColumn fx:id="tvAffichageReponseDate" prefWidth="111.0" text="Date">
+            <TableColumn fx:id="tvAffichageReponseDate" prefWidth="117.0" text="Date">
             <cellValueFactory>
                 <PropertyValueFactory property="date" />
             </cellValueFactory>
         </TableColumn>
-            <TableColumn fx:id="tvAffichageReponseActionUpVote" prefWidth="32.0" />
+            <TableColumn fx:id="tvAffichageReponseActionUpVote" prefWidth="54.0" />
             <TableColumn fx:id="tvAffichageReponseScore" prefWidth="36.0">
                 <cellValueFactory>
                     <PropertyValueFactory property="score" />

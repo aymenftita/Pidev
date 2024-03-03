@@ -6,6 +6,8 @@ import com.esprit.models.Sujet;
 import com.esprit.services.ServiceUtilisateur;
 import com.esprit.services.questionService;
 import com.esprit.services.sujetService;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +15,12 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URLEncoder;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.util.List;
 
@@ -46,7 +54,7 @@ public class AjoutQuestionController {
     }
 
     @FXML
-    void ajouterQuestion(ActionEvent event) {
+    void ajouterQuestion(ActionEvent event) throws IOException, InterruptedException {
 
 
         String titreQuestion = tfQuestionTitre.getText().trim(); // Trim pour couper l'espace vide
@@ -69,6 +77,17 @@ public class AjoutQuestionController {
             return;
         }
 
+        if (profanityFilter(titreQuestion)) {
+            // Display a warning message
+            Alert alertProfanity = new Alert(Alert.AlertType.WARNING);
+            alertProfanity.setTitle("Profanity detected!");
+            alertProfanity.setHeaderText("The rules contain profanity.");
+            alertProfanity.setContentText("Belehi traba la nchid nrabik");
+            alertProfanity.show();
+            return;
+
+        }
+
         String contenuQuestion = taContenuQuestion.getText().trim();
         if (contenuQuestion.isEmpty()) {
             // Affichage de message d'erreur
@@ -78,6 +97,17 @@ public class AjoutQuestionController {
             alertVide.setContentText("Veuillez saisir le contenu de la question.");
             alertVide.show();
             return; // Empêcher toute exécution ultérieure si le contenu est vide
+        }
+
+        if (profanityFilter(taContenuQuestion.getText())) {
+            // Display a warning message
+            Alert alertProfanity = new Alert(Alert.AlertType.WARNING);
+            alertProfanity.setTitle("Profanity detected!");
+            alertProfanity.setHeaderText("The rules contain profanity.");
+            alertProfanity.setContentText("Belehi traba la nchid nrabik");
+            alertProfanity.show();
+            return;
+
         }
 
         //Création du service et ajout d'entité
@@ -104,6 +134,30 @@ public class AjoutQuestionController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/InterfacesAdmin.fxml"));
         Parent root = loader.load();
         tfQuestionTitre.getScene().setRoot(root);
+    }
+
+    public boolean profanityFilter(String text) throws IOException, InterruptedException {
+
+        String encodedText = URLEncoder.encode(text, StandardCharsets.UTF_8);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://profanity-filter-by-api-ninjas.p.rapidapi.com/v1/profanityfilter?text=" + encodedText))
+                .header("X-RapidAPI-Key", "7d2775d2bdmshb8ee0d858ecdfdcp163823jsn6438f8d333df")
+                .header("X-RapidAPI-Host", "profanity-filter-by-api-ninjas.p.rapidapi.com")
+                .method("GET", HttpRequest.BodyPublishers.noBody())
+                .build();
+        HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+        //System.out.println(response.body());
+        ObjectMapper mapper = new ObjectMapper(); // Use Jackson for parsing
+        JsonNode root = mapper.readTree(response.body());
+        if (root.path("has_profanity").asBoolean()) {
+            System.out.println("Profanity detected!");
+            return true;
+        } else {
+            // The text is clean
+            System.out.println("The text is clean.");
+            return false;
+        }
     }
 
 }

@@ -7,6 +7,8 @@ import com.esprit.models.Sujet;
 import com.esprit.models.utilisateur;
 import com.esprit.services.questionService;
 import com.esprit.services.sujetService;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -24,6 +26,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URLEncoder;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -67,7 +75,7 @@ public class InterfaceQuestionUserController {
     private Sujet relatedSujet;
 
 
-    public void initialize() {
+    public void initialize() throws IOException, InterruptedException {
 
         //charger le combo box
         List<String> sortTypes = new ArrayList<>();
@@ -108,16 +116,53 @@ public class InterfaceQuestionUserController {
                 return;
             }
 
+            try {
+                if (profanityFilter(tvAffichageQuestionQuestion.getText())) {
+                    // Display a warning message
+                    Alert alertProfanity = new Alert(Alert.AlertType.WARNING);
+                    alertProfanity.setTitle("Profanity detected!");
+                    alertProfanity.setHeaderText("The rules contain profanity.");
+                    alertProfanity.setContentText("Belehi traba la nchid nrabik");
+                    alertProfanity.show();
+                    return;
+
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
             Question q = event.getRowValue();
             q.setTitre(event.getNewValue());
             qs.modifier(q);
         });
 
         tvAffichageQuestionContenu.setOnEditCommit(event -> {
+
+            try {
+                if (profanityFilter(tvAffichageQuestionContenu.getText())) {
+                    // Display a warning message
+                    Alert alertProfanity = new Alert(Alert.AlertType.WARNING);
+                    alertProfanity.setTitle("Profanity detected!");
+                    alertProfanity.setHeaderText("The rules contain profanity.");
+                    alertProfanity.setContentText("Belehi traba la nchid nrabik");
+                    alertProfanity.show();
+                    return;
+
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
             Question q = event.getRowValue();
             q.setContenu(event.getNewValue());
             qs.modifier(q);
         });
+
+
 
         tvAffichageQuestionNbrReponses.setStyle("-fx-text-fill: yellow;");
 
@@ -297,6 +342,30 @@ public class InterfaceQuestionUserController {
         } else {
             // Réinitialiser le filtre si aucune date n'est sélectionnée
             filteredData.setPredicate(question -> true);
+        }
+    }
+
+    public boolean profanityFilter(String text) throws IOException, InterruptedException {
+
+        String encodedText = URLEncoder.encode(text, StandardCharsets.UTF_8);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://profanity-filter-by-api-ninjas.p.rapidapi.com/v1/profanityfilter?text=" + encodedText))
+                .header("X-RapidAPI-Key", "7d2775d2bdmshb8ee0d858ecdfdcp163823jsn6438f8d333df")
+                .header("X-RapidAPI-Host", "profanity-filter-by-api-ninjas.p.rapidapi.com")
+                .method("GET", HttpRequest.BodyPublishers.noBody())
+                .build();
+        HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+        //System.out.println(response.body());
+        ObjectMapper mapper = new ObjectMapper(); // Use Jackson for parsing
+        JsonNode root = mapper.readTree(response.body());
+        if (root.path("has_profanity").asBoolean()) {
+            System.out.println("Profanity detected!");
+            return true;
+        } else {
+            // The text is clean
+            System.out.println("The text is clean.");
+            return false;
         }
     }
 

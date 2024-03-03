@@ -3,6 +3,7 @@ package com.esprit.controllers.sujet;
 import com.esprit.controllers.InterfacesAdminController;
 import com.esprit.models.Sujet;
 import com.esprit.services.sujetService;
+import com.fasterxml.jackson.databind.JsonNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,15 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+
+import java.io.InputStream;
+import java.net.*;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class AjoutSujetController {
 
@@ -25,7 +35,7 @@ public class AjoutSujetController {
     private TextField tfSujetTitre;
 
     @FXML
-    void ajouterSujet(ActionEvent event) {
+    void ajouterSujet(ActionEvent event) throws IOException, InterruptedException {
 
         String titreSujet = tfSujetTitre.getText().trim(); // Trim pour effacer l'espace vide
 
@@ -47,6 +57,17 @@ public class AjoutSujetController {
             return;
         }
 
+        if(profanityFilter(tfSujetTitre.getText())) {
+            // Display a warning message
+            Alert alertProfanity = new Alert(Alert.AlertType.WARNING);
+            alertProfanity.setTitle("Profanity detected!");
+            alertProfanity.setHeaderText("The Title contains profanity.");
+            alertProfanity.setContentText("Belehi traba la nchid nrabik");
+            alertProfanity.show();
+            return;
+
+        }
+
         String descSujet = tfDescriptionSujet.getText().trim(); // Trim pour effacer l'espace vide
 
         if (descSujet.isEmpty()) {
@@ -57,6 +78,17 @@ public class AjoutSujetController {
             alertVide.setContentText("Veuillez saisir la description du sujet.");
             alertVide.show();
             return; // Empêcher toute exécution ultérieure si le contenu est vide
+        }
+
+        if (profanityFilter(tfDescriptionSujet.getText())) {
+            // Display a warning message
+            Alert alertProfanity = new Alert(Alert.AlertType.WARNING);
+            alertProfanity.setTitle("Profanity detected!");
+            alertProfanity.setHeaderText("The description contains profanity.");
+            alertProfanity.setContentText("Belehi traba la nchid nrabik");
+            alertProfanity.show();
+            return;
+
         }
 
         String reglesSujet = tfReglesSujet.getText().trim(); // Trim pour effacer l'espace vide
@@ -70,6 +102,19 @@ public class AjoutSujetController {
             alertVide.show();
             return; // Empêcher toute exécution ultérieure si le contenu est vide
         }
+
+        if (profanityFilter(tfReglesSujet.getText())) {
+            // Display a warning message
+            Alert alertProfanity = new Alert(Alert.AlertType.WARNING);
+            alertProfanity.setTitle("Profanity detected!");
+            alertProfanity.setHeaderText("The rules contain profanity.");
+            alertProfanity.setContentText("Belehi traba la nchid nrabik");
+            alertProfanity.show();
+            return;
+
+        }
+
+
 
 
         //Création du service et ajout d'entité
@@ -85,6 +130,31 @@ public class AjoutSujetController {
         alertAjout.show();
 
     }
+
+    public boolean profanityFilter(String text) throws IOException, InterruptedException {
+
+        String encodedText = URLEncoder.encode(text, StandardCharsets.UTF_8);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://profanity-filter-by-api-ninjas.p.rapidapi.com/v1/profanityfilter?text=" + encodedText))
+                .header("X-RapidAPI-Key", "7d2775d2bdmshb8ee0d858ecdfdcp163823jsn6438f8d333df")
+                .header("X-RapidAPI-Host", "profanity-filter-by-api-ninjas.p.rapidapi.com")
+                .method("GET", HttpRequest.BodyPublishers.noBody())
+                .build();
+        HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+        //System.out.println(response.body());
+        ObjectMapper mapper = new ObjectMapper(); // Use Jackson for parsing
+        JsonNode root = mapper.readTree(response.body());
+        if (root.path("has_profanity").asBoolean()) {
+            System.out.println("Profanity detected!");
+            return true;
+        } else {
+            // The text is clean
+            System.out.println("The text is clean.");
+            return false;
+        }
+    }
+
 
     @FXML
     void menuAdmin(ActionEvent event) throws IOException {

@@ -125,10 +125,13 @@
     -fx-cell-size: 60px;
     -fx-alignment: center-left;
     -fx-background-color: #29292D;
-    -fx-border-color: #29292D;
     -fx-text-fill: white;
     -fx-font-family: "Segoe UI", sans-serif;
     -fx-font-size: 20px;
+    -fx-border-color: #144083;
+    -fx-border-width: 0 0 1px 0;
+
+
 }
 
 .table-row-cell:focused {
@@ -279,4 +282,29 @@
 .selected-question-date {
     -fx-font-family: "Segoe UI", sans-serif;
     -fx-font-size: 13px;
+}
+
+.ajout-label {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-size: 17px;
+}
+
+.question-input {
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(0, 0, 0, 0.2);
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-font-family: system, sans-serif;
+    -fx-font-size: 16px;
+    -fx-control-inner-background: transparent;
+    -fx-text-fill: #333;
+}
+
+.question-input:hover {
+    -fx-border-color: rgba(0, 0, 0, 0.4);
+}
+
+.question-content {
+    -fx-wrap-text: true;
+    -fx-min-height: 80px;
 }
