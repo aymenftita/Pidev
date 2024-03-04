@@ -70,17 +70,17 @@ public class InterfaceForumUserController {
             if (newSujet.trim().isEmpty()) {
                 // Affichage de message d'erreur
                 Alert alertVide = new Alert(Alert.AlertType.ERROR);
-                alertVide.setTitle("Erreur de Saisie");
-                alertVide.setHeaderText("Titre vide!");
-                alertVide.setContentText("Veuillez saisir le titre du sujet.");
+                alertVide.setTitle("Input Error");
+                alertVide.setHeaderText("Empty title!");
+                alertVide.setContentText("Please enter the topic title.");
                 alertVide.show();
                 return; //Empêcher toute exécution ultérieure si le contenu est vide
             } else if (newSujet.length() > 30) {
                 // Afficher un message d'erreur en cas de dépassement de la longueur
                 Alert alertLength = new Alert(Alert.AlertType.ERROR);
-                alertLength.setTitle("Erreur de Saisie");
-                alertLength.setHeaderText("Titre de sujet est trop longue!");
-                alertLength.setContentText("Le titre ne doit pas dépasser 30 caractères.");
+                alertLength.setTitle("Input Error");
+                alertLength.setHeaderText("Topic title is too long!");
+                alertLength.setContentText("The title must not exceed 30 characters.");
                 alertLength.show();
                 return; //Empêcher toute exécution ultérieure si le contenu est vide
             }
@@ -113,9 +113,9 @@ public class InterfaceForumUserController {
             if (newSujet.trim().isEmpty()) {
                 // Affichage de message d'erreur
                 Alert alertVide = new Alert(Alert.AlertType.ERROR);
-                alertVide.setTitle("Erreur de Saisie");
-                alertVide.setHeaderText("Description vide!");
-                alertVide.setContentText("Veuillez saisir la description du sujet.");
+                alertVide.setTitle("Input Error");
+                alertVide.setHeaderText("Empty description!");
+                alertVide.setContentText("Please enter the topic description.");
                 alertVide.show();
                 return;
             }
@@ -148,7 +148,7 @@ public class InterfaceForumUserController {
             if (newSujet.trim().isEmpty()) {
                 // Affichage de message d'erreur
                 Alert alertVide = new Alert(Alert.AlertType.ERROR);
-                alertVide.setTitle("Erreur de Saisie");
+                alertVide.setTitle("Input Error");
                 alertVide.setHeaderText("Règles vide!");
                 alertVide.setContentText("Veuillez saisir les règles du sujet.");
                 alertVide.show();
@@ -218,7 +218,7 @@ public class InterfaceForumUserController {
 
         Stage stage = new Stage();
 
-        stage.setTitle("Ajout Sujet");
+        stage.setTitle("Add Topic");
 
         stage.setScene(new Scene(root, 422, 399));
 

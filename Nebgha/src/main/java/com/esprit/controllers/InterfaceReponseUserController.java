@@ -106,8 +106,8 @@ public class InterfaceReponseUserController {
 
         //charger le combo box
         List<String> sortTypes = new ArrayList<>();
-        sortTypes.add("Plus récent");
-        sortTypes.add("Populaire");
+        sortTypes.add("Most recent");
+        sortTypes.add("Popular");
 
         loadReponse();
 
@@ -130,9 +130,9 @@ public class InterfaceReponseUserController {
             if (newContenu.trim().isEmpty()) {
                 // Affichage de message d'erreur
                 Alert alertVide = new Alert(Alert.AlertType.ERROR);
-                alertVide.setTitle("Erreur de Saisie");
-                alertVide.setHeaderText("Contenu vide!");
-                alertVide.setContentText("Veuillez saisir le contenu de la réponse.");
+                alertVide.setTitle("Input Error");
+                alertVide.setHeaderText("Empty content!");
+                alertVide.setContentText("Please enter the content of the response.");
                 alertVide.show();
                 return;
             }
@@ -216,7 +216,7 @@ public class InterfaceReponseUserController {
 
         Stage stage = new Stage();
 
-        stage.setTitle("Ajout Réponse");
+        stage.setTitle("Add response");
 
         stage.setScene(new Scene(root, 422, 405));
 
@@ -304,7 +304,7 @@ public class InterfaceReponseUserController {
         //Par défaut, trié par date
         Comparator<Reponse> dateComparator = (r1, r2) -> r2.getDate().compareTo(r1.getDate());
         sortedData.comparatorProperty().bind(cbSort.getSelectionModel().selectedItemProperty().asString().map(s -> {
-            if (s.equals("Populaire")) {
+            if (s.equals("Popular")) {
                 return (r1, r2) -> Integer.compare(r2.getScore(), r1.getScore());
             }
             return dateComparator;

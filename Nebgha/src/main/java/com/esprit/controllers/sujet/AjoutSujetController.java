@@ -42,17 +42,17 @@ public class AjoutSujetController {
         if (titreSujet.isEmpty()) {
             //Affichage de message d'erreur
             Alert alertVide = new Alert(Alert.AlertType.ERROR);
-            alertVide.setTitle("Erreur de Saisie");
-            alertVide.setHeaderText("Titre vide!");
-            alertVide.setContentText("Veuillez saisir le titre du sujet.");
+            alertVide.setTitle("Input Error");
+            alertVide.setHeaderText("Empty title!");
+            alertVide.setContentText("Please enter the topic title.");
             alertVide.show();
             return; // Empêcher toute exécution ultérieure si le contenu est vide
         } else if (titreSujet.length() > 30) {
             // Afficher un message d'erreur en cas de dépassement de la longueur
             Alert alertLength = new Alert(Alert.AlertType.ERROR);
-            alertLength.setTitle("Erreur de Saisie");
-            alertLength.setHeaderText("Titre sujet trop longue!");
-            alertLength.setContentText("Le titre de sujet ne doit pas dépasser 30 caractères.");
+            alertLength.setTitle("Input Error");
+            alertLength.setHeaderText("Subject title too long!");
+            alertLength.setContentText("The topic title should not exceed 30 characters.");
             alertLength.show();
             return;
         }
@@ -73,9 +73,9 @@ public class AjoutSujetController {
         if (descSujet.isEmpty()) {
             // Affichage de message d'erreur
             Alert alertVide = new Alert(Alert.AlertType.ERROR);
-            alertVide.setTitle("Erreur de Saisie");
-            alertVide.setHeaderText("Description vide!");
-            alertVide.setContentText("Veuillez saisir la description du sujet.");
+            alertVide.setTitle("Input Error");
+            alertVide.setHeaderText("Empty description!");
+            alertVide.setContentText("Please enter the topic description.");
             alertVide.show();
             return; // Empêcher toute exécution ultérieure si le contenu est vide
         }
@@ -96,9 +96,9 @@ public class AjoutSujetController {
         if (reglesSujet.isEmpty()) {
             // Affichage de message d'erreur
             Alert alertVide = new Alert(Alert.AlertType.ERROR);
-            alertVide.setTitle("Erreur de Saisie");
-            alertVide.setHeaderText("Règles vide!");
-            alertVide.setContentText("Veuillez saisir les règles du sujet.");
+            alertVide.setTitle("Input Error");
+            alertVide.setHeaderText("Empty rules!");
+            alertVide.setContentText("Please enter the topic rules.");
             alertVide.show();
             return; // Empêcher toute exécution ultérieure si le contenu est vide
         }
@@ -124,9 +124,9 @@ public class AjoutSujetController {
 
         //Message de confirmation
         Alert alertAjout = new Alert(Alert.AlertType.INFORMATION);
-        alertAjout.setTitle("Ajout Sujet");
-        alertAjout.setHeaderText("Succées!");
-        alertAjout.setContentText("Sujet ajouté!");
+        alertAjout.setTitle("Add topic");
+        alertAjout.setHeaderText("Success!");
+        alertAjout.setContentText("Topic add!");
         alertAjout.show();
 
     }

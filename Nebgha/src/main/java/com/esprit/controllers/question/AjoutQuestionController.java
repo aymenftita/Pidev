@@ -62,17 +62,17 @@ public class AjoutQuestionController {
         if (titreQuestion.isEmpty()) {
             // Affichage de message d'erreur
             Alert alertVide = new Alert(Alert.AlertType.ERROR);
-            alertVide.setTitle("Erreur de Saisie");
-            alertVide.setHeaderText("Titre vide!");
-            alertVide.setContentText("Veuillez saisir le titre de la question.");
+            alertVide.setTitle("Input Error");
+            alertVide.setHeaderText("Empty title!");
+            alertVide.setContentText("Please enter the question title.");
             alertVide.show();
             return; // Empêcher toute exécution ultérieure si le contenu est vide
         } else if (titreQuestion.length() > 30) {
             // Afficher un message d'erreur en cas de dépassement de la longueur
             Alert alertLength = new Alert(Alert.AlertType.ERROR);
-            alertLength.setTitle("Erreur de Saisie");
-            alertLength.setHeaderText("Titre question trop longue!");
-            alertLength.setContentText("Le titre de question ne doit pas dépasser 30 caractères.");
+            alertLength.setTitle("Input Error");
+            alertLength.setHeaderText("Question title too long!");
+            alertLength.setContentText("The question title should not exceed 30 characters.");
             alertLength.show();
             return;
         }
@@ -92,9 +92,9 @@ public class AjoutQuestionController {
         if (contenuQuestion.isEmpty()) {
             // Affichage de message d'erreur
             Alert alertVide = new Alert(Alert.AlertType.ERROR);
-            alertVide.setTitle("Erreur de Saisie");
-            alertVide.setHeaderText("Contenu vide!");
-            alertVide.setContentText("Veuillez saisir le contenu de la question.");
+            alertVide.setTitle("Input Error");
+            alertVide.setHeaderText("Empty content!");
+            alertVide.setContentText("Please enter the content of the question.");
             alertVide.show();
             return; // Empêcher toute exécution ultérieure si le contenu est vide
         }
@@ -121,9 +121,9 @@ public class AjoutQuestionController {
 
         //Message de confirmation
         Alert alertAjout = new Alert(Alert.AlertType.INFORMATION);
-        alertAjout.setTitle("Ajout Question");
-        alertAjout.setHeaderText("Succées!");
-        alertAjout.setContentText("Question ajouté!");
+        alertAjout.setTitle("Add Question");
+        alertAjout.setHeaderText("Success!");
+        alertAjout.setContentText("Question added!");
         alertAjout.show();
 
     }

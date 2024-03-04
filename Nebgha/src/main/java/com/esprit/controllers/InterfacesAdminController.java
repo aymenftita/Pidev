@@ -1,12 +1,6 @@
 package com.esprit.controllers;
 
 
-import com.esprit.controllers.question.AjoutQuestionController;
-import com.esprit.controllers.question.ModifierQuestionController;
-import com.esprit.controllers.reponse.ModifierReponseController;
-import com.esprit.controllers.reponse.AjoutReponseController;
-import com.esprit.controllers.sujet.AjoutSujetController;
-import com.esprit.controllers.sujet.ModifierSujetController;
 import com.esprit.models.Question;
 import com.esprit.models.Reponse;
 import com.esprit.models.Sujet;
@@ -19,11 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
-
-import java.io.IOException;
 
 public class InterfacesAdminController {
 
@@ -58,7 +48,7 @@ public class InterfacesAdminController {
 
         //Collecter le titre de chaque sujet pour l'affichage
         TableColumn<Question, Sujet> sujetColumn = (TableColumn<Question, Sujet>) tvAffichageQuestion.getColumns()
-                .filtered(c -> c.getText().equals("Sujet")).get(0);
+                .filtered(c -> c.getText().equals("Topic")).get(0);
         sujetColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getSujet())); // Wrap in ObservableValue
         sujetColumn.setCellFactory(col -> new TableCell<Question, Sujet>() {
             @Override
@@ -74,7 +64,7 @@ public class InterfacesAdminController {
 
         //Collecter l'email de chaque utilisateur pour l'affichage
         TableColumn<Question, utilisateur> userColumn = (TableColumn<Question, utilisateur>) tvAffichageQuestion.getColumns()
-                .filtered(c -> c.getText().equals("Auteur")).get(0);
+                .filtered(c -> c.getText().equals("Author")).get(0);
         userColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getAuteur())); // Wrap in ObservableValue
         userColumn.setCellFactory(col -> new TableCell<Question, utilisateur>() {
             @Override
@@ -99,7 +89,7 @@ public class InterfacesAdminController {
 
         //Collecter l'ID de chaque sujet pour l'affichage
         TableColumn<Reponse, Sujet> sujetColumn = (TableColumn<Reponse, Sujet>) tvAffichageReponse.getColumns().
-                filtered(c -> c.getText().equals("Sujet")).get(0);
+                filtered(c -> c.getText().equals("Topic")).get(0);
         sujetColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getSujet()));
         sujetColumn.setCellFactory(col -> new TableCell<Reponse, Sujet>() {
             @Override
@@ -131,7 +121,7 @@ public class InterfacesAdminController {
 
         //Collecter l'email de chaque utilisateur pour l'affichage
         TableColumn<Reponse, utilisateur> userColumn = (TableColumn<Reponse, utilisateur>) tvAffichageReponse.getColumns()
-                .filtered(c -> c.getText().equals("Auteur")).get(0);
+                .filtered(c -> c.getText().equals("Author")).get(0);
         userColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getAuteur())); // Wrap in ObservableValue
         userColumn.setCellFactory(col -> new TableCell<Reponse, utilisateur>() {
             @Override
@@ -174,9 +164,9 @@ public class InterfacesAdminController {
         } else {
             // Si pas d'élément choisi
             Alert alertAjout = new Alert(Alert.AlertType.ERROR);
-            alertAjout.setTitle("Erreur de suppression");
-            alertAjout.setHeaderText("Erreur!");
-            alertAjout.setContentText("Choisir une question pour la supprimer!");
+            alertAjout.setTitle("Deletion error");
+            alertAjout.setHeaderText("Error!");
+            alertAjout.setContentText("Choose a question to delete it!");
             alertAjout.show();
         }
     }
@@ -193,9 +183,9 @@ public class InterfacesAdminController {
         } else {
             // Si pas d'élément choisi
             Alert alertAjout = new Alert(Alert.AlertType.ERROR);
-            alertAjout.setTitle("Erreur de suppression");
-            alertAjout.setHeaderText("Erreur!");
-            alertAjout.setContentText("Choisir une réponse pour la supprimer!");
+            alertAjout.setTitle("Deletion error");
+            alertAjout.setHeaderText("Error!");
+            alertAjout.setContentText("Choose an answer to delete it!");
             alertAjout.show();
         }
 
@@ -213,9 +203,9 @@ public class InterfacesAdminController {
         } else {
             // Si pas d'élément choisi
             Alert alertAjout = new Alert(Alert.AlertType.ERROR);
-            alertAjout.setTitle("Erreur de suppression");
-            alertAjout.setHeaderText("Erreur!");
-            alertAjout.setContentText("Choisir un sujet pour le supprimer!");
+            alertAjout.setTitle("Deletion error");
+            alertAjout.setHeaderText("Error!");
+            alertAjout.setContentText("Choose a topic to delete it!");
             alertAjout.show();
         }
 

@@ -13,7 +13,7 @@
     <children>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="399.0" prefWidth="422.0">
               <children>
-                  <Button layoutX="77.0" layoutY="354.0" mnemonicParsing="false" onAction="#ajouterReponse" prefHeight="31.0" prefWidth="270.0" styleClass="my-button" stylesheets="@../style.css" text="Ajouter">
+                  <Button layoutX="77.0" layoutY="354.0" mnemonicParsing="false" onAction="#ajouterReponse" prefHeight="31.0" prefWidth="270.0" styleClass="my-button" stylesheets="@../style.css" text="Add">
                       <font>
                           <Font size="15.0" />
                       </font>
@@ -23,7 +23,7 @@
                   <String fx:value="question-content" />
                   <String fx:value="question-input" />
                </styleClass></TextArea>
-                  <Label layoutX="117.0" layoutY="14.0" text="Ajouter Réponse">
+                  <Label layoutX="117.0" layoutY="14.0" text="Add Response">
                       <font>
                           <Font name="System Bold" size="24.0" />
                       </font>

@@ -61,9 +61,9 @@ public class AjoutReponseController {
         if (contenuReponse.isEmpty()) {
             // Affichage de message d'erreur
             Alert alertVide = new Alert(Alert.AlertType.ERROR);
-            alertVide.setTitle("Erreur de Saisie");
-            alertVide.setHeaderText("Contenu vide!");
-            alertVide.setContentText("Veuillez saisir le contenu de la réponse.");
+            alertVide.setTitle("Input Error");
+            alertVide.setHeaderText("Empty content!");
+            alertVide.setContentText("Please enter the content of the response.");
             alertVide.show();
             return; // Empêcher toute exécution ultérieure si le contenu est vide
         }
@@ -90,9 +90,9 @@ public class AjoutReponseController {
 
         //Message de confirmation
         Alert alertAjout = new Alert(Alert.AlertType.INFORMATION);
-        alertAjout.setTitle("Ajout Réponse");
-        alertAjout.setHeaderText("Succées!");
-        alertAjout.setContentText("Réponse ajouté!");
+        alertAjout.setTitle("Add Response");
+        alertAjout.setHeaderText("Success!");
+        alertAjout.setContentText("Response added!");
         alertAjout.show();
 
     }

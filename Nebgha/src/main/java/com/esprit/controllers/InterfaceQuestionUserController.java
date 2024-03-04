@@ -79,8 +79,8 @@ public class InterfaceQuestionUserController {
 
         //charger le combo box
         List<String> sortTypes = new ArrayList<>();
-        sortTypes.add("Plus récent");
-        sortTypes.add("Populaire");
+        sortTypes.add("Most recent");
+        sortTypes.add("Popular");
 
         loadQuestion();
 
@@ -101,17 +101,17 @@ public class InterfaceQuestionUserController {
             if (newQuestion.trim().isEmpty()) {
                 // Affichage de message d'erreur
                 Alert alertVide = new Alert(Alert.AlertType.ERROR);
-                alertVide.setTitle("Erreur de Saisie");
-                alertVide.setHeaderText("Titre vide!");
-                alertVide.setContentText("Veuillez saisir le titre du question.");
+                alertVide.setTitle("Input Error");
+                alertVide.setHeaderText("Empty title!");
+                alertVide.setContentText("Please enter the question title.");
                 alertVide.show();
                 return;
             } else if (newQuestion.length() > 30) {
                 // Afficher un message d'erreur en cas de dépassement de la longueur
                 Alert alertLength = new Alert(Alert.AlertType.ERROR);
-                alertLength.setTitle("Erreur de Saisie");
-                alertLength.setHeaderText("Titre de question est trop longue!");
-                alertLength.setContentText("La question ne doit pas dépasser 30 caractères.");
+                alertLength.setTitle("Input Error");
+                alertLength.setHeaderText("Question title is too long!");
+                alertLength.setContentText("The question must not exceed 30 characters.");
                 alertLength.show();
                 return;
             }
@@ -248,7 +248,7 @@ public class InterfaceQuestionUserController {
 
         Stage stage = new Stage();
 
-        stage.setTitle("Ajout Question");
+        stage.setTitle("Add Question");
 
         stage.setScene(new Scene(root, 402, 402));  // Adjust width and height as needed
 
@@ -313,7 +313,7 @@ public class InterfaceQuestionUserController {
         //Trié par date par défaut
         Comparator<Question> dateComparator = (r1, r2) -> r2.getDate().compareTo(r1.getDate());
         sortedData.comparatorProperty().bind(cbSort.getSelectionModel().selectedItemProperty().asString().map(s -> {
-            if (s.equals("Populaire")) {
+            if (s.equals("Popular")) {
                 return (r1, r2) -> Integer.compare(qs.getNbrReponse(r2), qs.getNbrReponse(r1));
             }
             return dateComparator;

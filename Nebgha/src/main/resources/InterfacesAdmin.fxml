@@ -17,13 +17,13 @@
    <children>
       <TabPane layoutX="-3.0" layoutY="-2.0" prefHeight="740.0" prefWidth="1366.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab fx:id="tabSujet" text="Sujet">
+          <Tab fx:id="tabSujet" text="Topic">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <TableView fx:id="tvAffichageSujet" layoutX="5.0" layoutY="-2.0" prefHeight="717.0" prefWidth="1288.0" stylesheets="@style.css">
                           <columns>
-                              <TableColumn prefWidth="315.0" text="Titre">
+                              <TableColumn prefWidth="315.0" text="Title">
                                   <cellValueFactory>
                                       <PropertyValueFactory property="titre" />
                                   </cellValueFactory>
@@ -33,7 +33,7 @@
                                       <PropertyValueFactory property="desc" />
                                   </cellValueFactory>
                               </TableColumn>
-                              <TableColumn prefWidth="593.0" text="Règles">
+                              <TableColumn prefWidth="593.0" text="Rules">
                                   <cellValueFactory>
                                       <PropertyValueFactory property="regles" />
                                   </cellValueFactory>
@@ -58,7 +58,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Label layoutX="1297.0" layoutY="288.0" text="Supprimer">
+                        <Label layoutX="1312.0" layoutY="296.0" text="Delete">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -86,41 +86,41 @@
                               <Image url="@graphics/remove.gif" />
                            </image>
                         </ImageView>
-                        <Label layoutX="1297.0" layoutY="212.0" text="Supprimer">
+                        <Label layoutX="1309.0" layoutY="220.0" text="Delete">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
                         <TableView fx:id="tvAffichageQuestion" layoutX="5.0" prefHeight="713.0" prefWidth="1285.0" stylesheets="@style.css">
                            <columns>
-                               <TableColumn prefWidth="230.0" text="Titre">
+                               <TableColumn prefWidth="230.0" text="Title">
                                    <cellValueFactory>
                                        <PropertyValueFactory property="titre" />
                                    </cellValueFactory>
                                </TableColumn>
-                               <TableColumn prefWidth="119.0" text="Auteur">
+                               <TableColumn prefWidth="165.0" text="Author">
                                    <cellValueFactory>
                                        <PropertyValueFactory property="auteur_id" />
                                    </cellValueFactory>
                                </TableColumn>
-                               <TableColumn prefWidth="124.0" text="Date">
+                               <TableColumn prefWidth="147.0" text="Date">
                                    <cellValueFactory>
                                        <PropertyValueFactory property="date" />
                                    </cellValueFactory>
                                </TableColumn>
-                               <TableColumn prefWidth="245.0" text="Sujet">
+                               <TableColumn prefWidth="254.0" text="Topic">
                                    <cellValueFactory>
                                        <PropertyValueFactory property="sujet_id" />
                                    </cellValueFactory>
                                </TableColumn>
-                               <TableColumn prefWidth="563.0" text="Contenu">
+                               <TableColumn prefWidth="485.0" text="Content">
                                    <cellValueFactory>
                                        <PropertyValueFactory property="contenu" />
                                    </cellValueFactory>
                                </TableColumn>
                            </columns>
                         </TableView>
-                        <Button blendMode="MULTIPLY" layoutX="1295.0" layoutY="143.0" mnemonicParsing="false" onAction="#supprimerQuestion" prefHeight="88.0" prefWidth="66.0">
+                        <Button blendMode="MULTIPLY" layoutX="1295.0" layoutY="155.0" mnemonicParsing="false" onAction="#supprimerQuestion" prefHeight="88.0" prefWidth="66.0">
                            <font>
                               <Font size="11.0" />
                            </font>
@@ -137,7 +137,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab fx:id="tabReponse" text="Réponse">
+            <Tab fx:id="tabReponse" text="Response">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -151,34 +151,34 @@
                               <Image url="@graphics/remove.gif" />
                            </image>
                         </ImageView>
-                        <Label layoutX="1299.0" layoutY="212.0" text="Supprimer">
+                        <Label layoutX="1311.0" layoutY="213.0" text="Delete">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
                         <TableView fx:id="tvAffichageReponse" layoutX="5.0" prefHeight="713.0" prefWidth="1284.0" stylesheets="@style.css">
                            <columns>
-                               <TableColumn prefWidth="116.0" text="Auteur">
+                               <TableColumn prefWidth="187.0" text="Author">
                                    <cellValueFactory>
                                        <PropertyValueFactory property="auteur_id" />
                                    </cellValueFactory>
                                </TableColumn>
-                               <TableColumn prefWidth="270.0" text="Question">
+                               <TableColumn prefWidth="252.0" text="Question">
                                    <cellValueFactory>
                                        <PropertyValueFactory property="question_id" />
                                    </cellValueFactory>
                                </TableColumn>
-                               <TableColumn prefWidth="116.0" text="Date">
+                               <TableColumn prefWidth="151.0" text="Date">
                                    <cellValueFactory>
                                        <PropertyValueFactory property="date" />
                                    </cellValueFactory>
                                </TableColumn>
-                               <TableColumn prefWidth="187.0" text="Sujet">
+                               <TableColumn prefWidth="196.0" text="Topic">
                                    <cellValueFactory>
                                        <PropertyValueFactory property="sujet_id" />
                                    </cellValueFactory>
                                </TableColumn>
-                               <TableColumn prefWidth="594.0" text="Contenu">
+                               <TableColumn prefWidth="497.0" text="Content">
                                    <cellValueFactory>
                                        <PropertyValueFactory property="contenu" />
                                    </cellValueFactory>
