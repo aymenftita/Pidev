@@ -73,6 +73,10 @@ public class QuizsEtudiantController {
 
     private VBox durationBox;
     private Timeline timeline=new Timeline();;
+    private long questionStartTime;
+    private String selectedLanguage ;
+
+
 
     public void initialize() {
         String cssPath = getClass().getResource("/media/styles.css").toExternalForm();
@@ -167,7 +171,7 @@ public class QuizsEtudiantController {
                 currentQuestionIndex = 0;
                 quizScore = 0;
                 hideSearchAndSort();
-                displayCountdown();
+                displayLanguageChoice();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -183,6 +187,33 @@ public class QuizsEtudiantController {
 
     }
 
+    private void displayLanguageChoice() {
+        VBox languageBox = new VBox();
+        languageBox.setAlignment(Pos.CENTER);
+        languageBox.setFillWidth(true);
+        languageBox.setPrefWidth(quizPane.getWidth());
+        languageBox.setPrefHeight(quizPane.getHeight());
+
+        Label startLabel = new Label("Choose quiz language:");
+        startLabel.setStyle("-fx-font-size: 30px; -fx-text-fill: #000066;");
+
+        ComboBox<String> languageComboBox = new ComboBox<>();
+        languageComboBox.getItems().addAll("english", "french", "arabic", "german", "italian", "spanish");
+        languageComboBox.setStyle("-fx-background-color: white; -fx-border-width: 1px; -fx-effect: dropshadow(gaussian, #eae164, 13, 0, 0, 0); -fx-text-fill: #000066;");
+
+        Button submitButton = new Button("Submit");
+        VBox.setMargin(submitButton, new Insets(10, 0, 0, 0));
+        submitButton.setOnAction(event -> {
+            selectedLanguage = languageComboBox.getValue();
+            displayCountdown();
+        });
+
+        languageBox.getChildren().addAll(startLabel, languageComboBox, submitButton);
+        VBox.setMargin(languageComboBox, new Insets(0, 0, 10, 0));
+
+        quizPane.getChildren().clear();
+        quizPane.getChildren().add(languageBox);
+    }
 
     private void displayCountdown() {
         VBox countdownBox = new VBox();
@@ -231,6 +262,7 @@ public class QuizsEtudiantController {
 
 
     private void displayQuestion(Questions question) {
+        questionStartTime = System.currentTimeMillis();
         VBox questionBox = new VBox();
         questionBox.getStyleClass().add("question-box");
         questionBox.setAlignment(Pos.CENTER);
@@ -243,19 +275,38 @@ public class QuizsEtudiantController {
         questionIndexLabel.getStyleClass().add("question-index-label");
 
         Label questionLabel = new Label(question.getTexte());
+        if (!selectedLanguage.equals("english")) {
+            questionLabel.setText(TranslationService.translate(question.getTexte(),"english",selectedLanguage));
+        }else {
+            questionLabel.setText(question.getTexte());
+        }
         questionLabel.getStyleClass().add("question-label");
 
         List<Reponses> responsesList = reponsesService.afficherParQuestion(question.getQuestionId());
         if (question.getType().equals("multiple")) {
             VBox responsesBox = new VBox();
             responsesBox.setAlignment(Pos.CENTER_LEFT);
-
             for (Reponses response : responsesList) {
-                CheckBox responseCheckBox = new CheckBox(response.getTexte());
-                responsesBox.getChildren().add(responseCheckBox);
+                CheckBox responseCheckBox = new CheckBox();
+                if (!selectedLanguage.equals("english")) {
+                        String translatedText = TranslationService.translate(response.getTexte(), "english", selectedLanguage);
+                        responseCheckBox.setText(translatedText);
+                    }
+                else {
+
+                        responseCheckBox.setText(response.getTexte());
+                        responsesBox.getChildren().add(responseCheckBox);
+                           }
+            responsesBox.getChildren().add(responseCheckBox);
+        }
+            String buttonText;
+            if (!selectedLanguage.equals("english")) {
+                buttonText = TranslationService.translate("Submit", "english", selectedLanguage);
+            } else {
+                buttonText = "Submit";
             }
 
-            Button submitButton = new Button("Submit");
+            Button submitButton = new Button(buttonText);
             submitButton.getStyleClass().add("submit-button");
             VBox.setMargin(submitButton, new Insets(10, 0, 0, 0));
             submitButton.setOnAction(event -> {
@@ -277,12 +328,24 @@ public class QuizsEtudiantController {
             responsesBox.setAlignment(Pos.CENTER_LEFT);
 
             for (Reponses response : responsesList) {
-                RadioButton responseRadioButton = new RadioButton(response.getTexte());
+                RadioButton responseRadioButton ;
+                if (!selectedLanguage.equals("english")) {
+                    String translatedText = TranslationService.translate(response.getTexte(), "english", selectedLanguage);
+                    responseRadioButton = new RadioButton(translatedText);
+                }else {
+                    responseRadioButton = new RadioButton(response.getTexte());
+                }
                 responseRadioButton.setToggleGroup(responseGroup);
                 responsesBox.getChildren().add(responseRadioButton);
             }
+            String buttonText;
+            if (!selectedLanguage.equals("english")) {
+                buttonText = TranslationService.translate("Submit", "english", selectedLanguage);
+            } else {
+                buttonText = "Submit";
+            }
 
-            Button submitButton = new Button("Submit");
+            Button submitButton = new Button(buttonText);
             submitButton.getStyleClass().add("submit-button");
             VBox.setMargin(submitButton, new Insets(10, 0, 0, 0));
             submitButton.setOnAction(event -> {
@@ -317,9 +380,11 @@ public class QuizsEtudiantController {
         }
 
         for (String selectedResponse : selectedResponses) {
+            String translatedResponse = TranslationService.translate(selectedResponse, selectedLanguage, "english");
+            System.out.println("Translated response: " + translatedResponse);
             boolean isCorrect = reponsesService.afficherParQuestion(question.getQuestionId())
                     .stream()
-                    .filter(response -> response.getTexte().equals(selectedResponse))
+                    .filter(response -> response.getTexte().equals(translatedResponse))
                     .findFirst()
                     .map(Reponses::isEstCorrecte)
                     .orElse(false);
@@ -329,7 +394,7 @@ public class QuizsEtudiantController {
 
             int responseId = reponsesService.afficherParQuestion(question.getQuestionId())
                     .stream()
-                    .filter(response -> response.getTexte().equals(selectedResponse))
+                    .filter(response -> response.getTexte().equals(translatedResponse))
                     .findFirst()
                     .map(Reponses::getReponseId)
                     .orElse(-1);
@@ -435,9 +500,11 @@ public class QuizsEtudiantController {
     private void saveResponse(ToggleGroup responseGroup, Questions question) throws IOException {
         RadioButton selectedRadioButton = (RadioButton) responseGroup.getSelectedToggle();
         if (selectedRadioButton != null) {
+            String translatedResponse = TranslationService.translate(selectedRadioButton.getText(), selectedLanguage, "english");
+            System.out.println("Translated response: " + translatedResponse);
             boolean isCorrect = reponsesService.afficherParQuestion(question.getQuestionId())
                     .stream()
-                    .filter(response -> response.getTexte().equals(selectedRadioButton.getText()))
+                    .filter(response -> response.getTexte().equals(translatedResponse))
                     .findFirst()
                     .map(Reponses::isEstCorrecte)
                     .orElse(false);
@@ -447,15 +514,14 @@ public class QuizsEtudiantController {
 
             int responseId = reponsesService.afficherParQuestion(question.getQuestionId())
                     .stream()
-                    .filter(response -> response.getTexte().equals(selectedRadioButton.getText()))
+                    .filter(response -> response.getTexte().equals(translatedResponse))
                     .findFirst()
                     .map(Reponses::getReponseId)
                     .orElse(-1);
 
             System.out.println("Selected response: " + selectedRadioButton.getText() + ", Correct: " + isCorrect);
-
-            long timeTakenMillis = (3 - countdownSeconds) * 1000;
-            int timeTakenSeconds = (int) (timeTakenMillis / 1000);
+            long currentTimeMillis = System.currentTimeMillis();
+            int timeTakenSeconds = (int) ((currentTimeMillis - questionStartTime) / 1000);
 
             Quiz quiz = quizService.getQuiz(quizId);
             Reponses reponse = reponsesService.getReponse(responseId);
@@ -472,13 +538,14 @@ public class QuizsEtudiantController {
         }
     }
 
+
     private void showFinalResult() throws IOException {
         stopDuration();
         RecompensesService recompensesService = new RecompensesService();
         List<Recompenses> recompensesList = recompensesService.afficher();
         int rewardsRequiredScore = recompensesList.stream()
                 .mapToInt(Recompenses::getScoreRequis)
-                .findFirst()
+                .max()
                 .orElse(0);
 
         int totalQuestionPoints = currentQuestions.stream()
@@ -492,17 +559,18 @@ public class QuizsEtudiantController {
                         .stream()
                         .anyMatch(reponse -> reponse.getReponse().getQuestion().getQuestionId() == question.getQuestionId() && reponse.isCorrect()))
                 .count();
-
+        System.out.println(quizScore);
         List<Recompenses> reachedRewards = recompensesList.stream()
-                .filter(recompenses -> score >= recompenses.getScoreRequis())
-                .collect(Collectors.toList());
-
+                .filter(recompenses -> quizScore >= recompenses.getScoreRequis())
+                .toList();
+        System.out.println(reachedRewards);
         RecompensesUtilisateurService recompensesUtilisateurService = new RecompensesUtilisateurService();
+        List<RecompensesUtilisateur> existingRewards = recompensesUtilisateurService.afficherParUser(user.getId());
+
         for (Recompenses reachedReward : reachedRewards) {
-            boolean hasReceivedReward = recompensesUtilisateurService.afficherParUser(user.getId())
-                    .stream()
+            boolean alreadyReceived = existingRewards.stream()
                     .anyMatch(recompensesUtilisateur -> recompensesUtilisateur.getReward().getRewardId() == reachedReward.getRewardId());
-            if (!hasReceivedReward) {
+            if (!alreadyReceived) {
                 RecompensesUtilisateur recompensesUtilisateur = new RecompensesUtilisateur(user, reachedReward, new Date(System.currentTimeMillis()), false, null);
                 recompensesUtilisateurService.ajouter(recompensesUtilisateur);
             }
@@ -533,7 +601,6 @@ public class QuizsEtudiantController {
             System.err.println("Current stage is null.");
         }
     }
-
 
 
     private void showQuizResult(int quizId) throws IOException {

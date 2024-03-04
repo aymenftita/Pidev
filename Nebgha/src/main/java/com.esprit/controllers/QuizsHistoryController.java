@@ -94,7 +94,23 @@ public class QuizsHistoryController {
 
         Label nameLabel = new Label(quiz.getNom());
         Label difficultyLabel = new Label(quiz.getDifficulte().toString());
-        Label durationLabel = new Label(String.valueOf(quiz.getDuree()));
+        List<ReponsesUtilisateur> userResponses = reponsesUtilisateurService.afficherParQuizEtUser(quiz.getQuizId(), user.getId());
+        int totalTakenTime = 0;
+        for (ReponsesUtilisateur userResponse : userResponses) {
+            totalTakenTime += userResponse.getTempsPris();
+        }
+        Label timeLabel = new Label("Time taken");
+        timeLabel.setAlignment(Pos.CENTER);
+        String timeTakenText;
+        if (totalTakenTime >= 60) {
+            int minutes = totalTakenTime / 60;
+            int seconds = totalTakenTime % 60;
+            timeTakenText = String.format("%02d:%02d mins", minutes, seconds);
+        } else {
+            timeTakenText = String.format(totalTakenTime + " secs");
+        }
+        Label timeTakenLabel = new Label(timeTakenText);
+        timeTakenLabel.setAlignment(Pos.CENTER);
         Image doneImage = new Image(getClass().getResourceAsStream("/media/done.png"));
 
         ImageView imageView = new ImageView(doneImage);
@@ -112,7 +128,7 @@ public class QuizsHistoryController {
 
             resultButton.getStyleClass().add("submit-button");
 
-            quizBlock.getChildren().addAll(nameLabel, imageView, difficultyLabel, durationLabel, resultButton);
+            quizBlock.getChildren().addAll(nameLabel, imageView, difficultyLabel, timeLabel,timeTakenLabel, resultButton);
         }
 
 

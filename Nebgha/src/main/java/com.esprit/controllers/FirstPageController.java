@@ -16,9 +16,9 @@ import java.io.IOException;
 
 public class FirstPageController {
     private UtilisateurService utilisateurService = new UtilisateurService();
-    private Utilisateur tuteur = utilisateurService.getUser(4);
-    private Utilisateur admin = utilisateurService.getUser(2);
-    private Utilisateur etudiant = utilisateurService.getUser(1);
+    private Utilisateur tuteur = utilisateurService.getUser(2);
+    private Utilisateur admin = utilisateurService.getUser(1);
+    private Utilisateur etudiant = utilisateurService.getUser(3);
 
 
     @FXML

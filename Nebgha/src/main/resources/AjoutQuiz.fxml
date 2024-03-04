@@ -3,10 +3,14 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -16,7 +20,7 @@
          <font>
             <Font size="17.0" />
          </font></Label>
-      <Label layoutX="97.0" layoutY="184.0" text="Duration (min)" textFill="#000066">
+      <Label layoutX="97.0" layoutY="184.0" text="Duration " textFill="#000066">
          <font>
             <Font size="17.0" />
          </font></Label>
@@ -32,9 +36,8 @@
          <font>
             <Font size="17.0" />
          </font></Label>
-      <TextField fx:id="titletf" layoutX="270.0" layoutY="100.0" style="-fx-border-color: #FDFD96;" />
-      <TextField fx:id="desctf" layoutX="270.0" layoutY="136.0" prefHeight="27.0" prefWidth="151.0" style="-fx-border-color: #FDFD96;" />
-      <TextField fx:id="dureetf" layoutX="270.0" layoutY="180.0" prefHeight="27.0" prefWidth="151.0" style="-fx-border-color: #FDFD96;" />
+      <TextField fx:id="titletf" layoutX="270.0" layoutY="100.0" prefHeight="27.0" prefWidth="159.0" style="-fx-border-color: #FDFD96;" />
+      <TextField fx:id="desctf" layoutX="270.0" layoutY="136.0" prefHeight="27.0" prefWidth="159.0" style="-fx-border-color: #FDFD96;" />
       <TextField fx:id="nbr_questionstf" layoutX="270.0" layoutY="228.0" prefHeight="27.0" prefWidth="163.0" style="-fx-border-color: #FDFD96;" />
       <Button layoutX="419.0" layoutY="319.0" mnemonicParsing="false" onAction="#addQuiz" prefHeight="40.0" prefWidth="99.0" stylesheets="@media/styles.css" text="Submit" textFill="#000066">
          <font>
@@ -57,10 +60,25 @@
             <Font size="25.0" />
          </font>
       </Label>
+      <GridPane>
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+      </GridPane>
       <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="14.0" layoutY="15.0" onMouseClicked="#previous">
          <image>
             <Image url="@media/previous.png" />
          </image>
       </ImageView>
+      <Spinner fx:id="minutesSpinner" layoutX="269.0" layoutY="187.0" prefHeight="26.0" prefWidth="66.0" />
+      <Label layoutX="279.0" layoutY="169.0" text="Minutes" textFill="#000066" />
+
+      <Label layoutX="371.0" layoutY="169.0" text="Seconds" textFill="#000066" />
+      <Spinner fx:id="secondsSpinner" layoutX="362.0" layoutY="187.0" prefHeight="26.0" prefWidth="66.0" />
    </children>
 </AnchorPane>

@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -13,10 +14,6 @@
 <AnchorPane prefHeight="400.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.EditQuizController">
     <children>
         <Label layoutX="42.0" layoutY="149.0" text="Description" textFill="#000066">
-         <font>
-            <Font size="17.0" />
-         </font></Label>
-        <Label layoutX="42.0" layoutY="193.0" text="Duration (min)" textFill="#000066">
          <font>
             <Font size="17.0" />
          </font></Label>
@@ -34,7 +31,6 @@
          </font></Label>
         <TextField fx:id="titletf" layoutX="215.0" layoutY="109.0" prefHeight="27.0" prefWidth="163.0" style="-fx-border-color: #FDFD96;" />
         <TextField fx:id="desctf" layoutX="215.0" layoutY="145.0" prefHeight="27.0" prefWidth="163.0" style="-fx-border-color: #FDFD96;" />
-        <TextField fx:id="dureetf" layoutX="215.0" layoutY="189.0" prefHeight="27.0" prefWidth="163.0" style="-fx-border-color: #FDFD96;" />
         <TextField fx:id="nbr_questionstf" layoutX="216.0" layoutY="240.0" prefHeight="27.0" prefWidth="163.0" style="-fx-border-color: #FDFD96;" />
         <Button layoutX="498.0" layoutY="319.0" mnemonicParsing="false" onAction="#EditQuiz" prefHeight="40.0" prefWidth="103.0" stylesheets="@media/styles.css" text="Submit" textFill="#000066">
          <font>
@@ -62,5 +58,14 @@
             <Image url="@media/previous.png" />
          </image>
       </ImageView>
+      <Label layoutX="42.0" layoutY="193.0" text="Duration " textFill="#000066">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Spinner fx:id="minutesSpinner" layoutX="214.0" layoutY="196.0" prefHeight="26.0" prefWidth="66.0" />
+      <Label layoutX="224.0" layoutY="178.0" text="Minutes" textFill="#000066" />
+      <Label layoutX="316.0" layoutY="178.0" text="Seconds" textFill="#000066" />
+      <Spinner fx:id="secondsSpinner" layoutX="307.0" layoutY="196.0" prefHeight="26.0" prefWidth="66.0" />
     </children>
 </AnchorPane>

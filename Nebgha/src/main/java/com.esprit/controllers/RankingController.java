@@ -2,6 +2,7 @@ package com.esprit.controllers;
 
 import com.esprit.models.Questions;
 import com.esprit.models.ReponsesUtilisateur;
+import com.esprit.models.Role;
 import com.esprit.models.Utilisateur;
 import com.esprit.services.QuestionsService;
 import com.esprit.services.ReponsesUtilisateurService;
@@ -57,9 +58,11 @@ public class RankingController implements Initializable {
         Utilisateur currentUser = utilisateurService.getUser(currentUserId);
 
         List<Utilisateur> allUsers = utilisateurService.afficher();
+        List<Utilisateur> students = allUsers.stream()
+                .filter(user->user.getRole().equals(Role.Etudiant)).toList();
         Map<Utilisateur, Integer> userScores = new HashMap<>();
 
-        for (Utilisateur utilisateur : allUsers) {
+        for (Utilisateur utilisateur : students) {
             List<ReponsesUtilisateur> reponsesUtilisateurList = reponsesUtilisateurService.afficherParUser(utilisateur.getId());
             int totalScore = reponsesUtilisateurList.stream()
                     .mapToInt(reponseUtilisateur -> {
@@ -88,7 +91,6 @@ public class RankingController implements Initializable {
             }
         }
 
-        // Check if the current user is already in the top 5
         boolean currentUserInTop5 = false;
         for (Map.Entry<Utilisateur, Integer> entry : sortedScores) {
             if (entry.getKey().getId() == currentUserId) {
@@ -98,7 +100,6 @@ public class RankingController implements Initializable {
         }
 
         if (!currentUserInTop5) {
-            // Add current user's ranking
             int currentUserScore = userScores.getOrDefault(currentUser, 0);
             Map.Entry<Utilisateur, Integer> currentUserEntry = new AbstractMap.SimpleEntry<>(currentUser, currentUserScore);
             sortedScores.add(currentUserEntry);

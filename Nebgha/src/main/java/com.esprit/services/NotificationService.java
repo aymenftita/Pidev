@@ -68,7 +68,7 @@ public class NotificationService {
         if (quizzesPassedToday > 0) {
             Notifications.create()
                     .title("Quizzes Passed Today")
-                    .text(quizzesPassedToday + " of your quizzes have been passed today")
+                    .text("one of your quizzes have been passed "+ quizzesPassedToday + "times today")
                     .showInformation();
         }
     }

@@ -35,7 +35,7 @@ public class RecompensesEtudiantController {
 
     public void initialize() {
         List<RecompensesUtilisateur> userRewards = recompensesUtilisateurService.afficherParUser(userId);
-
+        System.out.println(userRewards);
         for (RecompensesUtilisateur recompensesUtilisateur : userRewards) {
             HBox rewardBlock = createRewardBlock(recompensesUtilisateur);
             rewardsContainer.getChildren().add(rewardBlock);
