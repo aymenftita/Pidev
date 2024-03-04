@@ -42,7 +42,7 @@
       </TextField>
    </top>
    <center>
-           <TableView fx:id="tableView" prefHeight="258.0" prefWidth="650.0" BorderPane.alignment="CENTER">
+           <TableView fx:id="tableView" prefHeight="258.0" prefWidth="650.0" stylesheets="@tableStyle.css" BorderPane.alignment="CENTER">
                  <columns>
                      <TableColumn fx:id="idColumng" prefWidth="47.20001220703125" text="User ID" />
                      <TableColumn fx:id="nomColumn" prefWidth="136.79998779296875" text="Nom Groupe" />

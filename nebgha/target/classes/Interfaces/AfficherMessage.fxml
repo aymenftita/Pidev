@@ -15,22 +15,22 @@
    <left>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="125.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="115.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/G.gif" />
                </image>
             </ImageView>
-            <Button defaultButton="true" mnemonicParsing="false" onAction="#SwitchToAfficherGroupe" prefHeight="40.0" prefWidth="130.0" text="Groupes">
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#SwitchToAfficherGroupe" prefHeight="93.0" prefWidth="123.0" text="Groupes">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <ImageView fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="123.0" fitWidth="126.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/R.gif" />
                </image>
             </ImageView>
-            <Button defaultButton="true" mnemonicParsing="false" onAction="#SwitchToAfficherReclamation" prefHeight="30.0" prefWidth="130.0" text="Reclamations">
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#SwitchToAfficherReclamation" prefHeight="60.0" prefWidth="123.0" text="Reclamations">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -73,7 +73,7 @@
    <center>
       <BorderPane BorderPane.alignment="CENTER">
          <center>
-            <TableView fx:id="MessageTable" prefHeight="294.0" prefWidth="587.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="MessageTable" prefHeight="294.0" prefWidth="587.0" stylesheets="@tableStyle.css" BorderPane.alignment="CENTER">
                <columns>
                   <TableColumn fx:id="CidG" prefWidth="76.79998779296875" text="Id Groupe" />
                   <TableColumn fx:id="CDate" prefWidth="115.199951171875" text="Date Creation" />

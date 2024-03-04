@@ -14,14 +14,14 @@
 
 <BorderPane prefHeight="584.0" prefWidth="828.0" styleClass="bkImage" stylesheets="@testStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.reclamationControllers.AfficherReclamationController">
    <center>
-       <TableView fx:id="tableView" prefHeight="390.0" prefWidth="750.0">
+       <TableView fx:id="tableView" prefHeight="390.0" prefWidth="750.0" stylesheets="@tableStyle.css">
            <columns>
                <TableColumn fx:id="uid" prefWidth="55.99993896484375" text="Id User" />
                <TableColumn fx:id="date" prefWidth="90.39995574951172" text="Date creation" />
                <TableColumn fx:id="sujet" prefWidth="60.79998779296875" text="Sujet" />
                <TableColumn fx:id="desc" prefWidth="242.39996337890625" text="description " />
                <TableColumn fx:id="stat" prefWidth="96.00006103515625" text="status" />
-               <TableColumn fx:id="priorite" prefWidth="109.59991455078125" text="priorité" />
+               <TableColumn fx:id="priorite" prefWidth="78.39998779296877" text="priorité" />
            </columns>
        </TableView>
    </center>

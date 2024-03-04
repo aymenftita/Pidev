@@ -1,11 +1,13 @@
 package com.esprit.tests;
 
+import com.esprit.controllers.ChatboxController;
 import com.esprit.controllers.NotificationUtil;
 import com.esprit.models.*;
 import com.esprit.services.*;
 import javafx.application.Platform;
 import org.controlsfx.control.Notifications;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,7 +16,7 @@ import java.util.List;
 
 public class MainProg {
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, IOException {
         GroupeService gs = new GroupeService();
         ReclamationService rs = new ReclamationService();
         UtilisateurService us =new UtilisateurService();
@@ -68,7 +70,10 @@ public class MainProg {
         //MessageService ms = new MessageService();
 
         //Message m = new Message(1,1,"dzdzd","hfhff");
-        System.out.println(ms.afficher());
+        //System.out.println(ms.afficher());
+
+        ChatboxController cbc=new ChatboxController();
+        cbc.TextFiltringApi("damn it");
 
     }
 }
