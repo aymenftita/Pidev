@@ -4,13 +4,17 @@ import com.esprit.models.Evenement;
 import com.esprit.models.Localisation;
 import com.esprit.utils.DataSource;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class LocalisationService implements IService<Localisation>  {
 
@@ -155,4 +159,73 @@ public class LocalisationService implements IService<Localisation>  {
         }
         return l;
     }
+    public Localisation getCoordinatesFromAddress(String address) {
+        try {
+            // Appeler l'API de géolocalisation sans clé
+            String apiUrl = "https://nominatim.openstreetmap.org/search?format=json&limit=1&q=" + address;
+            HttpURLConnection connection = (HttpURLConnection) new URL(apiUrl).openConnection();
+            connection.setRequestMethod("GET");
+
+            // Lire la réponse de l'API
+            StringBuilder response = new StringBuilder();
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+            }
+
+            // Analyser la réponse JSON avec Jackson
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode rootNode = objectMapper.readTree(response.toString());
+
+            // Vérifier si la réponse contient des résultats
+            if (rootNode.isArray() && rootNode.size() > 0) {
+                JsonNode firstEntry = rootNode.get(0);
+                double latitude = firstEntry.get("lat").asDouble();
+                double longitude = firstEntry.get("lon").asDouble();
+                String ville = firstEntry.get("name").asText();
+                String pays = firstEntry.get("display_name").asText();
+               // System.out.println("Latitude: " + latitude);
+                //System.out.println("Longitude: " + longitude);
+               // System.out.println("Nom du lieu: " + ville);
+             //   System.out.println("Nom affiché: " + pays);
+                // Retourner une nouvelle instance de Localisation avec les coordonnées obtenues
+               // return new Localisation(latitude, longitude);
+                return new Localisation(latitude, longitude, ville, pays);
+            } else {
+                // Ajouter un message de débogage
+                System.out.println("Réponse de l'API : " + response.toString());
+                return null;  // Retourner null si les coordonnées ne peuvent pas être obtenues
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;  // Retourner null en cas d'erreur lors de la communication avec l'API
+        }
+    }
+
+    public void enregistrer(Localisation localisation) {
+        // Vérifiez si la ville n'est pas null avant d'effectuer l'insertion
+        if (localisation != null && localisation.getVille() != null) {
+            String req = "INSERT INTO localisation(ville, codePostal, pays, latitude, longitude )  values (?, ?, ?, ?, ?)";
+            try (PreparedStatement ps = connection.prepareStatement(req)) {
+                ps.setString(1, localisation.getVille());
+                ps.setInt(2, localisation.getCodePostal());
+                ps.setString(3, localisation.getPays());
+                ps.setDouble(4, localisation.getLatitude());
+                ps.setDouble(5, localisation.getLongitude());
+
+                ps.executeUpdate();
+                System.out.println("Localisation ajoutée !");
+            } catch (SQLException e) {
+                System.out.println("Erreur lors de l'ajout de la localisation : " + e.getMessage());
+            }
+        } else {
+            System.out.println("La valeur de 'ville' ne peut pas être null. Ajout de la localisation annulé.");
+        }
+    }
+
+
 }
+

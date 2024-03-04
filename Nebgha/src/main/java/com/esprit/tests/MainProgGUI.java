@@ -1,5 +1,6 @@
 package com.esprit.tests;
 
+import com.esprit.controllers.CarteGeoController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,9 +17,10 @@ public class MainProgGUI extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListLocalisation.fxml"));
+       try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/CarteGeo.fxml"));
             Parent root = loader.load();
+
             Scene scene = new Scene(root, 800, 500);
             primaryStage.setScene(scene);
 
@@ -26,7 +28,7 @@ public class MainProgGUI extends Application {
             primaryStage.show();
 
         } catch (IOException ex) {
-            System.out.println("error" + ex.getMessage());
+           System.out.println("error" + ex.getMessage());
         }
     }
 }

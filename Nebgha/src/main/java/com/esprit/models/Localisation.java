@@ -15,7 +15,10 @@ public class Localisation {
 
     public Localisation() {
     }
-
+    public Localisation(double latitude, double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
     public Localisation(int id, String ville, String pays, double latitude, double longitude, int codePostal) {
         this.id = id;
         this.ville = ville;
@@ -31,6 +34,12 @@ public class Localisation {
         this.latitude = latitude;
         this.longitude = longitude;
         this.codePostal = codePostal;
+    }
+    public Localisation(double latitude, double longitude, String ville, String pays) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.ville = ville;
+        this.pays = pays;
     }
 
     public int getId() {
@@ -105,4 +114,6 @@ public class Localisation {
                 ", codePostal=" + codePostal +
                 '}';
     }
+
+
 }
