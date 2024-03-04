@@ -22,7 +22,7 @@
             <Font name="Candara" size="12.0" />
          </font>
       </TextField>
-      <Label layoutX="249.0" layoutY="65.0" text="Ajout Localisation" textFill="#0e1c57" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+      <Label layoutX="249.0" layoutY="28.0" text="Ajout Localisation" textFill="#0e1c57" textOverrun="CENTER_ELLIPSIS" wrapText="true">
          <font>
             <Font name="Candara" size="38.0" />
          </font>
@@ -67,5 +67,7 @@
             <Font name="Candara" size="12.0" />
          </font>
       </Label>
+      <TextField fx:id="adress" layoutX="293.0" layoutY="81.0" prefHeight="25.0" prefWidth="199.0" />
+      <Button fx:id="enregistre" layoutX="506.0" layoutY="81.0" mnemonicParsing="false" onAction="#enregistre" text="save" />
    </children>
 </AnchorPane>
