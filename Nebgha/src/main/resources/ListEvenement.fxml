@@ -17,7 +17,6 @@
          </image>
       </ImageView>
       <ListView fx:id="listEvenement" layoutX="110.0" layoutY="159.0" opacity="0.52" prefHeight="383.0" prefWidth="602.0" style="-fx-background-color: #D9D9D9;" />
-      <TextField layoutX="412.0" layoutY="74.0" onAction="#Search" prefHeight="25.0" prefWidth="289.0" promptText="Search..." style="-fx-border-radius: 20px;" />
       <HBox layoutX="400.0" layoutY="28.0" prefHeight="46.0" prefWidth="302.0">
          <children>
             <Button mnemonicParsing="false" onAction="#ajoutEvenement" prefHeight="46.0" prefWidth="97.0" style="-fx-background-color: transparent; -fx-border-radius: 20px;" styleClass="arrow-button" stylesheets="@style.css" text="Add" textFill="#0e1d59">
@@ -43,6 +42,12 @@
             <Image url="@Images/421935935_2103323113360956_2155380558138833429_n.png" />
          </image>
       </ImageView>
-      <Button fx:id="serachButton" layoutX="649.0" layoutY="74.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" />
+      <Button fx:id="serachButton" layoutX="649.0" layoutY="74.0" mnemonicParsing="false" onAction="#Recherche" prefHeight="25.0" prefWidth="51.0" text="search" />
+      <TextField fx:id="Ville" layoutX="459.0" layoutY="73.0" onKeyTyped="#Chercher" prefHeight="27.0" prefWidth="182.0" promptText="Ville" style="-fx-background-color: transparent; -fx-border-color: grey; -fx-border-radius: 20px;">
+         <font>
+            <Font name="Candara" size="12.0" />
+         </font>
+      </TextField>
+      <Button layoutX="385.0" layoutY="74.0" mnemonicParsing="false" onAction="#tri" text="Tri" />
    </children>
 </AnchorPane>

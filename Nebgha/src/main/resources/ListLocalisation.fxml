@@ -11,12 +11,12 @@
 
 <AnchorPane prefHeight="579.0" prefWidth="789.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.ListLocalisationController">
    <children>
-      <ImageView fitHeight="579.0" fitWidth="789.0" layoutX="1.0" layoutY="-1.0">
+      <ImageView fitHeight="585.0" fitWidth="801.0" layoutY="-1.0">
          <image>
             <Image url="@Images/map.jpg" />
          </image>
       </ImageView>
-      <ListView fx:id="listLoc" layoutX="78.0" layoutY="168.0" opacity="0.55" prefHeight="408.0" prefWidth="647.0" style="-fx-background-color: #D9D9D9;" />
+      <ListView fx:id="listLoc" layoutX="110.0" layoutY="159.0" opacity="0.52" prefHeight="383.0" prefWidth="602.0" style="-fx-background-color: #D9D9D9;" />
       <TextField layoutX="412.0" layoutY="74.0" prefHeight="25.0" prefWidth="289.0" promptText="Search..." style="-fx-border-radius: 20px;" />
       <HBox layoutX="400.0" layoutY="28.0" prefHeight="46.0" prefWidth="302.0">
          <children>

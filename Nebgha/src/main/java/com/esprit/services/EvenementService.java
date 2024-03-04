@@ -112,6 +112,36 @@ public class EvenementService implements IService<Evenement> {
         return null;
     }
 
+    public  List<Evenement> Recherche(String name) throws SQLException {
+        List<Evenement> evenements = new ArrayList<>();
+        LocalisationService ls = new LocalisationService();
+        try {
+            String s = "SELECT * FROM `evenement` WHERE nom LIKE '%" + name + "%';";
+
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(s);
+            while (rs.next()) {
+                Evenement e = new Evenement();
+                e.setId(rs.getInt("id"));
+
+                e.setNom(rs.getString("nom"));
+                e.setDate (rs.getDate("date"));
+
+                e.setLieuId(ls.findById(rs.getInt("lieuId")));
+                e.setDescription(rs.getString("description"));
+                e.setImage(rs.getString("image"));
+
+
+                evenements.add(e);
+
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return evenements;
+    }
+
 
 
 
