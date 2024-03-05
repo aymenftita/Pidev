@@ -63,6 +63,24 @@ public class ChatboxController {
     private void displayChatHistory(List<Message> chatHistory) {
         for (Message message : chatHistory) {
             Label messageLabel = new Label(us.rechercheUtilisateur(message.getUid()).getNom() + ": " + message.getText());
+            messageLabel.setOnMouseClicked(event -> {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirmation Dialog");
+                alert.setHeaderText("Are you sure?");
+                alert.setContentText("Do you want to report this message?");
+
+                // Customize the button types (OK, Cancel)
+                alert.getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
+
+                // Show and wait for the user's response
+                alert.showAndWait().ifPresent(buttonType -> {
+                    if (buttonType == ButtonType.OK) {
+                        message.setSignal(1);
+                        ms.modifier(message);
+                        // Add your logic for OK button action here
+                    }
+                });
+            });
             messageLabel.setLineSpacing(10);
             HBox hbox = new HBox(messageLabel);
             UtilisateurService us = new UtilisateurService();
@@ -81,6 +99,9 @@ public class ChatboxController {
             System.out.println(message.getUid());
         }
     }
+
+
+
 
     /*@FXML
     private void handleSendButtonAction(ActionEvent event) {
@@ -118,24 +139,32 @@ public class ChatboxController {
     public void handleSendButtonActionI(MouseEvent mouseEvent) throws IOException {
         String messageContent = messageTextField.getText().trim();
         if (!messageContent.isEmpty()) {
-            String cleanValue = TextFiltringApi(messageContent);
-            Message newMessage = new Message(selectedGroup.getId_groupe(), String.valueOf(LocalDate.now()), cleanValue, Session.getUserId(), 0);
-            ms.ajouter(newMessage);
-            Label newM = new Label(us.rechercheUtilisateur(newMessage.getUid()).getNom() + " : " + cleanValue + "\n");
-            Label bad = new Label("Ken fi darkom matrabitch a7na nrabywek ye XXXXX");
-            bad.setStyle("-fx-background-color: white; -fx-background-radius: 40; -fx-font-size: 20; -fx-text-fill: red; ");
-            newM.wrapTextProperty();
-            newM.setStyle("-fx-background-color: #4B87F6; -fx-background-radius: 40; -fx-font-size: 20; -fx-text-fill: white; ");
 
-            if(TextFiltringApi(messageContent)==null){
+            if(TextFiltringApi(messageContent).equals(messageContent)){
+                String cleanValue = TextFiltringApi(messageContent);
+                Message newMessage = new Message(selectedGroup.getId_groupe(), String.valueOf(LocalDate.now()), cleanValue, Session.getUserId(), 0);
+                ms.ajouter(newMessage);
+                Label newM = new Label(us.rechercheUtilisateur(newMessage.getUid()).getNom() + " : " + cleanValue + "\n");
+                newM.wrapTextProperty();
+                newM.setStyle("-fx-background-color: #4B87F6; -fx-background-radius: 40; -fx-font-size: 20; -fx-text-fill: white; ");
                 // Update the chatTextArea with the new message
                 HBox hbox = new HBox(newM);
                 hbox.setAlignment(Pos.CENTER_RIGHT);
                 vbox.getChildren().add(hbox);
             }else{
-                HBox hbox = new HBox(newM,bad);
+                String cleanValue = TextFiltringApi(messageContent);
+                Message newMessage = new Message(selectedGroup.getId_groupe(), String.valueOf(LocalDate.now()), cleanValue, Session.getUserId(), 1);
+                ms.ajouter(newMessage);
+                Label newM = new Label(us.rechercheUtilisateur(newMessage.getUid()).getNom() + " : " + cleanValue + "\n");
+                Label bad = new Label("PlZ respect others!!! , your message is automaticly reported");
+                bad.setStyle("-fx-background-color: red; -fx-background-radius: 40; -fx-font-size: 20; -fx-text-fill: white; ");
+                newM.wrapTextProperty();
+                newM.setStyle("-fx-background-color: #4B87F6; -fx-background-radius: 40; -fx-font-size: 20; -fx-text-fill: white; ");
+                HBox hboxBad =new HBox(bad);
+                hboxBad.setAlignment(Pos.CENTER_RIGHT);
+                HBox hbox = new HBox(newM);
                 hbox.setAlignment(Pos.CENTER_RIGHT);
-                vbox.getChildren().addAll(hbox);
+                vbox.getChildren().addAll(hbox,hboxBad);
             }
 
             // Save the message to the database
@@ -186,7 +215,28 @@ public class ChatboxController {
         return cleanValue;
     }
 
-    public void ChatBotRespect(){
+    public void AutoCorrectApi() throws IOException {
+        OkHttpClient client = new OkHttpClient();
+
+        MediaType mediaType = MediaType.parse("application/json");
+        RequestBody body = RequestBody.create(mediaType, "{\r\n    \"text\": \"Tihs snetence has erors in \",\r\n    \"keyboard\": \"QWERTY\",\r\n    \"languages\": [\r\n        \"en\"\r\n    ]\r\n}");
+        Request request = new Request.Builder()
+                .url("https://typewise-ai.p.rapidapi.com/correction/whole_sentence")
+                .post(body)
+                .addHeader("content-type", "application/json")
+                .addHeader("X-RapidAPI-Key", "aef1032e49msh9d46f007189dde9p15f3f9jsn879fab779700")
+                .addHeader("X-RapidAPI-Host", "typewise-ai.p.rapidapi.com")
+                .build();
+
+        Response response = client.newCall(request).execute();
+
+        String responseBody = response.body().string();
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode root = mapper.readTree(responseBody);
+
+        // Access the "clean" field in the JSON response
+        String cleanValue = root.path("corrected_text").asText();
+        System.out.println(cleanValue);
 
     }
 }

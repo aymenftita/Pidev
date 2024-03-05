@@ -6,11 +6,17 @@ import com.esprit.models.Utilisateur;
 import com.esprit.services.ReclamationService;
 import com.esprit.services.Session;
 import com.esprit.services.UtilisateurService;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.util.Duration;
+import okhttp3.*;
 
 
 import java.io.IOException;
@@ -70,32 +76,56 @@ public class AjouterReclamationController {
 
     }
 
-    public void initialize(){
+    public String AutoCorrectApi(String s) throws IOException {
+        OkHttpClient client = new OkHttpClient();
 
+        MediaType mediaType = MediaType.parse("application/json");
+        RequestBody body = RequestBody.create(mediaType,String.format("{\r\n    \"text\": \"%s\",\r\n    \"keyboard\": \"QWERTY\",\r\n    \"languages\": [\r\n        \"en\"\r\n    ]\r\n}",s) );
+        Request request = new Request.Builder()
+                .url("https://typewise-ai.p.rapidapi.com/correction/whole_sentence")
+                .post(body)
+                .addHeader("content-type", "application/json")
+                .addHeader("X-RapidAPI-Key", "aef1032e49msh9d46f007189dde9p15f3f9jsn879fab779700")
+                .addHeader("X-RapidAPI-Host", "typewise-ai.p.rapidapi.com")
+                .build();
 
-        /*cb.setItems(FXCollections.observableArrayList(
-                Status.envoyé.toString(),
-                Status.EnCourDeTraitement.toString(),
-                Status.Traité.toString(),
-                Status.EnReponse.toString()));
+        Response response = client.newCall(request).execute();
 
-        cbUsers.setItems(FXCollections.observableArrayList(users));
-        cbUsers.setCellFactory(listView -> new ListCell<Utilisateur>() {
-            @Override
-            protected void updateItem(Utilisateur user, boolean empty) {
-                super.updateItem(user, empty);
-                if (user != null) {
-                    setText(String.valueOf(user.getNom()));
-                } else {
-                    setText(null);
-                }
-            }
-        });*/
+        String responseBody = response.body().string();
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode root = mapper.readTree(responseBody);
+
+        // Access the "clean" field in the JSON response
+        String CorrectSentence = root.path("corrected_text").asText();
+        System.out.println(CorrectSentence);
+        return CorrectSentence;
     }
 
+    private void startStreaming() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), event -> {
+            if(!tfDescription.getText().isEmpty()){
+                updateStreamingText();
+                try {
+                    tfDescription.setText(AutoCorrectApi(tfDescription.getText()));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
 
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
 
+    private void updateStreamingText() {
+        // Customize how the streaming text is updated here
+        tfDescription.setText(tfDescription.getText().substring(1) + tfDescription.getText().charAt(0));
+    }
 
+    public void initialize(){
 
+        startStreaming();
+
+    }
 
 }

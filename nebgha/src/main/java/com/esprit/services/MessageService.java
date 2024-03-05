@@ -12,7 +12,7 @@ import java.util.List;
 
 public class MessageService {
 
-    private Connection connection;
+    private final Connection connection;
 
     public  MessageService() {
         connection = DataSource.getInstance().getConnection();
@@ -20,7 +20,7 @@ public class MessageService {
 
     public void ajouter(Message message) {
 
-       String req = "INSERT INTO message(uid,id_g,text,date_creation,signale) VALUES ('"+message.getUid()+"','"+message.getIdGroupe()+"','"+message.getText()+"','"+message.getDateCreation()+"','"+message.isSignal()+"')";
+       String req = "INSERT INTO message(uid,id_g,text,date_creation,signale) VALUES ('"+message.getUid()+"','"+message.getIdGroupe()+"','"+message.getText()+"','"+message.getDateCreation()+"','"+message.getSignal()+"')";
         try {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
@@ -31,7 +31,7 @@ public class MessageService {
     }
 
     public void modifier(Message message) {
-        String req = "UPDATE message set id_g = '" + message.getIdGroupe() + "',text = '" + message.getText() + "', date_creation = '" + message.getDateCreation() + "' where id_message = " + message.getIdMessage() + ";";
+        String req = "UPDATE message set signale = '" + message.getSignal() + "', id_g = '" + message.getIdGroupe() + "',text = '" + message.getText() + "', date_creation = '" + message.getDateCreation() + "' where id_message = " + message.getIdMessage() + ";";
         try {
             Statement st = connection.createStatement();
             st.executeUpdate(req);

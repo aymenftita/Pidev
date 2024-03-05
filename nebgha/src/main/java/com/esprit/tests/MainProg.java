@@ -2,6 +2,7 @@ package com.esprit.tests;
 
 import com.esprit.controllers.ChatboxController;
 import com.esprit.controllers.NotificationUtil;
+import com.esprit.controllers.reclamationControllers.AjouterReclamationController;
 import com.esprit.models.*;
 import com.esprit.services.*;
 import javafx.application.Platform;
@@ -73,7 +74,9 @@ public class MainProg {
         //System.out.println(ms.afficher());
 
         ChatboxController cbc=new ChatboxController();
-        cbc.TextFiltringApi("damn it");
+        //cbc.AutoCorrectApi();
+        AjouterReclamationController arc = new AjouterReclamationController();
+        arc.AutoCorrectApi("basterd");
 
     }
 }

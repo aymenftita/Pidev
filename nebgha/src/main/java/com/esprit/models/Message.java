@@ -33,15 +33,14 @@ public class Message {
         this.signal=signal;
     }
 
-    public int isSignal() {
+
+    public int getSignal() {
         return signal;
     }
 
     public void setSignal(int signal) {
         this.signal = signal;
     }
-
-
 
     public int getIdMessage() {
         return idMessage;
@@ -86,4 +85,5 @@ public class Message {
                 ", signal=" + signal +
                 '}';
     }
+
 }
