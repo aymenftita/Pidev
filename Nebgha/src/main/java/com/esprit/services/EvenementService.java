@@ -3,6 +3,7 @@ package com.esprit.services;
 import com.esprit.models.Evenement;
 import com.esprit.models.Localisation;
 import com.esprit.utils.DataSource;
+import javafx.scene.control.Alert;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class EvenementService implements IService<Evenement> {
         try {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
+            showAlert("Événement ajouté", "Nouvel événement ajouté avec succès.");
             System.out.println("Événement ajouté !");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -43,6 +45,8 @@ public class EvenementService implements IService<Evenement> {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
             System.out.println("Événement modifié !");
+            showAlert("Evenement updated.", "Evenement updated");
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -142,8 +146,13 @@ public class EvenementService implements IService<Evenement> {
         }
         return evenements;
     }
-
-
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 
 
 }

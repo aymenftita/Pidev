@@ -13,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import javafx.scene.input.KeyEvent;
 
@@ -129,9 +130,40 @@ public class ListEvenementController implements Initializable {
             List<Evenement> events = es.recuperer();
             ObservableList<Evenement> olp = FXCollections.observableArrayList(events);
             listEvenement.setItems(olp);
+            // Ajoutez le gestionnaire d'événements pour double-clic sur l'élément ListView
+            listEvenement.setOnMouseClicked(event -> {
+                if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
+                    // Récupérez l'élément sélectionné
+                    Evenement selectedEvent = listEvenement.getSelectionModel().getSelectedItem();
+
+                    if (selectedEvent != null) {
+                        try {
+                            // Chargez le fichier FXML AfficherEvent.fxml
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherEvent.fxml"));
+                            Parent root = loader.load();
+
+                            // Récupérez le contrôleur de la scène chargée
+                            AfficherEventController controller = loader.getController();
+
+                            // Passez l'événement sélectionné au contrôleur AfficherEventController
+                            controller.setEventDetails(selectedEvent);
+
+                            // Configurez la scène avec le nouvel AfficherEvent.fxml
+                            Stage newStage = new Stage();
+                            Scene newScene = new Scene(root, 800, 550);
+                            newStage.setScene(newScene);
+                            newStage.setTitle("Afficher Evenement");
+                            newStage.show();
+
+                        } catch (IOException ex) {
+                            System.out.println("Error: " + ex.getMessage());
+                        }
+                    }
+                }
+            });
 
         } catch (SQLException ex) {
-            System.out.println("error" + ex.getMessage());
+            System.out.println("Error: " + ex.getMessage());
         }
     }
 

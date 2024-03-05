@@ -84,7 +84,7 @@ public class AjoutEvenementController implements Initializable {
                 e.setNom(Nom.getText());
                 e.setDate(Date.valueOf(Datee.getValue()));
                 e.setDescription(Description.getText());
-                e.setImage(ImageF.getText());
+                e.setImage("C:/Users/hp/AppData/Local/Temp/607ad7d3-6bb1-4cd8-9257-d9faa0559b88_workshopjdbc.zip.b88/Pidev/Nebgha/src/main/resources/Images/"+ImageF.getText());
                 e.setLieuId(ls.findByName(nom_loc));
                 es.ajouter(e);
                 System.out.println("Event ajouté avec succées !");
