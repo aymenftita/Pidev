@@ -41,5 +41,6 @@
             <Image url="@Images/421935935_2103323113360956_2155380558138833429_n.png" />
          </image>
       </ImageView>
+      <Button layoutX="247.0" layoutY="51.0" mnemonicParsing="false" onAction="#meteo" text="Button" />
    </children>
 </AnchorPane>

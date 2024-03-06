@@ -105,14 +105,13 @@ public class Localisation {
 
     @Override
     public String toString() {
-        return "Localisation{" +
-                "id=" + id +
-                ", ville='" + ville + '\'' +
-                ", pays='" + pays + '\'' +
-                ", latitude=" + latitude +
-                ", longitude=" + longitude +
-                ", codePostal=" + codePostal +
-                '}';
+        return "Localisation: " +
+             //   "id=" + id +
+                ", ville: " + ville +
+                ", pays: " + pays +
+                //", latitude=" + latitude +
+               // ", longitude=" + longitude +
+                ", codePostal:" + codePostal ;
     }
 
 

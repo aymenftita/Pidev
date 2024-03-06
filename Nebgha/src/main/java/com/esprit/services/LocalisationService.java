@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -281,5 +282,18 @@ public class LocalisationService implements IService<Localisation>  {
         return localisations;
     }
 
+    public String getWeatherInfo(Localisation location) {
+        try {
+            JSONObject weatherData = WeatherService.getWeather(location.getPays());
+            double temperatureKelvin = weatherData.getJSONObject("main").getDouble("temp");
+            double temperatureCelsius = temperatureKelvin - 273.15;
+            String description = weatherData.getJSONArray("weather").getJSONObject(0).getString("description");
+
+            return String.format("temperature à %s est de %.1f°C. Conditions météorologiques : %s", location.getPays(), temperatureCelsius, description);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Erreur lors de la récupération des informations météorologiques.";
+        }
+    }
 }
 

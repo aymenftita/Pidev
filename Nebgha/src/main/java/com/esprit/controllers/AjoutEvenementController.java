@@ -4,7 +4,6 @@ import com.esprit.models.Evenement;
 import com.esprit.models.Localisation;
 import com.esprit.services.EvenementService;
 import com.esprit.services.LocalisationService;
-import com.esprit.services.NotificationService;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,7 +16,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.*;
