@@ -19,12 +19,9 @@ public class EvenementService implements IService<Evenement> {
         connection = DataSource.getInstance().getConnection();
     }
 
-    private NotificationService notificationService;
 
-    public EvenementService(NotificationService notificationService) {
-        connection = DataSource.getInstance().getConnection();
-        this.notificationService = notificationService;
-    }
+
+
     @Override
     public void ajouter(Evenement evenement) {
         String req = "INSERT into evenement( nom, date,  lieuId, description , image) values ( '" + evenement.getNom() + "', '" + evenement.getDate() + "', '" + evenement.getLieuId().getId() + "', '" +

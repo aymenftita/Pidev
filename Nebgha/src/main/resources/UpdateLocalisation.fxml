@@ -9,20 +9,15 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="581.0" prefWidth="797.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.UpdateLocalisatonController">
+<AnchorPane prefHeight="498.0" prefWidth="797.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.UpdateLocalisatonController">
 <children>
-    <ImageView fitHeight="589.0" fitWidth="804.0" layoutX="-1.0">
-        <image>
-            <Image url="@Images/map.jpg" />
-        </image>
-    </ImageView>
-    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#26186b" height="295.0" layoutX="193.0" layoutY="125.0" opacity="0.41" stroke="BLACK" strokeType="INSIDE" width="417.0" />
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#054c80" height="295.0" layoutX="193.0" layoutY="125.0" opacity="0.76" stroke="BLACK" strokeType="INSIDE" width="417.0" />
     <TextField fx:id="Villee" layoutX="246.0" layoutY="153.0" prefHeight="27.0" prefWidth="146.0" promptText="Ville" style="-fx-background-color: transparent; -fx-border-color: grey; -fx-border-radius: 20px;">
         <font>
             <Font name="Candara" size="12.0" />
         </font>
     </TextField>
-    <Label layoutX="249.0" layoutY="65.0" text="Update Localisation" textFill="#0e1c57" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+    <Label layoutX="265.0" layoutY="42.0" text="Update Location" textFill="#0e1c57" textOverrun="CENTER_ELLIPSIS" underline="true" wrapText="true">
         <font>
             <Font name="Candara" size="38.0" />
         </font>
@@ -33,7 +28,7 @@
         </font>
     </Label>
     <TextField fx:id="codePostal" layoutX="246.0" layoutY="207.0" prefHeight="8.0" prefWidth="146.0" promptText="Code Postal" style="-fx-background-color: transparent; -fx-border-color: grey; -fx-border-radius: 20px;" />
-    <Button layoutX="500.0" layoutY="321.0" mnemonicParsing="false" onAction="#UpDate" prefHeight="27.0" prefWidth="91.0" style="-fx-border-radius: 20; -fx-background-color: transparent; -fx-border-color: GREY;" text="UpDate" textFill="#0e1c57">
+    <Button layoutX="484.0" layoutY="371.0" mnemonicParsing="false" onAction="#UpDate" prefHeight="27.0" prefWidth="91.0" style="-fx-border-radius: 20; -fx-background-color: transparent; -fx-border-color: GREY;" text="UpDate" textFill="WHITE">
         <font>
             <Font name="Candara" size="16.0" />
         </font>
@@ -67,5 +62,10 @@
             <Font name="Candara" size="12.0" />
         </font>
     </Label>
+      <ImageView layoutX="483.0" layoutY="273.0">
+         <image>
+            <Image url="@Images/lova.png" />
+         </image>
+      </ImageView>
 </children>
 </AnchorPane>

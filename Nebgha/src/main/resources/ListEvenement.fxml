@@ -7,48 +7,74 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="579.0" prefWidth="789.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.ListEvenementController">
+<AnchorPane prefHeight="526.0" prefWidth="800.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.ListEvenementController">
    <children>
-      <ImageView fitHeight="579.0" fitWidth="799.0" layoutY="-2.0">
-         <image>
-            <Image url="@Images/bg.jpg" />
-         </image>
-      </ImageView>
-      <ListView fx:id="listEvenement" layoutX="110.0" layoutY="159.0" opacity="0.52" prefHeight="383.0" prefWidth="602.0" style="-fx-background-color: #D9D9D9;" />
-      <HBox layoutX="400.0" layoutY="28.0" prefHeight="46.0" prefWidth="302.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c0ddd8" height="536.0" layoutX="-4.0" layoutY="-9.0" opacity="0.22" stroke="BLACK" strokeType="INSIDE" width="812.0" />
+      <ListView fx:id="listEvenement" layoutX="194.0" layoutY="119.0" prefHeight="343.0" prefWidth="506.0" style="-fx-background-color: #D9D9D9;" />
+      <HBox layoutX="503.0" layoutY="7.0" prefHeight="46.0" prefWidth="302.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#ajoutEvenement" prefHeight="46.0" prefWidth="97.0" style="-fx-background-color: transparent; -fx-border-radius: 20px;" styleClass="arrow-button" stylesheets="@style.css" text="Add" textFill="#0e1d59">
+            <Button mnemonicParsing="false" onAction="#ajoutEvenement" prefHeight="46.0" prefWidth="97.0" style="-fx-background-color: transparent; -fx-border-radius: 20px;" styleClass="arrow-button" stylesheets="@style.css" text="Add" textFill="#0e1d59" underline="true">
                <font>
                   <Font name="Candara" size="24.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#update" prefHeight="46.0" prefWidth="121.0" style="-fx-background-color: transparent; -fx-border-radius: 20px;" text="Update" textFill="#0e1d59">
+            <Button mnemonicParsing="false" onAction="#update" prefHeight="46.0" prefWidth="121.0" style="-fx-background-color: transparent; -fx-border-radius: 20px;" text="Update" textFill="#0e1d59" underline="true">
                <font>
                   <Font name="Candara" size="24.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#delete" prefHeight="46.0" prefWidth="121.0" style="-fx-background-color: transparent; -fx-border-radius: 20px;" text="Delete" textFill="#0e1d59">
+            <Button mnemonicParsing="false" onAction="#delete" prefHeight="46.0" prefWidth="121.0" style="-fx-background-color: transparent; -fx-border-radius: 20px;" text="Delete" textFill="#0e1d59" underline="true">
                <font>
                   <Font name="Candara" size="24.0" />
                </font>
             </Button>
          </children>
       </HBox>
-      <Button layoutX="681.0" layoutY="74.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: transparent;" />
-      <ImageView fitHeight="107.0" fitWidth="162.0" layoutX="7.0" layoutY="4.0">
+      <ImageView fitHeight="96.0" fitWidth="141.0" layoutX="14.0" layoutY="7.0">
          <image>
             <Image url="@Images/421935935_2103323113360956_2155380558138833429_n.png" />
          </image>
       </ImageView>
-      <Button fx:id="serachButton" layoutX="649.0" layoutY="74.0" mnemonicParsing="false" onAction="#Recherche" prefHeight="25.0" prefWidth="51.0" text="search" />
-      <TextField fx:id="Ville" layoutX="459.0" layoutY="73.0" onKeyTyped="#Chercher" prefHeight="27.0" prefWidth="182.0" promptText="Ville" style="-fx-background-color: transparent; -fx-border-color: grey; -fx-border-radius: 20px;">
+      <Button fx:id="serachButton" layoutX="477.0" layoutY="75.0" mnemonicParsing="false" onAction="#Recherche" prefHeight="38.0" prefWidth="84.0" style="-fx-background-color: transparent;" textAlignment="JUSTIFY" textFill="#e8db51" textOverrun="WORD_ELLIPSIS" underline="true">
+         <font>
+            <Font name="Calibri Bold" size="20.0" />
+         </font></Button>
+      <TextField fx:id="Ville" layoutX="321.0" layoutY="81.0" onKeyTyped="#Chercher" prefHeight="27.0" prefWidth="182.0" promptText="event" style="-fx-background-color: transparent; -fx-border-color: grey; -fx-border-radius: 20px;">
          <font>
             <Font name="Candara" size="12.0" />
          </font>
       </TextField>
-      <Button layoutX="385.0" layoutY="74.0" mnemonicParsing="false" onAction="#tri" text="Tri" />
-      <Button layoutX="268.0" layoutY="74.0" mnemonicParsing="false" onAction="#translate" text="Button" />
+      <Button layoutX="534.0" layoutY="76.0" mnemonicParsing="false" onAction="#tri" prefHeight="38.0" prefWidth="55.0" style="-fx-background-color: transparent;" text="Tri" textFill="#111111" textOverrun="WORD_ELLIPSIS" underline="true">
+         <font>
+            <Font name="Cambria Bold" size="20.0" />
+         </font></Button>
+      <Button layoutX="22.0" layoutY="391.0" mnemonicParsing="false" onAction="#translate" style="-fx-background-color: transparente;" text="Translate" textFill="#6b85bc" underline="true">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="27.0" fitWidth="36.0" layoutX="137.0" layoutY="400.0">
+         <image>
+            <Image url="@Images/trad.png" />
+         </image>
+      </ImageView>
+      <ImageView layoutX="506.0" layoutY="82.0">
+         <image>
+            <Image url="@Images/loup.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="1.0" layoutY="346.0" mnemonicParsing="false" onAction="#toLova" prefHeight="38.0" prefWidth="172.0" style="-fx-background-color: transparente;" text="Location List" textFill="#6b85bc" underline="true">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="27.0" fitWidth="26.0" layoutX="160.0" layoutY="355.0">
+         <image>
+            <Image url="@Images/lova.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -247,4 +247,22 @@ public class ListEvenementController implements Initializable {
             alert.showAndWait();
         }
 
-}
+    @FXML
+    void toLova(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListLocalisation.fxml"));
+            root = loader.load();
+
+
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene =  new Scene(root, 800, 550);
+            stage.setScene(scene);
+            stage.setTitle("Ajouter Evenement");
+            stage.show();
+
+        } catch (IOException ex) {
+            System.out.println("error" + ex.getMessage());
+        }
+    }
+
+    }
