@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.EditReponseController">
+    <children>
+        <Label layoutX="44.0" layoutY="127.0" text="Question" textFill="#000066">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+        <Label layoutX="45.0" layoutY="165.0" text="Text" textFill="#000066">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+        <Label layoutX="42.0" layoutY="201.0" text="Correct ?" textFill="#000066">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+        <Label layoutX="43.0" layoutY="238.0" text="Order" textFill="#000066">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+        <Label layoutX="45.0" layoutY="275.0" text="Explanation" textFill="#000066">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+        <TextField fx:id="texttf" layoutX="144.0" layoutY="165.0" prefHeight="26.0" prefWidth="366.0" style="-fx-border-color: #FDFD96;" />
+        <ComboBox fx:id="quizList" layoutX="143.0" layoutY="92.0" prefHeight="27.0" prefWidth="162.0" promptText="Select a quiz" style="-fx-background-color: white; -fx-border-color: #FDFD96;" />
+        <ComboBox fx:id="questionList" layoutX="143.0" layoutY="128.0" prefHeight="27.0" prefWidth="161.0" promptText="Select a question" style="-fx-background-color: white; -fx-border-color: #FDFD96;" />
+        <TextField fx:id="ordretf" layoutX="144.0" layoutY="238.0" prefHeight="26.0" prefWidth="74.0" style="-fx-border-color: #FDFD96;" />
+        <TextField fx:id="explicationtf" layoutX="144.0" layoutY="275.0" prefHeight="26.0" prefWidth="366.0" style="-fx-border-color: #FDFD96;" />
+        <Button fx:id="reponsebtn" layoutX="442.0" layoutY="326.0" mnemonicParsing="false" onAction="#EditReponse" prefHeight="40.0" prefWidth="122.0" stylesheets="@graphics/styles.css" text="Submit" textFill="#000066">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
+        <CheckBox fx:id="est_correcte" layoutX="155.0" layoutY="205.0" mnemonicParsing="false">
+         <effect>
+            <Bloom />
+         </effect></CheckBox>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="58.0" layoutX="1.0" layoutY="1.0" stroke="TRANSPARENT" strokeType="INSIDE" width="659.0" />
+      <ImageView fitHeight="19.0" fitWidth="134.0" layoutX="124.0" layoutY="22.0">
+         <image>
+            <Image url="@graphics/55.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="76.0" layoutY="12.0">
+         <image>
+            <Image url="@graphics/Logo1.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="499.0" layoutY="14.0" text="Edit Answer" textFill="#000066">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="14.0" layoutY="17.0" onMouseClicked="#previous">
+         <image>
+            <Image url="@graphics/previous.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="45.0" layoutY="91.0" text="Quiz" textFill="#000066">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>
