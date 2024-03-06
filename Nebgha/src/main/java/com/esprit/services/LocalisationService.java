@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.scene.control.Alert;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -31,9 +32,18 @@ public class LocalisationService implements IService<Localisation>  {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
             System.out.println("Localisation ajoutée !");
+            showAlert("Added Location", "Added Location.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            showAlert("Error", "Error.");
         }
+    }
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
     @Override
@@ -43,8 +53,10 @@ public class LocalisationService implements IService<Localisation>  {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
             System.out.println("Localisation modifiée !");
+            showAlert("Location Updated", "Location Updated.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            showAlert("Error", "Error.");
         }
     }
 
@@ -55,8 +67,10 @@ public class LocalisationService implements IService<Localisation>  {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
             System.out.println("Localisation supprmiée !");
+            showAlert("Location Deleted", "Location Deleted.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            showAlert("Error", "Error.");
         }
     }
 

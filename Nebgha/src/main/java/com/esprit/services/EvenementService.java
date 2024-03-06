@@ -36,8 +36,8 @@ public class EvenementService implements IService<Evenement> {
            // NotificationService.showNotification(primaryStage, "Succès", "Événement ajouté avec succès !");
           // NotificationService.showNotification("Succès", "L'événement a été ajouté avec succès!");
             // NotificationService.showNotification("Succès", "L'opération a réussi !");
-              showAlert("Événement ajouté", "Nouvel événement ajouté avec succès.");
-            System.out.println("Événement ajouté !");
+              showAlert("Évent added", "Event added.");
+            System.out.println("Évént added!");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         //    if (notificationService != null) {
@@ -66,6 +66,7 @@ public class EvenementService implements IService<Evenement> {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            showAlert("error", "Error.");
         }
     }
 
@@ -75,6 +76,7 @@ public class EvenementService implements IService<Evenement> {
         PreparedStatement ps = connection.prepareStatement(req);
         ps.setInt(1, evenement.getId());
         ps.executeUpdate();
+        showAlert("Evenet Deleted", "Event Deleted.");
     }
 
 

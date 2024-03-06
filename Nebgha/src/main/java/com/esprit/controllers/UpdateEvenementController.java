@@ -105,8 +105,9 @@ public class UpdateEvenementController implements Initializable {
         Description.setText(e.getDescription());
         ImageF.setText(e.getImage());
         this.event.setId(e.getId());
-        //Date.setText(e.getNom());
-        //Lieu.setText(e.getNom());
+//Datee.setValue(toLocalDatee.getDate());
+
+        Lieu.setValue(e.getLieuId().getVille());
 
         return this.event;
 
