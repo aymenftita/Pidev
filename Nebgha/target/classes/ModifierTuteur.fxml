@@ -1,17 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.Tuteur.ModifierTuteurController">
-    <TextField fx:id="tfnom" layoutX="191.0" layoutY="51.0" />
-    <TextField fx:id="tfprenom" layoutX="191.0" layoutY="84.0" />
-    <TextField fx:id="tfemail" layoutX="191.0" layoutY="120.0" />
-    <TextField fx:id="tfpass" layoutX="191.0" layoutY="155.0" />
-    <TextField fx:id="tfdomaine" layoutX="191.0" layoutY="239.0" />
-    <TextField fx:id="tfexperience" layoutX="191.0" layoutY="314.0" />
-    <Button layoutX="391.0" layoutY="314.0" mnemonicParsing="false" onAction="#modifierTuteur" text="Ajouter Tuteur" />
-    <Button layoutX="383.0" layoutY="349.0" mnemonicParsing="false" onAction="#supprimerTuteur" text="Supprimer Tuteur" />
+   <ImageView fitHeight="411.0" fitWidth="663.0" layoutX="-9.0">
+      <image>
+         <Image url="@bleu.png" />
+      </image>
+   </ImageView>
+    <TextField fx:id="tfnom" layoutX="191.0" layoutY="81.0" />
+    <TextField fx:id="tfprenom" layoutX="191.0" layoutY="128.0" />
+    <TextField fx:id="tfemail" layoutX="191.0" layoutY="181.0" />
+    <TextField fx:id="tfpass" layoutX="191.0" layoutY="231.0" />
+   <ComboBox fx:id="cbDomaine" layoutX="190.0" layoutY="276.0" prefWidth="150.0">
+      <items>
+         <FXCollections fx:factory="observableArrayList">
+            <String fx:value="domaine 1" />
+            <String fx:value="domaine 2" />
+            <String fx:value="domaine 3" />
+         </FXCollections>
+      </items>
+   </ComboBox>    <TextField fx:id="tfexperience" layoutX="191.0" layoutY="328.0" />
+    <Button layoutX="443.0" layoutY="206.0" mnemonicParsing="false" onAction="#modifierTuteur" text="Modifier Tuteur" textFill="#310b90" />
+    <Button layoutX="438.0" layoutY="264.0" mnemonicParsing="false" onAction="#supprimerTuteur" text="Supprimer Tuteur" textFill="#310b90" />
+   <Button layoutX="583.0" layoutY="360.0" mnemonicParsing="false" onAction="#previous" text="retour" textFill="#310b90" />
+   <Label layoutX="100.0" layoutY="84.0" text="Nom" textFill="#310b90">
+      <font>
+         <Font name="System Bold Italic" size="14.0" />
+      </font>
+   </Label>
+   <Label layoutX="92.0" layoutY="131.0" text="Prenom" textFill="#310b90">
+      <font>
+         <Font name="System Bold Italic" size="14.0" />
+      </font>
+   </Label>
+   <Label layoutX="99.0" layoutY="184.0" text="Email" textFill="#310b90">
+      <font>
+         <Font name="System Bold Italic" size="14.0" />
+      </font>
+   </Label>
+   <Label layoutX="79.0" layoutY="234.0" text="mot de passe" textFill="#310b90">
+      <font>
+         <Font name="System Bold Italic" size="14.0" />
+      </font>
+   </Label>
+   <Label layoutX="86.0" layoutY="279.0" text="Domaine" textFill="#310b90">
+      <font>
+         <Font name="System Bold Italic" size="14.0" />
+      </font>
+   </Label>
+   <Label layoutX="87.0" layoutY="331.0" text="Experience" textFill="#310b90">
+      <font>
+         <Font name="System Bold Italic" size="14.0" />
+      </font>
+   </Label>
 
 </AnchorPane>

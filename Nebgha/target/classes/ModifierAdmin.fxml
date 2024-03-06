@@ -16,5 +16,6 @@
    <Label layoutX="172.0" layoutY="227.0" text="email" />
    <Label layoutX="172.0" layoutY="270.0" text="password" />
     <Button layoutX="252.0" layoutY="361.0" mnemonicParsing="false" onAction="#supprimerAdmin" text="supprimer Admin" />
+   <Button layoutX="14.0" layoutY="21.0" mnemonicParsing="false" onAction="#previous" text="retour" />
 
 </AnchorPane>
