@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="my-button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: white;" styleClass="my-anchor-pane" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.Forum.sujet.InterfaceForumUserController">
+   <children>
+      <Pane layoutY="-1.0" prefHeight="57.0" prefWidth="1366.0" style="-fx-background-color: #dddee1;">
+         <children>
+            <ImageView fitHeight="49.0" fitWidth="51.0" layoutX="12.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../graphics/Logo1.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="775.0" layoutY="18.0" styleClass="link-label" stylesheets="@../style.css" text="Courses" />
+            <Label layoutX="868.0" layoutY="18.0" onMousePressed="#ApercuForum" styleClass="link-label" stylesheets="@../style.css" text="Forum" />
+            <Label layoutX="966.0" layoutY="18.0" styleClass="link-label" stylesheets="@../style.css" text="Planning" />
+            <Label layoutX="1084.0" layoutY="18.0" styleClass="link-label" stylesheets="@../style.css" text="Quiz" />
+         </children>
+      </Pane>
+      <Separator layoutY="47.0" prefHeight="21.0" prefWidth="1280.0" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="56.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/name.png" />
+         </image>
+      </ImageView>
+      <Separator layoutY="136.0" prefHeight="0.0" prefWidth="1280.0" />
+      <Label layoutX="14.0" layoutY="68.0" text="Forum" textFill="#144083">
+         <font>
+            <Font name="Segoe UI" size="35.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfSearchSujet" layoutX="277.0" layoutY="90.0" onKeyPressed="#handleSearch" promptText="Search" styleClass="modern-search-bar">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <Button layoutX="1169.0" layoutY="91.0" mnemonicParsing="false" onAction="#AjoutSujet" prefHeight="31.0" prefWidth="130.0" styleClass="my-button" stylesheets="@../style.css" text="Add subject" textFill="#d3d709">
+         <font>
+            <Font name="Segoe UI" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fitHeight="31.0" fitWidth="30.0" layoutX="1308.0" layoutY="92.0" onMouseClicked="#refreshSujet" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/update.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <TableView fx:id="tvAffichageSujet" editable="true" layoutY="136.0" onMouseClicked="#apercuQuestion" prefHeight="605.0" prefWidth="1366.0" styleClass="modern-tableview">
+        <columns>
+          <TableColumn fx:id="tvAffichageSujetSujet" prefWidth="317.0" text="Topic">
+             <cellValueFactory>
+             <PropertyValueFactory property="titre" />
+          </cellValueFactory>
+          </TableColumn>
+          <TableColumn fx:id="tvAffichageSujetDesc" prefWidth="570.0" text="Description">
+             <cellValueFactory>
+                <PropertyValueFactory property="desc" />
+             </cellValueFactory>
+          </TableColumn>
+            <TableColumn fx:id="tvAffichageSujetRegles" prefWidth="475.0" text="Rules">
+               <cellValueFactory>
+                  <PropertyValueFactory property="regles" />
+               </cellValueFactory>
+            </TableColumn>
+        </columns>
+      </TableView>
+      <ImageView fitHeight="33.0" fitWidth="46.0" layoutX="244.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/magnifying-glass.gif" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
