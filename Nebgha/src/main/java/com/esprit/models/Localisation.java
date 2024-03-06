@@ -107,7 +107,7 @@ public class Localisation {
     public String toString() {
         return "Localisation: " +
              //   "id=" + id +
-                ", ville: " + ville +
+                " ville: " + ville +
                 ", pays: " + pays +
                 //", latitude=" + latitude +
                // ", longitude=" + longitude +

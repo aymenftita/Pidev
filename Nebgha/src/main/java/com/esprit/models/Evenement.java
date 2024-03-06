@@ -42,8 +42,8 @@ private String image;
 
                 "Event: " + nom +
                 " , Date: " + date +
-                " , Description: " + description +
-        ",  Location: " + lieuId.getVille();
+                        ",  Location: " + lieuId.getVille()+
+                " , Description: " + description;
     }
 
     @Override
