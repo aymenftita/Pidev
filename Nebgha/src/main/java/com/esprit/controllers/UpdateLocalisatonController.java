@@ -129,6 +129,9 @@ public class UpdateLocalisatonController  implements Initializable {
         Villee.setText(l.getVille());
         payss.setText(l.getPays());
         this.locc.setId(l.getId());
+        champPostal.setText(String.valueOf(l.getCodePostal()));
+        longitudee.setText(String.valueOf(l.getLongitude()));
+        latitudee.setText(String.valueOf(l.getLatitude()));
 
         return this.locc;
     }
