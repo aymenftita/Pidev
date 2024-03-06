@@ -1,10 +1,13 @@
 package com.esprit.controllers;
 
 import com.esprit.models.*;
+import com.esprit.models.Quiz;
+import com.esprit.models.ReponsesUtilisateur;
 import com.esprit.services.*;
+import com.esprit.services.QuizService;
+import com.esprit.services.ReponsesUtilisateurService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -44,7 +47,7 @@ public class QuizsHistoryController {
 
 
     public void initialize() {
-        String cssPath = getClass().getResource("/media/styles.css").toExternalForm();
+        String cssPath = getClass().getResource("/quiz/graphics/styles.css").toExternalForm();
         quizPane.getStylesheets().add(cssPath);
         allQuizzes = quizService.afficher();
         updateQuizList(allQuizzes);
@@ -111,7 +114,7 @@ public class QuizsHistoryController {
         }
         Label timeTakenLabel = new Label(timeTakenText);
         timeTakenLabel.setAlignment(Pos.CENTER);
-        Image doneImage = new Image(getClass().getResourceAsStream("/media/done.png"));
+        Image doneImage = new Image(getClass().getResourceAsStream("/quiz/graphics/done.png"));
 
         ImageView imageView = new ImageView(doneImage);
         imageView.setFitWidth(30);
@@ -138,7 +141,7 @@ public class QuizsHistoryController {
     private void showQuizResult(int quizId) {
         try {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/QuizResults.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/QuizResults.fxml"));
             Parent root = loader.load();
             QuizResultsController resultController = loader.getController();
             resultController.initialize(quizId);
@@ -155,7 +158,7 @@ public class QuizsHistoryController {
     @FXML
     void previous(MouseEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/EtudiantInterface.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/EtudiantInterface.fxml"));
         Parent root = loader.load();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(new Scene(root));

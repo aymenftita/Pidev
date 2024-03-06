@@ -1,8 +1,8 @@
 package com.esprit.controllers;
 
 
-import com.esprit.models.*;
-import com.esprit.services.*;
+import com.esprit.models.Recompenses;
+import com.esprit.services.RecompensesService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -79,7 +79,7 @@ public class EditRecompenseController {
 
 
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowRecompenses.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/ShowRecompenses.fxml"));
                 Parent root = loader.load();
                 Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 currentStage.setScene(new Scene(root));
@@ -102,7 +102,7 @@ public class EditRecompenseController {
     @FXML
     void previous(MouseEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowRecompenses.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/ShowRecompenses.fxml"));
         Parent root = loader.load();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(new Scene(root));

@@ -1,7 +1,10 @@
 package com.esprit.controllers;
 
 import com.esprit.models.*;
+import com.esprit.models.Quiz;
 import com.esprit.services.*;
+import com.esprit.services.QuestionsService;
+import com.esprit.services.QuizService;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -92,7 +95,7 @@ public class EditQuestionController implements Initializable {
                 FXMLLoader loader;
                 Parent root;
 
-                    loader = new FXMLLoader(getClass().getResource("/ShowQuestions.fxml"));
+                    loader = new FXMLLoader(getClass().getResource("/quiz/ShowQuestions.fxml"));
 
                 root = loader.load();
 
@@ -143,7 +146,7 @@ public class EditQuestionController implements Initializable {
         FXMLLoader loader;
         Parent root;
 
-            loader = new FXMLLoader(getClass().getResource("/ShowQuestions.fxml"));
+            loader = new FXMLLoader(getClass().getResource("/quiz/ShowQuestions.fxml"));
 
         root = loader.load();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -111,7 +111,7 @@ public class RankingController implements Initializable {
 
         for (int i = 0; i < sortedScores.size(); i++) {
             Map.Entry<Utilisateur, Integer> entry = sortedScores.get(i);
-            ImageView medalImageView = new ImageView(new Image(getClass().getResourceAsStream("/media/" + (i + 1) + ".png")));
+            ImageView medalImageView = new ImageView(new Image(getClass().getResourceAsStream("/quiz/graphics/" + (i + 1) + ".png")));
             medalImageView.setFitHeight(30);
             medalImageView.setFitWidth(30);
 
@@ -140,7 +140,7 @@ public class RankingController implements Initializable {
     @FXML
     void previous(MouseEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/RecompensesEtudiant.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/RecompensesEtudiant.fxml"));
         Parent root = loader.load();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(new Scene(root));

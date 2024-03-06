@@ -1,6 +1,10 @@
 package com.esprit.services;
 
 import com.esprit.models.*;
+import com.esprit.models.Difficulty;
+import com.esprit.models.Quiz;
+import com.esprit.services.IService;
+import com.esprit.services.UtilisateurService;
 import com.esprit.utils.DataSource;
 
 import java.sql.*;

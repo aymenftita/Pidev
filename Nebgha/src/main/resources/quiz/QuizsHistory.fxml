@@ -29,12 +29,12 @@
     </ScrollPane>
     <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="24.0" layoutY="22.0" onMouseClicked="#previous">
         <image>
-            <Image url="@media/previous.png" />
+            <Image url="@graphics/previous.png" />
         </image>
     </ImageView>
     <ImageView fx:id="loupe" fitHeight="21.0" fitWidth="22.0" layoutX="248.0" layoutY="24.0">
         <image>
-            <Image url="@media/loupe.png" />
+            <Image url="@graphics/loupe.png" />
         </image>
     </ImageView>
 </AnchorPane>

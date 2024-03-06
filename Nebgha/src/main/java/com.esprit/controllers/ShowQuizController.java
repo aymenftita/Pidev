@@ -1,6 +1,9 @@
 package com.esprit.controllers;
 
 import com.esprit.models.*;
+import com.esprit.models.Difficulty;
+import com.esprit.models.Quiz;
+import com.esprit.models.ReponsesUtilisateur;
 import com.esprit.services.QuizService;
 import com.esprit.services.ReponsesUtilisateurService;
 import com.esprit.services.Session;
@@ -97,7 +100,7 @@ public class ShowQuizController implements Initializable {
                 if (selectedQuiz != null) {
                     try {
 
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/EditQuiz.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/EditQuiz.fxml"));
                         Parent root = loader.load();
                         EditQuizController editQuizController = loader.getController();
                         editQuizController.initData(selectedQuiz);
@@ -206,7 +209,7 @@ public class ShowQuizController implements Initializable {
     @FXML
     void openAjout(ActionEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjoutQuiz.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/AjoutQuiz.fxml"));
         Parent root = loader.load();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(new Scene(root));
@@ -217,9 +220,9 @@ public class ShowQuizController implements Initializable {
     @FXML
     void previous(MouseEvent event) throws IOException {
 
-        String fxmlPath = "/AdminInterface.fxml";
+        String fxmlPath = "/quiz/AdminInterface.fxml";
         if (Session.getCurrentRole().equals(Role.Tuteur)) {
-            fxmlPath = "/TuteurInterface.fxml";
+            fxmlPath = "/quiz/TuteurInterface.fxml";
         }
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         Parent root = loader.load();

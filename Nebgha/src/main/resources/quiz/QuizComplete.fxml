@@ -118,12 +118,12 @@
       </Label>
       <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="242.0" layoutY="453.0" onMouseClicked="#openResults">
          <image>
-            <Image url="@media/loupe.png" />
+            <Image url="@graphics/loupe.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="38.0" fitWidth="34.0" layoutX="374.0" layoutY="452.0" onMouseClicked="#OpenRecompenses">
          <image>
-            <Image url="@media/trophy.png" />
+            <Image url="@graphics/trophy.png" />
          </image>
       </ImageView>
       <Label fx:id="titleLabel" alignment="CENTER" layoutX="95.0" layoutY="80.0" prefHeight="30.0" prefWidth="492.0" text="Congratulations!" textFill="#000066">
@@ -134,17 +134,17 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="58.0" layoutX="2.0" stroke="TRANSPARENT" strokeType="INSIDE" width="659.0" />
       <ImageView fitHeight="19.0" fitWidth="134.0" layoutX="139.0" layoutY="19.0">
          <image>
-            <Image url="@media/55.png" />
+            <Image url="@graphics/55.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="92.0" layoutY="9.0">
          <image>
-            <Image url="@media/Logo1.png" />
+            <Image url="@graphics/Logo1.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="14.0" layoutY="9.0" onMouseClicked="#openEtudiantInterface">
          <image>
-            <Image url="@media/home.png" />
+            <Image url="@graphics/home.png" />
          </image>
       </ImageView>
    </children>

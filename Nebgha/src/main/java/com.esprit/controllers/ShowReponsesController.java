@@ -109,7 +109,7 @@ public class ShowReponsesController implements Initializable {
                 if (event.getClickCount() == 2 && !row.isEmpty()) {
                     Reponses rowData = row.getItem();
                     try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/EditReponse.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/EditReponse.fxml"));
                         Parent root = loader.load();
                         EditReponseController editReponseController = loader.getController();
                         editReponseController.initData(rowData);
@@ -211,7 +211,7 @@ public class ShowReponsesController implements Initializable {
 
     @FXML
     void openAjout(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjoutReponse.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/AjoutReponse.fxml"));
         Parent root = loader.load();
         Stage currentStage = (Stage) reponseTableView.getScene().getWindow();
         currentStage.setTitle("Add Answer");
@@ -221,14 +221,14 @@ public class ShowReponsesController implements Initializable {
     void previous(MouseEvent event) throws IOException {
 
         if (Session.getCurrentRole().equals(Role.Administrateur)) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AdminInterface.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/AdminInterface.fxml"));
             Parent root = loader.load();
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             currentStage.setScene(new Scene(root));
             currentStage.setTitle("Nebgha");
             currentStage.show();
         } else if (Session.getCurrentRole().equals(Role.Tuteur)) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/TuteurInterface.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/TuteurInterface.fxml"));
             Parent root = loader.load();
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             currentStage.setScene(new Scene(root));

@@ -2,13 +2,10 @@ package com.esprit.services;
 
 import com.esprit.models.Quiz;
 import com.esprit.models.ReponsesUtilisateur;
-import com.esprit.models.Utilisateur;
 import org.controlsfx.control.Notifications;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class NotificationService {
     public void showInformationNotification(String title, String message) {

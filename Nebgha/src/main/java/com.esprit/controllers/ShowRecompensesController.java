@@ -1,7 +1,7 @@
 package com.esprit.controllers;
 
-import com.esprit.models.*;
-import com.esprit.services.*;
+import com.esprit.models.Recompenses;
+import com.esprit.services.RecompensesService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -43,7 +43,7 @@ public class ShowRecompensesController implements Initializable {
 
     @FXML
     void openAjout(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjoutRecompense.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/AjoutRecompense.fxml"));
         Parent root = loader.load();
         Stage currentStage = (Stage) recompenseTableView.getScene().getWindow();
         currentStage.setTitle("Add Reward");
@@ -69,7 +69,7 @@ public class ShowRecompensesController implements Initializable {
                 if (event.getClickCount() == 2 && !row.isEmpty()) {
                     Recompenses rowData = row.getItem();
                     try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/EditRecompense.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/EditRecompense.fxml"));
                         Parent root = loader.load();
                         EditRecompenseController editRecompenseController = loader.getController();
                         editRecompenseController.initData(rowData);
@@ -139,7 +139,7 @@ public class ShowRecompensesController implements Initializable {
     @FXML
     void previous(MouseEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AdminInterface.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/AdminInterface.fxml"));
         Parent root = loader.load();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(new Scene(root));

@@ -23,17 +23,17 @@ public class FirstPageController {
 
     @FXML
     void TuteurInterface(ActionEvent event) throws IOException {
-        changeScene(event, "/TuteurInterface.fxml","Mentor",tuteur,tuteur.getRole());
+        changeScene(event, "/quiz/TuteurInterface.fxml","Mentor",tuteur,tuteur.getRole());
     }
 
     @FXML
     void AdminInterface(ActionEvent event) throws IOException {
-        changeScene(event, "/AdminInterface.fxml","Administrator",admin,admin.getRole());
+        changeScene(event, "/quiz/AdminInterface.fxml","Administrator",admin,admin.getRole());
     }
 
     @FXML
     void EtudiantInterface(ActionEvent event) throws IOException {
-        changeScene(event, "/EtudiantInterface.fxml","Student",etudiant,admin.getRole());
+        changeScene(event, "/quiz/EtudiantInterface.fxml","Student",etudiant,admin.getRole());
     }
 
     private void changeScene(ActionEvent event, String fxmlPath, String title, Utilisateur user, Role role) throws IOException {

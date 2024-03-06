@@ -1,8 +1,6 @@
 package com.esprit.controllers;
 
-import com.esprit.models.Quiz;
 import com.esprit.models.Utilisateur;
-import com.esprit.services.QuizService;
 import com.esprit.services.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -80,7 +78,7 @@ public class QuizCompleteController {
     void OpenRecompenses(MouseEvent event) {
         try {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/RecompensesEtudiant.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/RecompensesEtudiant.fxml"));
             Parent root = loader.load();
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             currentStage.setScene(new Scene(root));
@@ -95,7 +93,7 @@ public class QuizCompleteController {
     void openEtudiantInterface(MouseEvent event) {
         try {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/EtudiantInterface.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/EtudiantInterface.fxml"));
             Parent root = loader.load();
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             currentStage.setScene(new Scene(root));
@@ -110,7 +108,7 @@ public class QuizCompleteController {
     void openResults(MouseEvent event) {
         try {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/QuizResults.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/QuizResults.fxml"));
             Parent root = loader.load();
             QuizResultsController resultsController = loader.getController();
             resultsController.initialize(quizId);

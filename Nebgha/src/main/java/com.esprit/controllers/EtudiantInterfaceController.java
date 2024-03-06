@@ -1,7 +1,11 @@
 package com.esprit.controllers;
 
-import com.esprit.models.*;
+import com.esprit.models.Questions;
+import com.esprit.models.ReponsesUtilisateur;
 import com.esprit.services.*;
+import com.esprit.services.NotificationService;
+import com.esprit.services.QuestionsService;
+import com.esprit.services.ReponsesUtilisateurService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,9 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class EtudiantInterfaceController {
 
@@ -49,17 +51,17 @@ public class EtudiantInterfaceController {
 
     @FXML
     void ShowQuizs(ActionEvent event) throws IOException {
-        changeScene(event, "/QuizsEtudiant.fxml","Quizzes");
+        changeScene(event, "/quiz/QuizsEtudiant.fxml","Quizzes");
     }
 
     @FXML
     void ShowRecompenses(ActionEvent event) throws IOException {
-        changeScene(event, "/RecompensesEtudiant.fxml","My rewards");
+        changeScene(event, "/quiz/RecompensesEtudiant.fxml","My rewards");
     }
 
     @FXML
     void ShowHistorique(ActionEvent event) throws IOException {
-        changeScene(event, "/QuizsHistory.fxml","History");
+        changeScene(event, "/quiz/QuizsHistory.fxml","History");
     }
 
     private void changeScene(ActionEvent event, String fxmlPath,String title) throws IOException {
@@ -73,7 +75,7 @@ public class EtudiantInterfaceController {
     @FXML
     void previous(MouseEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/FirstPage.fxml"));
         Parent root = loader.load();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(new Scene(root));

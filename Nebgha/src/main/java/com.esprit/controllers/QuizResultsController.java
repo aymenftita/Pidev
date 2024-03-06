@@ -1,6 +1,10 @@
 package com.esprit.controllers;
 
 import com.esprit.models.*;
+import com.esprit.models.Questions;
+import com.esprit.models.Quiz;
+import com.esprit.models.Reponses;
+import com.esprit.models.ReponsesUtilisateur;
 import com.esprit.services.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -9,7 +13,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -80,7 +83,7 @@ private Utilisateur user=Session.getCurrentUser();
                             reponseLabel.setText(reponseLabel.getText() + " (Correct)");
                             reponseLabel.setStyle("-fx-background-color: rgba(0, 255, 0, 0.3); -fx-padding: 5px;");
                             userCorrectAnswers++;
-                            ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/media/check.png")));
+                            ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/quiz/graphics/check.png")));
                             imageView.setFitHeight(20);
                             imageView.setFitWidth(20);
                             answerBox.getChildren().add(imageView);
@@ -88,7 +91,7 @@ private Utilisateur user=Session.getCurrentUser();
                         } else {
                             reponseLabel.setText(reponseLabel.getText() + " (Incorrect)");
                             reponseLabel.setStyle("-fx-background-color: rgba(255, 0, 0, 0.3); -fx-padding: 5px;");
-                            ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/media/cancel.png")));
+                            ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/quiz/graphics/cancel.png")));
                             imageView.setFitHeight(20);
                             imageView.setFitWidth(20);
                             answerBox.getChildren().add(imageView);
@@ -117,7 +120,7 @@ private Utilisateur user=Session.getCurrentUser();
                 Label explicationLabel = new Label("Explanation: " + explanation);
                 explicationLabel.setStyle("-fx-background-color: rgba(255, 255, 0, 0.3); -fx-padding: 5px;");
 
-                ImageView explanationImageView = new ImageView(new Image(getClass().getResourceAsStream("/media/lightbulb.png")));
+                ImageView explanationImageView = new ImageView(new Image(getClass().getResourceAsStream("/quiz/graphics/lightbulb.png")));
                 explanationImageView.setFitHeight(20);
                 explanationImageView.setFitWidth(20);
 
@@ -134,7 +137,7 @@ private Utilisateur user=Session.getCurrentUser();
 
     @FXML
     void previous(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/QuizsHistory.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/QuizsHistory.fxml"));
         Parent root = loader.load();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(new Scene(root));

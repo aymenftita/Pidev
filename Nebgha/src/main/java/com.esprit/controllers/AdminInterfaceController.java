@@ -15,12 +15,12 @@ public class AdminInterfaceController {
 
     @FXML
     void ShowQuestions(ActionEvent event) throws IOException {
-        changeScene(event, "/ShowQuestions.fxml","Questions");
+        changeScene(event, "/quiz/ShowQuestions.fxml","Questions");
     }
 
     @FXML
     void ShowQuizs(ActionEvent event) throws IOException {
-        changeScene(event, "/ShowQuiz.fxml","Quizzes");
+        changeScene(event, "/quiz/ShowQuiz.fxml","Quizzes");
 
     }
 
@@ -28,12 +28,12 @@ public class AdminInterfaceController {
 
     @FXML
     void ShowRecompenses(ActionEvent event) throws IOException {
-        changeScene(event, "/ShowRecompenses.fxml","Rewards");
+        changeScene(event, "/quiz/ShowRecompenses.fxml","Rewards");
     }
 
     @FXML
     void ShowReponses(ActionEvent event) throws IOException {
-        changeScene(event, "/ShowReponses.fxml","Answers");
+        changeScene(event, "/quiz/ShowReponses.fxml","Answers");
     }
 
     private void changeScene(ActionEvent event, String fxmlPath,String title) throws IOException {
@@ -48,7 +48,7 @@ public class AdminInterfaceController {
     @FXML
     void previous(MouseEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/FirstPage.fxml"));
         Parent root = loader.load();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(new Scene(root));

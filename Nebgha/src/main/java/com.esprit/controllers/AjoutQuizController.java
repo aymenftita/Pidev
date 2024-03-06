@@ -1,7 +1,10 @@
 package com.esprit.controllers;
 
 import com.esprit.models.*;
+import com.esprit.models.Difficulty;
+import com.esprit.models.Quiz;
 import com.esprit.services.*;
+import com.esprit.services.QuizService;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -102,7 +105,7 @@ public class AjoutQuizController implements Initializable {
             FXMLLoader loader;
             Parent root;
 
-            loader = new FXMLLoader(getClass().getResource("/ShowQuiz.fxml"));
+            loader = new FXMLLoader(getClass().getResource("/quiz/ShowQuiz.fxml"));
 
             root = loader.load();
 
@@ -124,7 +127,7 @@ public class AjoutQuizController implements Initializable {
 
     @FXML
     void previous(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowQuiz.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/ShowQuiz.fxml"));
         Parent root = loader.load();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(new Scene(root));

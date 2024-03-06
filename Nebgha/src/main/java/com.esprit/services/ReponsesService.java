@@ -1,14 +1,12 @@
 package com.esprit.services;
-import com.esprit.models.Difficulty;
 import com.esprit.models.Questions;
-import com.esprit.models.Quiz;
 import com.esprit.models.Reponses;
 import com.esprit.utils.DataSource;
 
 import java.sql.*;
 import java.util.*;
 
-public class ReponsesService implements IService<Reponses>{
+public class ReponsesService implements IService<Reponses> {
     private Connection connection;
     private QuestionsService questionsService;
 

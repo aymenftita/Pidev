@@ -6,7 +6,6 @@ import com.esprit.services.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -47,7 +46,7 @@ public class RecompensesEtudiantController {
         rewardBlock.setSpacing(10);
         rewardBlock.setStyle("-fx-background-color: #f0f0f0; -fx-border-color: #000066; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-padding: 10px;");
 
-        ImageView medalImageView = new ImageView(new Image(getClass().getResourceAsStream("/media/medal.png")));
+        ImageView medalImageView = new ImageView(new Image(getClass().getResourceAsStream("/quiz/graphics/medal.png")));
         medalImageView.setFitHeight(30);
         medalImageView.setFitWidth(30);
 
@@ -73,7 +72,7 @@ public class RecompensesEtudiantController {
     }
     @FXML
     void showRanking(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ranking.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/Ranking.fxml"));
         Parent root = loader.load();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(new Scene(root));
@@ -83,7 +82,7 @@ public class RecompensesEtudiantController {
     @FXML
     void previous(MouseEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/EtudiantInterface.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/EtudiantInterface.fxml"));
         Parent root = loader.load();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(new Scene(root));

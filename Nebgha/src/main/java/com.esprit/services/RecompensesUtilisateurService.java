@@ -7,7 +7,7 @@ import com.esprit.utils.DataSource;
 import java.sql.*;
 import java.util.*;
 
-public class RecompensesUtilisateurService implements IService<RecompensesUtilisateur>{
+public class RecompensesUtilisateurService implements IService<RecompensesUtilisateur> {
     private Connection connection;
     private RecompensesService recompensesService;
     private UtilisateurService utilisateurService;

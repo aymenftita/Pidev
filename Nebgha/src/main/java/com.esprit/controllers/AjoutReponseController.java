@@ -1,7 +1,13 @@
 package com.esprit.controllers;
 
 import com.esprit.models.*;
+import com.esprit.models.Questions;
+import com.esprit.models.Quiz;
+import com.esprit.models.Reponses;
 import com.esprit.services.*;
+import com.esprit.services.QuestionsService;
+import com.esprit.services.QuizService;
+import com.esprit.services.ReponsesService;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -101,7 +107,7 @@ public class AjoutReponseController implements Initializable {
 
                 FXMLLoader loader;
                 Parent root;
-                loader = new FXMLLoader(getClass().getResource("/ShowReponses.fxml"));
+                loader = new FXMLLoader(getClass().getResource("/quiz/ShowReponses.fxml"));
                 root = loader.load();
                 Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 currentStage.setScene(new Scene(root));
@@ -161,7 +167,7 @@ public class AjoutReponseController implements Initializable {
     @FXML
     void previous(MouseEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ShowReponses.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/ShowReponses.fxml"));
         Parent root = loader.load();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(new Scene(root));

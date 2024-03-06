@@ -1,7 +1,11 @@
 package com.esprit.controllers;
 
 import com.esprit.models.*;
+import com.esprit.models.Questions;
+import com.esprit.models.Quiz;
 import com.esprit.services.*;
+import com.esprit.services.QuestionsService;
+import com.esprit.services.QuizService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -100,7 +104,7 @@ public class ShowQuestionsController implements Initializable {
                 if (event.getClickCount() == 2 && !row.isEmpty()) {
                     Questions rowData = row.getItem();
                     try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/EditQuestion.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/EditQuestion.fxml"));
                         Parent root = loader.load();
                         EditQuestionController editQuestionController = loader.getController();
                         editQuestionController.initData(rowData);
@@ -185,7 +189,7 @@ public class ShowQuestionsController implements Initializable {
 
     @FXML
     void openAjout(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjoutQuestion.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/AjoutQuestion.fxml"));
         Parent root = loader.load();
         Stage currentStage = (Stage) questionTableView.getScene().getWindow();
         currentStage.setTitle("Add Question");
@@ -215,9 +219,9 @@ public class ShowQuestionsController implements Initializable {
     void previous(MouseEvent event) throws IOException {
 
         Role role = Session.getCurrentRole();
-        String fxmlPath = "/AdminInterface.fxml";
+        String fxmlPath = "/quiz/AdminInterface.fxml";
         if (role.equals(Role.Tuteur)) {
-            fxmlPath = "/TuteurInterface.fxml";
+            fxmlPath = "/quiz/TuteurInterface.fxml";
         }
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));

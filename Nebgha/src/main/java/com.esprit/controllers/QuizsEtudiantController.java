@@ -24,7 +24,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.io.IOException;
 import java.sql.Date;
 import java.util.*;
@@ -79,7 +78,7 @@ public class QuizsEtudiantController {
 
 
     public void initialize() {
-        String cssPath = getClass().getResource("/media/styles.css").toExternalForm();
+        String cssPath = getClass().getResource("/quiz/graphics/styles.css").toExternalForm();
         quizPane.getStylesheets().add(cssPath);
         questionsService = new QuestionsService();
 
@@ -122,8 +121,8 @@ public class QuizsEtudiantController {
         Label difficultyLabel = new Label(quiz.getDifficulte().toString());
         Label durationLabel = new Label("Duration : "+String.valueOf(quiz.getDuree())+" min");
 
-        Image image = new Image(getClass().getResourceAsStream("/media/question.png"));
-        Image doneImage = new Image(getClass().getResourceAsStream("/media/done.png"));
+        Image image = new Image(getClass().getResourceAsStream("/quiz/graphics/question.png"));
+        Image doneImage = new Image(getClass().getResourceAsStream("/quiz/graphics/done.png"));
 
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(30);
@@ -576,7 +575,7 @@ public class QuizsEtudiantController {
             }
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/QuizComplete.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/QuizComplete.fxml"));
         Parent root = loader.load();
 
         QuizCompleteController quizCompleteController = loader.getController();
@@ -604,7 +603,7 @@ public class QuizsEtudiantController {
 
 
     private void showQuizResult(int quizId) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/QuizResults.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/QuizResults.fxml"));
         Parent root = loader.load();
         QuizResultsController resultController = loader.getController();
         resultController.initialize(quizId);
@@ -650,7 +649,7 @@ public class QuizsEtudiantController {
             }
         } else {
             stopDuration();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/EtudiantInterface.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/EtudiantInterface.fxml"));
             Parent root = loader.load();
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             currentStage.setScene(new Scene(root));
