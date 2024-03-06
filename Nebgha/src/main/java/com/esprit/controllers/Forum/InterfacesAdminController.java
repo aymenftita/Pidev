@@ -5,9 +5,9 @@ import com.esprit.models.Forum.Question;
 import com.esprit.models.Forum.Reponse;
 import com.esprit.models.Forum.Sujet;
 import com.esprit.models.utilisateur;
-import com.esprit.services.Forum.questionService;
-import com.esprit.services.Forum.reponseService;
-import com.esprit.services.Forum.sujetService;
+import com.esprit.services.Forum.QuestionService;
+import com.esprit.services.Forum.ReponseService;
+import com.esprit.services.Forum.SujetService;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -44,7 +44,7 @@ public class InterfacesAdminController {
 
     private void loadQuestions() {
         //charger la table des questions
-        questionService QS = new questionService();
+        QuestionService QS = new QuestionService();
 
         //Collecter le titre de chaque sujet pour l'affichage
         TableColumn<Question, Sujet> sujetColumn = (TableColumn<Question, Sujet>) tvAffichageQuestion.getColumns()
@@ -85,7 +85,7 @@ public class InterfacesAdminController {
 
     private void loadReponses() {
         //charger la table des réponse
-        reponseService RS = new reponseService();
+        ReponseService RS = new ReponseService();
 
         //Collecter l'ID de chaque sujet pour l'affichage
         TableColumn<Reponse, Sujet> sujetColumn = (TableColumn<Reponse, Sujet>) tvAffichageReponse.getColumns().
@@ -143,7 +143,7 @@ public class InterfacesAdminController {
 
     private void loadSujets() {
         //charger la table des sujets
-        sujetService SS = new sujetService();
+        SujetService SS = new SujetService();
         ObservableList<Sujet> sujetsData = FXCollections.observableArrayList(SS.afficher());
         tvAffichageSujet.setItems(sujetsData);
     }
@@ -157,7 +157,7 @@ public class InterfacesAdminController {
         Question selectedQuestion = tvAffichageQuestion.getSelectionModel().getSelectedItem();
         if (selectedQuestion != null) {
             //Supprimer l'élément choisi
-            questionService qs = new questionService();
+            QuestionService qs = new QuestionService();
             qs.supprimer(selectedQuestion);
             loadQuestions();// Recharger la table
 
@@ -177,7 +177,7 @@ public class InterfacesAdminController {
         Reponse selectedReponse = tvAffichageReponse.getSelectionModel().getSelectedItem();
         if (selectedReponse != null) {
             //Supprimer l'élément choisi
-            reponseService rs = new reponseService();
+            ReponseService rs = new ReponseService();
             rs.supprimer(selectedReponse);
             loadReponses(); // Recharger la table
         } else {
@@ -197,7 +197,7 @@ public class InterfacesAdminController {
         Sujet selectedSujet = tvAffichageSujet.getSelectionModel().getSelectedItem();
         if (selectedSujet != null) {
             //Supprimer l'élément choisi
-            sujetService SS = new sujetService();
+            SujetService SS = new SujetService();
             SS.supprimer(selectedSujet);
             loadSujets(); // Recharger la table
         } else {

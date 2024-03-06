@@ -3,8 +3,8 @@ package com.esprit.controllers.Forum.question;
 import com.esprit.models.Forum.Question;
 import com.esprit.models.Forum.Sujet;
 import com.esprit.services.*;
-import com.esprit.services.Forum.questionService;
-import com.esprit.services.Forum.sujetService;
+import com.esprit.services.Forum.QuestionService;
+import com.esprit.services.Forum.SujetService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.ActionEvent;
@@ -109,8 +109,8 @@ public class AjoutQuestionController {
         }
 
         //Création du service et ajout d'entité
-        questionService qs = new questionService();
-        sujetService ss = new sujetService();
+        QuestionService qs = new QuestionService();
+        SujetService ss = new SujetService();
         ServiceUtilisateur su = new ServiceUtilisateur();
         //TODO: auteur à changer quand la session est configuré
         System.out.println(su.getUtilisateur(1));

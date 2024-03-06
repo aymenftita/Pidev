@@ -4,7 +4,7 @@ import com.esprit.controllers.Forum.question.InterfaceQuestionUserController;
 import com.esprit.models.Forum.Question;
 import com.esprit.models.Forum.Reponse;
 import com.esprit.models.Forum.Sujet;
-import com.esprit.services.Forum.reponseService;
+import com.esprit.services.Forum.ReponseService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.beans.property.SimpleStringProperty;
@@ -113,7 +113,7 @@ public class InterfaceReponseUserController {
 
         tvAffichageReponseContenu.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        reponseService rs = new reponseService();
+        ReponseService rs = new ReponseService();
 
         // Enregistrer les modifications lors de la validation
         tvAffichageReponseContenu.setOnEditCommit(event -> {
@@ -163,14 +163,14 @@ public class InterfaceReponseUserController {
 
     public void loadReponse() {
         //charger la table des questions
-        reponseService rs = new reponseService();
+        ReponseService rs = new ReponseService();
         ObservableList<Reponse> reponsesData = FXCollections.observableArrayList(rs.afficher());
         tvAffichageReponse.setItems(reponsesData);
 
     }
 
     public void loadReponseParQuestion() {
-        reponseService rs = new reponseService();
+        ReponseService rs = new ReponseService();
 
 
         //Collecter l'email de chaque utilisateur pour l'affichage
@@ -250,7 +250,7 @@ public class InterfaceReponseUserController {
 
     @FXML
     void handleSearch() {
-        reponseService rs = new reponseService();
+        ReponseService rs = new ReponseService();
 
         ObservableList<Reponse> reponsesData = FXCollections.observableArrayList(rs.afficherParQuestion(relatedQuestion));
 
@@ -345,7 +345,7 @@ public class InterfaceReponseUserController {
                         isUpvoted = false;
                         Reponse reponse = getTableView().getItems().get(getIndex());
                         //System.out.println("downVote this: " + reponse);
-                        reponseService rs = new reponseService();
+                        ReponseService rs = new ReponseService();
                         rs.downVote(reponse);
                         loadReponseParQuestion();
                         handleSearch();
@@ -357,7 +357,7 @@ public class InterfaceReponseUserController {
                         Reponse reponse = getTableView().getItems().get(getIndex());
                         //upVoteButton.setDisable(true);
                         //System.out.println("upVote this: " + reponse);
-                        reponseService rs = new reponseService();
+                        ReponseService rs = new ReponseService();
                         rs.upVote(reponse);
                         loadReponseParQuestion();
                         handleSearch();
@@ -392,7 +392,7 @@ public class InterfaceReponseUserController {
                         downVoteButton.setOpacity(0.5);
                         Reponse reponse = getTableView().getItems().get(getIndex());
                         System.out.println("upVote this: " + reponse);
-                        reponseService rs = new reponseService();
+                        ReponseService rs = new ReponseService();
                         rs.upVote(reponse);
                         loadReponseParQuestion();
                         handleSearch();
@@ -401,7 +401,7 @@ public class InterfaceReponseUserController {
                         isDownvoted = true;
                         downVoteButton.setOpacity(1);
                         Reponse reponse = getTableView().getItems().get(getIndex());
-                        reponseService rs = new reponseService();
+                        ReponseService rs = new ReponseService();
                         rs.downVote(reponse);
                         loadReponseParQuestion();
                         handleSearch();
@@ -436,7 +436,7 @@ public class InterfaceReponseUserController {
                     if (isAccepted) {
                         acceptButton.setOpacity(0.5);
                         Reponse reponse = getTableView().getItems().get(getIndex());
-                        reponseService rs = new reponseService();
+                        ReponseService rs = new ReponseService();
                         rs.unAcceptReponse(reponse);
                     }
                     else {
@@ -444,7 +444,7 @@ public class InterfaceReponseUserController {
                         acceptButton.setOpacity(1);
                         Reponse reponse = getTableView().getItems().get(getIndex());
                         System.out.println("accept this: " + reponse);
-                        reponseService rs = new reponseService();
+                        ReponseService rs = new ReponseService();
                         rs.acceptReponse(reponse);
                     }
                 });
@@ -476,7 +476,7 @@ public class InterfaceReponseUserController {
                     if (isReported){
                         reportButton.setOpacity(0.5);
                         Reponse reponse = getTableView().getItems().get(getIndex());
-                        reponseService rs = new reponseService();
+                        ReponseService rs = new ReponseService();
                         rs.unreportReponse(reponse);
                     }
                     else {
@@ -484,7 +484,7 @@ public class InterfaceReponseUserController {
                         reportButton.setOpacity(1);
                         Reponse reponse = getTableView().getItems().get(getIndex());
                         System.out.println("report this: " + reponse);
-                        reponseService rs = new reponseService();
+                        ReponseService rs = new ReponseService();
                         rs.reportReponse(reponse);
                     }
                 });

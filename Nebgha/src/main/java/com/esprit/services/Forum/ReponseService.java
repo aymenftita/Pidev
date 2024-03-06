@@ -9,12 +9,12 @@ import com.esprit.models.Forum.Reponse;
 import java.sql.*;
 import java.util.*;
 
-public class reponseService implements IService<Reponse> {
+public class ReponseService implements IService<Reponse> {
 
 
     private Connection connection;
 
-    public reponseService() {
+    public ReponseService() {
         connection = DataSource.getInstance().getConnection();
     }
 
@@ -68,8 +68,8 @@ public class reponseService implements IService<Reponse> {
         try {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(req);
-            sujetService ss = new sujetService();//sujet service pour récupérer le sujet d'aprés l'ID
-            questionService qs = new questionService();//question service pour récupérer le question d'aprés l'ID
+            SujetService ss = new SujetService();//sujet service pour récupérer le sujet d'aprés l'ID
+            QuestionService qs = new QuestionService();//question service pour récupérer le question d'aprés l'ID
             ServiceUtilisateur su = new ServiceUtilisateur();
             while (rs.next()) {
                 reponses.add(new Reponse(rs.getInt("id"), su.getUtilisateur(rs.getInt("auteur_id")),
@@ -92,8 +92,8 @@ public class reponseService implements IService<Reponse> {
         try {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(req);
-            sujetService ss = new sujetService();//sujet service pour récupérer le sujet d'aprés l'ID
-            questionService qs = new questionService();//question service pour récupérer le question d'aprés l'ID
+            SujetService ss = new SujetService();//sujet service pour récupérer le sujet d'aprés l'ID
+            QuestionService qs = new QuestionService();//question service pour récupérer le question d'aprés l'ID
             ServiceUtilisateur su = new ServiceUtilisateur();
             while (rs.next()) {
                 reponses.add(new Reponse(rs.getInt("id"), su.getUtilisateur(rs.getInt("auteur_id")),

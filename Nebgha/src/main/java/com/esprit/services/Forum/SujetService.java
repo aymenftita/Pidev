@@ -7,10 +7,10 @@ import com.esprit.models.Forum.Sujet;
 import java.sql.*;
 import java.util.*;
 
-public class sujetService implements IService<Sujet> {
+public class SujetService implements IService<Sujet> {
     private Connection connection;
 
-    public sujetService() {
+    public SujetService() {
         connection = DataSource.getInstance().getConnection();
     }
     @Override

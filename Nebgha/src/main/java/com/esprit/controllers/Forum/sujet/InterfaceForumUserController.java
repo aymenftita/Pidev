@@ -2,7 +2,7 @@ package com.esprit.controllers.Forum.sujet;
 
 import com.esprit.controllers.Forum.question.InterfaceQuestionUserController;
 import com.esprit.models.Forum.Sujet;
-import com.esprit.services.Forum.sujetService;
+import com.esprit.services.Forum.SujetService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.collections.FXCollections;
@@ -55,7 +55,7 @@ public class InterfaceForumUserController {
         tvAffichageSujetRegles.setCellFactory(TextFieldTableCell.forTableColumn());
         tvAffichageSujetSujet.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        sujetService ss = new sujetService();
+        SujetService ss = new SujetService();
 
 
 
@@ -200,7 +200,7 @@ public class InterfaceForumUserController {
 
     public void loadSujet() {
         //charger la table des sujets
-        sujetService SS = new sujetService();
+        SujetService SS = new SujetService();
         ObservableList<Sujet> sujetsData = FXCollections.observableArrayList(SS.afficher());
         tvAffichageSujet.setItems(sujetsData);
 

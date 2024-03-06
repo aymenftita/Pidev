@@ -6,8 +6,8 @@ import com.esprit.models.Forum.Reponse;
 import com.esprit.models.Forum.Sujet;
 import com.esprit.services.*;
 import com.esprit.services.Forum.GPTService;
-import com.esprit.services.Forum.questionService;
-import com.esprit.services.Forum.reponseService;
+import com.esprit.services.Forum.QuestionService;
+import com.esprit.services.Forum.ReponseService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.beans.property.SimpleStringProperty;
@@ -92,7 +92,7 @@ public class InterfaceQuestionUserController {
         tvAffichageQuestionQuestion.setCellFactory(TextFieldTableCell.forTableColumn());
         tvAffichageQuestionContenu.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        questionService qs = new questionService();
+        QuestionService qs = new QuestionService();
 
         // Enregistrer les modifications lors de la validation
         tvAffichageQuestionQuestion.setOnEditCommit(event -> {
@@ -171,14 +171,14 @@ public class InterfaceQuestionUserController {
 
     public void loadQuestion() {
         //charger la table des questions
-        questionService qs = new questionService();
+        QuestionService qs = new QuestionService();
         ObservableList<Question> questionsData = FXCollections.observableArrayList(qs.afficher());
         tvAffichageQuestion.setItems(questionsData);
 
     }
 
     public void loadQuestionParSujet() {
-        questionService qs = new questionService();
+        QuestionService qs = new QuestionService();
 
 
         ObservableList<Question> questionsData = FXCollections.observableArrayList(qs.afficherParSujet(relatedSujet));
@@ -193,7 +193,7 @@ public class InterfaceQuestionUserController {
         changeLabel();
         loadQuestionParSujet();
 
-        questionService qs = new questionService();
+        QuestionService qs = new QuestionService();
 
         ObservableList<Question> questionsData = FXCollections.observableArrayList(qs.afficherParSujet(relatedSujet));
 
@@ -289,7 +289,7 @@ public class InterfaceQuestionUserController {
 
             ServiceUtilisateur su = new ServiceUtilisateur();
             GPTService gs = new GPTService();
-            reponseService rs = new reponseService();
+            ReponseService rs = new ReponseService();
             String response = gs.request(selectedQuestion.getTitre(), selectedQuestion.getContenu());
 
 
@@ -324,7 +324,7 @@ public class InterfaceQuestionUserController {
         FilteredList<Question> filteredData = (FilteredList<Question>) tvAffichageQuestion.getItems();
 
         SortedList<Question> sortedData = new SortedList<>(filteredData);
-        questionService qs = new questionService();
+        QuestionService qs = new QuestionService();
         //Trié par date par défaut
         Comparator<Question> dateComparator = (r1, r2) -> r2.getDate().compareTo(r1.getDate());
         sortedData.comparatorProperty().bind(cbSort.getSelectionModel().selectedItemProperty().asString().map(s -> {

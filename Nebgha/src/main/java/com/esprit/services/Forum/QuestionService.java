@@ -10,10 +10,10 @@ import java.sql.*;
 import java.util.*;
 
 
-public class questionService implements IService<Question> {
+public class QuestionService implements IService<Question> {
     private Connection connection;
 
-    public questionService() {
+    public QuestionService() {
         connection = DataSource.getInstance().getConnection();
     }
     @Override
@@ -67,7 +67,7 @@ public class questionService implements IService<Question> {
         try {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(req);
-            sujetService ss = new sujetService();//sujet service pour récupérer le sujet d'aprés l'ID
+            SujetService ss = new SujetService();//sujet service pour récupérer le sujet d'aprés l'ID
             ServiceUtilisateur su = new ServiceUtilisateur();
             while (rs.next()) {
                 questions.add(new Question(rs.getInt("id"), rs.getString("titre"),
@@ -92,7 +92,7 @@ public class questionService implements IService<Question> {
             ResultSet rs = st.executeQuery(req);
 
             if (rs.next()) {  // Check if a row exists
-                sujetService ss = new sujetService();//sujet service pour récupérer le sujet d'aprés l'ID
+                SujetService ss = new SujetService();//sujet service pour récupérer le sujet d'aprés l'ID
                 ServiceUtilisateur su = new ServiceUtilisateur();
                 question = new Question(rs.getInt("id"), rs.getString("titre"),
                         su.getUtilisateur(rs.getInt("auteur_id")), rs.getDate("date_creation"),
@@ -113,7 +113,7 @@ public class questionService implements IService<Question> {
         try {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(req);
-            sujetService ss = new sujetService();//sujet service pour récupérer le sujet d'aprés l'ID
+            SujetService ss = new SujetService();//sujet service pour récupérer le sujet d'aprés l'ID
             ServiceUtilisateur su = new ServiceUtilisateur();
             while (rs.next()) {
                 questions.add(new Question(rs.getInt("id"), rs.getString("titre"),

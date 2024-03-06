@@ -1,6 +1,6 @@
 .my-anchor-pane {
     -fx-pref-width: 1366px; /* Set the preferred width to screen width */
-    -fx-pref-height: 720px; /* Set the preferred height to screen height */
+    -fx-pref-height: 715px; /* Set the preferred height to screen height */
     -fx-background-color: white;
 }
 

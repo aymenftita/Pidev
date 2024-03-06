@@ -4,7 +4,7 @@ import com.esprit.models.Forum.Question;
 import com.esprit.models.Forum.Reponse;
 import com.esprit.models.Forum.Sujet;
 import com.esprit.services.ServiceUtilisateur;
-import com.esprit.services.Forum.reponseService;
+import com.esprit.services.Forum.ReponseService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.ActionEvent;
@@ -75,7 +75,7 @@ public class AjoutReponseController {
 
 
         //Création du service et ajout d'entité
-        reponseService rs = new reponseService();
+        ReponseService rs = new ReponseService();
         ServiceUtilisateur su = new ServiceUtilisateur();
         rs.ajouter(new Reponse(0, su.getUtilisateur(1),
                 relatedQuestion, tfContenuReponse.getText(),
