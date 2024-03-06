@@ -63,7 +63,7 @@ public class AfficherGroupeController implements Initializable {
 
 
         nomColumn.setCellFactory(TextFieldTableCell.<Groupe>forTableColumn());
-        idColumng.setCellFactory(ChoiceBoxTableCell.<Groupe,Utilisateur>forTableColumn(users));
+        //idColumng.setCellFactory(ChoiceBoxTableCell.<Groupe,Utilisateur>forTableColumn(users));
         dateColumn.setCellFactory(TextFieldTableCell.<Groupe>forTableColumn());
 
 

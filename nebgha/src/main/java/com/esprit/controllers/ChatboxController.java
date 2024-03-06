@@ -102,40 +102,6 @@ public class ChatboxController {
 
 
 
-
-    /*@FXML
-    private void handleSendButtonAction(ActionEvent event) {
-        String messageContent = messageTextField.getText().trim();
-        if (!messageContent.isEmpty()) {
-            // Save the message to the database
-            Message newMessage = new Message(selectedGroup.getId_groupe(), "User", messageContent);
-            ms.ajouter(newMessage);
-
-            // Update the chatTextArea with the new message
-            chatTextArea.appendText("User: " + messageContent + "\n");
-
-            // Clear the messageTextField
-            messageTextField.clear();
-        }
-    }*/
-
-    /*@FXML
-    public void handleSendButtonAction(javafx.event.ActionEvent actionEvent) {
-        String messageContent = messageTextField.getText().trim();
-        if (!messageContent.isEmpty()) {
-            // Save the message to the database
-            Message newMessage = new Message(selectedGroup.getId_groupe(), String.valueOf(LocalDate.now()), messageContent,Session.getUserId(),0);
-            ms.ajouter(newMessage);
-            // Update the chatTextArea with the new message
-            Label newM = new Label(messageContent);
-            newM.setStyle("-fx-background-color: #4B87F6; -fx-background-radius: 40; -fx-font-size: 20; -fx-text-fill: white; ");
-            //chatTextArea.appendText(String.valueOf(newM));
-            vbox.getChildren().add(newM);
-            // Clear the messageTextField
-            messageTextField.clear();
-        }
-    }*/
-
     public void handleSendButtonActionI(MouseEvent mouseEvent) throws IOException {
         String messageContent = messageTextField.getText().trim();
         if (!messageContent.isEmpty()) {

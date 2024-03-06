@@ -32,6 +32,7 @@ public class AjouterReclamationController {
     public TextField tfP;
     public Label csSujet;
     public Label csDesc;
+    public Label lbCorrect;
 
     @FXML
     private TextField tfid;
@@ -65,10 +66,6 @@ public class AjouterReclamationController {
                     String.valueOf(tfDescription.getText()),
                     "Envoyée",
                     1,"admin" ));
-            /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Personne ajoutée");
-            alert.setContentText("Personne ajoutée !");
-            alert.show();*/
             SwitchScenesController ss = new SwitchScenesController();
             ss.SwitchScene2(event,"AfficherReclamationUser",tfSujet);
         }
@@ -102,11 +99,11 @@ public class AjouterReclamationController {
     }
 
     private void startStreaming() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), event -> {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(5000), event -> {
             if(!tfDescription.getText().isEmpty()){
                 updateStreamingText();
                 try {
-                    tfDescription.setText(AutoCorrectApi(tfDescription.getText()));
+                    lbCorrect.setText(AutoCorrectApi(tfDescription.getText()));
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -119,12 +116,16 @@ public class AjouterReclamationController {
 
     private void updateStreamingText() {
         // Customize how the streaming text is updated here
-        tfDescription.setText(tfDescription.getText().substring(1) + tfDescription.getText().charAt(0));
+        lbCorrect.setText(tfDescription.getText().substring(1) + tfDescription.getText().charAt(0));
     }
 
     public void initialize(){
 
         startStreaming();
+
+        lbCorrect.setOnMouseClicked(event->{
+            tfDescription.setText(lbCorrect.getText());
+        });
 
     }
 

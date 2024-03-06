@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.reclamationControllers.AjouterReclamationController">
-    <TextField fx:id="tfDescription" alignment="CENTER" layoutX="160.0" layoutY="196.0" prefHeight="182.0" prefWidth="319.0" promptText="Description" style="-fx-background-radius: 50;">
+    <TextField fx:id="tfDescription" alignment="CENTER" layoutX="160.0" layoutY="196.0" prefHeight="177.0" prefWidth="319.0" promptText="Description" style="-fx-background-radius: 50;">
       <font>
          <Font size="13.0" />
       </font></TextField>
@@ -39,4 +39,5 @@
          <Image url="@../Images/cancel.png" />
       </image>
    </ImageView>
+   <Label fx:id="lbCorrect" alignment="CENTER" layoutX="212.0" layoutY="319.0" prefHeight="38.0" prefWidth="218.0" textFill="#0000004a" />
 </AnchorPane>

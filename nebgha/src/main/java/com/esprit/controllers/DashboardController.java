@@ -75,7 +75,7 @@ public class DashboardController implements Initializable {
             ChatboxController chatboxController = loader.getController();
             chatboxController.initData(selectedGroup);
 
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root,600,700);
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setTitle(selectedGroup.getTitre() + " Chat");
