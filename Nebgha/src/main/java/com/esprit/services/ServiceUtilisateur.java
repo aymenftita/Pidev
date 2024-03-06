@@ -96,7 +96,7 @@ public class ServiceUtilisateur implements IService<utilisateur> {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(req);
             while (rs.next()) {
-                user = new utilisateur(rs.getString("nom"),
+                user = new utilisateur(1, rs.getString("nom"), //TODO: à changer id_user
                         rs.getString("prenom"),
                         rs.getString("email"),
                         rs.getString("password"),

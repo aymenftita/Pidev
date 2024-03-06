@@ -187,4 +187,26 @@ public class reponseService implements IService<Reponse> {
         }
     }
 
+    public boolean AiResponded(Question question) {
+        int questionId = question.getId();
+        String req = "SELECT EXISTS(SELECT * FROM reponse_forum WHERE auteur_id = 1 AND question_id = " + questionId + ")";
+        try {
+            Statement st = connection.createStatement();
+            System.out.println("AI response check!");
+
+            ResultSet resultSet = st.executeQuery(req);
+
+            if (resultSet.next()) {
+                return resultSet.getBoolean(1);
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return false;
+
+    }
+
 }

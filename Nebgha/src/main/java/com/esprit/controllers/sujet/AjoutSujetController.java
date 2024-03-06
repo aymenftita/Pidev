@@ -2,6 +2,7 @@ package com.esprit.controllers.sujet;
 
 import com.esprit.controllers.InterfacesAdminController;
 import com.esprit.models.Sujet;
+import com.esprit.services.GPTService;
 import com.esprit.services.sujetService;
 import com.fasterxml.jackson.databind.JsonNode;
 import javafx.event.ActionEvent;
@@ -128,6 +129,7 @@ public class AjoutSujetController {
         alertAjout.setHeaderText("Success!");
         alertAjout.setContentText("Topic add!");
         alertAjout.show();
+
 
     }
 

@@ -16,8 +16,8 @@ public class questionService implements IService<Question> {
     }
     @Override
     public void ajouter(Question question) {
-        String req = "INSERT into questions_forum(id, titre, auteur_id, date_creation, sujet_id, contenu) values (" + question.getId() +
-                ", '" + question.getTitre() + "', " + question.getAuteur().getId() +
+        String req = "INSERT into questions_forum(titre, auteur_id, date_creation, sujet_id, contenu) values ( '" +
+                 question.getTitre() + "', " + question.getAuteur().getId() +
                 ", '" + question.getDate()  + "', " +
                 question.getSujet().getId() + ", '" + question.getContenu() + "');";
         try {

@@ -26,7 +26,7 @@
                         <Image url="@graphics/Logo1.png" />
                     </image>
                 </ImageView>
-                <Label layoutX="775.0" layoutY="18.0" styleClass="link-label" stylesheets="@style.css" text="Cours" />
+                <Label layoutX="775.0" layoutY="18.0" styleClass="link-label" stylesheets="@style.css" text="Courses" />
                 <Label layoutX="868.0" layoutY="18.0" onMouseClicked="#apercuForum" styleClass="link-label" stylesheets="@style.css" text="Forum" />
                 <Label layoutX="966.0" layoutY="18.0" styleClass="link-label" stylesheets="@style.css" text="Planning" />
                 <Label layoutX="1098.0" layoutY="18.0" styleClass="link-label" stylesheets="@style.css" text="Quiz" />
@@ -50,12 +50,12 @@
                 <Font size="15.0" />
             </font>
         </TextField>
-        <ComboBox fx:id="cbSort" layoutX="489.0" layoutY="88.0" onAction="#handleSort" prefHeight="37.0" prefWidth="120.0" promptText="Plus récent" styleClass="modern-combo-box">
+        <ComboBox fx:id="cbSort" layoutX="489.0" layoutY="88.0" onAction="#handleSort" prefHeight="37.0" prefWidth="120.0" promptText="Most recent" styleClass="modern-combo-box">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ComboBox>
-        <Button layoutX="1130.0" layoutY="91.0" mnemonicParsing="false" onAction="#AjoutReponse" prefHeight="31.0" prefWidth="169.0" styleClass="my-button" stylesheets="@style.css" text="Ajouter une Réponse" textFill="#d3d709">
+        <Button layoutX="1130.0" layoutY="91.0" mnemonicParsing="false" onAction="#AjoutReponse" prefHeight="31.0" prefWidth="169.0" styleClass="my-button" stylesheets="@style.css" text="Add Response" textFill="#d3d709">
             <font>
                 <Font name="Segoe UI" size="15.0" />
             </font>
@@ -71,7 +71,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <DatePicker fx:id="dpDateCreation" layoutX="82.0" layoutY="236.0" onAction="#handleFilterDate" prefHeight="25.0" prefWidth="149.0" promptText="Date de création">
+        <DatePicker fx:id="dpDateCreation" layoutX="82.0" layoutY="236.0" onAction="#handleFilterDate" prefHeight="25.0" prefWidth="149.0" promptText="Creation date">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
@@ -81,7 +81,7 @@
                 <String fx:value="arrow-button" />
             </styleClass>
         </DatePicker>
-        <TextField fx:id="tfAuteurReponse" layoutX="79.0" layoutY="357.0" onAction="#handleFilterAuteur" promptText="Auteur" styleClass="modern-textfield" />
+        <TextField fx:id="tfAuteurReponse" layoutX="79.0" layoutY="357.0" onAction="#handleFilterAuteur" promptText="Author" styleClass="modern-textfield" />
         <ImageView fitHeight="33.0" fitWidth="46.0" layoutX="240.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@graphics/magnifying-glass.gif" />
@@ -89,12 +89,12 @@
         </ImageView>
       <TableView fx:id="tvAffichageReponse" layoutX="234.0" layoutY="199.0" prefHeight="541.0" prefWidth="1133.0">
         <columns>
-          <TableColumn fx:id="tvAffichageReponseContenu" prefWidth="600.0" text="Contenu">
+          <TableColumn fx:id="tvAffichageReponseContenu" prefWidth="600.0" text="Content">
             <cellValueFactory>
                 <PropertyValueFactory property="contenu" />
             </cellValueFactory>
         </TableColumn>
-          <TableColumn fx:id="tvAffichageReponseAuteur" minWidth="0.0" prefWidth="213.0" text="Auteur">
+          <TableColumn fx:id="tvAffichageReponseAuteur" minWidth="0.0" prefWidth="213.0" text="Author">
               <!--
             <cellValueFactory>
                 <PropertyValueFactory property="auteur" />
@@ -116,11 +116,11 @@
             <TableColumn fx:id="tvAffichageReponseActionReport" prefWidth="32.0" />
         </columns>
       </TableView>
-      <Label fx:id="titreQuestion" layoutX="263.0" layoutY="156.0" onMouseClicked="#apercuQuestion" styleClass="selected-question-titre" text="Titre Question" />
-      <Label fx:id="contenuQuestion" layoutX="737.0" layoutY="156.0" styleClass="selected-question-contenu" text="Contenu Question" />
-      <Label fx:id="auteurQuestion" layoutX="1186.0" layoutY="148.0" styleClass="selected-question-auteur" text="Auteur" />
-      <Label fx:id="dateQuestion" layoutX="1186.0" layoutY="167.0" styleClass="selected-question-date" text="Date de publication" />
-      <Label fx:id="nomSujet" layoutX="14.0" layoutY="115.0" onMouseClicked="#apercuForum" styleClass="questions-label" text="Nom Sujet" />
+      <Label fx:id="titreQuestion" layoutX="263.0" layoutY="156.0" onMouseClicked="#apercuQuestion" styleClass="selected-question-titre" text="Question title" />
+      <Label fx:id="contenuQuestion" layoutX="737.0" layoutY="156.0" styleClass="selected-question-contenu" text="Question content" />
+      <Label fx:id="auteurQuestion" layoutX="1186.0" layoutY="148.0" styleClass="selected-question-auteur" text="Author" />
+      <Label fx:id="dateQuestion" layoutX="1186.0" layoutY="167.0" styleClass="selected-question-date" text="Date of publication" />
+      <Label fx:id="nomSujet" layoutX="14.0" layoutY="115.0" onMouseClicked="#apercuForum" styleClass="questions-label" text="Topic name" />
       <ImageView fitHeight="57.0" fitWidth="39.0" layoutX="25.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@graphics/check.gif" />

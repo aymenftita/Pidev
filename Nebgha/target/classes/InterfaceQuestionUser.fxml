@@ -26,7 +26,7 @@
                         <Image url="@graphics/Logo1.png" />
                     </image>
                 </ImageView>
-                <Label layoutX="775.0" layoutY="18.0" styleClass="link-label" stylesheets="@style.css" text="Cours" />
+                <Label layoutX="775.0" layoutY="18.0" styleClass="link-label" stylesheets="@style.css" text="Courses" />
                 <Label layoutX="868.0" layoutY="18.0" onMouseClicked="#apercuForum" styleClass="link-label" stylesheets="@style.css" text="Forum" />
                 <Label layoutX="966.0" layoutY="18.0" styleClass="link-label" stylesheets="@style.css" text="Planning" />
                 <Label layoutX="1098.0" layoutY="18.0" styleClass="link-label" stylesheets="@style.css" text="Quiz" />
@@ -45,17 +45,17 @@
                 <Font name="Segoe UI" size="35.0" />
             </font>
         </Label>
-        <TextField fx:id="tfSearchQuestion" layoutX="277.0" layoutY="90.0" onAction="#handleSearch" promptText="Rechercher" styleClass="modern-search-bar">
+        <TextField fx:id="tfSearchQuestion" layoutX="277.0" layoutY="90.0" onAction="#handleSearch" promptText="Search" styleClass="modern-search-bar">
             <font>
                 <Font size="15.0" />
             </font>
         </TextField>
-        <ComboBox fx:id="cbSort" layoutX="489.0" layoutY="88.0" onAction="#handleSort" prefHeight="37.0" prefWidth="120.0" promptText="Plus récent" styleClass="modern-combo-box">
+        <ComboBox fx:id="cbSort" layoutX="489.0" layoutY="88.0" onAction="#handleSort" prefHeight="37.0" prefWidth="120.0" promptText="Most recent" styleClass="modern-combo-box">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ComboBox>
-        <Button layoutX="1129.0" layoutY="91.0" mnemonicParsing="false" onAction="#ajoutQuestion" prefHeight="31.0" prefWidth="172.0" styleClass="my-button" stylesheets="@style.css" text="Ajouter une Question" textFill="#d3d709">
+        <Button layoutX="1129.0" layoutY="91.0" mnemonicParsing="false" onAction="#ajoutQuestion" prefHeight="31.0" prefWidth="172.0" styleClass="my-button" stylesheets="@style.css" text="Add Question" textFill="#d3d709">
             <font>
                 <Font name="Segoe UI" size="15.0" />
             </font>
@@ -71,7 +71,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <DatePicker fx:id="dpDateCreation" layoutX="82.0" layoutY="225.0" onAction="#handleFilterDate" prefHeight="25.0" prefWidth="149.0" promptText="Date de création">
+        <DatePicker fx:id="dpDateCreation" layoutX="82.0" layoutY="225.0" onAction="#handleFilterDate" prefHeight="25.0" prefWidth="149.0" promptText="Creation date">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
@@ -81,7 +81,7 @@
                 <String fx:value="arrow-button" />
             </styleClass>
         </DatePicker>
-        <TextField fx:id="tfAuteurQuestion" layoutX="79.0" layoutY="331.0" onAction="#handleFilterAuteur" promptText="Auteur" styleClass="modern-textfield" />
+        <TextField fx:id="tfAuteurQuestion" layoutX="79.0" layoutY="331.0" onAction="#handleFilterAuteur" promptText="Author" styleClass="modern-textfield" />
         <TableView fx:id="tvAffichageQuestion" layoutX="236.0" layoutY="136.0" onMouseClicked="#apercuReponse" prefHeight="605.0" prefWidth="1126.0">
             <columns>
                 <TableColumn fx:id="tvAffichageQuestionQuestion" prefWidth="256.0" text="Question">
@@ -89,7 +89,7 @@
                         <PropertyValueFactory property="titre" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="tvAffichageQuestionAuteur" prefWidth="189.0" text="Auteur">
+                <TableColumn fx:id="tvAffichageQuestionAuteur" prefWidth="189.0" text="Author">
                    <!--
                 <cellValueFactory>
                     <PropertyValueFactory property="regles" />
@@ -101,7 +101,7 @@
                         <PropertyValueFactory property="date" />
                     </cellValueFactory>
                 </TableColumn>
-            <TableColumn fx:id="tvAffichageQuestionContenu" prefWidth="442.0" text="Contenu">
+            <TableColumn fx:id="tvAffichageQuestionContenu" prefWidth="442.0" text="Content">
                 <cellValueFactory>
                     <PropertyValueFactory property="contenu" />
                 </cellValueFactory>
@@ -118,7 +118,7 @@
                 <Image url="@graphics/magnifying-glass.gif" />
             </image>
         </ImageView>
-      <Label fx:id="nomSujet" layoutX="19.0" layoutY="115.0" onMouseClicked="#apercuSujet" styleClass="questions-label" text="Nom Sujet" />
+      <Label fx:id="nomSujet" layoutX="19.0" layoutY="115.0" onMouseClicked="#apercuSujet" styleClass="questions-label" text="Topic Name" />
       <ImageView fitHeight="43.0" fitWidth="40.0" layoutX="35.0" layoutY="221.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@graphics/check.gif" />

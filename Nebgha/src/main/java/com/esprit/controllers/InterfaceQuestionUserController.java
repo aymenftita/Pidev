@@ -5,8 +5,7 @@ import com.esprit.models.Question;
 import com.esprit.models.Reponse;
 import com.esprit.models.Sujet;
 import com.esprit.models.utilisateur;
-import com.esprit.services.questionService;
-import com.esprit.services.sujetService;
+import com.esprit.services.*;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.beans.property.SimpleObjectProperty;
@@ -274,7 +273,7 @@ public class InterfaceQuestionUserController {
     }
 
     @FXML
-    void apercuReponse(MouseEvent event) throws IOException {
+    void apercuReponse(MouseEvent event) throws IOException, InterruptedException {
         if (event.getClickCount() == 2) {
 
             Question selectedQuestion = tvAffichageQuestion.getSelectionModel().getSelectedItem();
@@ -284,8 +283,23 @@ public class InterfaceQuestionUserController {
             InterfaceReponseUserController iruc = loader.getController();
             iruc.setRelated(relatedSujet, selectedQuestion);
             tvAffichageQuestion.getScene().setRoot(root);
-        }
 
+            //Automatic answer by AI to entered question
+
+            ServiceUtilisateur su = new ServiceUtilisateur();
+            GPTService gs = new GPTService();
+            reponseService rs = new reponseService();
+            String response = gs.request(selectedQuestion.getTitre(), selectedQuestion.getContenu());
+
+
+            if (!rs.AiResponded(selectedQuestion)) {
+
+                rs.ajouter(new Reponse(0, su.getUtilisateur(1), selectedQuestion, response
+                        , new Date(System.currentTimeMillis()), relatedSujet, 0, false, false));
+
+            }
+
+        }
     }
 
     @FXML

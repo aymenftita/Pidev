@@ -14,17 +14,17 @@
     <children>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="399.0" prefWidth="422.0">
               <children>
-                  <Button layoutX="92.0" layoutY="354.0" mnemonicParsing="false" onAction="#ajouterQuestion" prefHeight="31.0" prefWidth="264.0" styleClass="my-button" stylesheets="@../style.css" text="Ajouter">
+                  <Button layoutX="92.0" layoutY="354.0" mnemonicParsing="false" onAction="#ajouterQuestion" prefHeight="31.0" prefWidth="264.0" styleClass="my-button" stylesheets="@../style.css" text="Add">
                       <font>
                           <Font size="15.0" />
                       </font>
                   </Button>
-                  <Label layoutX="10.0" layoutY="90.0" styleClass="ajout-label" stylesheets="@../style.css" text="Titre :">
+                  <Label layoutX="10.0" layoutY="90.0" styleClass="ajout-label" stylesheets="@../style.css" text="Title :">
                       <font>
                           <Font size="16.0" />
                       </font>
                   </Label>
-                  <Label layoutX="10.0" layoutY="156.0" styleClass="ajout-label" stylesheets="@../style.css" text="Contenu :">
+                  <Label layoutX="10.0" layoutY="156.0" styleClass="ajout-label" stylesheets="@../style.css" text="Content :">
                       <font>
                           <Font size="16.0" />
                       </font>
@@ -35,7 +35,7 @@
                   <String fx:value="question-content" />
                   <String fx:value="question-input" />
                </styleClass></TextArea>
-                  <Label layoutX="119.0" layoutY="14.0" text="Ajout Question">
+                  <Label layoutX="119.0" layoutY="14.0" text="Add Question">
                       <font>
                           <Font name="System Bold" size="26.0" />
                       </font>

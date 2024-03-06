@@ -2,10 +2,9 @@ package com.esprit.controllers.question;
 
 import com.esprit.controllers.InterfacesAdminController;
 import com.esprit.models.Question;
+import com.esprit.models.Reponse;
 import com.esprit.models.Sujet;
-import com.esprit.services.ServiceUtilisateur;
-import com.esprit.services.questionService;
-import com.esprit.services.sujetService;
+import com.esprit.services.*;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.ActionEvent;
@@ -111,13 +110,16 @@ public class AjoutQuestionController {
         }
 
         //Création du service et ajout d'entité
-        questionService rs = new questionService();
+        questionService qs = new questionService();
         sujetService ss = new sujetService();
         ServiceUtilisateur su = new ServiceUtilisateur();
         //TODO: auteur à changer quand la session est configuré
-        rs.ajouter(new Question(0, tfQuestionTitre.getText(),
+        System.out.println(su.getUtilisateur(1));
+
+        Question newQuestion = new Question(0, tfQuestionTitre.getText(),
                 su.getUtilisateur(1), new Date(System.currentTimeMillis()),
-                relatedSujet, taContenuQuestion.getText()));
+                relatedSujet, taContenuQuestion.getText());
+        qs.ajouter(newQuestion);
 
         //Message de confirmation
         Alert alertAjout = new Alert(Alert.AlertType.INFORMATION);
@@ -125,6 +127,7 @@ public class AjoutQuestionController {
         alertAjout.setHeaderText("Success!");
         alertAjout.setContentText("Question added!");
         alertAjout.show();
+
 
     }
 
