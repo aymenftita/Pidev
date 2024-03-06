@@ -49,5 +49,6 @@
          </font>
       </TextField>
       <Button layoutX="385.0" layoutY="74.0" mnemonicParsing="false" onAction="#tri" text="Tri" />
+      <Button layoutX="268.0" layoutY="74.0" mnemonicParsing="false" onAction="#translate" text="Button" />
    </children>
 </AnchorPane>

@@ -1,12 +1,14 @@
 package com.esprit.controllers;
 
 import com.esprit.models.Evenement;
+import com.esprit.services.TraductionService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -77,5 +79,7 @@ public class AfficherEventController {
             System.out.println("error" + ex.getMessage());
         }
     }
+
+
 }
 

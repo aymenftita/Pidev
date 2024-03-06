@@ -4,6 +4,7 @@ import com.esprit.models.Evenement;
 import com.esprit.models.Localisation;
 import com.esprit.utils.DataSource;
 import javafx.scene.control.Alert;
+import javafx.stage.Window;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,6 +19,12 @@ public class EvenementService implements IService<Evenement> {
         connection = DataSource.getInstance().getConnection();
     }
 
+    private NotificationService notificationService;
+
+    public EvenementService(NotificationService notificationService) {
+        connection = DataSource.getInstance().getConnection();
+        this.notificationService = notificationService;
+    }
     @Override
     public void ajouter(Evenement evenement) {
         String req = "INSERT into evenement( nom, date,  lieuId, description , image) values ( '" + evenement.getNom() + "', '" + evenement.getDate() + "', '" + evenement.getLieuId().getId() + "', '" +
@@ -25,10 +32,23 @@ public class EvenementService implements IService<Evenement> {
         try {
             Statement st = connection.createStatement();
             st.executeUpdate(req);
-            showAlert("Événement ajouté", "Nouvel événement ajouté avec succès.");
+          //  if (notificationService != null) {
+               // notificationService.showEventAddedNotification(evenement.getNom(), evenement.getDescription());
+           // }
+         //   Window primaryStage = null;
+           // NotificationService.showNotification(primaryStage, "Succès", "Événement ajouté avec succès !");
+          // NotificationService.showNotification("Succès", "L'événement a été ajouté avec succès!");
+            // NotificationService.showNotification("Succès", "L'opération a réussi !");
+              showAlert("Événement ajouté", "Nouvel événement ajouté avec succès.");
             System.out.println("Événement ajouté !");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        //    if (notificationService != null) {
+               //notificationService.showErrorNotification("Erreur", "Une erreur s'est produite lors de l'ajout de l'événement.");
+          //  }
+
+             showAlert("Erreur", "Une erreur s'est produite lors de l'ajout de l'événement.");
+           // NotificationService.showErrorNotification("Erreur", "Une erreur s'est produite lors de l'ajout de l'événement.");
         }
     }
 

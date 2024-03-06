@@ -4,6 +4,7 @@ import com.esprit.models.Evenement;
 import com.esprit.models.Localisation;
 import com.esprit.services.EvenementService;
 import com.esprit.services.LocalisationService;
+import com.esprit.services.NotificationService;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -28,6 +29,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class AjoutEvenementController implements Initializable {
+    private EvenementService evenementService;
+
 
     @FXML
     private DatePicker Datee;
@@ -61,6 +64,7 @@ public class AjoutEvenementController implements Initializable {
     EvenementService es = new EvenementService();
     LocalisationService ls = new LocalisationService();
     private String nom_loc;
+
     @FXML
     void Ajouter(ActionEvent event) {
         if (Datee.getValue()== null )
@@ -88,6 +92,8 @@ public class AjoutEvenementController implements Initializable {
                 e.setLieuId(ls.findByName(nom_loc));
                 es.ajouter(e);
                 System.out.println("Event ajouté avec succées !");
+
+
             } catch (SQLException ex) {
                 System.out.println("error" + ex.getMessage());
 
@@ -101,11 +107,19 @@ public class AjoutEvenementController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //NotificationService notificationService = new NotificationService();
+       // evenementService = new EvenementService(notificationService);
         champ_nom.setText("");
         champ_lieu.setText("");
         champ_desc.setText("");
         champ_date.setText("");
         ImageF.setEditable(false);
+        //if (notificationService != null) {
+          //  evenementService = new EvenementService(notificationService);
+        //} else {
+            // Gérez le cas où le service de notification est nul
+          //  System.err.println("Le service de notification est nul. Assurez-vous qu'il est correctement initialisé.");
+        //}
         try {
             ListLieu();
             EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {

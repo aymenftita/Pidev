@@ -25,6 +25,9 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import com.esprit.services.TraductionService;
+
+import javax.swing.*;
 
 public class ListEvenementController implements Initializable {
 
@@ -214,4 +217,34 @@ public class ListEvenementController implements Initializable {
         ObservableList<Evenement> items = listEvenement.getItems();
         items.sort((evt1, evt2) -> evt1.getNom().compareToIgnoreCase(evt2.getNom()));
     }
+    @FXML
+    void translate(ActionEvent event) {
+
+            Evenement selectedEvent = listEvenement.getSelectionModel().getSelectedItem();
+
+            if (selectedEvent != null) {
+                // Utilisez votre service de traduction pour traduire la description de l'événement
+                String translatedDescription = TraductionService.translate(selectedEvent.getDescription(), "fr", "en");
+
+                // Mettez à jour la description de l'événement avec la traduction
+                selectedEvent.setDescription(translatedDescription);
+
+                // Rafraîchissez la liste pour refléter les modifications
+                listEvenement.refresh();
+
+                // Affichez une notification ou un message à l'utilisateur
+                showAlert("Traduction Réussie", "La description de l'événement a été traduite avec succès.");
+            } else {
+                showAlert("Sélectionnez un Événement", "Veuillez sélectionner un événement avant de traduire.");
+            }
+        }
+
+        private void showAlert(String title, String content) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle(title);
+            alert.setHeaderText(null);
+            alert.setContentText(content);
+            alert.showAndWait();
+        }
+
 }
