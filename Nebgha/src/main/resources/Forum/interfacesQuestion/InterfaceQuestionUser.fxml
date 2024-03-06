@@ -17,25 +17,25 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="my-button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: white;" styleClass="my-anchor-pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.InterfaceQuestionUserController">
+<AnchorPane id="my-button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: white;" styleClass="my-anchor-pane" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.Forum.question.InterfaceQuestionUserController">
     <children>
         <Pane layoutY="-1.0" prefHeight="57.0" prefWidth="1366.0" style="-fx-background-color: #dddee1;">
             <children>
                 <ImageView fitHeight="49.0" fitWidth="51.0" layoutX="12.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@graphics/Logo1.png" />
+                        <Image url="@../graphics/Logo1.png" />
                     </image>
                 </ImageView>
-                <Label layoutX="775.0" layoutY="18.0" styleClass="link-label" stylesheets="@style.css" text="Courses" />
-                <Label layoutX="868.0" layoutY="18.0" onMouseClicked="#apercuForum" styleClass="link-label" stylesheets="@style.css" text="Forum" />
-                <Label layoutX="966.0" layoutY="18.0" styleClass="link-label" stylesheets="@style.css" text="Planning" />
-                <Label layoutX="1098.0" layoutY="18.0" styleClass="link-label" stylesheets="@style.css" text="Quiz" />
+                <Label layoutX="775.0" layoutY="18.0" styleClass="link-label" stylesheets="@../style.css" text="Courses" />
+                <Label layoutX="868.0" layoutY="18.0" onMouseClicked="#apercuForum" styleClass="link-label" stylesheets="@../style.css" text="Forum" />
+                <Label layoutX="966.0" layoutY="18.0" styleClass="link-label" stylesheets="@../style.css" text="Planning" />
+                <Label layoutX="1098.0" layoutY="18.0" styleClass="link-label" stylesheets="@../style.css" text="Quiz" />
             </children>
         </Pane>
         <Separator layoutY="47.0" prefHeight="21.0" prefWidth="1280.0" />
         <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="56.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@graphics/name.png" />
+                <Image url="@../graphics/name.png" />
             </image>
         </ImageView>
         <Separator layoutY="136.0" prefHeight="0.0" prefWidth="1280.0" />
@@ -55,7 +55,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ComboBox>
-        <Button layoutX="1129.0" layoutY="91.0" mnemonicParsing="false" onAction="#ajoutQuestion" prefHeight="31.0" prefWidth="172.0" styleClass="my-button" stylesheets="@style.css" text="Add Question" textFill="#d3d709">
+        <Button layoutX="1129.0" layoutY="91.0" mnemonicParsing="false" onAction="#ajoutQuestion" prefHeight="31.0" prefWidth="172.0" styleClass="my-button" stylesheets="@../style.css" text="Add Question" textFill="#d3d709">
             <font>
                 <Font name="Segoe UI" size="15.0" />
             </font>
@@ -65,7 +65,7 @@
         </Button>
         <ImageView fitHeight="31.0" fitWidth="30.0" layoutX="1308.0" layoutY="92.0" onMouseClicked="#refreshQuestion" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@graphics/update.png" />
+                <Image url="@../graphics/update.png" />
             </image>
             <cursor>
                 <Cursor fx:constant="HAND" />
@@ -115,18 +115,18 @@
         </TableView>
         <ImageView fitHeight="33.0" fitWidth="46.0" layoutX="244.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@graphics/magnifying-glass.gif" />
+                <Image url="@../graphics/magnifying-glass.gif" />
             </image>
         </ImageView>
       <Label fx:id="nomSujet" layoutX="19.0" layoutY="115.0" onMouseClicked="#apercuSujet" styleClass="questions-label" text="Topic Name" />
       <ImageView fitHeight="43.0" fitWidth="40.0" layoutX="35.0" layoutY="221.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@graphics/check.gif" />
+            <Image url="@../graphics/check.gif" />
          </image>
       </ImageView>
       <ImageView fitHeight="86.0" fitWidth="46.0" layoutX="32.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@graphics/speech-bubble.gif" />
+            <Image url="@../graphics/speech-bubble.gif" />
          </image>
       </ImageView>
     </children>

@@ -1,8 +1,8 @@
-package com.esprit.controllers;
+package com.esprit.controllers.Forum.sujet;
 
-import com.esprit.models.Question;
-import com.esprit.models.Sujet;
-import com.esprit.services.sujetService;
+import com.esprit.controllers.Forum.question.InterfaceQuestionUserController;
+import com.esprit.models.Forum.Sujet;
+import com.esprit.services.Forum.sujetService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.collections.FXCollections;
@@ -14,9 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -28,8 +26,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 
 public class InterfaceForumUserController {
 
@@ -213,7 +209,7 @@ public class InterfaceForumUserController {
     @FXML
     void AjoutSujet(ActionEvent event) throws IOException {
         //redirection à l'interface d'ajout
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesSujet/InterfaceAjoutSujet.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/interfacesSujet/InterfaceAjoutSujet.fxml"));
         Parent root = loader.load();
 
         Stage stage = new Stage();
@@ -229,7 +225,7 @@ public class InterfaceForumUserController {
     @FXML
     void ApercuForum(MouseEvent event) throws IOException {
         //redirection à l'interface de forum
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/InterfaceForumUser.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/interfacesSujet/InterfaceForumUser.fxml"));
         Parent root = loader.load();
         tvAffichageSujet.getScene().setRoot(root);
 
@@ -242,7 +238,7 @@ public class InterfaceForumUserController {
 
             Sujet selectedSujet = tvAffichageSujet.getSelectionModel().getSelectedItem();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/InterfaceQuestionUser.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/interfacesQuestion/InterfaceQuestionUser.fxml"));
             Parent root = loader.load();
             InterfaceQuestionUserController iquc = loader.getController();
             iquc.setRelatedSujet(selectedSujet);

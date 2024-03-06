@@ -1,13 +1,6 @@
 package com.esprit.tests;
 
-import com.esprit.models.Reponse;
-import com.esprit.models.Sujet;
-import com.esprit.services.questionService;
-import com.esprit.models.Question;
-import com.esprit.services.reponseService;
-
 import java.text.ParseException;
-import java.sql.Date;
 
 public class MainProg {
 

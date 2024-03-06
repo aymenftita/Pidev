@@ -1,7 +1,8 @@
-package com.esprit.services;
+package com.esprit.services.Forum;
 
+import com.esprit.services.IService;
 import com.esprit.utils.DataSource;
-import com.esprit.models.Sujet;
+import com.esprit.models.Forum.Sujet;
 
 import java.sql.*;
 import java.util.*;

@@ -1,4 +1,4 @@
-package com.esprit.models;
+package com.esprit.models.Forum;
 
 public class Sujet {
 

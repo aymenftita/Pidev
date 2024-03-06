@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="428.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.sujet.AjoutSujetController">
+<AnchorPane prefHeight="400.0" prefWidth="428.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.Forum.sujet.AjoutSujetController">
     <children>
           <AnchorPane layoutX="20.0" layoutY="1.0" minHeight="0.0" minWidth="0.0" prefHeight="399.0" prefWidth="422.0">
               <children>

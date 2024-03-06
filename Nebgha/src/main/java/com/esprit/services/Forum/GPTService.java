@@ -1,4 +1,4 @@
-package com.esprit.services;
+package com.esprit.services.Forum;
 
 import java.io.IOException;
 import java.net.URI;

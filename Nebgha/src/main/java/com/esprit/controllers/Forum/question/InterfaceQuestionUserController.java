@@ -1,14 +1,15 @@
-package com.esprit.controllers;
+package com.esprit.controllers.Forum.question;
 
-import com.esprit.controllers.question.AjoutQuestionController;
-import com.esprit.models.Question;
-import com.esprit.models.Reponse;
-import com.esprit.models.Sujet;
-import com.esprit.models.utilisateur;
+import com.esprit.controllers.Forum.reponse.InterfaceReponseUserController;
+import com.esprit.models.Forum.Question;
+import com.esprit.models.Forum.Reponse;
+import com.esprit.models.Forum.Sujet;
 import com.esprit.services.*;
+import com.esprit.services.Forum.GPTService;
+import com.esprit.services.Forum.questionService;
+import com.esprit.services.Forum.reponseService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -239,7 +240,7 @@ public class InterfaceQuestionUserController {
     @FXML
     void ajoutQuestion(ActionEvent event) throws IOException {
         //redirection à l'interface d'ajout
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfacesQuestion/InterfaceAjoutQuestion.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/interfacesQuestion/InterfaceAjoutQuestion.fxml"));
         Parent root = loader.load();
 
         AjoutQuestionController aqc = loader.getController();
@@ -259,7 +260,7 @@ public class InterfaceQuestionUserController {
     @FXML
     void apercuForum(MouseEvent event) throws IOException {
         //redirection à l'interface de forum
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/InterfaceForumUser.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/interfacesSujet/InterfaceForumUser.fxml"));
         Parent root = loader.load();
         tvAffichageQuestion.getScene().setRoot(root);
     }
@@ -267,7 +268,7 @@ public class InterfaceQuestionUserController {
     @FXML
     void apercuSujet(MouseEvent event) throws IOException {
         //redirection à l'interface de forum
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/InterfaceForumUser.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/interfacesSujet/InterfaceForumUser.fxml"));
         Parent root = loader.load();
         tvAffichageQuestion.getScene().setRoot(root);
     }
@@ -278,7 +279,7 @@ public class InterfaceQuestionUserController {
 
             Question selectedQuestion = tvAffichageQuestion.getSelectionModel().getSelectedItem();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/InterfaceReponseUser.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/interfacesReponse/InterfaceReponseUser.fxml"));
             Parent root = loader.load();
             InterfaceReponseUserController iruc = loader.getController();
             iruc.setRelated(relatedSujet, selectedQuestion);

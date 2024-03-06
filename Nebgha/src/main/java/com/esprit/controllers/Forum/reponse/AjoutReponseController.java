@@ -1,14 +1,10 @@
-package com.esprit.controllers.reponse;
+package com.esprit.controllers.Forum.reponse;
 
-import com.esprit.controllers.InterfaceReponseUserController;
-import com.esprit.controllers.InterfacesAdminController;
-import com.esprit.models.Question;
-import com.esprit.models.Reponse;
-import com.esprit.models.Sujet;
+import com.esprit.models.Forum.Question;
+import com.esprit.models.Forum.Reponse;
+import com.esprit.models.Forum.Sujet;
 import com.esprit.services.ServiceUtilisateur;
-import com.esprit.services.questionService;
-import com.esprit.services.reponseService;
-import com.esprit.services.sujetService;
+import com.esprit.services.Forum.reponseService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.ActionEvent;
@@ -25,8 +21,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.sql.Date;
-import java.time.LocalDate;
-import java.util.List;
 
 
 public class AjoutReponseController {
@@ -105,7 +99,7 @@ public class AjoutReponseController {
     @FXML
     void menuAdmin(ActionEvent event) throws IOException {
         //redirection à l'autre interface
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/InterfacesAdmin.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/InterfacesAdmin.fxml"));
         Parent root = loader.load();
         tfContenuReponse.getScene().setRoot(root);
     }

@@ -1,4 +1,6 @@
-package com.esprit.models;
+package com.esprit.models.Forum;
+
+import com.esprit.models.utilisateur;
 
 import java.sql.Date;
 

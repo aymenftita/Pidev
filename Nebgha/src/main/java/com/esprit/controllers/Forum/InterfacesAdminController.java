@@ -1,13 +1,13 @@
-package com.esprit.controllers;
+package com.esprit.controllers.Forum;
 
 
-import com.esprit.models.Question;
-import com.esprit.models.Reponse;
-import com.esprit.models.Sujet;
+import com.esprit.models.Forum.Question;
+import com.esprit.models.Forum.Reponse;
+import com.esprit.models.Forum.Sujet;
 import com.esprit.models.utilisateur;
-import com.esprit.services.questionService;
-import com.esprit.services.reponseService;
-import com.esprit.services.sujetService;
+import com.esprit.services.Forum.questionService;
+import com.esprit.services.Forum.reponseService;
+import com.esprit.services.Forum.sujetService;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -1,104 +1,107 @@
-package com.esprit.controllers.question;
+package com.esprit.controllers.Forum.sujet;
 
-import com.esprit.controllers.InterfacesAdminController;
-import com.esprit.models.Question;
-import com.esprit.models.Reponse;
-import com.esprit.models.Sujet;
-import com.esprit.services.*;
+import com.esprit.models.Forum.Sujet;
+import com.esprit.services.Forum.sujetService;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URLEncoder;
+
+import java.net.*;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
-import java.sql.Date;
-import java.util.List;
 
-public class AjoutQuestionController {
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-    @FXML
-    private DatePicker DpDateQuestion;
+public class AjoutSujetController {
 
     @FXML
-    private TextArea taContenuQuestion;
+    private TextArea tfDescriptionSujet;
 
     @FXML
-    private TextField tfQuestionAuteurID;
+    private TextArea tfReglesSujet;
 
     @FXML
-    private ComboBox<Sujet> cbChoixSujet;
-
-
-    @FXML
-    private TextField tfQuestionTitre;
-
-    private Sujet relatedSujet;
+    private TextField tfSujetTitre;
 
     @FXML
-    void initialize() {
+    void ajouterSujet(ActionEvent event) throws IOException, InterruptedException {
 
-    }
+        String titreSujet = tfSujetTitre.getText().trim(); // Trim pour effacer l'espace vide
 
-    public void setRelatedSujet(Sujet sujet) {
-        this.relatedSujet = sujet;
-    }
-
-    @FXML
-    void ajouterQuestion(ActionEvent event) throws IOException, InterruptedException {
-
-
-        String titreQuestion = tfQuestionTitre.getText().trim(); // Trim pour couper l'espace vide
-
-        if (titreQuestion.isEmpty()) {
-            // Affichage de message d'erreur
+        if (titreSujet.isEmpty()) {
+            //Affichage de message d'erreur
             Alert alertVide = new Alert(Alert.AlertType.ERROR);
             alertVide.setTitle("Input Error");
             alertVide.setHeaderText("Empty title!");
-            alertVide.setContentText("Please enter the question title.");
+            alertVide.setContentText("Please enter the topic title.");
             alertVide.show();
             return; // Empêcher toute exécution ultérieure si le contenu est vide
-        } else if (titreQuestion.length() > 30) {
+        } else if (titreSujet.length() > 30) {
             // Afficher un message d'erreur en cas de dépassement de la longueur
             Alert alertLength = new Alert(Alert.AlertType.ERROR);
             alertLength.setTitle("Input Error");
-            alertLength.setHeaderText("Question title too long!");
-            alertLength.setContentText("The question title should not exceed 30 characters.");
+            alertLength.setHeaderText("Subject title too long!");
+            alertLength.setContentText("The topic title should not exceed 30 characters.");
             alertLength.show();
             return;
         }
 
-        if (profanityFilter(titreQuestion)) {
+        if(profanityFilter(tfSujetTitre.getText())) {
             // Display a warning message
             Alert alertProfanity = new Alert(Alert.AlertType.WARNING);
             alertProfanity.setTitle("Profanity detected!");
-            alertProfanity.setHeaderText("The rules contain profanity.");
+            alertProfanity.setHeaderText("The Title contains profanity.");
             alertProfanity.setContentText("Belehi traba la nchid nrabik");
             alertProfanity.show();
             return;
 
         }
 
-        String contenuQuestion = taContenuQuestion.getText().trim();
-        if (contenuQuestion.isEmpty()) {
+        String descSujet = tfDescriptionSujet.getText().trim(); // Trim pour effacer l'espace vide
+
+        if (descSujet.isEmpty()) {
             // Affichage de message d'erreur
             Alert alertVide = new Alert(Alert.AlertType.ERROR);
             alertVide.setTitle("Input Error");
-            alertVide.setHeaderText("Empty content!");
-            alertVide.setContentText("Please enter the content of the question.");
+            alertVide.setHeaderText("Empty description!");
+            alertVide.setContentText("Please enter the topic description.");
             alertVide.show();
             return; // Empêcher toute exécution ultérieure si le contenu est vide
         }
 
-        if (profanityFilter(taContenuQuestion.getText())) {
+        if (profanityFilter(tfDescriptionSujet.getText())) {
+            // Display a warning message
+            Alert alertProfanity = new Alert(Alert.AlertType.WARNING);
+            alertProfanity.setTitle("Profanity detected!");
+            alertProfanity.setHeaderText("The description contains profanity.");
+            alertProfanity.setContentText("Belehi traba la nchid nrabik");
+            alertProfanity.show();
+            return;
+
+        }
+
+        String reglesSujet = tfReglesSujet.getText().trim(); // Trim pour effacer l'espace vide
+
+        if (reglesSujet.isEmpty()) {
+            // Affichage de message d'erreur
+            Alert alertVide = new Alert(Alert.AlertType.ERROR);
+            alertVide.setTitle("Input Error");
+            alertVide.setHeaderText("Empty rules!");
+            alertVide.setContentText("Please enter the topic rules.");
+            alertVide.show();
+            return; // Empêcher toute exécution ultérieure si le contenu est vide
+        }
+
+        if (profanityFilter(tfReglesSujet.getText())) {
             // Display a warning message
             Alert alertProfanity = new Alert(Alert.AlertType.WARNING);
             alertProfanity.setTitle("Profanity detected!");
@@ -109,34 +112,22 @@ public class AjoutQuestionController {
 
         }
 
-        //Création du service et ajout d'entité
-        questionService qs = new questionService();
-        sujetService ss = new sujetService();
-        ServiceUtilisateur su = new ServiceUtilisateur();
-        //TODO: auteur à changer quand la session est configuré
-        System.out.println(su.getUtilisateur(1));
 
-        Question newQuestion = new Question(0, tfQuestionTitre.getText(),
-                su.getUtilisateur(1), new Date(System.currentTimeMillis()),
-                relatedSujet, taContenuQuestion.getText());
-        qs.ajouter(newQuestion);
+
+
+        //Création du service et ajout d'entité
+        sujetService SS = new sujetService();
+        SS.ajouter(new Sujet(11, tfSujetTitre.getText(), tfDescriptionSujet.getText(),
+                tfReglesSujet.getText()));
 
         //Message de confirmation
         Alert alertAjout = new Alert(Alert.AlertType.INFORMATION);
-        alertAjout.setTitle("Add Question");
+        alertAjout.setTitle("Add topic");
         alertAjout.setHeaderText("Success!");
-        alertAjout.setContentText("Question added!");
+        alertAjout.setContentText("Topic add!");
         alertAjout.show();
 
 
-    }
-
-    @FXML
-    void menuAdmin(ActionEvent event) throws IOException {
-        //redirection à l'autre interface
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/InterfacesAdmin.fxml"));
-        Parent root = loader.load();
-        tfQuestionTitre.getScene().setRoot(root);
     }
 
     public boolean profanityFilter(String text) throws IOException, InterruptedException {
@@ -163,4 +154,13 @@ public class AjoutQuestionController {
         }
     }
 
+
+    @FXML
+    void menuAdmin(ActionEvent event) throws IOException {
+        //redirection à l'autre interface
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/InterfacesAdmin.fxml"));
+        Parent root = loader.load();
+        tfSujetTitre.getScene().setRoot(root);
+
+    }
 }
