@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controller.InterfaceEtudiantLeconController">
+   <children>
+      <ImageView fitHeight="53.0" fitWidth="59.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/Black_Simple_Online_Education_Logo-removebg-preview (1).png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="17.0" fitWidth="163.0" layoutX="65.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/55.png" />
+         </image>
+      </ImageView>
+      <fx:include source="AfficherLecon.fxml" layoutX="100.0" layoutY="121.0" prefHeight="224.0" prefWidth="600.0" />
+      <Button layoutX="254.0" layoutY="540.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="78.0" text="Continuer" />
+      <TextField fx:id="tfGPT1" layoutX="800.0" layoutY="200.0" promptText="Lesson Title" />
+      <TextField fx:id="tfGPT2" layoutX="1000.0" layoutY="200.0" promptText="Lesson Content" />
+      <Button fx:id="bGPT" layoutX="850.0" layoutY="250.0" mnemonicParsing="false" onAction="#handleRequest" prefHeight="30.0" prefWidth="78.0" text="GPT" />
+      <Label fx:id="lbA" layoutX="830.0" layoutY="150.0" text="Chatgpt"/>
+      <ImageView fitHeight="45.0" fitWidth="88.0" layoutX="201.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/pdf_7035555.png" />
+         </image>
+      </ImageView>
+      <Text fill="#120be9" layoutX="253.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des lecons " textAlignment="CENTER" wrappingWidth="157.2552490234375">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="30.0" fitWidth="35.0" layoutX="24.0" layoutY="540.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/previous.gif" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="30.0" fitWidth="51.0" layoutX="557.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/update.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
