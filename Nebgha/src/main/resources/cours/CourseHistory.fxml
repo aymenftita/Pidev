@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controller.CourseHistoryController">
+   <children>
+      <ImageView fitHeight="59.0" fitWidth="79.0" layoutX="527.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/student_icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="67.0" fitWidth="82.0" layoutX="14.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/Black_Simple_Online_Education_Logo-removebg-preview (1).png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="22.0" fitWidth="184.0" layoutX="78.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/55.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="43.0" layoutX="260.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/ebook.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="31.0" layoutX="541.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/update.png" />
+         </image>
+      </ImageView>
+      <Text fill="#3308f4" layoutX="310.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mes  Cours" textAlignment="CENTER" wrappingWidth="99.8990478515625">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+      <TableView fx:id="coursTable" layoutX="-2.0" layoutY="143.0" prefHeight="229.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="titreColumn" prefWidth="175.33328247070312" text="Titre" />
+          <TableColumn fx:id="contenuColumn" prefWidth="196.66668701171875" text="Contenu" />
+            <TableColumn fx:id="descriptionColumn" prefWidth="227.99996948242188" text="Description" />
+        </columns>
+      </TableView>
+      <ImageView fitHeight="31.0" fitWidth="23.0" layoutX="14.0" layoutY="374.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/previous.gif" />
+         </image>
+      </ImageView>
+      <ComboBox fx:id="cbSort" layoutX="377.0" layoutY="89.0" prefWidth="150.0" />
+      <TextField fx:id="tfSearchCours" layoutX="88.0" layoutY="88.0" prefHeight="25.0" prefWidth="119.0" />
+      <Text layoutX="35.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search :" />
+   </children>
+</AnchorPane>
