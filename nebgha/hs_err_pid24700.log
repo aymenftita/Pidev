@@ -27,7 +27,7 @@
 
 ---------------  S U M M A R Y ------------
 
-Command Line: --module-path=C:\Users\Naruto'Store B28\.m2\repository\org\openjfx\javafx-base\21.0.2\javafx-base-21.0.2-win.jar;C:\Users\Naruto'Store B28\.m2\repository\org\openjfx\javafx-base\21.0.2\javafx-base-21.0.2.jar;C:\Users\Naruto'Store B28\.m2\repository\org\openjfx\javafx-controls\21.0.2\javafx-controls-21.0.2-win.jar;C:\Users\Naruto'Store B28\.m2\repository\org\openjfx\javafx-controls\21.0.2\javafx-controls-21.0.2.jar;C:\Users\Naruto'Store B28\.m2\repository\org\openjfx\javafx-fxml\21.0.2\javafx-fxml-21.0.2-win.jar;C:\Users\Naruto'Store B28\.m2\repository\org\openjfx\javafx-fxml\21.0.2\javafx-fxml-21.0.2.jar;C:\Users\Naruto'Store B28\.m2\repository\org\openjfx\javafx-graphics\21.0.2\javafx-graphics-21.0.2-win.jar;C:\Users\Naruto'Store B28\.m2\repository\org\openjfx\javafx-graphics\21.0.2\javafx-graphics-21.0.2.jar --add-modules=javafx.base,javafx.controls,javafx.fxml,javafx.graphics com.esprit.tests.MainProgGUI
+Command Line: --module-path=C:\Users\Naruto'Store B28\.m2\repository\org\openjfx\javafx-base\21.0.2\javafx-base-21.0.2-win.jar;C:\Users\Naruto'Store B28\.m2\repository\org\openjfx\javafx-base\21.0.2\javafx-base-21.0.2.jar;C:\Users\Naruto'Store B28\.m2\repository\org\openjfx\javafx-controls\21.0.2\javafx-controls-21.0.2-win.jar;C:\Users\Naruto'Store B28\.m2\repository\org\openjfx\javafx-controls\21.0.2\javafx-controls-21.0.2.jar;C:\Users\Naruto'Store B28\.m2\repository\org\openjfx\javafx-fxml\21.0.2\javafx-fxml-21.0.2-win.jar;C:\Users\Naruto'Store B28\.m2\repository\org\openjfx\javafx-fxml\21.0.2\javafx-fxml-21.0.2.jar;C:\Users\Naruto'Store B28\.m2\repository\org\openjfx\javafx-graphics\21.0.2\javafx-graphics-21.0.2-win.jar;C:\Users\Naruto'Store B28\.m2\repository\org\openjfx\javafx-graphics\21.0.2\javafx-graphics-21.0.2.jar --add-modules=javafx.base,javafx.controls,javafx.fxml,javafx.graphics tests.com.esprit.MainProgGUI
 
 Host: AMD Ryzen 7 5800H with Radeon Graphics         , 16 cores, 15G,  Windows 11 , 64 bit Build 22621 (10.0.22621.3085)
 Time: Mon Feb 26 17:26:29 2024 Paris, Madrid elapsed time: 0.010754 seconds (0d 0h 0m 0s)
@@ -164,7 +164,7 @@ symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Pr
 
 VM Arguments:
 jvm_args: --module-path=C:\Users\Naruto'Store B28\.m2\repository\org\openjfx\javafx-base\21.0.2\javafx-base-21.0.2-win.jar;C:\Users\Naruto'Store B28\.m2\repository\org\openjfx\javafx-base\21.0.2\javafx-base-21.0.2.jar;C:\Users\Naruto'Store B28\.m2\repository\org\openjfx\javafx-controls\21.0.2\javafx-controls-21.0.2-win.jar;C:\Users\Naruto'Store B28\.m2\repository\org\openjfx\javafx-controls\21.0.2\javafx-controls-21.0.2.jar;C:\Users\Naruto'Store B28\.m2\repository\org\openjfx\javafx-fxml\21.0.2\javafx-fxml-21.0.2-win.jar;C:\Users\Naruto'Store B28\.m2\repository\org\openjfx\javafx-fxml\21.0.2\javafx-fxml-21.0.2.jar;C:\Users\Naruto'Store B28\.m2\repository\org\openjfx\javafx-graphics\21.0.2\javafx-graphics-21.0.2-win.jar;C:\Users\Naruto'Store B28\.m2\repository\org\openjfx\javafx-graphics\21.0.2\javafx-graphics-21.0.2.jar --add-modules=javafx.base,javafx.controls,javafx.fxml,javafx.graphics 
-java_command: com.esprit.tests.MainProgGUI
+java_command: tests.com.esprit.MainProgGUI
 java_class_path (initial): E:\Pidev\nebgha\target\classes;C:\Users\Naruto'Store B28\.m2\repository\com\google\protobuf\protobuf-java\3.21.9\protobuf-java-3.21.9.jar;C:\Users\Naruto'Store B28\.m2\repository\com\mysql\mysql-connector-j\8.0.33\mysql-connector-j-8.0.33.jar
 Launcher Type: SUN_STANDARD
 

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="30.0" prefWidth="219.0" styleClass="bkImage" stylesheets="@testStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.ModuleReclamationEtGroupe.controllers.ChatboxController">
+   <bottom>
+       <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <ImageView fitHeight="72.0" fitWidth="73.0" onMouseClicked="#chooseFile" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../Images/attachment.gif" />
+            </image>
+         </ImageView>
+           <TextField fx:id="messageTextField" alignment="CENTER" prefHeight="69.0" prefWidth="146.0" style="-fx-background-radius: 50;" styleClass="message-input" HBox.hgrow="ALWAYS" />
+         <ImageView fx:id="sendButtonI" fitHeight="69.0" fitWidth="71.0" onMouseClicked="#handleSendButtonActionI" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../Images/send.png" />
+            </image>
+         </ImageView>
+       </HBox>
+   </bottom>
+   <top>
+      <BorderPane prefHeight="110.0" prefWidth="219.0" BorderPane.alignment="CENTER">
+         <left>
+            <ImageView fitHeight="102.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@../Images/M.gif" />
+               </image>
+            </ImageView>
+         </left>
+         <right>
+            <ImageView fitHeight="63.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@../Images/cancel.png" />
+               </image>
+            </ImageView>
+         </right>
+         <bottom>
+            <Separator prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </bottom>
+         <center>
+            <Label fx:id="typing" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Arial" size="17.0" />
+               </font>
+            </Label>
+         </center>
+      </BorderPane>
+   </top>
+   <center>
+      <VBox fx:id="vbox" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+   </center>
+   <left>
+      <VBox fx:id="Vgroups" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER" />
+   </left>
+</BorderPane>

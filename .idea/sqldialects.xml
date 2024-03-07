@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/nebgha/src/main/java/com/esprit/services/GroupeService.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/nebgha/src/main/java/com/esprit/services/ReclamationGroupServices/GroupeService.java" dialect="GenericSQL" />
     <file url="PROJECT" dialect="MySQL" />
   </component>
 </project>

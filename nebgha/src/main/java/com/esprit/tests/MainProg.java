@@ -1,15 +1,13 @@
 package com.esprit.tests;
 
-import com.esprit.controllers.ChatboxController;
-import com.esprit.controllers.NotificationUtil;
-import com.esprit.controllers.reclamationControllers.AjouterReclamationController;
-import com.esprit.models.*;
-import com.esprit.services.*;
-import javafx.application.Platform;
-import org.controlsfx.control.Notifications;
+import com.esprit.ModuleReclamationEtGroupe.ReclamationGroupModels.*;
+import com.esprit.ModuleReclamationEtGroupe.ReclamationGroupServices.*;
+import com.esprit.models.ReclamationGroupModels.Groupe;
+import com.esprit.models.ReclamationGroupModels.UserGroupe;
+import com.esprit.models.ReclamationGroupModels.Utilisateur;
+import com.esprit.services.ReclamationGroupServices.*;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,11 +70,16 @@ public class MainProg {
 
         //Message m = new Message(1,1,"dzdzd","hfhff");
         //System.out.println(ms.afficher());
+        Session.login(7);
+        UserGroupeService ugs = new UserGroupeService();
+        List<UserGroupe> ug= ugs.ListUserGroupeByIdUser(Session.getUserId());
+        List<Groupe> g = new ArrayList<Groupe>();
+        for(UserGroupe ugroup : ug ){
+            g.add(gs.afficherById(ugroup.getIdGroupe().getId_groupe()));
+        }
 
-        ChatboxController cbc=new ChatboxController();
-        //cbc.AutoCorrectApi();
-        AjouterReclamationController arc = new AjouterReclamationController();
-        arc.AutoCorrectApi("basterd");
+        System.out.println(g);
+
 
     }
 }
