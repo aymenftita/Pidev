@@ -4,7 +4,7 @@ package com.esprit.controllers.Forum;
 import com.esprit.models.Forum.Question;
 import com.esprit.models.Forum.Reponse;
 import com.esprit.models.Forum.Sujet;
-import com.esprit.models.utilisateur;
+import com.esprit.models.utilisateur.Utilisateur;
 import com.esprit.services.Forum.QuestionService;
 import com.esprit.services.Forum.ReponseService;
 import com.esprit.services.Forum.SujetService;
@@ -63,12 +63,12 @@ public class InterfacesAdminController {
         });
 
         //Collecter l'email de chaque utilisateur pour l'affichage
-        TableColumn<Question, utilisateur> userColumn = (TableColumn<Question, utilisateur>) tvAffichageQuestion.getColumns()
+        TableColumn<Question, Utilisateur> userColumn = (TableColumn<Question, Utilisateur>) tvAffichageQuestion.getColumns()
                 .filtered(c -> c.getText().equals("Author")).get(0);
         userColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getAuteur())); // Wrap in ObservableValue
-        userColumn.setCellFactory(col -> new TableCell<Question, utilisateur>() {
+        userColumn.setCellFactory(col -> new TableCell<Question, Utilisateur>() {
             @Override
-            protected void updateItem(utilisateur user, boolean empty) {
+            protected void updateItem(Utilisateur user, boolean empty) {
                 super.updateItem(user, empty);
                 if (user != null) {
                     setText(String.valueOf(user.getEmail())); // afficher user email
@@ -120,12 +120,12 @@ public class InterfacesAdminController {
         });
 
         //Collecter l'email de chaque utilisateur pour l'affichage
-        TableColumn<Reponse, utilisateur> userColumn = (TableColumn<Reponse, utilisateur>) tvAffichageReponse.getColumns()
+        TableColumn<Reponse, Utilisateur> userColumn = (TableColumn<Reponse, Utilisateur>) tvAffichageReponse.getColumns()
                 .filtered(c -> c.getText().equals("Author")).get(0);
         userColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getAuteur())); // Wrap in ObservableValue
-        userColumn.setCellFactory(col -> new TableCell<Reponse, utilisateur>() {
+        userColumn.setCellFactory(col -> new TableCell<Reponse, Utilisateur>() {
             @Override
-            protected void updateItem(utilisateur user, boolean empty) {
+            protected void updateItem(Utilisateur user, boolean empty) {
                 super.updateItem(user, empty);
                 if (user != null) {
                     setText(String.valueOf(user.getEmail())); // afficher user email

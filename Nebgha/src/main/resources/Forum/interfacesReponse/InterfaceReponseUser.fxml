@@ -26,10 +26,10 @@
                         <Image url="@../graphics/Logo1.png" />
                     </image>
                 </ImageView>
-                <Label layoutX="775.0" layoutY="18.0" styleClass="link-label" stylesheets="@../style.css" text="Courses" />
+                <Label layoutX="775.0" layoutY="18.0" onMousePressed="#ApercuCours" styleClass="link-label" stylesheets="@../style.css" text="Courses" />
                 <Label layoutX="868.0" layoutY="18.0" onMouseClicked="#apercuForum" styleClass="link-label" stylesheets="@../style.css" text="Forum" />
-                <Label layoutX="966.0" layoutY="18.0" styleClass="link-label" stylesheets="@../style.css" text="Planning" />
-                <Label layoutX="1098.0" layoutY="18.0" styleClass="link-label" stylesheets="@../style.css" text="Quiz" />
+                <Label layoutX="966.0" layoutY="18.0" onMousePressed="#ApercuPlanning" styleClass="link-label" stylesheets="@../style.css" text="Planning" />
+                <Label layoutX="1098.0" layoutY="18.0" onMousePressed="#ApercuQuiz" styleClass="link-label" stylesheets="@../style.css" text="Quiz" />
             </children>
         </Pane>
         <Separator layoutY="47.0" prefHeight="21.0" prefWidth="1366.0" />

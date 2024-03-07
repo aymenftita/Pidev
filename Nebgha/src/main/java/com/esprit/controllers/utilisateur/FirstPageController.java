@@ -1,5 +1,6 @@
 package com.esprit.controllers.utilisateur;
 
+import com.esprit.models.utilisateur.Role;
 import com.esprit.models.utilisateur.Utilisateur;
 import com.esprit.services.utilisateur.ServiceUtilisateur;
 import com.esprit.services.Session;
@@ -35,27 +36,51 @@ public void initialize() {
 }
 
 
-        @FXML
-    void login(ActionEvent event)  {
+    @FXML
+    void login(ActionEvent event) {
         String email = emailtf.getText();
         String password = mdptf.getText();
 
         Utilisateur user = utilisateurService.login(email, password);
         if (user != null) {
             Session.setCurrentUser(user);
-            Session.setCurrentRole(user.getRole().toString());
+            Session.setCurrentRole(user.getRole());
             showAlert("Login Successful", "Welcome, " + user.getNom() + "!");
             try {
                 Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 currentStage.close();
-                navigateToInterface(user.getRole().toString());
-            } catch(Exception e) {
-                System.out.println(e.getMessage());
+                if (user.getRole().equals(Role.Administrateur)) {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/AdminInterface.fxml"));
+                    Parent root = loader.load();
+                    Scene scene = new Scene(root);
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
+                    stage.show();
+                } else if (user.getRole().equals(Role.Tuteur)) {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/TuteurInterface.fxml"));
+                    Parent root = loader.load();
+                    Scene scene = new Scene(root);
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
+                    stage.show();
+                } else if (user.getRole().equals(Role.Etudiant)) {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/EtudiantInterface.fxml"));
+                    Parent root = loader.load();
+                    Scene scene = new Scene(root);
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
+                    stage.show();
+                }
+            } catch (Exception e) {
+                e.printStackTrace(); // Print the exception stack trace for debugging
+                showAlert("Error", "An error occurred. Please try again.");
             }
         } else {
             showAlert("Invalid credentials", "Please check your email and password.");
         }
     }
+
+
 
     @FXML
     void togglePasswordVisibility(ActionEvent event) {
@@ -74,30 +99,7 @@ public void initialize() {
 
 
 
-    private void navigateToInterface(String role) throws IOException {
 
-        if (role.equals("Administrateur")) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/AdminInterface.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.show();
-        } else if (role.equals("Tuteur")) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/TuteurInterface.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.show();        }
-        else if (role.equals("Etudiant")) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/EtudiantInterface.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.show();        }
-    }
 
     private void showAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

@@ -5,6 +5,8 @@ import com.esprit.models.Forum.Sujet;
 import com.esprit.services.*;
 import com.esprit.services.Forum.QuestionService;
 import com.esprit.services.Forum.SujetService;
+import com.esprit.services.utilisateur.ServiceUtilisateur;
+import com.esprit.services.Session;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.ActionEvent;
@@ -112,11 +114,10 @@ public class AjoutQuestionController {
         QuestionService qs = new QuestionService();
         SujetService ss = new SujetService();
         ServiceUtilisateur su = new ServiceUtilisateur();
-        //TODO: auteur à changer quand la session est configuré
-        System.out.println(su.getUtilisateur(1));
+
 
         Question newQuestion = new Question(0, tfQuestionTitre.getText(),
-                su.getUtilisateur(1), new Date(System.currentTimeMillis()),
+                Session.getCurrentUser(), new Date(System.currentTimeMillis()),
                 relatedSujet, taContenuQuestion.getText());
         qs.ajouter(newQuestion);
 

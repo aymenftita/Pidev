@@ -2,7 +2,7 @@ package com.esprit.services.Forum;
 
 import com.esprit.models.Forum.Sujet;
 import com.esprit.services.IService;
-import com.esprit.services.ServiceUtilisateur;
+import com.esprit.services.utilisateur.ServiceUtilisateur;
 import com.esprit.utils.DataSource;
 import com.esprit.models.Forum.Question;
 
@@ -71,7 +71,7 @@ public class QuestionService implements IService<Question> {
             ServiceUtilisateur su = new ServiceUtilisateur();
             while (rs.next()) {
                 questions.add(new Question(rs.getInt("id"), rs.getString("titre"),
-                        su.getUtilisateur(rs.getInt("auteur_id")), rs.getDate("date_creation"),
+                        su.getUser(rs.getInt("auteur_id")), rs.getDate("date_creation"),
                         ss.getSujet(rs.getInt("sujet_id")), rs.getString("contenu")));
             }
         } catch (SQLException e) {
@@ -95,7 +95,7 @@ public class QuestionService implements IService<Question> {
                 SujetService ss = new SujetService();//sujet service pour récupérer le sujet d'aprés l'ID
                 ServiceUtilisateur su = new ServiceUtilisateur();
                 question = new Question(rs.getInt("id"), rs.getString("titre"),
-                        su.getUtilisateur(rs.getInt("auteur_id")), rs.getDate("date_creation"),
+                        su.getUser(rs.getInt("auteur_id")), rs.getDate("date_creation"),
                         ss.getSujet(rs.getInt("sujet_id")), rs.getString("contenu"));
             }
         } catch (SQLException e) {
@@ -117,7 +117,7 @@ public class QuestionService implements IService<Question> {
             ServiceUtilisateur su = new ServiceUtilisateur();
             while (rs.next()) {
                 questions.add(new Question(rs.getInt("id"), rs.getString("titre"),
-                        su.getUtilisateur(rs.getInt("auteur_id")), rs.getDate("date_creation"),
+                        su.getUser(rs.getInt("auteur_id")), rs.getDate("date_creation"),
                         ss.getSujet(rs.getInt("sujet_id")), rs.getString("contenu")));
             }
         } catch (SQLException e) {

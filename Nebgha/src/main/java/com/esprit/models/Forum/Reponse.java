@@ -1,14 +1,14 @@
 package com.esprit.models.Forum;
 
 
-import com.esprit.models.utilisateur;
+import com.esprit.models.utilisateur.Utilisateur;
 
 import java.sql.Date;
 
 public class Reponse {
 
     private int id;
-    private utilisateur auteur;
+    private Utilisateur auteur;
     private Question question;
     private String contenu;
     private Date date;
@@ -34,7 +34,7 @@ public class Reponse {
                 '}';
     }
 
-    public Reponse(int id, utilisateur auteur, Question question, String contenu, Date date, Sujet sujet, int score, boolean accepted, boolean reported) {
+    public Reponse(int id, Utilisateur auteur, Question question, String contenu, Date date, Sujet sujet, int score, boolean accepted, boolean reported) {
         this.id = id;
         this.auteur = auteur;
         this.question = question;
@@ -54,11 +54,11 @@ public class Reponse {
         this.id = id;
     }
 
-    public utilisateur getAuteur() {
+    public Utilisateur getAuteur() {
         return auteur;
     }
 
-    public void setAuteur(utilisateur auteur) {
+    public void setAuteur(Utilisateur auteur) {
         this.auteur = auteur;
     }
 

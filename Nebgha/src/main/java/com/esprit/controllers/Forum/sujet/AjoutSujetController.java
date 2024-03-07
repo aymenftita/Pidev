@@ -124,7 +124,7 @@ public class AjoutSujetController {
         Alert alertAjout = new Alert(Alert.AlertType.INFORMATION);
         alertAjout.setTitle("Add topic");
         alertAjout.setHeaderText("Success!");
-        alertAjout.setContentText("Topic add!");
+        alertAjout.setContentText("Topic added!");
         alertAjout.show();
 
 

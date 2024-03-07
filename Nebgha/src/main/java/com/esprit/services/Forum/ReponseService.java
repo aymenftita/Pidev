@@ -2,7 +2,7 @@ package com.esprit.services.Forum;
 
 import com.esprit.models.Forum.Question;
 import com.esprit.services.IService;
-import com.esprit.services.ServiceUtilisateur;
+import com.esprit.services.utilisateur.ServiceUtilisateur;
 import com.esprit.utils.DataSource;
 import com.esprit.models.Forum.Reponse;
 
@@ -72,7 +72,7 @@ public class ReponseService implements IService<Reponse> {
             QuestionService qs = new QuestionService();//question service pour récupérer le question d'aprés l'ID
             ServiceUtilisateur su = new ServiceUtilisateur();
             while (rs.next()) {
-                reponses.add(new Reponse(rs.getInt("id"), su.getUtilisateur(rs.getInt("auteur_id")),
+                reponses.add(new Reponse(rs.getInt("id"), su.getUser(rs.getInt("auteur_id")),
                         qs.getQuestion(rs.getInt("question_id")), rs.getString("contenu"),
                         rs.getDate("date_creation"), ss.getSujet(rs.getInt("sujet_id")),
                         rs.getInt("score"), rs.getBoolean("accept_status"),
@@ -96,7 +96,7 @@ public class ReponseService implements IService<Reponse> {
             QuestionService qs = new QuestionService();//question service pour récupérer le question d'aprés l'ID
             ServiceUtilisateur su = new ServiceUtilisateur();
             while (rs.next()) {
-                reponses.add(new Reponse(rs.getInt("id"), su.getUtilisateur(rs.getInt("auteur_id")),
+                reponses.add(new Reponse(rs.getInt("id"), su.getUser(rs.getInt("auteur_id")),
                         qs.getQuestion(rs.getInt("question_id")), rs.getString("contenu"),
                         rs.getDate("date_creation"), ss.getSujet(rs.getInt("sujet_id")),
                         rs.getInt("score"), rs.getBoolean("accept_status"),

@@ -1,5 +1,7 @@
 package com.esprit.services.utilisateur;
 
+import com.esprit.models.quiz.Difficulty;
+import com.esprit.models.quiz.Quiz;
 import com.esprit.models.utilisateur.Role;
 import com.esprit.models.utilisateur.Utilisateur;
 import com.esprit.services.IService;
@@ -110,4 +112,23 @@ public class ServiceUtilisateur implements IService<Utilisateur> {
         return user;
     }
 
+    public Utilisateur getUser(int userId) {
+        Utilisateur user = null;
+        String req = "SELECT * FROM utilisateur WHERE id = " + userId;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(req);
+            if (rs.next()) {
+                user = new Utilisateur(rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        Role.valueOf(rs.getString("role")));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return user;
+    }
 }

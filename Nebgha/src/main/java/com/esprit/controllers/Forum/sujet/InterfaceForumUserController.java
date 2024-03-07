@@ -2,7 +2,9 @@ package com.esprit.controllers.Forum.sujet;
 
 import com.esprit.controllers.Forum.question.InterfaceQuestionUserController;
 import com.esprit.models.Forum.Sujet;
+import com.esprit.models.utilisateur.Role;
 import com.esprit.services.Forum.SujetService;
+import com.esprit.services.Session;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.collections.FXCollections;
@@ -231,6 +233,65 @@ public class InterfaceForumUserController {
 
     }
 
+    @FXML
+    public void ApercuPlanning(MouseEvent event) throws IOException {
+        //redirection à l'interface de forum
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Planning/AfficherEvent.fxml"));
+        Parent root = loader.load();
+        tvAffichageSujet.getScene().setRoot(root);
+    }
+
+    @FXML
+    public void ApercuCours(MouseEvent event) throws IOException {
+        //TODO: ADD path when integrated
+        //redirection à l'interface de forum
+        /*
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/interfacesSujet/InterfaceForumUser.fxml"));
+        Parent root = loader.load();
+        tvAffichageSujet.getScene().setRoot(root);
+
+         */
+    }
+
+    @FXML
+    public void ApercuQuiz(MouseEvent event) throws IOException {
+        //redirection à l'interface de forum
+        if (Session.getCurrentRole().equals(Role.Tuteur)) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/TuteurInterface.fxml"));
+            Parent root = loader.load();
+            tvAffichageSujet.getScene().setRoot(root);
+        }
+        else if (Session.getCurrentRole().equals(Role.Etudiant)) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/EtudiantInterface.fxml"));
+            Parent root = loader.load();
+            tvAffichageSujet.getScene().setRoot(root);
+        }
+        else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/AdminInterface.fxml"));
+            Parent root = loader.load();
+            tvAffichageSujet.getScene().setRoot(root);
+        }
+
+    }
+
+    public void apercuProfile(MouseEvent mouseEvent) throws IOException {
+        if (Session.getCurrentRole().equals(Role.Tuteur)) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/TuteurInterface.fxml"));
+            Parent root = loader.load();
+            tvAffichageSujet.getScene().setRoot(root);
+        }
+        else if (Session.getCurrentRole().equals(Role.Etudiant)) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/EtudiantInterface.fxml"));
+            Parent root = loader.load();
+            tvAffichageSujet.getScene().setRoot(root);
+        }
+        else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/AdminInterface.fxml"));
+            Parent root = loader.load();
+            tvAffichageSujet.getScene().setRoot(root);
+        }
+    }
+
 
     @FXML
     void apercuQuestion(MouseEvent event) throws IOException {
@@ -278,4 +339,6 @@ public class InterfaceForumUserController {
             return false;
         }
     }
+
+
 }
