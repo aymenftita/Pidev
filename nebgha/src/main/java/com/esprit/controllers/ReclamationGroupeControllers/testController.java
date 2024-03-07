@@ -59,7 +59,7 @@ public class testController implements Initializable {
         titleLabel.setOnMouseClicked(event->{
             try {
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ReclamationEtGroupesChatRessources/Interfaces/chat.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ReclamationEtGroupesChat/Interfaces/chat.fxml"));
                 Parent root = loader.load();
 
                 ChatboxController chatboxController = loader.getController();
