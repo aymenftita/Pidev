@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.esprit.controller.AfficherModuleController"
+            prefHeight="400.0" prefWidth="600.0">
+    <TableView fx:id="tableModule" prefHeight="400.0" prefWidth="600.0">
+        <columns>
+            <TableColumn fx:id="titreColumn" prefWidth="75.0" text="Titre">
+                <cellValueFactory>
+                    <PropertyValueFactory property="titre" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="niveauColumn" prefWidth="75.0" text="Niveau">
+                <cellValueFactory>
+                    <PropertyValueFactory property="niveau" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="domaineColumn" prefWidth="75.0" text="Domaine">
+                <cellValueFactory>
+                    <PropertyValueFactory property="domaine" />
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+</AnchorPane>

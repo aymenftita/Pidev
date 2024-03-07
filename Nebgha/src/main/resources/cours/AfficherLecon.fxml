@@ -1,0 +1,41 @@
+<?import javafx.scene.layout.AnchorPane?>
+<?import jdk.internal.joptsimple.internal.Columns?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.esprit.controller.AfficherLeconController"
+            prefHeight="400.0" prefWidth="600.0">
+    <TableView fx:id="tableLecon" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" >
+        <columns>
+<!--            <TableColumn fx:id="idLeconColumn" prefWidth="75.0" text="id_lecon" >-->
+<!--                <cellValueFactory>-->
+<!--                    <PropertyValueFactory property="id_lecon" />-->
+<!--                </cellValueFactory>-->
+<!--            </TableColumn>-->
+            <TableColumn fx:id="titreColumn" prefWidth="75.0" text="Titre" >
+                <cellValueFactory>
+                    <PropertyValueFactory property="titre" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="descriptionColumn" prefWidth="75.0" text="Description" >
+                <cellValueFactory>
+                    <PropertyValueFactory property="description" />
+                </cellValueFactory>
+            </TableColumn>
+<!--            <TableColumn fx:id="idCoursColumn" prefWidth="75.0" text="id_cours" >-->
+<!--                <cellValueFactory>-->
+<!--                    <PropertyValueFactory property="id_cours" />-->
+<!--                </cellValueFactory>-->
+<!--            </TableColumn>-->
+            <TableColumn fx:id="contenuColumn" prefWidth="75.0" text="Contenu" >
+                <cellValueFactory>
+                    <PropertyValueFactory property="contenu" />
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+
+</AnchorPane>
+
