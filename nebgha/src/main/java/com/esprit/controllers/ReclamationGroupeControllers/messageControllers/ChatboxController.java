@@ -3,7 +3,7 @@ package com.esprit.controllers.ReclamationGroupeControllers.messageControllers;
 import com.esprit.models.ReclamationGroupModels.Groupe;
 import com.esprit.models.ReclamationGroupModels.Message;
 import com.esprit.models.ReclamationGroupModels.UserGroupe;
-import com.esprit.ModuleReclamationEtGroupe.ReclamationGroupServices.*;
+
 
 import com.esprit.services.ReclamationGroupServices.*;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -83,7 +83,7 @@ public class ChatboxController {
 
         titleLabel.setOnMouseClicked(event->{
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ReclamationEtGroupesChat/Interfaces/chat.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ReclamationEtGroupesChatRessources/Interfaces/chat.fxml"));
                 Parent root = loader.load();
 
                 ChatboxController chatboxController = loader.getController();

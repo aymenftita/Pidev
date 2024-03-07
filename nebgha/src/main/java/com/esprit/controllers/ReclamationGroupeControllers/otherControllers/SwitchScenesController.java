@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class SwitchScenesController {
     public void SwitchScene(ActionEvent event,String fxmlfile) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ReclamationEtGroupesChat/Interfaces/" +fxmlfile+".fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ReclamationEtGroupesChatRessources/Interfaces/" +fxmlfile+".fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         Stage Stage = new Stage();
@@ -22,7 +22,7 @@ public class SwitchScenesController {
     }
 
     public void SwitchScene2(ActionEvent event, String fxmlfile, TextField t) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ReclamationEtGroupesChat/Interfaces/" +fxmlfile+".fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ReclamationEtGroupesChatRessources/Interfaces/" +fxmlfile+".fxml"));
         Parent root = loader.load();
         t.getScene().setRoot(root);
     }

@@ -16,7 +16,7 @@ public class MainProgGUI extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ReclamationEtGroupesChat/Interfaces/ParRole.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ReclamationEtGroupesChatRessources/Interfaces/ParRole.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root,1000,700);
         primaryStage.setScene(scene);

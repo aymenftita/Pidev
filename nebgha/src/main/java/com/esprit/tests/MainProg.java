@@ -1,7 +1,6 @@
 package com.esprit.tests;
 
-import com.esprit.ModuleReclamationEtGroupe.ReclamationGroupModels.*;
-import com.esprit.ModuleReclamationEtGroupe.ReclamationGroupServices.*;
+
 import com.esprit.models.ReclamationGroupModels.Groupe;
 import com.esprit.models.ReclamationGroupModels.UserGroupe;
 import com.esprit.models.ReclamationGroupModels.Utilisateur;
