@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="A" prefHeight="350.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.ReclamationGroupeControllers.otherControllers.WelcomePageController">
+    <children>
+        <ImageView fitHeight="400.0" fitWidth="670.0" layoutX="-1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../Images/Rb.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="134.0" layoutY="35.0" prefHeight="54.0" prefWidth="336.0" text="Welcome Admin">
+            <font>
+                <Font name="Arial Bold" size="42.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="76.0" fitWidth="87.0" layoutX="470.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../Images/wave.gif" />
+            </image>
+        </ImageView>
+        <Label layoutX="276.0" layoutY="143.0" text="Reclamations">
+            <font>
+                <Font name="System Bold" size="25.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="76.0" fitWidth="78.0" layoutX="159.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../Images/R.gif" />
+            </image>
+        </ImageView>
+        <Button defaultButton="true" layoutX="159.0" layoutY="124.0" mnemonicParsing="false" onAction="#SwitchToAfficherReclamation" opacity="0.14" prefHeight="76.0" prefWidth="302.0">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font></Button>
+        <Label layoutX="300.0" layoutY="324.0" text="Message">
+            <font>
+                <Font name="System Bold" size="25.0" />
+            </font>
+        </Label>
+        <Label layoutX="300.0" layoutY="232.0" text="Groupes">
+            <font>
+                <Font name="System Bold" size="25.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="76.0" fitWidth="78.0" layoutX="160.0" layoutY="213.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../Images/G.gif" />
+            </image>
+        </ImageView>
+        <Button fx:id="bt" defaultButton="true" layoutX="159.0" layoutY="213.0" mnemonicParsing="false" onAction="#SwitchToAfficherGroupe" opacity="0.14" prefHeight="76.0" prefWidth="302.0">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font></Button>
+        <ImageView fitHeight="76.0" fitWidth="78.0" layoutX="159.0" layoutY="305.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../Images/M.gif" />
+            </image>
+        </ImageView>
+        <Button defaultButton="true" layoutX="159.0" layoutY="304.0" mnemonicParsing="false" onAction="#SwitchToAfficherMessage" opacity="0.14" prefHeight="76.0" prefWidth="302.0">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font></Button>
+        <TextField fx:id="tf" opacity="0.0" />
+    </children>
+
+</AnchorPane>
