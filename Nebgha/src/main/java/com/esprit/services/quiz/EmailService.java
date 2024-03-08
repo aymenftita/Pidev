@@ -33,7 +33,7 @@ public class EmailService {
 
         StringBuilder content = new StringBuilder();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/media/QuizEmailTemplate.html"));
+            BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/quiz/graphics/QuizEmailTemplate.html"));
             String line;
             while ((line = reader.readLine()) != null) {
                 content.append(line);

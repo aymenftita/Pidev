@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.cours.AjoutLeconController">
+    <children>
+        <SplitPane dividerPositions="0.29797979797979796" layoutX="-4.0" layoutY="-4.0" prefHeight="400.0" prefWidth="607.0">
+            <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                    <children>
+                        <Button cache="true" defaultButton="true" layoutX="26.0" layoutY="103.0" mnemonicParsing="false" onAction="#menuAjoutLecon" text="Add" textAlignment="CENTER">
+                            <effect>
+                                <Blend />
+                            </effect>
+                            <font>
+                                <Font name="System Bold" size="15.0" />
+                            </font>
+                            <textFill>
+                                <LinearGradient endX="0.976303317535545" endY="0.1800947867298578" startX="0.27014218009478674" startY="0.13744075829383887">
+                                    <stops>
+                                        <Stop>
+                                            <color>
+                                                <Color red="0.8289473652839661" green="0.7660087943077087" blue="0.19956140220165253" />
+                                            </color>
+                                        </Stop>
+                                        <Stop offset="1.0">
+                                            <color>
+                                                <Color red="0.17819200456142426" green="0.1384015530347824" blue="0.9342105388641357" />
+                                            </color>
+                                        </Stop>
+                                    </stops>
+                                </LinearGradient>
+                            </textFill>
+                        </Button>
+                        <Button layoutX="26.0" layoutY="164.0" mnemonicParsing="false" onAction="#menuModifierLecon" text="Edit" />
+                        <Button layoutX="27.0" layoutY="214.0" mnemonicParsing="false" onAction="#menuSupprimerLecon" text="Delete" />
+                        <Button layoutX="28.0" layoutY="269.0" mnemonicParsing="false" onAction="#menuAfficherLecon" text="Show" />
+                        <Label layoutX="56.0" layoutY="14.0" text="Lesson">
+                            <font>
+                                <Font name="System Bold Italic" size="25.0" />
+                            </font>
+                            <textFill>
+                                <RadialGradient centerX="0.46685082872928174" centerY="0.495260663507109" radius="0.603448275862069">
+                                    <stops>
+                                        <Stop>
+                                            <color>
+                                                <Color red="0.8289473652839661" green="0.7660087943077087" blue="0.19956140220165253" />
+                                            </color>
+                                        </Stop>
+                                        <Stop offset="1.0">
+                                            <color>
+                                                <Color red="0.17819200456142426" green="0.1384015530347824" blue="0.9342105388641357" />
+                                            </color>
+                                        </Stop>
+                                    </stops>
+                                </RadialGradient>
+                            </textFill>
+                        </Label>
+                        <Line endX="82.0" layoutX="101.0" layoutY="59.0" startX="-100.0" />
+                  <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="14.0" layoutY="66.0" onMouseClicked="#previous">
+                     <image>
+                        <Image url="@../quiz/graphics/previous.png" />
+                     </image>
+                  </ImageView>
+                    </children>
+                </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="399.0" prefWidth="422.0">
+                    <children>
+                        <Button layoutX="190.0" layoutY="353.0" mnemonicParsing="false" onAction="#ajouterLecon" text="Add">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </Button>
+                        <Label layoutX="14.0" layoutY="58.0" text="Title:">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="115.0" text="Description :">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="207.0" text="Content:">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="tfLeconTitre" layoutX="120.0" layoutY="58.0" prefHeight="25.0" prefWidth="209.0" />
+                        <TextArea fx:id="tfContenuLecon" layoutX="120.0" layoutY="207.0" prefHeight="129.0" prefWidth="209.0" />
+                        <TextArea fx:id="tfDescriptionLecon" layoutX="120.0" layoutY="115.0" prefHeight="66.0" prefWidth="209.0" />
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
+</AnchorPane>

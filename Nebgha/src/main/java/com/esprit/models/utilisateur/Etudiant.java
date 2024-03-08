@@ -22,6 +22,7 @@ public String specialite;
         this.specialite = specialite;
     }
 
+
     public int getNiveau() {
         return niveau;
     }

@@ -2,6 +2,7 @@ package com.esprit.services.utilisateur;
 
 import com.esprit.models.utilisateur.Role;
 import com.esprit.models.utilisateur.Tuteur;
+import com.esprit.models.utilisateur.Utilisateur;
 import com.esprit.services.IService;
 import com.esprit.utils.DataSource;
 
@@ -82,5 +83,26 @@ public class ServiceTuteur implements IService<Tuteur> {
         }
 
         return tuteurs;
+    }
+    public Tuteur getTueur(int userId) {
+        Tuteur user = null;
+        String req = "SELECT * FROM utilisateur WHERE id = " + userId;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(req);
+            if (rs.next()) {
+                user = new Tuteur( rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        Role.valueOf(rs.getString("role")),
+                        rs.getString("domaine"),
+                        rs.getDouble("experience"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return user;
     }
 }

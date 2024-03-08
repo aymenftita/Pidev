@@ -20,6 +20,7 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -75,9 +76,13 @@ public class InterfaceQuestionUserController {
     private TableColumn<Question, String> tvAffichageQuestionNbrReponses;
 
     private Sujet relatedSujet;
+    @FXML
+    private Label nameLabel;
 
 
     public void initialize() throws IOException, InterruptedException {
+        nameLabel.setText(Session.getCurrentUser().getNom());
+
 
         //charger le combo box
         List<String> sortTypes = new ArrayList<>();
@@ -124,7 +129,7 @@ public class InterfaceQuestionUserController {
                     Alert alertProfanity = new Alert(Alert.AlertType.WARNING);
                     alertProfanity.setTitle("Profanity detected!");
                     alertProfanity.setHeaderText("The rules contain profanity.");
-                    alertProfanity.setContentText("Belehi traba la nchid nrabik");
+                    alertProfanity.setContentText("This content contains profanity. Please consider revising it with more appropriate language.");
                     alertProfanity.show();
                     return;
 
@@ -148,7 +153,7 @@ public class InterfaceQuestionUserController {
                     Alert alertProfanity = new Alert(Alert.AlertType.WARNING);
                     alertProfanity.setTitle("Profanity detected!");
                     alertProfanity.setHeaderText("The rules contain profanity.");
-                    alertProfanity.setContentText("Belehi traba la nchid nrabik");
+                    alertProfanity.setContentText("This content contains profanity. Please consider revising it with more appropriate language.");
                     alertProfanity.show();
                     return;
 
@@ -264,27 +269,89 @@ public class InterfaceQuestionUserController {
         //redirection à l'interface de forum
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/interfacesSujet/InterfaceForumUser.fxml"));
         Parent root = loader.load();
-        tvAffichageQuestion.getScene().setRoot(root);
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.show();
     }
 
     @FXML
     public void ApercuPlanning(MouseEvent event) throws IOException {
         //redirection à l'interface de forum
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Planning/AfficherEvent.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Planning/ListEvenement.fxml"));
         Parent root = loader.load();
-        tvAffichageQuestion.getScene().setRoot(root);
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.show();
+    }
+    public void apercuProfile(MouseEvent mouseEvent) throws IOException {
+        if (Session.getCurrentRole().equals(Role.Tuteur)) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/TuteurInterface.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.show();
+        }
+        else if (Session.getCurrentRole().equals(Role.Etudiant)) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/EtudiantInterface.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.show();
+        }
+        else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/AdminInterface.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.show();
+        }
+    }
+    @FXML
+    public void ApercuGroups(MouseEvent event) throws IOException {
+        if (Session.getCurrentRole().equals(Role.Administrateur)) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ReclamationEtGroupesChatRessources/Interfaces/AfficherGroupe.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
+        }
+        else  {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ReclamationEtGroupesChatRessources/Interfaces/testFlow.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
+        }
     }
 
     @FXML
     public void ApercuCours(MouseEvent event) throws IOException {
-        //TODO: ADD path when integrated
-        //redirection à l'interface de forum
-        /*
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/interfacesSujet/InterfaceForumUser.fxml"));
-        Parent root = loader.load();
-        tvAffichageQuestion.getScene().setRoot(root);
-
-         */
+        if (Session.getCurrentRole().equals(Role.Tuteur)) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cours/InterfaceTuteur.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
+        }
+        else if (Session.getCurrentRole().equals(Role.Etudiant)) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cours/InterfaceEtudiant.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
+        }
+        else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cours/InterfaceAdmin.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
+        }
     }
 
     @FXML
@@ -298,12 +365,16 @@ public class InterfaceQuestionUserController {
         else if (Session.getCurrentRole().equals(Role.Etudiant)) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/EtudiantInterface.fxml"));
             Parent root = loader.load();
-            tvAffichageQuestion.getScene().setRoot(root);
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.show();
         }
         else {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/AdminInterface.fxml"));
             Parent root = loader.load();
-            tvAffichageQuestion.getScene().setRoot(root);
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.show();
         }
 
     }
@@ -313,7 +384,9 @@ public class InterfaceQuestionUserController {
         //redirection à l'interface de forum
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/interfacesSujet/InterfaceForumUser.fxml"));
         Parent root = loader.load();
-        tvAffichageQuestion.getScene().setRoot(root);
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.show();
     }
 
     @FXML
@@ -326,19 +399,20 @@ public class InterfaceQuestionUserController {
             Parent root = loader.load();
             InterfaceReponseUserController iruc = loader.getController();
             iruc.setRelated(relatedSujet, selectedQuestion);
-            tvAffichageQuestion.getScene().setRoot(root);
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.show();
 
             //Automatic answer by AI to entered question
 
             ServiceUtilisateur su = new ServiceUtilisateur();
             GPTService gs = new GPTService();
             ReponseService rs = new ReponseService();
-            String response = gs.request(selectedQuestion.getTitre(), selectedQuestion.getContenu());
 
 
             if (!rs.AiResponded(selectedQuestion)) {
-
-                rs.ajouter(new Reponse(0, Session.getCurrentUser(), selectedQuestion, response
+                String response = gs.request(selectedQuestion.getTitre(), selectedQuestion.getContenu());
+                rs.ajouter(new Reponse(0, su.getUser(1), selectedQuestion, response
                         , new Date(System.currentTimeMillis()), relatedSujet, 0, false, false));
 
             }

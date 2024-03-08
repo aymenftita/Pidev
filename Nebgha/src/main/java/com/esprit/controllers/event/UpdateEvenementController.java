@@ -20,8 +20,11 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.URL;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.SQLException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -82,7 +85,9 @@ public class UpdateEvenementController implements Initializable {
                 Evenement e = new Evenement();
                 e.setNom(Nom.getText());
                 e.setId(this.event.getId());
-                e.setDate(Date.valueOf(Datee.getValue()));
+                LocalDate localDate = Datee.getValue();
+                Date sqlDate = java.sql.Date.valueOf(localDate);
+                e.setDate(sqlDate);
                 e.setDescription(Description.getText());
                 e.setImage(ImageF.getText());
                 e.setLieuId(ls.findByName(nom_loc));
@@ -100,17 +105,22 @@ public class UpdateEvenementController implements Initializable {
 
 }
 
+
     public Evenement setEvenement(Evenement e) {
         Nom.setText(e.getNom());
         Description.setText(e.getDescription());
         ImageF.setText(e.getImage());
         this.event.setId(e.getId());
-//Datee.setValue(toLocalDatee.getDate());
+
+        // Convert java.sql.Date to LocalDate
+        Date date = e.getDate();
+        Instant instant = Instant.ofEpochMilli(date.getTime());
+        LocalDate localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+        Datee.setValue(localDate);
 
         Lieu.setValue(e.getLieuId().getVille());
 
         return this.event;
-
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

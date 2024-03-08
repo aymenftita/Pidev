@@ -40,7 +40,7 @@
       </Label>
       <ImageView fitHeight="101.0" fitWidth="159.0" layoutX="27.0" layoutY="24.0">
          <image>
-            <Image url="@Images/421935935_2103323113360956_2155380558138833429_n.png" />
+            <Image url="@../Planning/Images/421935935_2103323113360956_2155380558138833429_n.png" />
          </image>
       </ImageView>
       <Label layoutX="308.0" layoutY="52.0" text="Update Event" textFill="#0e1c57" textOverrun="CENTER_ELLIPSIS" wrapText="true">
@@ -69,7 +69,7 @@
       <Button layoutX="118.0" layoutY="447.0" mnemonicParsing="false" onAction="#Retour" prefHeight="32.0" prefWidth="65.0" style="-fx-background-color: transparent; -fx-border-radius: 20px; -fx-border-color: grey;" text="Retour" textFill="#0e1c57" />
       <ImageView fitHeight="200.0" fitWidth="178.0" layoutX="639.0" layoutY="288.0">
          <image>
-            <Image url="@Images/mashup-events.gif" />
+            <Image url="@../Planning/Images/mashup-events.gif" />
          </image>
       </ImageView>
    </children>

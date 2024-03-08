@@ -47,29 +47,27 @@ public void initialize() {
             Session.setCurrentRole(user.getRole());
             showAlert("Login Successful", "Welcome, " + user.getNom() + "!");
             try {
-                Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                currentStage.close();
                 if (user.getRole().equals(Role.Administrateur)) {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/AdminInterface.fxml"));
                     Parent root = loader.load();
-                    Scene scene = new Scene(root);
-                    Stage stage = new Stage();
-                    stage.setScene(scene);
-                    stage.show();
+                    Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    currentStage.setScene(new Scene(root));
+                    currentStage.setTitle("Nebgha");
+                    currentStage.show();
                 } else if (user.getRole().equals(Role.Tuteur)) {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/TuteurInterface.fxml"));
                     Parent root = loader.load();
-                    Scene scene = new Scene(root);
-                    Stage stage = new Stage();
-                    stage.setScene(scene);
-                    stage.show();
+                    Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    currentStage.setScene(new Scene(root));
+                    currentStage.setTitle("Nebgha");
+                    currentStage.show();
                 } else if (user.getRole().equals(Role.Etudiant)) {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/EtudiantInterface.fxml"));
                     Parent root = loader.load();
-                    Scene scene = new Scene(root);
-                    Stage stage = new Stage();
-                    stage.setScene(scene);
-                    stage.show();
+                    Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    currentStage.setScene(new Scene(root));
+                    currentStage.setTitle("Nebgha");
+                    currentStage.show();
                 }
             } catch (Exception e) {
                 e.printStackTrace(); // Print the exception stack trace for debugging
@@ -112,13 +110,12 @@ public void initialize() {
     @FXML
     void openCreate(ActionEvent event) {
         try {
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            currentStage.close();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/CreateAccount.fxml"));
             Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -128,9 +125,10 @@ public void initialize() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/ForgotPassword.fxml"));
             Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

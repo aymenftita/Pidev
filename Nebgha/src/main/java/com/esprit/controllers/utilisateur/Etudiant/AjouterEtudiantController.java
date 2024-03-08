@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -123,25 +124,21 @@ public class AjouterEtudiantController {
     }
 
     @FXML
-    void previous(ActionEvent event) throws IOException {
-        if (Session.getCurrentRole().equals(Role.Administrateur)) {
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            currentStage.close();
+    void previous(MouseEvent event) throws IOException {
+        if (Session.getCurrentRole()!=null&&Session.getCurrentRole().equals(Role.Administrateur)) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/ShowEtudiants.fxml"));
             Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Nebgha");
-            stage.show();
-        } else {
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            currentStage.close();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
+        } else {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/FirstPage.fxml"));
             Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Nebgha");
-            stage.show();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
         }
     }
 }

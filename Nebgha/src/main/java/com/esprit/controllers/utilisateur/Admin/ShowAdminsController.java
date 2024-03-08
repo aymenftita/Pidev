@@ -37,9 +37,13 @@ public class ShowAdminsController implements Initializable {
 
     @FXML
     private TableView<Admin> adminTableView;
+    @FXML
+    private Label nameLabel;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        nameLabel.setText(Session.getCurrentUser().getNom());
         ServiceAdmin serviceAdmin = new ServiceAdmin();
         List<Admin> Admins = serviceAdmin.afficher();
 
@@ -85,27 +89,24 @@ public class ShowAdminsController implements Initializable {
     @FXML
     void AjoutAdmin(ActionEvent event) {
         try {
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            currentStage.close();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/AjouterAdmin.fxml"));
             Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
     @FXML
-    void previous(ActionEvent event) throws IOException {
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
+    void previous(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/ShowUsers.fxml"));
         Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Nebgha");
-        stage.show();
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.setTitle("Nebgha");
+        currentStage.show();
     }
     @FXML
     void ApercuForum(MouseEvent event) throws IOException {
@@ -122,7 +123,7 @@ public class ShowAdminsController implements Initializable {
     @FXML
     public void ApercuPlanning(MouseEvent event) throws IOException {
         //redirection à l'interface de forum
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Planning/AfficherEvent.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Planning/ListEvenement.fxml"));
         Parent root = loader.load();
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.setScene(new Scene(root));
@@ -132,14 +133,49 @@ public class ShowAdminsController implements Initializable {
 
     @FXML
     public void ApercuCours(MouseEvent event) throws IOException {
-        //TODO: ADD path when integrated
-        //redirection à l'interface de forum
-        /*
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/interfacesSujet/InterfaceForumUser.fxml"));
-        Parent root = loader.load();
-        tvAffichageSujet.getScene().setRoot(root);
-
-         */
+        if (Session.getCurrentRole().equals(Role.Tuteur)) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cours/InterfaceTuteur.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
+        }
+        else if (Session.getCurrentRole().equals(Role.Etudiant)) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cours/InterfaceEtudiant.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
+        }
+        else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cours/InterfaceAdmin.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
+        }
+    }
+    @FXML
+    public void ApercuGroups(MouseEvent event) throws IOException {
+        if (Session.getCurrentRole().equals(Role.Administrateur)) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ReclamationEtGroupesChatRessources/Interfaces/AfficherGroupe.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
+        }
+        else  {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ReclamationEtGroupesChatRessources/Interfaces/testFlow.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
+        }
     }
 
     @FXML
@@ -174,7 +210,8 @@ public class ShowAdminsController implements Initializable {
 
     public void apercuProfile(MouseEvent mouseEvent) throws IOException {
         if (Session.getCurrentRole().equals(Role.Tuteur)) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/TuteurInterface.fxml"));
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/ModifierTuteur.fxml"));
             Parent root = loader.load();
             Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
             currentStage.setScene(new Scene(root));
@@ -182,7 +219,7 @@ public class ShowAdminsController implements Initializable {
             currentStage.show();
         }
         else if (Session.getCurrentRole().equals(Role.Etudiant)) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/EtudiantInterface.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/ModifierEtudiant.fxml"));
             Parent root = loader.load();
             Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
             currentStage.setScene(new Scene(root));
@@ -190,12 +227,13 @@ public class ShowAdminsController implements Initializable {
             currentStage.show();
         }
         else {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/AdminInterface.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/ModifierAdmin.fxml"));
             Parent root = loader.load();
             Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
             currentStage.setScene(new Scene(root));
             currentStage.setTitle("Nebgha");
             currentStage.show();
-        }}
+        }
+    }
 
 }

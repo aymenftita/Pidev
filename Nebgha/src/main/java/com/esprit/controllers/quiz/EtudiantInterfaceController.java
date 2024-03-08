@@ -2,6 +2,7 @@ package com.esprit.controllers.quiz;
 
 import com.esprit.models.quiz.Questions;
 import com.esprit.models.quiz.ReponsesUtilisateur;
+import com.esprit.models.utilisateur.Role;
 import com.esprit.services.*;
 import com.esprit.services.quiz.NotificationService;
 import com.esprit.services.quiz.QuestionsService;
@@ -23,10 +24,13 @@ public class EtudiantInterfaceController {
     private int userId=Session.getCurrentUser().getId();
     @FXML
     private Label scoreLabel;
+    @FXML
+    private Label nameLabel;
 
 
     @FXML
     void initialize() {
+        nameLabel.setText(Session.getCurrentUser().getNom());
 
             NotificationService notificationService = new NotificationService();
             notificationService.showQuizzesAddedTodayNotification();
@@ -81,6 +85,137 @@ public class EtudiantInterfaceController {
         currentStage.setScene(new Scene(root));
         currentStage.setTitle("Nebgha");
         currentStage.show();
+    }
+
+
+    @FXML
+    void ApercuForum(MouseEvent event) throws IOException {
+        //redirection à l'interface de forum
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/interfacesSujet/InterfaceForumUser.fxml"));
+        Parent root = loader.load();
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.setTitle("Nebgha");
+        currentStage.show();
+
+    }
+
+    @FXML
+    public void ApercuPlanning(MouseEvent event) throws IOException {
+        //redirection à l'interface de forum
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Planning/ListEvenement.fxml"));
+        Parent root = loader.load();
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.setTitle("Nebgha");
+        currentStage.show();
+    }
+
+    @FXML
+    public void ApercuCours(MouseEvent event) throws IOException {
+        if (Session.getCurrentRole().equals(Role.Tuteur)) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cours/InterfaceTuteur.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
+        }
+        else if (Session.getCurrentRole().equals(Role.Etudiant)) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cours/InterfaceEtudiant.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
+        }
+        else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cours/InterfaceAdmin.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
+        }
+    }
+    @FXML
+    public void ApercuGroups(MouseEvent event) throws IOException {
+        if (Session.getCurrentRole().equals(Role.Administrateur)) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ReclamationEtGroupesChatRessources/Interfaces/AfficherGroupe.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
+        }
+        else  {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ReclamationEtGroupesChatRessources/Interfaces/testFlow.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
+        }
+    }
+
+    @FXML
+    public void ApercuQuiz(MouseEvent event) throws IOException {
+        //redirection à l'interface de forum
+        if (Session.getCurrentRole().equals(Role.Tuteur)) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/TuteurInterface.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
+        }
+        else if (Session.getCurrentRole().equals(Role.Etudiant)) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/EtudiantInterface.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
+        }
+        else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/AdminInterface.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
+        }
+
+    }
+
+    public void apercuProfile(MouseEvent mouseEvent) throws IOException {
+        if (Session.getCurrentRole().equals(Role.Tuteur)) {
+            Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+            currentStage.close();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/ModifierTuteur.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        else if (Session.getCurrentRole().equals(Role.Etudiant)) {
+            Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+            currentStage.close();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/ModifierEtudiant.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        else {
+            Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+            currentStage.close();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/ModifierAdmin.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
     }
 
 }

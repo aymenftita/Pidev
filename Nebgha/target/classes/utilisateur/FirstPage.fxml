@@ -10,37 +10,48 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.utilisateur.FirstPageController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.utilisateur.FirstPageController">
    <children>
-      <ImageView fitHeight="411.0" fitWidth="601.0" layoutY="-11.0">
-         <image>
-            <Image url="@graphics/Logo_nebgha.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="411.0" layoutY="36.0" text="Email" textFill="#310b90">
+      <Label layoutX="239.0" layoutY="140.0" text="Email" textFill="#000066">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="407.0" layoutY="104.0" text="Password" textFill="#310b90">
+      <Label layoutX="239.0" layoutY="206.0" text="Password" textFill="#000066">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="emailtf" layoutX="411.0" layoutY="65.0" />
-      <PasswordField fx:id="mdptf" layoutX="411.0" layoutY="132.0" />
-      <Button layoutX="538.0" layoutY="200.0" mnemonicParsing="false" onAction="#login" text="Login" textFill="#310b90" />
-      <Button layoutX="419.0" layoutY="200.0" mnemonicParsing="false" onAction="#openForgotPassword" text="Forgot Password" textFill="#310b90" />
-      <Label layoutX="205.0" layoutY="313.0" text="You don't have an account ?" textFill="#e4d20d">
+      <TextField fx:id="emailtf" layoutX="239.0" layoutY="172.0" prefHeight="34.0" prefWidth="168.0" style="-fx-border-color: #FDFD96;" />
+      <PasswordField fx:id="mdptf" layoutX="239.0" layoutY="230.0" prefHeight="34.0" prefWidth="168.0" style="-fx-border-color: #FDFD96;" />
+      <Button layoutX="484.0" layoutY="203.0" mnemonicParsing="false" onAction="#login" prefHeight="26.0" prefWidth="57.0" stylesheets="@../quiz/graphics/styles.css" text="Login" textFill="#310b90" />
+      <Button layoutX="271.0" layoutY="278.0" mnemonicParsing="false" onAction="#openForgotPassword" stylesheets="@../quiz/graphics/styles.css" text="Forgot Password ?" textFill="#310b90" />
+      <Label layoutX="390.0" layoutY="325.0" text="You don't have an account ?" textFill="#e4d20d">
          <font>
             <Font name="System Bold Italic" size="15.0" />
          </font>
       </Label>
-      <Button layoutX="269.0" layoutY="350.0" mnemonicParsing="false" onAction="#openCreate" text="Sign up" textFill="#310b90" />
+      <Button layoutX="461.0" layoutY="360.0" mnemonicParsing="false" onAction="#openCreate" stylesheets="@../quiz/graphics/styles.css" text="Sign up" textFill="#310b90" />
 
       <!-- Label for showing/hiding password -->
-      <ToggleButton fx:id="togglePasswordBtn" layoutX="486.0" layoutY="169.0" onAction="#togglePasswordVisibility" text="Show" />
+      <ToggleButton fx:id="togglePasswordBtn" layoutX="415.0" layoutY="236.0" onAction="#togglePasswordVisibility" style="-fx-background-color: transparent;" text="Show" textFill="#000066">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font></ToggleButton>
 
-      <Label fx:id="shownPassword" layoutX="419.0" layoutY="136.0" text="Label" />
+      <Label fx:id="shownPassword" layoutX="253.0" layoutY="238.0" text="Label">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <ImageView fitHeight="174.0" fitWidth="179.0" layoutX="199.0" layoutY="-24.0">
+         <image>
+            <Image url="@../quiz/graphics/Logo2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="195.0" fitWidth="200.0" layoutX="17.0" layoutY="130.0">
+         <image>
+            <Image url="@graphics/login.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -16,6 +16,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -96,9 +97,13 @@ public class InterfaceReponseUserController {
     private Question relatedQuestion;
 
     private Sujet relatedSujet;
+    @FXML
+    private Label nameLabel;
+
 
 
     public void initialize() {
+        nameLabel.setText(Session.getCurrentUser().getNom());
 
         //charger le combo box
         List<String> sortTypes = new ArrayList<>();
@@ -139,7 +144,7 @@ public class InterfaceReponseUserController {
                     Alert alertProfanity = new Alert(Alert.AlertType.WARNING);
                     alertProfanity.setTitle("Profanity detected!");
                     alertProfanity.setHeaderText("The rules contain profanity.");
-                    alertProfanity.setContentText("Belehi traba la nchid nrabik");
+                    alertProfanity.setContentText("This content contains profanity. Please consider revising it with more appropriate language.");
                     alertProfanity.show();
                     return;
 
@@ -225,7 +230,9 @@ public class InterfaceReponseUserController {
         //redirection à l'interface de forum
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/interfacesSujet/InterfaceForumUser.fxml"));
         Parent root = loader.load();
-        tvAffichageReponse.getScene().setRoot(root);
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.show();
     }
 
     @FXML
@@ -233,19 +240,56 @@ public class InterfaceReponseUserController {
         //redirection à l'interface de forum
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Planning/AfficherEvent.fxml"));
         Parent root = loader.load();
-        tvAffichageReponse.getScene().setRoot(root);
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.show();
     }
 
     @FXML
     public void ApercuCours(MouseEvent event) throws IOException {
-        //TODO: ADD path when integrated
-        //redirection à l'interface de forum
-        /*
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/interfacesSujet/InterfaceForumUser.fxml"));
-        Parent root = loader.load();
-        tvAffichageSujet.getScene().setRoot(root);
-
-         */
+        if (Session.getCurrentRole().equals(Role.Tuteur)) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cours/InterfaceTuteur.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
+        }
+        else if (Session.getCurrentRole().equals(Role.Etudiant)) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cours/InterfaceEtudiant.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
+        }
+        else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cours/InterfaceAdmin.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
+        }
+    }
+    @FXML
+    public void ApercuGroups(MouseEvent event) throws IOException {
+        if (Session.getCurrentRole().equals(Role.Administrateur)) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ReclamationEtGroupesChatRessources/Interfaces/AfficherGroupe.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
+        }
+        else  {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ReclamationEtGroupesChatRessources/Interfaces/testFlow.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Nebgha");
+            currentStage.show();
+        }
     }
 
     @FXML
@@ -254,17 +298,23 @@ public class InterfaceReponseUserController {
         if (Session.getCurrentRole().equals(Role.Tuteur)) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/TuteurInterface.fxml"));
             Parent root = loader.load();
-            tvAffichageReponse.getScene().setRoot(root);
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.show();
         }
         else if (Session.getCurrentRole().equals(Role.Etudiant)) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/EtudiantInterface.fxml"));
             Parent root = loader.load();
-            tvAffichageReponse.getScene().setRoot(root);
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.show();
         }
         else {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/quiz/AdminInterface.fxml"));
             Parent root = loader.load();
-            tvAffichageReponse.getScene().setRoot(root);
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.show();
         }
 
     }
@@ -276,7 +326,9 @@ public class InterfaceReponseUserController {
         Parent root = loader.load();
         InterfaceQuestionUserController iquc = loader.getController();
         iquc.setRelatedSujet(relatedSujet);
-        tvAffichageReponse.getScene().setRoot(root);
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.show();
     }
 
     @FXML
@@ -570,5 +622,29 @@ public class InterfaceReponseUserController {
             return false;
         }
     }
+    public void apercuProfile(MouseEvent mouseEvent) throws IOException {
+        if (Session.getCurrentRole().equals(Role.Tuteur)) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/TuteurInterface.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.show();
+        }
+        else if (Session.getCurrentRole().equals(Role.Etudiant)) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/EtudiantInterface.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.show();
+        }
+        else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/AdminInterface.fxml"));
+            Parent root = loader.load();
+            Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+            currentStage.setScene(new Scene(root));
+            currentStage.show();
+        }
+    }
+
 
 }

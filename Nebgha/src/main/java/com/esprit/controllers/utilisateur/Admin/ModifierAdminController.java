@@ -1,9 +1,11 @@
 package com.esprit.controllers.utilisateur.Admin;
 
 import com.esprit.models.utilisateur.Admin;
+import com.esprit.models.utilisateur.Tuteur;
 import com.esprit.services.utilisateur.EmailVerifier;
 import com.esprit.services.utilisateur.ServiceAdmin;
 import com.esprit.services.Session;
+import com.esprit.services.utilisateur.ServiceTuteur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -55,7 +58,8 @@ public class ModifierAdminController {
 
     public void initialize() {
         shownPassword.setVisible(false);
-        currentAdmin = (Admin) Session.getCurrentUser();
+        ServiceAdmin serviceAdmin =new ServiceAdmin();
+        currentAdmin=serviceAdmin.getAdmin(Session.getCurrentUser().getId()) ;
         tfnom.setText(currentAdmin.getNom());
         tfprenom.setText(currentAdmin.getPrenom());
         tfemail.setText(currentAdmin.getEmail());
@@ -129,14 +133,13 @@ public class ModifierAdminController {
 
 
     @FXML
-    void previous(ActionEvent event) throws IOException {
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
+    void previous(MouseEvent event) throws IOException {
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/AdminInterface.fxml"));
         Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Nebgha");
-        stage.show();
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.setTitle("Nebgha");
+        currentStage.show();
     }
 }

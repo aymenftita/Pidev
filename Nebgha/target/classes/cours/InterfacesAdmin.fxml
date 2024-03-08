@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.cours.InterfaceAdminController">
+    <children>
+        <ImageView fitHeight="600.0" fitWidth="700.0" layoutY="-21.0" pickOnBounds="true">
+            <image>
+                <Image url="@Images/Rb.png" />
+            </image>
+        </ImageView>
+        <Button layoutX="308.0" layoutY="36.0" mnemonicParsing="false" onAction="#ModifierModules" prefHeight="58.0" prefWidth="294.0" stylesheets="@Images/styles.css" text="Edit Module">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button layoutX="308.0" layoutY="102.0" mnemonicParsing="false" onAction="#SupprimerModules" prefHeight="58.0" prefWidth="294.0" stylesheets="@Images/styles.css" text="Delete Module">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button layoutX="308.0" layoutY="178.0" mnemonicParsing="false" onAction="#ModifierCours" prefHeight="57.0" prefWidth="294.0" stylesheets="@Images/styles.css" text="Edit Course" textAlignment="CENTER" textFill="#191818">
+            <effect>
+                <DropShadow />
+            </effect>
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button layoutX="303.0" layoutY="358.0" mnemonicParsing="false" onAction="#ModifierLecons" prefHeight="57.0" prefWidth="294.0" stylesheets="@Images/styles.css" text="Edit Lesson">
+            <effect>
+                <DropShadow />
+            </effect>
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+      <ImageView fitHeight="48.0" fitWidth="69.0" layoutX="315.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/education_11198319.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="315.0" layoutY="361.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/pdf_7035555.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="48.0" fitWidth="59.0" layoutX="315.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/ebook.png" />
+         </image>
+      </ImageView>
+        <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="20.0" layoutY="197.0">
+            <image>
+                <Image url="@Images/Black_Simple_Online_Education_Logo__1_-removebg-preview.png" />
+            </image>
+        </ImageView>
+      <ImageView fitHeight="48.0" fitWidth="69.0" layoutX="323.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/education_11198319.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="303.0" layoutY="266.0" mnemonicParsing="false" onAction="#SupprimerCours" prefHeight="57.0" prefWidth="294.0" stylesheets="@Images/styles.css" text="Delete course" textAlignment="CENTER" textFill="#191818">
+         <effect>
+            <DropShadow />
+         </effect>
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="48.0" fitWidth="59.0" layoutX="315.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/ebook.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="303.0" layoutY="440.0" mnemonicParsing="false" onAction="#ModifierLecons" prefHeight="57.0" prefWidth="294.0" stylesheets="@Images/styles.css" text="Delete Lesson">
+         <effect>
+            <DropShadow />
+         </effect>
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="315.0" layoutY="445.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/pdf_7035555.png" />
+         </image>
+      </ImageView>
+        <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="14.0" layoutY="21.0" onMouseClicked="#previous">
+            <image>
+                <Image url="@../quiz/graphics/previous.png" />
+            </image>
+        </ImageView>
+    </children>
+</AnchorPane>

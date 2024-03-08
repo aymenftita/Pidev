@@ -68,7 +68,7 @@ public class AjoutReponseController {
             Alert alertProfanity = new Alert(Alert.AlertType.WARNING);
             alertProfanity.setTitle("Profanity detected!");
             alertProfanity.setHeaderText("The rules contain profanity.");
-            alertProfanity.setContentText("Belehi traba la nchid nrabik");
+            alertProfanity.setContentText("This content contains profanity. Please consider revising it with more appropriate language.");
             alertProfanity.show();
             return;
 

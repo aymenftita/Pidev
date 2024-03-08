@@ -2,33 +2,27 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.utilisateur.Admin.AdminInterfaceController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.utilisateur.Admin.AdminInterfaceController">
    <children>
-      <ImageView fitHeight="429.0" fitWidth="795.0" layoutY="-6.0">
-         <image>
-            <Image url="@graphics/bleu.png" />
-         </image>
-      </ImageView>
-      <Button layoutX="35.0" layoutY="152.0" mnemonicParsing="false" onAction="#openEdit" prefHeight="25.0" prefWidth="144.0" text="Edit profile" textFill="#2b07ae" />
-      <Button layoutX="256.0" layoutY="152.0" mnemonicParsing="false" onAction="#showUsers" prefHeight="25.0" prefWidth="144.0" text="Users List" textFill="#2b07ae" />
-      <Button layoutX="189.0" layoutY="250.0" mnemonicParsing="false" onAction="#logout" text="Logout" textFill="#2b07ae" />
-      <Pane prefHeight="58.0" prefWidth="795.0" style="-fx-background-color: #dddee1;">
+      <Pane prefHeight="58.0" prefWidth="795.0" style="-fx-background-color: #f2f2f2;">
          <children>
             <ImageView fitHeight="49.0" fitWidth="51.0" layoutX="12.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Forum/graphics/Logo1.png" />
                </image>
             </ImageView>
-            <Label layoutX="241.0" layoutY="18.0" onMousePressed="#ApercuCours" styleClass="link-label" stylesheets="@../Forum/style.css" text="Courses" />
-            <Label layoutX="334.0" layoutY="18.0" onMousePressed="#ApercuForum" styleClass="link-label" stylesheets="@../Forum/style.css" text="Forum" />
+            <Label layoutX="241.0" layoutY="18.0" onMousePressed="#ApercuCours" styleClass="link-label" stylesheets="@../Forum/style.css" text="Courses" textFill="#000066" />
+            <Label layoutX="334.0" layoutY="18.0" onMousePressed="#ApercuForum" styleClass="link-label" stylesheets="@../Forum/style.css" text="Forum" textFill="#000066" />
             <Label layoutX="432.0" layoutY="18.0" onMousePressed="#ApercuPlanning" styleClass="link-label" stylesheets="@../Forum/style.css" text="Planning" />
-            <Label fx:id="nameLabel" layoutX="724.0" layoutY="17.0" onMouseClicked="#apercuProfile" text="Name" textFill="#144083">
+            <Label fx:id="nameLabel" layoutX="716.0" layoutY="15.0" onMouseClicked="#apercuProfile" text="Name" textFill="#000066">
                <font>
                   <Font name="Segoe UI" size="20.0" />
                </font>
@@ -38,7 +32,32 @@
                   <Image url="@../Forum/graphics/name.png" />
                </image>
             </ImageView>
+            <Label layoutX="559.0" layoutY="16.0" onMousePressed="#ApercuQuiz" styleClass="link-label" stylesheets="@../Forum/style.css" text="Quiz" />
+            <Label layoutX="631.0" layoutY="17.0" onMousePressed="#ApercuGroups" styleClass="link-label" stylesheets="@../Forum/style.css" text="Groups" />
          </children>
       </Pane>
+      <Button layoutX="388.0" layoutY="271.0" mnemonicParsing="false" onAction="#showUsers" prefHeight="57.0" prefWidth="294.0" stylesheets="@../quiz/graphics/styles.css" text="Users' Lists">
+         <effect>
+            <DropShadow />
+         </effect>
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="112.0" layoutY="100.0">
+         <image>
+            <Image url="@graphics/admin.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="49.0" fitWidth="46.0" layoutX="4.0" layoutY="66.0" onMouseClicked="#logout">
+         <image>
+            <Image url="@graphics/exit.png" />
+         </image>
+      </ImageView>
+      <Text fill="#000066" layoutX="366.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, Admin! Manage courses, users, and content on NEBGHA.TN. &#10;Your role is crucial in ensuring a smooth learning experience for all. &#10;Thank you for your dedication!&#10;&#10;Happy managing!&#10;" wrappingWidth="390.6148681640625">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

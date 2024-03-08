@@ -10,31 +10,20 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="431.0" prefWidth="847.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.utilisateur.Admin.ShowTuteursController">
+<AnchorPane prefHeight="431.0" prefWidth="847.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.utilisateur.Admin.ShowTuteursController">
     <children>
-      <ImageView fitHeight="431.0" fitWidth="674.0">
-         <image>
-            <Image url="@graphics/bleu.png" />
-         </image>
-      </ImageView>
 
-        <TableView fx:id="tuteurTableView" layoutY="118.0" prefHeight="200.0" prefWidth="674.0">
+        <TableView fx:id="tuteurTableView" layoutX="64.0" layoutY="138.0" prefHeight="200.0" prefWidth="720.0" style="-fx-border-color: #FDFD96;">
             <columns>
-                <TableColumn fx:id="nom" prefWidth="75.0" text="First Name" />
-                <TableColumn fx:id="prenom" prefWidth="75.0" text="Last Name" />
-                <TableColumn fx:id="email" prefWidth="75.0" text="Email" />
-                <TableColumn fx:id="domaine" prefWidth="75.0" text="Field" />
-                <TableColumn fx:id="experience" prefWidth="75.0" text="Experience" />
+                <TableColumn fx:id="nom" prefWidth="116.8000259399414" text="First Name" />
+                <TableColumn fx:id="prenom" prefWidth="138.39999389648438" text="Last Name" />
+                <TableColumn fx:id="email" prefWidth="211.19998168945312" text="Email" />
+                <TableColumn fx:id="domaine" prefWidth="126.4000244140625" text="Field" />
+                <TableColumn fx:id="experience" prefWidth="125.5999755859375" text="Experience" />
 
             </columns>
         </TableView>
-        <Label layoutX="275.0" layoutY="80.0" text="Mentors' List" textFill="#2b07ae">
-         <font>
-            <Font name="Arial Bold Italic" size="20.0" />
-         </font></Label>
-        <Button layoutX="567.0" layoutY="376.0" mnemonicParsing="false" onAction="#AjoutTuteur" text="Add" textFill="#2b07ae" />
-      <Button layoutX="14.0" layoutY="376.0" mnemonicParsing="false" onAction="#previous" text="previous" textFill="#2b07ae" />
-      <Pane layoutX="-1.0" prefHeight="58.0" prefWidth="850.0" style="-fx-background-color: #dddee1;">
+      <Pane layoutX="-1.0" prefHeight="58.0" prefWidth="850.0" style="-fx-background-color: #f2f2f2;">
          <children>
             <ImageView fitHeight="49.0" fitWidth="51.0" layoutX="12.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -45,7 +34,7 @@
             <Label layoutX="381.0" layoutY="18.0" onMousePressed="#ApercuForum" styleClass="link-label" stylesheets="@../Forum/style.css" text="Forum" />
             <Label layoutX="479.0" layoutY="18.0" onMousePressed="#ApercuPlanning" styleClass="link-label" stylesheets="@../Forum/style.css" text="Planning" />
             <Label layoutX="597.0" layoutY="18.0" onMousePressed="#ApercuQuiz" styleClass="link-label" stylesheets="@../Forum/style.css" text="Quiz" />
-            <Label fx:id="nameLabel" layoutX="771.0" layoutY="17.0" onMouseClicked="#apercuProfile" text="Name" textFill="#144083">
+            <Label fx:id="nameLabel" layoutX="771.0" layoutY="17.0" onMouseClicked="#apercuProfile" text="Name" textFill="#000066">
                <font>
                   <Font name="Segoe UI" size="20.0" />
                </font>
@@ -55,8 +44,25 @@
                   <Image url="@../Forum/graphics/name.png" />
                </image>
             </ImageView>
+            <Label layoutX="670.0" layoutY="16.0" onMousePressed="#ApercuGroups" styleClass="link-label" stylesheets="@../Forum/style.css" text="Groups" />
          </children>
       </Pane>
+      <Button fx:id="btnQuiz" layoutX="130.0" layoutY="358.0" mnemonicParsing="false" onAction="#AjoutTuteur" stylesheets="@../quiz/graphics/styles.css" text="Add" />
+      <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="95.0" layoutY="357.0">
+         <image>
+            <Image url="@../quiz/graphics/add.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="17.0" layoutY="67.0" onMouseClicked="#previous">
+         <image>
+            <Image url="@../quiz/graphics/previous.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="353.0" layoutY="76.0" text="Mentors' List" textFill="#000066">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
 
     </children>
 </AnchorPane>

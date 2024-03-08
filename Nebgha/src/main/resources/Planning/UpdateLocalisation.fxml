@@ -46,7 +46,7 @@
     <Button layoutX="209.0" layoutY="371.0" mnemonicParsing="false" onAction="#Retour" style="-fx-background-color: transparent; -fx-border-radius: 20px; -fx-border-color: grey;" text="Retour" textFill="#f6f7fc" />
     <ImageView fitHeight="101.0" fitWidth="159.0" layoutX="17.0" layoutY="14.0">
         <image>
-            <Image url="@Images/421935935_2103323113360956_2155380558138833429_n.png" />
+            <Image url="@../Planning/Images/421935935_2103323113360956_2155380558138833429_n.png" />
         </image>
     </ImageView>
     <TextField fx:id="latitudee" layoutX="427.0" layoutY="153.0" prefHeight="8.0" prefWidth="146.0" promptText="Latitude" style="-fx-background-color: transparent; -fx-border-color: grey; -fx-border-radius: 20px;" />
@@ -64,7 +64,7 @@
     </Label>
       <ImageView layoutX="483.0" layoutY="273.0">
          <image>
-            <Image url="@Images/lova.png" />
+            <Image url="@../Planning/Images/lova.png" />
          </image>
       </ImageView>
 </children>

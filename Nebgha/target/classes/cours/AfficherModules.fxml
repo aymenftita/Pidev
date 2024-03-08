@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.cours.AfficherModuleController">
+    <TableView fx:id="tableModule" layoutY="62.0" prefHeight="338.0" prefWidth="600.0">
+        <columns>
+            <TableColumn fx:id="titreColumn" prefWidth="75.0" text="Title">
+                <cellValueFactory>
+                    <PropertyValueFactory property="titre" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="niveauColumn" prefWidth="75.0" text="Level">
+                <cellValueFactory>
+                    <PropertyValueFactory property="niveau" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="domaineColumn" prefWidth="75.0" text="Field">
+                <cellValueFactory>
+                    <PropertyValueFactory property="domaine" />
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+    <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="14.0" layoutY="21.0" onMouseClicked="#previous">
+        <image>
+            <Image url="@../quiz/graphics/previous.png" />
+        </image>
+    </ImageView>
+   <Label layoutX="242.0" layoutY="21.0" text="Modules' List" textFill="#000066">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Label>
+</AnchorPane>

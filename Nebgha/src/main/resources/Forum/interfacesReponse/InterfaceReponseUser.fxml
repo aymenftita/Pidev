@@ -30,6 +30,12 @@
                 <Label layoutX="868.0" layoutY="18.0" onMouseClicked="#apercuForum" styleClass="link-label" stylesheets="@../style.css" text="Forum" />
                 <Label layoutX="966.0" layoutY="18.0" onMousePressed="#ApercuPlanning" styleClass="link-label" stylesheets="@../style.css" text="Planning" />
                 <Label layoutX="1098.0" layoutY="18.0" onMousePressed="#ApercuQuiz" styleClass="link-label" stylesheets="@../style.css" text="Quiz" />
+            <Label fx:id="nameLabel" layoutX="1265.0" layoutY="19.0" onMouseClicked="#apercuProfile" text="Name" textFill="#000066">
+               <font>
+                  <Font name="Segoe UI" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="1177.0" layoutY="18.0" onMousePressed="#ApercuGroups" styleClass="link-label" stylesheets="@../style.css" text="Groups" />
             </children>
         </Pane>
         <Separator layoutY="47.0" prefHeight="21.0" prefWidth="1366.0" />

@@ -16,7 +16,7 @@
       <ListView fx:id="listEvenement" layoutX="194.0" layoutY="119.0" prefHeight="343.0" prefWidth="506.0" style="-fx-background-color: #D9D9D9;" />
       <HBox layoutX="503.0" layoutY="7.0" prefHeight="46.0" prefWidth="302.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#ajoutEvenement" prefHeight="46.0" prefWidth="97.0" style="-fx-background-color: transparent; -fx-border-radius: 20px;" styleClass="arrow-button" stylesheets="@style.css" text="Add" textFill="#0e1d59" underline="true">
+            <Button mnemonicParsing="false" onAction="#ajoutEvenement" prefHeight="46.0" prefWidth="97.0" style="-fx-background-color: transparent; -fx-border-radius: 20px;" styleClass="arrow-button" stylesheets="@../Planning/style.css" text="Add" textFill="#0e1d59" underline="true">
                <font>
                   <Font name="Candara" size="24.0" />
                </font>
@@ -35,10 +35,10 @@
       </HBox>
       <ImageView fitHeight="96.0" fitWidth="141.0" layoutX="14.0" layoutY="7.0">
          <image>
-            <Image url="@Images/421935935_2103323113360956_2155380558138833429_n.png" />
+            <Image url="@../Planning/Images/421935935_2103323113360956_2155380558138833429_n.png" />
          </image>
       </ImageView>
-      <Button fx:id="serachButton" layoutX="477.0" layoutY="75.0" mnemonicParsing="false" onAction="#Recherche" prefHeight="38.0" prefWidth="84.0" style="-fx-background-color: transparent;" textAlignment="JUSTIFY" textFill="#e8db51" textOverrun="WORD_ELLIPSIS" underline="true">
+      <Button fx:id="searchButton" layoutX="477.0" layoutY="75.0" mnemonicParsing="false" onAction="#Recherche" prefHeight="38.0" prefWidth="84.0" style="-fx-background-color: transparent;" textAlignment="JUSTIFY" textFill="#e8db51" textOverrun="WORD_ELLIPSIS" underline="true">
          <font>
             <Font name="Calibri Bold" size="20.0" />
          </font></Button>
@@ -47,33 +47,38 @@
             <Font name="Candara" size="12.0" />
          </font>
       </TextField>
-      <Button layoutX="534.0" layoutY="76.0" mnemonicParsing="false" onAction="#tri" prefHeight="38.0" prefWidth="55.0" style="-fx-background-color: transparent;" text="Tri" textFill="#111111" textOverrun="WORD_ELLIPSIS" underline="true">
+      <Button layoutX="519.0" layoutY="76.0" mnemonicParsing="false" onAction="#tri" prefHeight="38.0" prefWidth="155.0" style="-fx-background-color: transparent;" text="search event" textFill="#111111" textOverrun="WORD_ELLIPSIS" underline="true">
          <font>
             <Font name="Cambria Bold" size="20.0" />
          </font></Button>
-      <Button layoutX="22.0" layoutY="391.0" mnemonicParsing="false" onAction="#translate" style="-fx-background-color: transparente;" text="Translate" textFill="#6b85bc" underline="true">
+      <Button layoutX="22.0" layoutY="391.0" mnemonicParsing="false" onAction="#translate" style="-fx-background-color: transparent;" text="Translate" textFill="#6b85bc" underline="true">
          <font>
             <Font name="System Bold Italic" size="18.0" />
          </font>
       </Button>
       <ImageView fitHeight="27.0" fitWidth="36.0" layoutX="137.0" layoutY="400.0">
          <image>
-            <Image url="@Images/trad.png" />
+            <Image url="@../Planning/Images/trad.png" />
          </image>
       </ImageView>
       <ImageView layoutX="506.0" layoutY="82.0">
          <image>
-            <Image url="@Images/loup.png" />
+            <Image url="@../Planning/Images/loup.png" />
          </image>
       </ImageView>
-      <Button layoutX="1.0" layoutY="346.0" mnemonicParsing="false" onAction="#toLova" prefHeight="38.0" prefWidth="172.0" style="-fx-background-color: transparente;" text="Location List" textFill="#6b85bc" underline="true">
+      <Button layoutX="1.0" layoutY="346.0" mnemonicParsing="false" onAction="#toLova" prefHeight="38.0" prefWidth="172.0" style="-fx-background-color: transparent;" text="Location List" textFill="#6b85bc" underline="true">
          <font>
             <Font name="System Bold Italic" size="18.0" />
          </font>
       </Button>
       <ImageView fitHeight="27.0" fitWidth="26.0" layoutX="160.0" layoutY="355.0">
          <image>
-            <Image url="@Images/lova.png" />
+            <Image url="@../Planning/Images/lova.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="14.0" layoutY="119.0" onMouseClicked="#previous">
+         <image>
+            <Image url="@../quiz/graphics/previous.png" />
          </image>
       </ImageView>
    </children>

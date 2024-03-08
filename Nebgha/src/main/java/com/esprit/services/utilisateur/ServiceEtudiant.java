@@ -2,6 +2,7 @@ package com.esprit.services.utilisateur;
 
 import com.esprit.models.utilisateur.Role;
 import com.esprit.models.utilisateur.Etudiant;
+import com.esprit.models.utilisateur.Tuteur;
 import com.esprit.services.IService;
 import com.esprit.utils.DataSource;
 
@@ -90,5 +91,25 @@ public ServiceEtudiant(){connection = DataSource.getInstance().getConnection();}
         return Etudiants;
     }
 
-
+    public Etudiant getEtudiant(int userId) {
+        Etudiant user = null;
+        String req = "SELECT * FROM utilisateur WHERE id = " + userId;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(req);
+            if (rs.next()) {
+                user = new Etudiant( rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        Role.valueOf(rs.getString("role")),
+                        rs.getInt("niveau"),
+                        rs.getString("specialite"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return user;
+    }
 }

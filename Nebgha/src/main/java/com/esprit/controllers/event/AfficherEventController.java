@@ -13,10 +13,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.nio.file.Paths;
 
 public class AfficherEventController {
 
@@ -38,24 +36,34 @@ public class AfficherEventController {
     public void setEventDetails(Evenement evenement) {
         // Remplissez les champs avec les détails de l'événement
         Nom.setText(evenement.getNom());
-        Datevnt.setText(evenement.getDate().toString()); // Assurez-vous que la classe Evenement a une méthode getDate() qui renvoie un objet java.util.Date
-       Lieu.setText(evenement.getLieuId().getVille()); // Assurez-vous que la classe Evenement a une méthode getLieuId() qui renvoie un objet de type Localisation
+        Datevnt.setText(evenement.getDate().toString()); // Assuming getDate() returns a java.util.Date
+        Lieu.setText(evenement.getLieuId().getVille()); // Assuming getLieuId() returns a Localisation object with a getVille() method
         Descrip.setText(evenement.getDescription());
 
-        // Vous devrez charger et afficher l'image ici (utilisez une bibliothèque ou une approche que vous préférez)
-      //  imagevent.setImage(new Image(evenement.getImage())); // Assurez-vous que la classe Evenement a une méthode getImage() qui renvoie le chemin de l'image
-        afficherImage(evenement.getImage());
+        // Afficher l'image de l'événement
+        afficherImage(evenement.getImage()); // Assuming getImage() returns the file path as a string
     }
 
-    private void afficherImage(String cheminImage) {
+
+    private void afficherImage(String filePath) {
         try {
-            InputStream stream = new FileInputStream(cheminImage);
-            Image imagee = new Image(stream);
-            imagevent.setImage(imagee);
+            File file = new File(filePath);
+            if (!file.exists()) {
+                System.out.println("Image file not found: " + filePath);
+                return;
+            }
+            InputStream stream = new FileInputStream(file);
+            Image image = new Image(stream);
+            imagevent.setImage(image);
         } catch (FileNotFoundException e) {
             System.out.println("Erreur lors de l'affichage de l'image : " + e.getMessage());
         }
     }
+
+
+
+
+
     private Stage stage;
     private Scene scene;
     private Parent root;

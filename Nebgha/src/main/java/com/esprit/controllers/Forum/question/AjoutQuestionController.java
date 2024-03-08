@@ -12,8 +12,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URI;
@@ -82,7 +85,7 @@ public class AjoutQuestionController {
             Alert alertProfanity = new Alert(Alert.AlertType.WARNING);
             alertProfanity.setTitle("Profanity detected!");
             alertProfanity.setHeaderText("The rules contain profanity.");
-            alertProfanity.setContentText("Belehi traba la nchid nrabik");
+            alertProfanity.setContentText("This content contains profanity. Please consider revising it with more appropriate language.");
             alertProfanity.show();
             return;
 
@@ -104,7 +107,7 @@ public class AjoutQuestionController {
             Alert alertProfanity = new Alert(Alert.AlertType.WARNING);
             alertProfanity.setTitle("Profanity detected!");
             alertProfanity.setHeaderText("The rules contain profanity.");
-            alertProfanity.setContentText("Belehi traba la nchid nrabik");
+            alertProfanity.setContentText("This content contains profanity. Please consider revising it with more appropriate language.");
             alertProfanity.show();
             return;
 
@@ -136,8 +139,9 @@ public class AjoutQuestionController {
         //redirection à l'autre interface
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/InterfacesAdmin.fxml"));
         Parent root = loader.load();
-        tfQuestionTitre.getScene().setRoot(root);
-    }
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.show();    }
 
     public boolean profanityFilter(String text) throws IOException, InterruptedException {
 

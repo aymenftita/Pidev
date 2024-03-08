@@ -73,7 +73,7 @@ public class EvenementService implements IService<Evenement> {
 
     @Override
     public void supprimer(Evenement evenement) {
-        String req = "DELETE FROM quiz WHERE id = " + evenement.getId();
+        String req = "DELETE FROM evenement WHERE id = " + evenement.getId();
         try {
             Statement statement = connection.createStatement();
             statement.executeUpdate(req);

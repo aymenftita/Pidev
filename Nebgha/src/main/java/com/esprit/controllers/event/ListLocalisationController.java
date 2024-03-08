@@ -33,6 +33,7 @@ public class ListLocalisationController implements Initializable {
     @FXML
     private ListView<Localisation> listLoc;
     private TextField payss;
+
     private Stage stage;
     private Scene scene;
     private Parent root;

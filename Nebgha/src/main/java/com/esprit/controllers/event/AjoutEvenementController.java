@@ -19,6 +19,9 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.Date;
 
 import java.net.URL;
@@ -63,6 +66,22 @@ public class AjoutEvenementController implements Initializable {
     LocalisationService ls = new LocalisationService();
     private String nom_loc;
 
+    public static String uploadImage(File imageFile, String destinationDirectory) {
+        try {
+            // Generate a unique file name for the image
+            String fileName = imageFile.getName();
+            String destFilePath = destinationDirectory + File.separator + fileName;
+
+            // Copy the image file to the destination directory
+            Files.copy(imageFile.toPath(), new File(destFilePath).toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+            return fileName;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     @FXML
     void Ajouter(ActionEvent event) {
         if (Datee.getValue()== null )
@@ -86,7 +105,8 @@ public class AjoutEvenementController implements Initializable {
                 e.setNom(Nom.getText());
                 e.setDate(Date.valueOf(Datee.getValue()));
                 e.setDescription(Description.getText());
-                e.setImage("C:/Users/hp/AppData/Local/Temp/607ad7d3-6bb1-4cd8-9257-d9faa0559b88_workshopjdbc.zip.b88/Pidev/Nebgha/src/main/resources/Images/"+ImageF.getText());
+                String imagePath = Paths.get("src", "main", "resources", "Planning", "Images", ImageF.getText()).toUri().toString();
+                e.setImage(imagePath);
                 e.setLieuId(ls.findByName(nom_loc));
                 es.ajouter(e);
                 System.out.println("Event ajouté avec succées !");
@@ -138,24 +158,26 @@ public class AjoutEvenementController implements Initializable {
     @FXML
     void importer(ActionEvent event) throws FileNotFoundException {
         FileChooser fc = new FileChooser();
-
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image files", "*.jpg", "*.png", "*.jpeg"));
-        // for single file
+
+        // Show the file chooser dialog
         File selectedFile = fc.showOpenDialog(null);
 
         if (selectedFile != null) {
+            // Upload the selected image file
+            String imageFileName = uploadImage(selectedFile, "src/main/resources/Planning/Images");
 
-            ImageF.setText(selectedFile.getName());
-            InputStream stream = new FileInputStream(selectedFile.getAbsolutePath());
-            Image imagee = new Image(stream);
-            imageV.setImage(imagee);
+            // Store the image file name (or path) in the ImageF TextField
+            ImageF.setText(imageFileName);
 
+            // Display the selected image
+            Image image = new Image(selectedFile.toURI().toString());
+            imageV.setImage(image);
         } else {
             System.out.println("Not valid file");
         }
-
-
     }
+
     public void ListLieu() throws SQLException {
         LocalisationService ls = new LocalisationService();
         ArrayList<Localisation> liste_loc = (ArrayList<Localisation>) ls.recupererLocalisation();

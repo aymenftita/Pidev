@@ -13,7 +13,7 @@
       <ListView fx:id="listLoc" layoutX="174.0" layoutY="111.0" prefHeight="383.0" prefWidth="544.0" style="-fx-background-color: #D9D9D9;" />
       <HBox layoutX="400.0" layoutY="28.0" prefHeight="46.0" prefWidth="302.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#ajoutEvenement" prefHeight="46.0" prefWidth="97.0" style="-fx-background-color: transparent; -fx-border-radius: 20px;" styleClass="arrow-button" stylesheets="@style.css" text="Add" textFill="#0e1d59" underline="true">
+            <Button mnemonicParsing="false" onAction="#ajoutEvenement" prefHeight="46.0" prefWidth="97.0" style="-fx-background-color: transparent; -fx-border-radius: 20px;" styleClass="arrow-button" stylesheets="@../Planning/style.css" text="Add" textFill="#0e1d59" underline="true">
                <font>
                   <Font name="Candara" size="24.0" />
                </font>
@@ -33,19 +33,19 @@
       <Button layoutX="681.0" layoutY="74.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: transparent;" />
       <ImageView fitHeight="107.0" fitWidth="162.0" layoutX="7.0" layoutY="4.0">
          <image>
-            <Image url="@Images/421935935_2103323113360956_2155380558138833429_n.png" />
+            <Image url="@../Planning/Images/421935935_2103323113360956_2155380558138833429_n.png" />
          </image>
       </ImageView>
-      <Button layoutX="30.0" layoutY="228.0" mnemonicParsing="false" onAction="#meteo" prefHeight="49.0" prefWidth="117.0" style="-fx-background-color: transprente;" text="Weather" textFill="#eed73d" underline="true">
+      <Button layoutX="30.0" layoutY="228.0" mnemonicParsing="false" onAction="#meteo" prefHeight="49.0" prefWidth="117.0" style="-fx-background-color: transparent;" text="Weather" textFill="#eed73d" underline="true">
          <font>
             <Font name="Calibri Bold Italic" size="22.0" />
          </font></Button>
       <ImageView layoutX="48.0" layoutY="277.0">
          <image>
-            <Image url="@Images/weather.png" />
+            <Image url="@../Planning/Images/weather.png" />
          </image>
       </ImageView>
-      <Button layoutX="88.0" layoutY="442.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#retour" prefHeight="34.0" prefWidth="80.0" style="-fx-background-color: transprent;" text="return" textFill="#2e0a61" underline="true">
+      <Button layoutX="88.0" layoutY="442.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#retour" prefHeight="34.0" prefWidth="80.0" style="-fx-background-color: transparent;" text="return" textFill="#2e0a61" underline="true">
          <font>
             <Font name="System Bold Italic" size="17.0" />
          </font>

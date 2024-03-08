@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="my-button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: white;" styleClass="my-anchor-pane" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.Forum.sujet.InterfaceForumUserController">
+<AnchorPane  prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: white;" styleClass="my-anchor-pane" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.Forum.sujet.InterfaceForumUserController">
    <children>
       <Pane layoutY="-1.0" prefHeight="57.0" prefWidth="1366.0" style="-fx-background-color: #dddee1;">
          <children>
@@ -27,7 +27,7 @@
             <Label layoutX="868.0" layoutY="18.0" onMousePressed="#ApercuForum" styleClass="link-label" stylesheets="@../style.css" text="Forum" />
             <Label layoutX="966.0" layoutY="18.0" onMousePressed="#ApercuPlanning" styleClass="link-label" stylesheets="@../style.css" text="Planning" />
             <Label layoutX="1084.0" layoutY="18.0" onMousePressed="#ApercuQuiz" styleClass="link-label" stylesheets="@../style.css" text="Quiz" />
-            <Label fx:id="nameLabel" layoutX="1258.0" layoutY="17.0" onMouseClicked="#apercuProfile" text="Name" textFill="#144083">
+            <Label fx:id="nameLabel" layoutX="1258.0" layoutY="17.0" onMouseClicked="#apercuProfile" text="Name" textFill="#000066">
                <font>
                   <Font name="Segoe UI" size="20.0" />
                </font>
@@ -37,6 +37,7 @@
                   <Image url="@../graphics/name.png" />
                </image>
             </ImageView>
+            <Label layoutX="1155.0" layoutY="18.0" onMousePressed="#ApercuGroups" styleClass="link-label" stylesheets="@../style.css" text="Groups" />
          </children>
       </Pane>
       <Separator layoutY="47.0" prefHeight="21.0" prefWidth="1280.0" />
@@ -59,14 +60,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ImageView fitHeight="31.0" fitWidth="30.0" layoutX="1308.0" layoutY="92.0" onMouseClicked="#refreshSujet" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../graphics/update.png" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
+
       <TableView fx:id="tvAffichageSujet" editable="true" layoutY="136.0" onMouseClicked="#apercuQuestion" prefHeight="605.0" prefWidth="1366.0" styleClass="modern-tableview">
         <columns>
           <TableColumn fx:id="tvAffichageSujetSujet" prefWidth="317.0" text="Topic">
@@ -86,9 +80,14 @@
             </TableColumn>
         </columns>
       </TableView>
-      <ImageView fitHeight="33.0" fitWidth="46.0" layoutX="244.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="49.0" fitWidth="46.0" layoutX="231.0" layoutY="87.0">
          <image>
             <Image url="@../graphics/magnifying-glass.gif" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="34.0" fitWidth="32.0" layoutX="1307.0" layoutY="90.0" onMouseClicked="#refreshSujet">
+         <image>
+            <Image url="@../graphics/update.png" />
          </image>
       </ImageView>
    </children>

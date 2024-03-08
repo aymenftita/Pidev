@@ -95,7 +95,7 @@ public class ServiceAdmin implements IService<Admin> {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(req);
             if (rs.next()) {
-                admin = new Admin(
+                admin = new Admin(rs.getInt("id"),
                         rs.getString("nom"),
                         rs.getString("prenom"),
                         rs.getString("email"),

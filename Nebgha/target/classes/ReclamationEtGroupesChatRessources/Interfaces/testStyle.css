@@ -1,0 +1,104 @@
+.item-card {
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #c0c0c0;
+    -fx-border-width: 1;
+    -fx-padding: 10;
+    -fx-cursor: hand;
+}
+
+.item-card:hover {
+    -fx-background-color: #87CEEB;
+}
+
+.title-label:hover{
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+}
+
+.title-label {
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.description-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #555555;
+}
+
+
+
+/****************************************************/
+
+
+.chatbox-root {
+    -fx-background-color: #f0f0f0; /* Set the background color */
+}
+
+.chat-area {
+    -fx-background-color: #ffffff; /* Set the background color of the chat area */
+}
+
+.message-text {
+    -fx-font-size: 14px; /* Set the font size for the chat messages */
+    -fx-padding: 5px; /* Add padding to the chat messages */
+}
+
+.message-input {
+    -fx-font-size: 14px; /* Set the font size for the input field */
+}
+
+.chatbox-root {
+    -fx-background-color: #f0f0f0;
+}
+
+.chat-area {
+    -fx-background-color: #ffffff;
+}
+
+.message-sender {
+    -fx-font-size: 14px;
+    -fx-background-color: #87CEEB; /* Light Blue for Sender */
+    -fx-padding: 5px;
+    -fx-border-radius: 5px;
+}
+
+.message-receiver {
+    -fx-font-size: 14px;
+    -fx-background-color: #98FB98; /* Light Green for Receiver */
+    -fx-padding: 5px;
+    -fx-border-radius: 5px;
+}
+
+.bkImage{
+    -fx-background-image: url("../Images/R.jpeg");
+    -fx-background-size:cover;
+}
+
+.button {
+    -fx-background-color: linear-gradient(#4565d5, #2839e7);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
+
+
+/************************************************************************/
+.my-anchor-pane {
+    -fx-pref-width: 1366px; /* Set the preferred width to screen width */
+    -fx-pref-height: 715px; /* Set the preferred height to screen height */
+    -fx-background-color: white;
+}
+
+.link-label {
+    -fx-font-family: Segoe UI, sans-serif;
+    -fx-font-size: 15px;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
+.link-label:hover {
+    -fx-font-size: 17px;
+    -fx-underline: true; /* Add underline on hover */
+    -fx-text-fill: #4085ac; /* Change text color on hover */
+    -fx-cursor: hand;
+}

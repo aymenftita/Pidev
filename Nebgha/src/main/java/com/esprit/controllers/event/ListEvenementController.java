@@ -1,6 +1,8 @@
 package com.esprit.controllers.event;
 
 import com.esprit.models.event.Evenement;
+import com.esprit.models.utilisateur.Role;
+import com.esprit.services.Session;
 import com.esprit.services.event.EvenementService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.input.KeyEvent;
 
@@ -82,9 +85,9 @@ public class ListEvenementController implements Initializable {
 
             if (option.get() == ButtonType.OK) {
                 evt = listEvenement.getSelectionModel().getSelectedItem();
+                es.supprimer(evt);
                 listEvenement.getItems().remove(listEvenement.getSelectionModel().getSelectedItem());
                 listEvenement.refresh();
-                es.supprimer(evt);
 
             } else if (option.get() == ButtonType.CANCEL) {
                 System.out.println("Canceled");
@@ -249,6 +252,31 @@ public class ListEvenementController implements Initializable {
         } catch (IOException ex) {
             System.out.println("error" + ex.getMessage());
         }
+    }
+    @FXML
+    void previous(MouseEvent event) throws IOException {
+if (Session.getCurrentRole().equals(Role.Administrateur)){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/AdminInterface.fxml"));
+        Parent root = loader.load();
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.setTitle("Nebgha");
+        currentStage.show();
+    }else if(Session.getCurrentRole().equals(Role.Tuteur)){
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/TuteurInterface.fxml"));
+    Parent root = loader.load();
+    Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    currentStage.setScene(new Scene(root));
+    currentStage.setTitle("Nebgha");
+    currentStage.show();
+} else  {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/EtudiantInterface.fxml"));
+    Parent root = loader.load();
+    Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    currentStage.setScene(new Scene(root));
+    currentStage.setTitle("Nebgha");
+    currentStage.show();
+}
     }
 
     }

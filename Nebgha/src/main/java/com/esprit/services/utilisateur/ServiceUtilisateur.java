@@ -99,7 +99,7 @@ public class ServiceUtilisateur implements IService<Utilisateur> {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             if (resultSet.next()) {
-                user = new Utilisateur(
+                user = new Utilisateur(resultSet.getInt("id"),
                         resultSet.getString("nom"),
                         resultSet.getString("prenom"),
                         resultSet.getString("email"),

@@ -7,11 +7,12 @@ import com.twilio.type.PhoneNumber;
 
 public class SmsService {
     public static final String ACCOUNT_SID = "ACbdda076c145669838d51f303a3fece16";
-    public static final String AUTH_TOKEN = "bff55a6738de4f9050c6127126ac23da";
+    public static final String AUTH_TOKEN = "dd89c5976b0f1a956dc18ce5fa754022";
     public static final String FROM_PHONE_NUMBER = "+16562162257";
 
     public boolean sendResetCodeSMS(String phoneNumber, String resetCode) {
         try {
+
             Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 
             Message message = Message.creator(

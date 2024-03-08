@@ -16,11 +16,11 @@
    <children>
       <ImageView fitHeight="126.0" fitWidth="181.0" layoutX="595.0" layoutY="14.0">
          <image>
-            <Image url="@Images/421935935_2103323113360956_2155380558138833429_n.png" />
+            <Image url="@../Planning/Images/421935935_2103323113360956_2155380558138833429_n.png" />
          </image>
       </ImageView>
       <ImageView fx:id="imagevent" fitHeight="312.0" fitWidth="392.0" layoutX="402.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true" />
-      <TextField fx:id="Nom" alignment="CENTER" layoutX="80.0" layoutY="42.0" prefHeight="54.0" prefWidth="242.0" style="-fx-background-color: transprent;">
+      <TextField fx:id="Nom" alignment="CENTER" layoutX="80.0" layoutY="42.0" prefHeight="54.0" prefWidth="242.0" style="-fx-background-color: transparent;">
          <font>
             <Font name="System Italic" size="19.0" />
          </font>
@@ -31,13 +31,6 @@
                <bumpInput>
                   <Shadow />
                </bumpInput>
-               <light>
-                  <Light.Distant>
-                     <color>
-                        <Color red="0.6586257219314575" green="0.7176535129547119" blue="0.8947368264198303" />
-                     </color>
-                  </Light.Distant>
-               </light>
             </Lighting>
          </effect>
       </TextField>
@@ -48,13 +41,6 @@
                <bumpInput>
                   <Shadow />
                </bumpInput>
-               <light>
-                  <Light.Distant>
-                     <color>
-                        <Color red="0.7921568751335144" green="0.843137264251709" blue="1.0" />
-                     </color>
-                  </Light.Distant>
-               </light>
             </Lighting>
          </effect>
       </TextField>
@@ -67,13 +53,6 @@
                <bumpInput>
                   <Shadow />
                </bumpInput>
-               <light>
-                  <Light.Distant azimuth="231.21">
-                     <color>
-                        <Color red="0.7921568751335144" green="0.843137264251709" blue="1.0" />
-                     </color>
-                  </Light.Distant>
-               </light>
             </Lighting>
          </effect>
       </Button>

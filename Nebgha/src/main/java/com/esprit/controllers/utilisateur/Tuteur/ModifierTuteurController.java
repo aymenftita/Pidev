@@ -1,7 +1,9 @@
 package com.esprit.controllers.utilisateur.Tuteur;
 
+import com.esprit.models.utilisateur.Etudiant;
 import com.esprit.models.utilisateur.Tuteur;
 import com.esprit.services.utilisateur.EmailVerifier;
+import com.esprit.services.utilisateur.ServiceEtudiant;
 import com.esprit.services.utilisateur.ServiceTuteur;
 import com.esprit.services.Session;
 import javafx.event.ActionEvent;
@@ -11,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -61,18 +64,14 @@ public class ModifierTuteurController {
 
     public void initialize() {
         shownPassword.setVisible(false);
-        Object currentUser = Session.getCurrentUser();
-        if (currentUser instanceof Tuteur) {
-            currentTuteur = (Tuteur) currentUser;
+        ServiceTuteur serviceTuteur =new ServiceTuteur();
+        currentTuteur=serviceTuteur.getTueur(Session.getCurrentUser().getId()) ;
             tfnom.setText(currentTuteur.getNom());
             tfprenom.setText(currentTuteur.getPrenom());
             tfemail.setText(currentTuteur.getEmail());
             tfpass.setText(currentTuteur.getPassword());
             cbDomaine.setValue(currentTuteur.getDomaine());
             tfexperience.setText(String.valueOf(currentTuteur.getExperience()));
-        } else {
-            System.out.println("Current user is not a tuteur.");
-        }
     }
 
     public void modifierTuteur(ActionEvent event) throws IOException {
@@ -161,14 +160,12 @@ public class ModifierTuteurController {
     }
 
     @FXML
-    void previous(ActionEvent event) throws IOException {
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
+    void previous(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/TuteurInterface.fxml"));
         Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Nebgha");
-        stage.show();
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.setTitle("Nebgha");
+        currentStage.show();
     }
 }

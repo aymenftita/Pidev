@@ -7,11 +7,13 @@ import com.esprit.services.Session;
 import com.esprit.services.utilisateur.SmsService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -37,9 +39,6 @@ public class ForgotPasswordController {
         Optional<Utilisateur> userOptional = utilisateurService.afficher().stream()
                 .filter(user -> user.getEmail().equals(email))
                 .findFirst();
-        System.out.println(utilisateurService.afficher());
-        System.out.println(email);
-        System.out.println(userOptional);
         if (userOptional.isPresent()) {
             Utilisateur user = userOptional.get();
             String resetCode = generateResetCode();
@@ -79,5 +78,14 @@ public class ForgotPasswordController {
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+    @FXML
+    void previous(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/FirstPage.fxml"));
+        Parent root = loader.load();
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.setTitle("Nebgha");
+        currentStage.show();
     }
 }

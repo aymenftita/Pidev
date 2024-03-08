@@ -60,7 +60,7 @@
 .link-label {
     -fx-font-family: Segoe UI, sans-serif;
     -fx-font-size: 15px;
-    -fx-text-fill: black;
+    -fx-text-fill: #000066;
     -fx-font-weight: bold;
 }
 

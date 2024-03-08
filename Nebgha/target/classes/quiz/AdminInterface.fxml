@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="333.0" prefWidth="659.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.quiz.AdminInterfaceController">
+<AnchorPane prefHeight="333.0" prefWidth="659.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.quiz.AdminInterfaceController">
    <children>
-      <Button layoutX="24.0" layoutY="104.0" mnemonicParsing="false" onAction="#ShowQuizs" prefHeight="58.0" prefWidth="294.0" stylesheets="@graphics/styles.css" text="Quizzes">
+      <Button layoutX="100.0" layoutY="107.0" mnemonicParsing="false" onAction="#ShowQuizs" prefHeight="58.0" prefWidth="294.0" stylesheets="@graphics/styles.css" text="Quizzes">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="344.0" layoutY="104.0" mnemonicParsing="false" onAction="#ShowQuestions" prefHeight="57.0" prefWidth="294.0" stylesheets="@graphics/styles.css" text="Questions">
+      <Button layoutX="420.0" layoutY="107.0" mnemonicParsing="false" onAction="#ShowQuestions" prefHeight="57.0" prefWidth="294.0" stylesheets="@graphics/styles.css" text="Questions">
          <effect>
             <DropShadow />
          </effect>
@@ -23,7 +24,7 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="344.0" layoutY="204.0" mnemonicParsing="false" onAction="#ShowReponses" prefHeight="57.0" prefWidth="294.0" stylesheets="@graphics/styles.css" text="Answers">
+      <Button layoutX="420.0" layoutY="207.0" mnemonicParsing="false" onAction="#ShowReponses" prefHeight="57.0" prefWidth="294.0" stylesheets="@graphics/styles.css" text="Answers">
          <effect>
             <DropShadow />
          </effect>
@@ -31,7 +32,7 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="24.0" layoutY="204.0" mnemonicParsing="false" onAction="#ShowRecompenses" prefHeight="57.0" prefWidth="294.0" stylesheets="@graphics/styles.css" text="Rewards">
+      <Button layoutX="100.0" layoutY="207.0" mnemonicParsing="false" onAction="#ShowRecompenses" prefHeight="57.0" prefWidth="294.0" stylesheets="@graphics/styles.css" text="Rewards">
          <effect>
             <DropShadow />
          </effect>
@@ -39,41 +40,54 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <ImageView fitHeight="57.0" fitWidth="51.0" layoutX="42.0" layoutY="204.0">
+      <ImageView fitHeight="57.0" fitWidth="51.0" layoutX="118.0" layoutY="207.0">
          <image>
             <Image url="@graphics/award.gif" />
          </image>
       </ImageView>
-      <ImageView fitHeight="57.0" fitWidth="65.0" layoutX="354.0" layoutY="104.0">
+      <ImageView fitHeight="57.0" fitWidth="65.0" layoutX="430.0" layoutY="107.0">
          <image>
             <Image url="@graphics/puzzle.gif" />
          </image>
       </ImageView>
-      <ImageView fitHeight="50.0" fitWidth="51.0" layoutX="357.0" layoutY="210.0">
+      <ImageView fitHeight="50.0" fitWidth="51.0" layoutX="433.0" layoutY="213.0">
          <image>
             <Image url="@graphics/answer.gif" />
          </image>
       </ImageView>
-      <ImageView fitHeight="58.0" fitWidth="65.0" layoutX="35.0" layoutY="100.0">
+      <ImageView fitHeight="58.0" fitWidth="65.0" layoutX="111.0" layoutY="103.0">
          <image>
             <Image url="@graphics/quiz.gif" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="58.0" layoutY="-6.0" stroke="TRANSPARENT" strokeType="INSIDE" width="659.0" />
-      <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="14.0" layoutY="10.0" onMouseClicked="#previous">
+      <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="14.0" layoutY="61.0" onMouseClicked="#previous">
          <image>
             <Image url="@graphics/previous.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="19.0" fitWidth="134.0" layoutX="104.0" layoutY="16.0">
-         <image>
-            <Image url="@graphics/55.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="56.0" layoutY="5.0">
-         <image>
-            <Image url="@graphics/Logo1.png" />
-         </image>
-      </ImageView>
+      <Pane layoutX="1.0" layoutY="-1.0" prefHeight="58.0" prefWidth="795.0" style="-fx-background-color: #f2f2f2;">
+         <children>
+            <ImageView fitHeight="49.0" fitWidth="51.0" layoutX="12.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Forum/graphics/Logo1.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="241.0" layoutY="18.0" onMousePressed="#ApercuCours" styleClass="link-label" stylesheets="@../Forum/style.css" text="Courses" textFill="#000066" />
+            <Label layoutX="334.0" layoutY="18.0" onMousePressed="#ApercuForum" styleClass="link-label" stylesheets="@../Forum/style.css" text="Forum" textFill="#000066" />
+            <Label layoutX="432.0" layoutY="18.0" onMousePressed="#ApercuPlanning" styleClass="link-label" stylesheets="@../Forum/style.css" text="Planning" />
+            <Label fx:id="nameLabel" layoutX="716.0" layoutY="15.0" onMouseClicked="#apercuProfile" text="Name" textFill="#000066">
+               <font>
+                  <Font name="Segoe UI" size="20.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="21.0" fitWidth="163.0" layoutX="59.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Forum/graphics/name.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="559.0" layoutY="16.0" onMousePressed="#ApercuQuiz" styleClass="link-label" stylesheets="@../Forum/style.css" text="Quiz" />
+            <Label layoutX="627.0" layoutY="17.0" onMousePressed="#ApercuGroups" styleClass="link-label" stylesheets="@../Forum/style.css" text="Groups" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

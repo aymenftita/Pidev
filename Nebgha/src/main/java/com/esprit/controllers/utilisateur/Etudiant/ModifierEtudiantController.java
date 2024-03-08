@@ -1,6 +1,7 @@
 package com.esprit.controllers.utilisateur.Etudiant;
 
 import com.esprit.models.utilisateur.Etudiant;
+import com.esprit.models.utilisateur.Utilisateur;
 import com.esprit.services.utilisateur.EmailVerifier;
 import com.esprit.services.utilisateur.ServiceEtudiant;
 import com.esprit.services.Session;
@@ -11,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -60,7 +62,8 @@ public class ModifierEtudiantController {
 
     public void initialize() {
         shownPassword.setVisible(false);
-        currentStudent = (Etudiant) Session.getCurrentUser();
+        ServiceEtudiant serviceEtudiant =new ServiceEtudiant();
+        currentStudent =serviceEtudiant.getEtudiant(Session.getCurrentUser().getId()) ;
         tfnom.setText(currentStudent.getNom());
         tfprenom.setText(currentStudent.getPrenom());
         tfemail.setText(currentStudent.getEmail());
@@ -146,14 +149,12 @@ public class ModifierEtudiantController {
     }
 
     @FXML
-    void previous(ActionEvent event) throws IOException {
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
+    void previous(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/utilisateur/EtudiantInterface.fxml"));
         Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Nebgha");
-        stage.show();
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.setTitle("Nebgha");
+        currentStage.show();
     }
 }
