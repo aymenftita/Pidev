@@ -20,7 +20,7 @@
                   <Image url="@../Images/G.gif" />
                </image>
             </ImageView>
-            <Button defaultButton="true" mnemonicParsing="false" onAction="#SwitchToAfficherGroupe" prefHeight="93.0" prefWidth="123.0" text="Groupes">
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#SwitchToAfficherGroupe" prefHeight="93.0" prefWidth="123.0" text="Groups">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -48,7 +48,7 @@
             </ImageView>
          </left>
          <center>
-            <TextField fx:id="rsh" alignment="CENTER" prefHeight="51.0" prefWidth="328.0" promptText="Recherche" style="-fx-background-radius: 50;" BorderPane.alignment="CENTER">
+            <TextField fx:id="rsh" alignment="CENTER" prefHeight="51.0" prefWidth="328.0" promptText="searsh" style="-fx-background-radius: 50;" BorderPane.alignment="CENTER">
                <font>
                   <Font size="26.0" />
                </font>
