@@ -1,9 +1,0 @@
-/*
- * Empty Stylesheet file.
- */
-.Specialcolor {
-    -fx-text-fill: black;
-}
-body {
-    background-color: rgba(255, 255, 255, 0); /* La dernière valeur (0) représente l'alpha (transparence) */
-}
