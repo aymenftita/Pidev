@@ -162,5 +162,15 @@ public class InterfaceTuteurCours {
         currentStage.setTitle("Nebgha");
         currentStage.show();
     }
+    @FXML
+    void previous(MouseEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/cours/InterfaceTuteur.fxml"));
+        Parent root = loader.load();
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.setScene(new Scene(root));
+        currentStage.setTitle("Nebgha");
+        currentStage.show();
+    }
 
 }
